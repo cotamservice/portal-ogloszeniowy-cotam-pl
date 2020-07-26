@@ -1,0 +1,165 @@
+<nav>
+  <ul>
+    <li class="parking">
+      <img src="assets/img/header/parking.png">
+      <span id="count-parking">99+</span>
+    </li>
+  </ul>
+  <ul id="right-side">
+    <li class="menu-element-container hover-effect transition-effect" (click)="pickCategory('osobowe')">
+      <div id="osobowe" class="category">
+        <img src="assets/img/header/osobowe.png">
+      </div>
+    </li>
+    <li class="menu-element-container hover-effect transition-effect" (click)="pickCategory('motocykle')">
+      <div id="motocykle" class="category">
+        <img src="assets/img/header/motocykle.png">
+      </div>
+    </li>
+    <li class="menu-element-container hover-effect transition-effect" (click)="pickCategory('dostawcze')">
+      <div id="dostawcze" class="category">
+        <img src="assets/img/header/dostawcze.png">
+      </div>
+    </li>
+    <li class="menu-element-container hover-effect transition-effect" (click)="pickCategory('ciezarowe')">
+      <div id="ciezarowe" class="category">
+        <img src="assets/img/header/ciezarowe.png">
+      </div>
+    </li>
+    <li class="menu-element-container hover-effect transition-effect" (click)="pickCategory('budowlane')">
+      <div id="budowlane" class="category">
+        <img src="assets/img/header/budowlane.png">
+      </div>
+    </li>
+    <li class="menu-element-container hover-effect transition-effect" (click)="pickCategory('rolnicze')">
+      <div id="rolnicze" class="category">
+        <img src="assets/img/header/rolnicze.png">
+      </div>
+    </li>
+    <li class="menu-element-container hover-effect transition-effect" (click)="pickCategory('przyczepy')">
+      <div id="przyczepy" class="category">
+        <img src="assets/img/header/przyczepy.png">
+      </div>
+    </li>
+    <li class="menu-element-container hover-effect transition-effect" (click)="pickCategory('autobusy')">
+      <div id="autobusy" class="category">
+        <img src="assets/img/header/autobusy.png">
+      </div>
+    </li>
+    <li class="menu-element-container hover-effect transition-effect" (click)="pickCategory('statek')">
+      <div id="statek" class="category">
+        <img src="/assets/img/header/statek.png">
+      </div>
+    </li>
+    <li class="menu-element-container hover-effect transition-effect" (click)="pickCategory('samolot')">
+      <div id="samolot" class="category">
+        <img src="assets/img/header/samolot.png">
+      </div>
+    </li>
+    <li class="menu-element-container hover-effect transition-effect" (click)="pickCategory('czesci')">
+      <div id="czesci" class="category">
+        <img src="assets/img/header/czesci.png">
+      </div>
+    </li>
+    <li class="menu-element-container hover-effect transition-effect">
+      <div id="country-select" class="select-css" (click)="openCloseMenuSelector('country-select-list')">
+        <img src="assets/img/header/countryflag.png">
+        <span>pl</span>
+        <img src="assets/img/header/arrowupwhite.png">
+      </div>
+      <div id="country-select-list" class="option-list">
+        <div class="option-css hover-effect transition-effect"
+             (click)="pickOption('pl', 'country-select', 'country-select-list')">
+          <img src="assets/img/flag/PL.png">
+          <span>pl</span>
+        </div>
+        <div class="option-css hover-effect transition-effect"
+             (click)="pickOption('gb', 'country-select', 'country-select-list')">
+          <img src="assets/img/flag/PL.png">
+          <span>gb</span>
+        </div>
+      </div>
+    </li>
+    <li class="menu-element-container hover-effect transition-effect">
+      <div id="lang-select" class="select-css" (click)="openCloseMenuSelector('lang-select-list')">
+        <img src="../../assets/img/header/lipsflag.png">
+        <span>pl</span>
+        <img src="assets/img/header/arrowupwhite.png">
+      </div>
+      <div id="lang-select-list" class="option-list">
+        <div class="option-css hover-effect transition-effect"
+             (click)="pickOption('pl', 'lang-select', 'lang-select-list')">
+          <img src="assets/img/flag/PL.png">
+          <span>pl</span>
+        </div>
+        <div class="option-css hover-effect transition-effect"
+             (click)="pickOption('gb', 'lang-select', 'lang-select-list')">
+          <img src="assets/img/flag/PL.png">
+          <span>gb</span>
+        </div>
+      </div>
+    </li>
+    <li class="menu-element-container hover-effect transition-effect">
+      <div id="currency-select" class="select-css" (click)="openCloseMenuSelector('currency-select-list')">
+        <img src="assets/img/header/currencies.png">
+        <span>usd</span>
+        <img src="assets/img/header/arrowupwhite.png">
+      </div>
+      <div id="currency-select-list" class="option-list">
+        <div class="option-css hover-effect transition-effect"
+             (click)="pickOption('pln', 'currency-select', 'currency-select-list')">
+          <img src="assets/img/flag/PL.png">
+          <span>pln</span>
+        </div>
+        <div class="option-css hover-effect transition-effect"
+             (click)="pickOption('eur', 'currency-select', 'currency-select-list')">
+          <img src="assets/img/flag/PL.png">
+          <span>eur</span>
+        </div>
+      </div>
+    </li>
+    <li class="menu-element-container vert-dash"></li>
+    <li class="menu-element-container hover-effect transition-effect">
+      <div id="banknotes">
+        <img src="assets/img/header/banknotes.png">
+        <span id="count-banknotes">999999</span>
+      </div>
+    </li>
+    <li class="menu-element-container vert-dash"></li>
+    <!--    Accounts   -->
+    <!--    <li class="menu-element-container hover-effect transition-effect">-->
+    <!--        <div class="account">-->
+    <!--          <img src="assets/img/header/type-cup.png">-->
+    <!--          <span class="account-type">Dealer/Broker</span>-->
+    <!--          <span class="account-name">bbb.fffff.eee.2222@gmail.com</span>-->
+    <!--        </div>-->
+    <!--    </li>-->
+    <!--    <li class="menu-element-container hover-effect transition-effect">-->
+    <!--        <div class="account">-->
+    <!--          <img src="assets/img/header/type-medal.png">-->
+    <!--          <span class="account-type">Komis</span>-->
+    <!--          <span class="account-name">bbb.fffff.eee.2222@gmail.com</span>-->
+    <!--        </div>-->
+    <!--    </li>-->
+    <!--    <li class="menu-element-container hover-effect transition-effect">-->
+    <!--      <div class="account">-->
+    <!--        <img src="assets/img/header/type-individual.png">-->
+    <!--        <span class="account-type">Individual</span>-->
+    <!--        <span class="account-name">bbb.fffff.eee.2222@gmail.com</span>-->
+    <!--      </div>-->
+    <!--    </li>-->
+    <li class="menu-element-container hover-effect transition-effect">
+      <div class="account">
+        Moje Konto
+      </div>
+    </li>
+    <li class="menu-element-container vert-dash"></li>
+    <li class="menu-element-container hover-effect transition-effect">
+      <div class="add-post">
+        <img src="assets/img/header/add-post.png">
+        <span class="add=post-text">Dodaj ogłoszenie</span>
+      </div>
+    </li>
+    <li class="menu-element-container vert-dash"></li>
+  </ul>
+</nav>

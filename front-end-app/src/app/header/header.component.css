@@ -1,0 +1,184 @@
+* {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+nav {
+  min-width: 1324px;
+  max-width: 2560px;
+  margin: 13px auto;
+  padding: 0 12px;
+}
+
+nav:before {
+  content: '';
+  display: block;
+  height: 64px;
+  width: 100%;
+  background-color: #2a2a2a;
+  position: absolute;
+  left: 0;
+  top: 30px;
+  z-index: -1;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  height: 102px;
+  line-height: 102px;
+  display: inline-block;
+}
+
+.parking {
+  margin: 0 auto;
+  padding: 0 16px;
+  height: 102px;
+  width: 64px;
+  border: 3px #e9bc09 solid;
+  cursor: pointer;
+}
+
+.parking:hover {
+  background-color: #45a1ac;
+  color: white;
+}
+
+.parking img {
+  position: relative;
+  height: 37px;
+  top: -7px;
+}
+
+#count-parking {
+  position: relative;
+  height: 1rem;
+  top: -66px;
+}
+
+#right-side {
+  float: right;
+}
+
+.menu-element-container {
+  display: inline-block;
+  float: left;
+  line-height: 64px;
+  text-align: center;
+  margin: 17px auto;
+  color: white;
+}
+
+.category {
+  cursor: pointer;
+  padding: 0 10px;
+}
+
+.hover-effect:hover {
+  background-color: #45a1ac;
+}
+
+.transition-effect {
+  transition-duration: .3s;
+  transition-timing-function: ease-in-out;
+}
+
+.vert-dash {
+  height: 64px;
+  width: 1px;
+  border: 1px solid #5f5f5f;
+}
+
+#banknotes {
+  height: 64px;
+  text-align: center;
+  color: black;
+  padding: 0 12px;
+  width: 61px;
+}
+
+#count-banknotes {
+  background-color: #f6cb20;
+  display: inline-block;
+  position: relative;
+  line-height: 1rem;
+  color: black;
+  left: 16px;
+  top: -42px;
+  padding: 0 2px;
+  width: auto;
+}
+
+.account {
+  height: 64px;
+  padding: 0 6px;
+  text-align: left;
+}
+
+.account img {
+  height: 18px;
+  position: relative;
+  top: -16px;
+  margin: 0 3px;
+  font-size: 1rem;
+}
+
+.account-type {
+  text-transform: capitalize;
+  position: relative;
+  font-size: .7rem;
+  width: 100%;
+  height: 10px;
+  left: 0;
+  top: -16px;
+}
+
+.account-name {
+  display: block;
+  position: relative;
+  font-size: 1rem;
+  height: 10px;
+  top: -52px;
+  padding-left: 32px;
+}
+
+
+.select-css, .select-css span {
+  display: inline-block;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 0 3px;
+}
+
+.select-css img {
+  height: 24px;
+}
+
+.option-css {
+  background-color: #2a2a2a;
+  color: white;
+  margin: 0;
+}
+
+.option-list {
+  line-height: 24px;
+  text-transform: uppercase;
+  display: none;
+}
+
+.add-post:hover {
+  background-color: #e9bc09;
+}
+
+.add-post {
+  cursor: cell;
+  color: black;
+  text-transform: uppercase;
+  background-color: #f6cb20;
+  padding: 0 6px;
+}
