@@ -12,6 +12,7 @@ export class HeaderComponent implements OnInit {
   private categoryPickedBackgroundColor = '#45a1ac';
   private categoryBackgroundColor = 'transparent';
   private lastPickedCategoryId = '';
+
   constructor() {
   }
 
