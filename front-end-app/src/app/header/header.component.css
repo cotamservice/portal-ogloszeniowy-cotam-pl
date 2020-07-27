@@ -183,3 +183,7 @@ ul {
   background-color: #f6cb20;
   padding: 0 6px;
 }
+
+#account-logout-icon {
+  top: 0px;
+}
