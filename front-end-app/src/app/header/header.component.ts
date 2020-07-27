@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-header',
@@ -11,25 +12,30 @@ export class HeaderComponent implements OnInit {
   private countrySelectListId = 'country-select-list';
   private categoryPickedBackgroundColor = '#45a1ac';
   private categoryBackgroundColor = 'transparent';
-  private lastPickedCategoryId = '';
+  private lastPickedelementId = '';
 
-  constructor() {
+  constructor(private router: Router) {
   }
 
   ngOnInit(): void {
   }
 
-  pickCategory(categoryId): void {
-    if(this.lastPickedCategoryId !== '') {
-      document.getElementById(this.lastPickedCategoryId).style.backgroundColor = this.categoryBackgroundColor;
+  pickElement(elementId: string): void {
+    if (this.lastPickedelementId !== '') {
+      document.getElementById(this.lastPickedelementId).style.backgroundColor = this.categoryBackgroundColor;
     }
-    let pickedCategory = document.getElementById(categoryId);
+    let pickedCategory = document.getElementById(elementId);
     pickedCategory.style.backgroundColor = this.categoryPickedBackgroundColor;
-    this.lastPickedCategoryId = categoryId;
+    this.lastPickedelementId = elementId;
 
   }
 
-  openCloseMenuSelector(selectListId): void {
+  pickCategory(elementId: string): void {
+    this.pickElement(elementId);
+    this.redirectTo('');
+  }
+
+  openCloseMenuSelector(selectListId: string): void {
     let selectList = document.getElementById(selectListId);
     let display = selectList.style.display;
     if (display === 'none' || display === '') {
@@ -40,7 +46,7 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  pickOption(code, selectId, selectorListId): void {
+  pickOption(code: string, selectId: string, selectorListId): void {
     this.closeAllSelect();
     document.getElementById(selectId).childNodes[1].textContent = code;
   }
@@ -49,5 +55,15 @@ export class HeaderComponent implements OnInit {
     document.getElementById(this.langSelectListId).style.display = 'none';
     document.getElementById(this.currencySelectListId).style.display = 'none';
     document.getElementById(this.countrySelectListId).style.display = 'none';
+  }
+
+  redirectTo(pagename: string): void {
+    this.router.navigate(['/' + pagename]);
+
+  }
+
+  pickRegistration(): void {
+    this.pickElement('account');
+    this.redirectTo("registration");
   }
 }
