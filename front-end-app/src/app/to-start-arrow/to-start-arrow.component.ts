@@ -16,7 +16,7 @@ export class ToStartArrowComponent implements OnInit {
 
   addHideShowOnScrolling(): void {
     document.addEventListener('scroll',
-      function () {
+      () => {
         let currentScrollPos = window.scrollY;
         if (currentScrollPos > 0) {
           document.getElementById('arrow-to-start').style.visibility = 'visible';
