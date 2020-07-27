@@ -10,7 +10,7 @@ export class HeaderComponent implements OnInit {
   private langSelectListId = 'lang-select-list';
   private currencySelectListId = 'currency-select-list';
   private countrySelectListId = 'country-select-list';
-  private categoryPickedBackgroundColor = '#45a1ac';
+  private elementPickedBackgroundColor = '#3b8790';
   private categoryBackgroundColor = 'transparent';
   private lastPickedelementId = '';
 
@@ -25,7 +25,7 @@ export class HeaderComponent implements OnInit {
       document.getElementById(this.lastPickedelementId).style.backgroundColor = this.categoryBackgroundColor;
     }
     let pickedCategory = document.getElementById(elementId);
-    pickedCategory.style.backgroundColor = this.categoryPickedBackgroundColor;
+    pickedCategory.style.backgroundColor = this.elementPickedBackgroundColor;
     this.lastPickedelementId = elementId;
 
   }
