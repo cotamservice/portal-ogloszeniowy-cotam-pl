@@ -12,7 +12,7 @@ export class HeaderComponent implements OnInit {
   private countrySelectListId = 'country-select-list';
   private elementPickedBackgroundColor = '#3b8790';
   private categoryBackgroundColor = 'transparent';
-  private lastPickedelementId = '';
+  private lastPickedElementId = '';
 
   constructor(private router: Router) {
   }
@@ -21,12 +21,12 @@ export class HeaderComponent implements OnInit {
   }
 
   pickElement(elementId: string): void {
-    if (this.lastPickedelementId !== '') {
-      document.getElementById(this.lastPickedelementId).style.backgroundColor = this.categoryBackgroundColor;
+    if (this.lastPickedElementId !== '') {
+      document.getElementById(this.lastPickedElementId).style.backgroundColor = this.categoryBackgroundColor;
     }
     let pickedCategory = document.getElementById(elementId);
     pickedCategory.style.backgroundColor = this.elementPickedBackgroundColor;
-    this.lastPickedelementId = elementId;
+    this.lastPickedElementId = elementId;
 
   }
 
