@@ -1,12 +1,3 @@
-* {
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
 footer {
   text-align: center;
   background: #2a2a2a;
@@ -27,7 +18,7 @@ ul {
 
 li {
   display: inline-block;
-  font-size: 1rem;
+  font-size: 1.25rem;
   color: white;
   padding: 0 6px;
 }
@@ -65,7 +56,7 @@ a:hover {
 #footer-logout {
   width: 100%;
   background-color: #f6cb20;
-  height: 220px;
+  height: 240px;
   text-align: center;
 }
 
@@ -95,7 +86,7 @@ a:hover {
   background-color: #3b8790;
 }
 .footer-logout-text {
-  font-size: 1rem;
+  font-size: 1.25rem;
   padding: 36px;
   text-align: left;
 }

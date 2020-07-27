@@ -3,11 +3,10 @@
   top:-90px;
 }
 nav {
-  min-width: 1324px;
-  max-width: 1980px;
+  width: 1360px;
   height: 102px;
   margin: 13px auto 24px auto;
-  padding: 0 12px;
+  padding: 0;
 }
 
 nav:before {
@@ -72,7 +71,7 @@ ul {
 
 .category {
   cursor: pointer;
-  padding: 0 10px;
+  padding: 0 12px;
 }
 
 .hover-effect:hover {
