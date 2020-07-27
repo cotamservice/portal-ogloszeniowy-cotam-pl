@@ -6,12 +6,22 @@
   -ms-user-select: none;
   user-select: none;
 }
-
+.container{
+  position: relative;
+  top:-90px;
+}
+#header-footer{
+  position: relative;
+  width: 100%;
+  background-color: white;
+  height: 24px;
+  z-index: -4;
+}
 nav {
   min-width: 1324px;
   max-width: 1980px;
   height: 102px;
-  margin: 13px auto;
+  margin: 13px auto 24px auto;
   padding: 0 12px;
 }
 
