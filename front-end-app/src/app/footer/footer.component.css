@@ -20,7 +20,6 @@ footer {
   height: 156px;
 }
 
-
 ul {
   list-style: none;
   line-height: 156px;
@@ -63,4 +62,44 @@ a:hover {
   display: inline-block;
 }
 
+#footer-logout {
+  width: 100%;
+  background-color: #f6cb20;
+  height: 220px;
+  text-align: center;
+}
+
+#footer-logout img{
+  position: relative;
+  height: 360px;
+
+  top: -60px;
+  z-index: 4;
+}
+
+.button-blue {
+  position: relative;
+  float: right;
+  color: white;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 1rem;
+  background-color: #45a1ac;
+  line-height: 43px;
+  padding: 0 12px;
+  margin-right: 24px;
+
+}
+
+.button-blue:hover {
+  background-color: #3b8790;
+}
+.footer-logout-text {
+  font-size: 1rem;
+  padding: 36px;
+  text-align: left;
+}
+.footer-logout-text h2{
+  font-weight: 700;
+}
 
