@@ -27,4 +27,7 @@ export class ToStartArrowComponent implements OnInit {
         }
       })
   }
+  goToTheTopOfPage():void{
+    scroll(0,0);
+  }
 }
