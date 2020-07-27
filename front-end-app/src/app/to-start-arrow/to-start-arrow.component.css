@@ -1,0 +1,23 @@
+#arrow-to-start img {
+  height: 31px;
+}
+
+#arrow-to-start{
+  text-align: center;
+  line-height: 53px;
+  background-color: #f6cb20;
+  width: 53px;
+  height: 53px;
+  z-index: 20;
+  position: fixed;
+  bottom: 85px;
+  right: 85px;
+  transition-duration: .5s;
+  transition-timing-function: ease-in-out;
+  visibility: hidden;
+  opacity: 0;
+}
+
+#arrow-to-start:hover {
+  background-color: #e9bc09;
+}

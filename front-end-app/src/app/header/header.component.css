@@ -9,7 +9,7 @@
 
 nav {
   min-width: 1324px;
-  max-width: 2560px;
+  max-width: 1980px;
   height: 102px;
   margin: 13px auto;
   padding: 0 12px;
@@ -85,7 +85,7 @@ ul {
 }
 
 .transition-effect {
-  transition-duration: .3s;
+  transition-duration: .5s;
   transition-timing-function: ease-in-out;
 }
 

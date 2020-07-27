@@ -9,18 +9,29 @@ import { FooterComponent } from './footer/footer.component';
 import { AuthenticateComponent } from './authenticate/authenticate.component';
 import { HomeComponent } from './home/home.component';
 
+import { RouterModule, Routes} from "@angular/router";
+import { ToStartArrowComponent } from './to-start-arrow/to-start-arrow.component';
+
+const appRoute: Routes = [
+  {path: '', component: HomeComponent},
+  {path: 'registration', component: RegistrationComponent},
+  {path: 'authentication', component: AuthenticateComponent},
+];
+
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    RegistrationComponent,
-    FooterComponent,
-    AuthenticateComponent,
-    HomeComponent
-  ],
+    declarations: [
+        AppComponent,
+        HeaderComponent,
+        RegistrationComponent,
+        FooterComponent,
+        AuthenticateComponent,
+        HomeComponent,
+        ToStartArrowComponent,
+    ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    RouterModule.forRoot(appRoute),
   ],
   providers: [],
   bootstrap: [AppComponent]
