@@ -1,0 +1,66 @@
+.container {
+  background-color: white;
+  padding: 0;
+  margin: 0 auto 24px auto;
+}
+
+.container h1 {
+  padding: 12px;
+  margin: 0;
+  font-size: 2rem;
+}
+
+nav {
+  margin-bottom: 24px;
+}
+
+nav ul {
+  padding: 0;
+  margin: 0;
+  border-bottom: 3px solid #f6cb20;
+}
+
+.menu-element-container {
+  display: inline-block;
+  height: 67px;
+  width: 234px;
+  line-height: 67px;
+  padding: 0 30px;
+  margin: 0;
+}
+
+.menu-element-container:hover {
+  background-color: #f6cb20 !important;
+}
+
+.menu-element-container img {
+  display: inline-block;
+  height: 24px;
+}
+
+.menu-element-container p {
+  display: inline-block;
+  text-transform: uppercase;
+  padding: 0 12px;
+  margin: 0;
+  font-size: 1rem;
+}
+
+#registration-title {
+  text-transform: uppercase;
+}
+
+#login-form {
+  display: none;
+}
+#registration-indywidualne-form {
+  display: none;
+}
+#registration-komis-form {
+  display: none;
+}
+#registration-broker-form {
+  display: none;
+}
+
+

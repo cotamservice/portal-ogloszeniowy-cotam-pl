@@ -15,6 +15,7 @@ import { ToStartArrowComponent } from './to-start-arrow/to-start-arrow.component
 const appRoute: Routes = [
   {path: '', component: HomeComponent},
   {path: 'registration', component: RegistrationComponent},
+  {path: 'login', component: RegistrationComponent},
   {path: 'authentication', component: AuthenticateComponent},
 ];
 

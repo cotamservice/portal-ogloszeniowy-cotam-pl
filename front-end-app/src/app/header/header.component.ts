@@ -57,13 +57,18 @@ export class HeaderComponent implements OnInit {
     document.getElementById(this.countrySelectListId).style.display = 'none';
   }
 
-  redirectTo(pagename: string): void {
-    this.router.navigate(['/' + pagename]);
+  redirectTo(pagename: string, param?: object): void {
+    if(param!== undefined){
+      this.router.navigate(['/' + pagename, param]);
+    }else{
+      this.router.navigate(['/' + pagename]);
+    }
+
 
   }
 
   pickRegistration(): void {
     this.pickElement('account');
-    this.redirectTo("registration");
+    this.redirectTo("login");
   }
 }
