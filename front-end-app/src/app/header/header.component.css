@@ -2,13 +2,6 @@
   position: relative;
   top:-90px;
 }
-#header-footer{
-  position: relative;
-  width: 100%;
-  background-color: white;
-  height: 24px;
-  z-index: -4;
-}
 nav {
   min-width: 1324px;
   max-width: 1980px;
