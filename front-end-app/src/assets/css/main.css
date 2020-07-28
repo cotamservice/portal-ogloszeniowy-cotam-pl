@@ -6,6 +6,53 @@
   -ms-user-select: none;
   user-select: none;
 }
+
 .container {
   min-width: 1360px;
+}
+
+.main-black-bg {
+  background-color: #2a2a2a;
+}
+
+.main-orange-bg {
+  background-color: #f6cb20;
+}
+
+.main-black-orange-bg {
+  background-color: #e9bc09;
+}
+
+.main-blue-bg {
+  background-color: #45a1ac;
+}
+
+.main-dark-blue-bg {
+  background-color: #3b8790;
+}
+
+.main-orange-bg-hover:hover {
+  background-color: #f6cb20;
+}
+
+.main-black-orange-bg-hover:hover {
+  background-color: #e9bc09;
+}
+
+.main-blue-bg-hover:hover {
+  background-color: #45a1ac;
+}
+
+.main-dark-blue-bg-hover:hover {
+  background-color: #3b8790;
+}
+
+
+.main-transition-effect {
+  transition-duration: .5s;
+  transition-timing-function: ease-in-out;
+}
+
+.main-border-color {
+  border-color: #5f5f5f;
 }
