@@ -16,6 +16,7 @@
   transition-timing-function: ease-in-out;
   visibility: hidden;
   opacity: 0;
+  border: 1px white solid;
 }
 
 #arrow-to-start:hover {
