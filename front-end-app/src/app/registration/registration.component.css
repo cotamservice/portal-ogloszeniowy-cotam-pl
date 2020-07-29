@@ -25,6 +25,7 @@ nav ul {
   line-height: 67px;
   padding: 0 30px;
   margin: 0;
+  text-align: center;
 }
 
 .element:hover {

@@ -23,10 +23,12 @@
 
 .registration-button:hover {
   background-color: #e9bc09;
+  margin-top: 12px;
 }
 
 .company-info-title{
-
+font-size: 1.75rem;
+  font-weight: 500;
 }
 
 .input {
@@ -45,6 +47,16 @@
   font-weight: 200;
 }
 
+.select {
+  width: 520px;
+  height: 43px;
+}
+.select-arrow-icon{
+  position: relative;
+  top: 21px;
+  right: 45px;
+  height: 24px;
+}
 .input-label {
   font-size: 1.25rem;
   font-weight: 500;

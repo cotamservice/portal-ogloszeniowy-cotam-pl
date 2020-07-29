@@ -17,7 +17,7 @@
         <input id="{{inputWordId}}" [ngClass]="{'input':true}" type="text"
                placeholder="{{inputWordPlaceholderValue}}">
       </label>
-      <p [ngClass]="{'company-info-title': true}">Informacja o firmie / dane do faktury</p>
+      <p [ngClass]="{'company-info-title': true}">{{companyInfoTitleValue}}</p>
       <label for="{{inputNipId}}" [ngClass]="{'input-label':true}">{{inputNipLabelValue}}
         <input id="{{inputNipId}}" [ngClass]="{'input':true}" type="text"
                placeholder="{{inputNipPlaceholderValue}}">
@@ -27,11 +27,8 @@
                placeholder="{{inputCompanyNamePlaceholderValue}}">
       </label>
 
-      <!--      <label for="{{inputCompanyTypeId}}" [ngClass]="{'input-label':true}">{{inputCompanyTypeLabelValue}}-->
-      <!--        <input id="{{inputCompanyTypeId}}" [ngClass]="{'input':true}" type="text"-->
-      <!--               placeholder="{{inputCompanyTypePlaceholderValue}}">-->
-      <!--      </label>-->
       <label for="type" [ngClass]="{'select-label':true}">{{inputCompanyTypeLabelValue}}
+        <img [ngClass]="{'select-arrow-icon': true}" src="assets/img/registration/arrow-down-black.png">
         <select id="type" [ngClass]="{'select':true}">
           <option [ngClass]="{'select-option':true}">Value 1</option>
           <option [ngClass]="{'select-option':true}">Value 2</option>
@@ -63,7 +60,7 @@
         <input id="{{inputCityId}}" [ngClass]="{'input':true}" type="text"
                placeholder="{{inputCityPlaceholderValue}}">
       </label>
-      <label ffor="{{inputPhoneId}}" [ngClass]="{'input-label':true}">{{inputPhoneLabelValue}}
+      <label for="{{inputPhoneId}}" [ngClass]="{'input-label':true}">{{inputPhoneLabelValue}}
         <input id="{{inputPhoneId}}" [ngClass]="{'input':true}" type="text"
                placeholder="{{inputPhonePlaceholderValue}}">
       </label>
