@@ -109,18 +109,6 @@
   font-weight: 500;
 }
 
-#login-fb, #login-google {
-  display: inline-block;
-  padding: 12px;
-  margin: 24px 12px 0px 0;
-  border: 1px solid #e9bc09;
-  width: 280px;
-}
-
-#login-google:hover, #login-fb:hover {
-  background-color: #e9bc09;
-}
-
 .login-google-fb p {
   display: inline-block;
   padding: 0;
