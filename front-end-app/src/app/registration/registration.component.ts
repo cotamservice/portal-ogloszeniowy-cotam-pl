@@ -28,11 +28,11 @@ export class RegistrationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // if (this.router.url.endsWith("login")) {
-    //   this.openLogin();
-    // } else if (this.router.url.endsWith("registration")) {
-    //   this.pickIndywidualne();
-    // }
+    if (this.router.url.endsWith("login")) {
+      this.openLoginForm();
+    } else if (this.router.url.endsWith("registration")) {
+      this.openRegistrationIndividualForm();
+    }
   }
 
   closeAllForms(): void {
