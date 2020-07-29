@@ -26,13 +26,13 @@
   margin-top: 12px;
 }
 
-.company-info-title{
-font-size: 1.75rem;
+.company-info-title {
+  font-size: 1.75rem;
   font-weight: 500;
 }
 
 .input {
-  width: 520px;
+  width: 80%;
   display: block;
   height: 43px;
   border: 1px solid #9a9a9a;
@@ -48,15 +48,16 @@ font-size: 1.75rem;
 }
 
 .select {
+  display: block;
   width: 520px;
   height: 43px;
+  line-height: 43px;
+  padding: 0 24px;
+  margin-top: 6px;
+  font-size: 1rem;
+
 }
-.select-arrow-icon{
-  position: relative;
-  top: 21px;
-  right: 45px;
-  height: 24px;
-}
+
 .input-label {
   font-size: 1.25rem;
   font-weight: 500;
@@ -89,4 +90,12 @@ font-size: 1.75rem;
 .accept:hover {
   color: #3b8790;
   font-weight: 400;
+}
+
+.salon-container {
+  background-color: #ececec;
+  margin: 12px 0;
+  height: 50%;
+  top: -24px;
+  padding: 24px;
 }

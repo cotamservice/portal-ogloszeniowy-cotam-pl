@@ -1,6 +1,7 @@
 <div class="container">
   <div class="row">
-    <div class="col-12">
+    <div class="col-6">
+      <p [ngClass]="{'company-info-title': true}">{{generalInfoTitleValue}}</p>
       <label for="{{inputEmailId}}" [ngClass]="{'input-label':true}">{{inputEmailLabelValue}}
         <input id="{{inputEmailId}}" [ngClass]="{'input':true}" type="text"
                placeholder="{{inputEmailPlaceholderValue}}">
@@ -27,12 +28,10 @@
                placeholder="{{inputCompanyNamePlaceholderValue}}">
       </label>
 
-      <label for="type" [ngClass]="{'select-label':true}">{{inputCompanyTypeLabelValue}}
-        <img [ngClass]="{'select-arrow-icon': true}" src="assets/img/registration/arrow-down-black.png">
-        <select id="type" [ngClass]="{'select':true}">
-          <option [ngClass]="{'select-option':true}">Value 1</option>
-          <option [ngClass]="{'select-option':true}">Value 2</option>
-          <option [ngClass]="{'select-option':true}">Value 3</option>
+      <label for="{{selectCompanyTypeId}}" [ngClass]="{'input-label':true}">{{selectCompanyTypeLabelValue}}
+        <select id="{{selectCompanyTypeId}}" [ngClass]="{'select':true}">
+          <option disabled selected>{{selectCompanyTypeDefaultValue}}</option>
+          <option *ngFor="let option of selectCompanyOptionList">{{option}}</option>
         </select>
       </label>
 
@@ -67,6 +66,37 @@
       <label for="{{inputAcceptCheckboxId}}" [ngClass]="{'input-checkbox-label':true}">
         <input id="{{inputAcceptCheckboxId}}" [ngClass]="{'input-checkbox':true}" type="checkbox">
         <a [ngClass]="{'accept':true}" href="">{{inputAcceptCheckboxTitleValue}}</a>
+      </label>
+    </div>
+    <div class="col-6" [ngClass]="{'salon-container': true}">
+      <p [ngClass]="{'company-info-title': true}">{{salonInfoTitleValue}}</p>
+      <label for="{{inputSalonNameId}}" [ngClass]="{'input-label':true}">{{inputSalonNameLabelValue}}
+        <input id="{{inputSalonNameId}}" [ngClass]="{'input':true}" type="text"
+               placeholder="{{inputSalonNamePlaceholderValue}}">
+      </label>
+      <label for="{{inputSalonCountryId}}" [ngClass]="{'input-label':true}">{{inputSalonCountryLabelValue}}
+        <input id="{{inputSalonCountryId}}" [ngClass]="{'input':true}" type="text"
+               placeholder="{{inputSalonCountryPlaceholderValue}}">
+      </label>
+      <label for="{{inputSalonAddressId}}" [ngClass]="{'input-label':true}">{{inputSalonAddressLabelValue}}
+        <input id="{{inputSalonAddressId}}" [ngClass]="{'input':true}" type="text"
+               placeholder="{{inputSalonCountryPlaceholderValue}}">
+      </label>
+      <label for="{{inputSalonZipId}}" [ngClass]="{'input-label':true}">{{inputSalonZipLabelValue}}
+        <input id="{{inputSalonZipId}}" [ngClass]="{'input':true}" type="text"
+               placeholder="{{inputSalonCountryPlaceholderValue}}">
+      </label>
+      <label for="{{inputSalonCityId}}" [ngClass]="{'input-label':true}">{{inputSalonCityLabelValue}}
+        <input id="{{inputSalonCityId}}" [ngClass]="{'input':true}" type="text"
+               placeholder="{{inputSalonCityPlaceholderValue}}">
+      </label>
+      <label for="{{inputSalonPhoneId}}" [ngClass]="{'input-label':true}">{{inputSalonPhoneLabelValue}}
+        <input id="{{inputSalonPhoneId}}" [ngClass]="{'input':true}" type="text"
+               placeholder="{{inputSalonPhonePlaceholderValue}}">
+      </label>
+      <label for="{{inputSalonPhone2Id}}" [ngClass]="{'input-label':true}">{{inputSalonPhoneLabelValue}}
+        <input id="{{inputSalonPhone2Id}}" [ngClass]="{'input':true}" type="text"
+               placeholder="{{inputSalonPhonePlaceholderValue}}">
       </label>
     </div>
     <div class="col-12">
