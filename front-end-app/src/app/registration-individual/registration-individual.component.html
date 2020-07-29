@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <label for="{{inputEmailId}}" [ngClass]="{'input-label':true}">{{inputEmailLabelValue}}
+        <input id="{{inputEmailId}}" [ngClass]="{'input':true}" type="text"
+               placeholder="{{inputEmailPlaceholderValue}}">
+      </label>
+      <label for="{{inputPasswordId}}" [ngClass]="{'input-label':true}">{{inputPasswordLabelValue}}
+        <input id="{{inputPasswordId}}" [ngClass]="{'input':true}" type="text"
+               placeholder="{{inputPasswordPlaceholderValue}}">
+      </label>
+      <label for="{{inputPasswordConfirmId}}" [ngClass]="{'input-label':true}">{{inputPasswordConfirmLabelValue}}
+        <input id="{{inputPasswordConfirmId}}" [ngClass]="{'input':true}" type="text"
+               placeholder="{{inputPasswordConfirmPlaceholderValue}}">
+      </label>
+      <label for="{{inputWordId}}" [ngClass]="{'input-label':true}">{{inputWordLabelValue}}
+        <input id="{{inputWordId}}" [ngClass]="{'input':true}" type="text"
+               placeholder="{{inputWordPlaceholderValue}}">
+      </label>
+      <label for="{{inputAcceptCheckboxId}}" [ngClass]="{'input-checkbox-label':true}">
+        <input id="{{inputAcceptCheckboxId}}"  [ngClass]="{'input-checkbox':true}" type="checkbox">
+        <a [ngClass]="{'accept':true}" href="">{{inputAcceptCheckboxTitleValue}}</a>
+      </label>
+    </div>
+    <div class="col-12">
+      <div [ngClass]="{'registration-button':true}">{{registrationButtonTitleValue}}</div>
+    </div>
+  </div>
+</div>
