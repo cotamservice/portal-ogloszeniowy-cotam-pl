@@ -11,6 +11,10 @@ import { HomeComponent } from './home/home.component';
 
 import { RouterModule, Routes} from "@angular/router";
 import { ToStartArrowComponent } from './to-start-arrow/to-start-arrow.component';
+import { RegistrationLoginComponent } from './registration-login/registration-login.component';
+import { RegistrationIndividualComponent } from './registration-individual/registration-individual.component';
+import { RegistrationCommissionComponent } from './registration-commission/registration-commission.component';
+import { RegistrationBrokerComponent } from './registration-broker/registration-broker.component';
 
 const appRoute: Routes = [
   {path: '', component: HomeComponent},
@@ -28,6 +32,10 @@ const appRoute: Routes = [
         AuthenticateComponent,
         HomeComponent,
         ToStartArrowComponent,
+        RegistrationLoginComponent,
+        RegistrationIndividualComponent,
+        RegistrationCommissionComponent,
+        RegistrationBrokerComponent,
     ],
   imports: [
     BrowserModule,

@@ -8,15 +8,6 @@ import {Router, ActivatedRoute, Params} from '@angular/router';
 })
 
 export class RegistrationComponent implements OnInit {
-  private elementPickedBackgroundColor = '#e9bc09';
-  private categoryBackgroundColor = 'transparent';
-  private lastPickedElementId = '';
-
-  private loginFormId = 'login-form';
-  private registrationIndywidualneFormId = 'registration-indywidualne-form';
-  private registrationKomisFormId = 'registration-komis-form';
-  private registrationBrokerFormId = 'registration-broker-form';
-  private lastOpenFormId = '';
 
   registrationTitle = 'rejestracja';
   loginTitle = 'login'
@@ -33,7 +24,6 @@ export class RegistrationComponent implements OnInit {
   isRegistrationBrokerFormOpen: boolean = false;
   registrationBrokerElementTextValue = 'dealer/broker';
 
-
   constructor(private activatedRoute: ActivatedRoute, private router: Router) {
   }
 
@@ -43,27 +33,6 @@ export class RegistrationComponent implements OnInit {
     // } else if (this.router.url.endsWith("registration")) {
     //   this.pickIndywidualne();
     // }
-  }
-
-  pickElement(elementId: string): void {
-    // if (this.lastPickedElementId !== '') {
-    //   document.getElementById(this.lastPickedElementId).style.backgroundColor = this.categoryBackgroundColor;
-    // }
-    // let pickedCategory = document.getElementById(elementId);
-    // pickedCategory.style.backgroundColor = this.elementPickedBackgroundColor;
-    // this.lastPickedElementId = elementId;
-  }
-
-  setRegistrationTitle(title: string): void {
-    // document.getElementById('registration-title').textContent = title;
-  }
-
-  openCloseForm(formId: string): void {
-    // if (this.lastOpenFormId !== '') {
-    //   document.getElementById(this.lastOpenFormId).style.display = 'none';
-    // }
-    // this.lastOpenFormId = formId;
-    // document.getElementById(formId).style.display = 'block';
   }
 
   closeAllForms(): void {
