@@ -127,12 +127,3 @@
   margin: 0 12px;
   line-height: 24px;
 }
-
-#login-google-img, #login-fb-img {
-  height: 24px;
-  display: inline-block;
-}
-
-#login-forgot-password {
-  margin: 12px 0px;
-}
