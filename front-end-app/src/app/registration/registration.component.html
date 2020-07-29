@@ -1,81 +1,36 @@
 <div class="container">
   <div class="col-12 text-left">
-    <h1 id="registration-title">rejestracja</h1>
+    <h1 [ngClass]="{'title':true}">{{isLoginFormOpen?loginTitle:registrationTitle}}</h1>
   </div>
   <nav>
     <ul>
-      <li id="login" class="menu-element-container" (click)="pickLogin()">
-        <img src="assets/img/registration/finger-print.png">
-        <p>
-          logowanie
-        </p>
+      <li [ngClass]="{'select-element': isLoginFormOpen, 'unselect-element': !isLoginFormOpen, 'element': true}"
+          (click)="openLoginForm()">
+        <img [ngClass]="{'element-icon': true}" src="assets/img/registration/finger-print.png">
+        <p [ngClass]="{'element-text': true}">{{loginElementTextValue}}</p>
       </li>
-      <li id="registration-indywidualne" class="menu-element-container" (click)="pickIndywidualne()">
-        <img src="assets/img/registration/type-individual-black.png">
-        <p>
-          indywidualne
-        </p>
+      <li
+        [ngClass]="{'select-element': isRegistrationIndividualFormOpen, 'unselect-element': !isRegistrationIndividualFormOpen, 'element': true}"
+        (click)="openRegistrationIndividualForm()">
+        <img [ngClass]="{'element-icon': true}" src="assets/img/registration/type-individual-black.png">
+        <p [ngClass]="{'element-text': true}">{{registrationIndividualElementTextValue}}</p>
       </li>
-      <li id="registration-komis" class="menu-element-container" (click)="pickKomis()">
-        <img src="assets/img/registration/type-medal-black.png">
-        <p>
-          komis
-        </p>
+      <li
+        [ngClass]="{'select-element': isRegistrationCommissionFormOpen, 'unselect-element': !isRegistrationCommissionFormOpen, 'element': true}"
+        (click)="openRegistrationCommissionForm()">
+        <img [ngClass]="{'element-icon': true}" src="assets/img/registration/type-medal-black.png">
+        <p [ngClass]="{'element-text': true}">{{registrationCommissionElementTextValue}}</p>
       </li>
-      <li id="registration-broker" class="menu-element-container" (click)="pickBroker()">
-        <img src="assets/img/registration/type-cup-black.png">
-        <p>
-          dealer/broker
-        </p>
+      <li
+        [ngClass]="{'select-element': isRegistrationBrokerFormOpen, 'unselect-element': !isRegistrationBrokerFormOpen, 'element': true}"
+        (click)="openRegistrationBrokerForm()">
+        <img [ngClass]="{'element-icon': true}" src="assets/img/registration/type-cup-black.png">
+        <p [ngClass]="{'element-text': true}">{{registrationBrokerElementTextValue}}</p>
       </li>
     </ul>
   </nav>
 </div>
-<div id="login-form" class="container">
-  <div class="row">
-    <div class="col-12">
-      <label for="login-email">Email
-        <input id="login-email" name="login-email" type="text" placeholder="wprowadż swój email">
-      </label>
-      <label for="login-password">Hasło
-        <input id="login-password" name="login-password" type="text" placeholder="wprowadż swoje hasło">
-      </label>
-      <label id="login-remember-me-label" for="login-remember-me">
-        <input id="login-remember-me" name="login-remember-me" type="checkbox">
-        Zapamiętaj mnie
-      </label>
-    </div>
-    <div class="col-6 login-google-fb">
-      <div id="login-google">
-        <img id="login-google-img" src="assets/img/registration/login-google-icon.png">
-        <p>Zaloguj się przez google</p>
-      </div>
-      <div id="login-fb">
-        <img id="login-fb-img" src="assets/img/registration/login-fb-icon.png">
-        <p>Zaloguj się przez facebook</p>
-      </div>
-    </div>
-    <div class="col-12">
-      <div id="login-button">Zaloguj się</div>
-    </div>
-    <div id="login-forgot-password"class="col-12">
-      <a href="">Zaponiałeś hasło?</a>
-    </div>
-  </div>
-</div>
-<div class="container">
-  <div id="registration-indywidualne-form">
-    individual form
-  </div>
-</div>
-<div class="container">
-  <div id="registration-komis-form">
-    komis form
-  </div>
-</div>
-<div class="container">
-  <div id="registration-broker-form">
-    broker form
-  </div>
-</div>
-
+<app-registration-login *ngIf="isLoginFormOpen"></app-registration-login>
+<app-registration-individual *ngIf="isRegistrationIndividualFormOpen"></app-registration-individual>
+<app-registration-commission *ngIf="isRegistrationCommissionFormOpen"></app-registration-commission>
+<app-registration-broker *ngIf="isRegistrationBrokerFormOpen"></app-registration-broker>
