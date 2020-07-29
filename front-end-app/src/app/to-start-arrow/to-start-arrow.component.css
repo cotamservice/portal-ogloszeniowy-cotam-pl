@@ -10,8 +10,8 @@
   height: 53px;
   z-index: 20;
   position: fixed;
-  bottom: 85px;
-  right: 85px;
+  bottom: 25px;
+  right: 25px;
   transition-duration: .5s;
   transition-timing-function: ease-in-out;
   visibility: hidden;
