@@ -37,7 +37,6 @@ export class RegistrationCommissionComponent implements OnInit {
 
   selectCompanyTypeId= 'type';
   selectCompanyTypeLabelValue = 'Forma prawna';
-  inputCompanyTypePlaceholderValue = 'wpiś formę prawną';
   selectCompanyTypeDefaultValue = 'wybierz';
   selectCompanyOptionList = ['spółka', 'jednoosobowa'];
 
