@@ -79,7 +79,7 @@
 }
 
 .input-label {
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   font-weight: 500;
   margin: 12px 24px;
   display: block;
@@ -97,18 +97,18 @@
 .input-checkbox-label {
   display: inline-block;
   line-height: 24px;
-  font-size: .8rem;
+  font-size: 1rem;
   margin: 12px 24px;
 }
 
 .button-orange-100 {
   background-color: #f6cb20;
   border: 1px solid #e9bc09;
-  height: 43px;
-  line-height: 43px;
   text-transform: uppercase;
   font-weight: 500;
-  padding: 0 24px;
+  padding: 12px 24px;
+  font-size: 1.25rem;
+  line-height: 1.25rem;
   margin: 12px 24px;
 }
 
@@ -131,10 +131,39 @@
   margin: 12px 24px;
 }
 
-.title-label-1 {
+.title-label-80, .title-label-90, .title-label-100, .title-label-125, .title-label-150, .title-label-175, .title-label-200 {
   font-size: 1.75rem;
   font-weight: 500;
   margin: 12px 24px;
+  text-transform: uppercase;
+}
+
+.title-label-80 {
+  font-size: .8rem;
+}
+
+.title-label-90 {
+  font-size: .9rem;
+}
+
+.title-label-100 {
+  font-size: 1rem;
+}
+
+.title-label-125 {
+  font-size: 1.25rem;
+}
+
+.title-label-150 {
+  font-size: 1.5rem;
+}
+
+.title-label-175 {
+  font-size: 1.75rem;
+}
+
+.title-label-200 {
+  font-size: 2rem;
 }
 
 .input-select {
@@ -146,3 +175,5 @@
   margin-top: 6px;
   font-size: 1rem;
 }
+
+

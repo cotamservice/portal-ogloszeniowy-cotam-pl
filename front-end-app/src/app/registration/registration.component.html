@@ -1,34 +1,36 @@
 <div class="container">
-  <div class="col-12 text-left">
-    <label [ngClass]="{'title-label-175':true}">{{isLoginFormOpen?loginTitle:registrationTitle}}</label>
+  <div class="row">
+    <div class="col-12">
+      <label [ngClass]="{'title-label-175':true}">{{isLoginFormOpen ? loginTitle : registrationTitle}}</label>
+      <nav>
+        <ul>
+          <li [ngClass]="{'select-element': isLoginFormOpen, 'unselect-element': !isLoginFormOpen, 'element': true}"
+              (click)="openLoginForm()">
+            <img [ngClass]="{'element-icon': true}" src="assets/img/registration/finger-print.png">
+            <p [ngClass]="{'element-text': true}">{{loginElementTextValue}}</p>
+          </li>
+          <li
+            [ngClass]="{'select-element': isRegistrationIndividualFormOpen, 'unselect-element': !isRegistrationIndividualFormOpen, 'element': true}"
+            (click)="openRegistrationIndividualForm()">
+            <img [ngClass]="{'element-icon': true}" src="assets/img/registration/type-individual-black.png">
+            <p [ngClass]="{'element-text': true}">{{registrationIndividualElementTextValue}}</p>
+          </li>
+          <li
+            [ngClass]="{'select-element': isRegistrationCommissionFormOpen, 'unselect-element': !isRegistrationCommissionFormOpen, 'element': true}"
+            (click)="openRegistrationCommissionForm()">
+            <img [ngClass]="{'element-icon': true}" src="assets/img/registration/type-medal-black.png">
+            <p [ngClass]="{'element-text': true}">{{registrationCommissionElementTextValue}}</p>
+          </li>
+          <li
+            [ngClass]="{'select-element': isRegistrationBrokerFormOpen, 'unselect-element': !isRegistrationBrokerFormOpen, 'element': true}"
+            (click)="openRegistrationBrokerForm()">
+            <img [ngClass]="{'element-icon': true}" src="assets/img/registration/type-cup-black.png">
+            <p [ngClass]="{'element-text': true}">{{registrationBrokerElementTextValue}}</p>
+          </li>
+        </ul>
+      </nav>
+    </div>
   </div>
-  <nav>
-    <ul>
-      <li [ngClass]="{'select-element': isLoginFormOpen, 'unselect-element': !isLoginFormOpen, 'element': true}"
-          (click)="openLoginForm()">
-        <img [ngClass]="{'element-icon': true}" src="assets/img/registration/finger-print.png">
-        <p [ngClass]="{'element-text': true}">{{loginElementTextValue}}</p>
-      </li>
-      <li
-        [ngClass]="{'select-element': isRegistrationIndividualFormOpen, 'unselect-element': !isRegistrationIndividualFormOpen, 'element': true}"
-        (click)="openRegistrationIndividualForm()">
-        <img [ngClass]="{'element-icon': true}" src="assets/img/registration/type-individual-black.png">
-        <p [ngClass]="{'element-text': true}">{{registrationIndividualElementTextValue}}</p>
-      </li>
-      <li
-        [ngClass]="{'select-element': isRegistrationCommissionFormOpen, 'unselect-element': !isRegistrationCommissionFormOpen, 'element': true}"
-        (click)="openRegistrationCommissionForm()">
-        <img [ngClass]="{'element-icon': true}" src="assets/img/registration/type-medal-black.png">
-        <p [ngClass]="{'element-text': true}">{{registrationCommissionElementTextValue}}</p>
-      </li>
-      <li
-        [ngClass]="{'select-element': isRegistrationBrokerFormOpen, 'unselect-element': !isRegistrationBrokerFormOpen, 'element': true}"
-        (click)="openRegistrationBrokerForm()">
-        <img [ngClass]="{'element-icon': true}" src="assets/img/registration/type-cup-black.png">
-        <p [ngClass]="{'element-text': true}">{{registrationBrokerElementTextValue}}</p>
-      </li>
-    </ul>
-  </nav>
 </div>
 <app-registration-login *ngIf="isLoginFormOpen"></app-registration-login>
 <app-registration-individual *ngIf="isRegistrationIndividualFormOpen"></app-registration-individual>
