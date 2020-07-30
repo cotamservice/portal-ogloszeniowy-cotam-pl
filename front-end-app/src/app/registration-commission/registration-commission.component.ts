@@ -71,7 +71,7 @@ export class RegistrationCommissionComponent implements OnInit {
   generalInfoTitleValue = 'Podstawowa informacja';
   companyInfoTitleValue = 'Informacja o firmie';
 
-  salonInfoTitleValue = 'Lokalizacja salonu';
+  salonInfoTitleValue = 'Dodaj salon';
 
   inputSalonNameId = 'salon-name';
   inputSalonNameLabelValue = 'Nazwa salonu';

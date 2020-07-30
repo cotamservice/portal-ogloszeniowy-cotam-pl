@@ -64,7 +64,7 @@
 /*===========================*/
 
 .input {
-  width: 520px;
+  width: 80%;
   display: block;
   height: 43px;
   border: 1px solid #9a9a9a;
@@ -128,5 +128,11 @@
 }
 
 .link-a-label {
+  margin: 12px 24px;
+}
+
+.title-label-1 {
+  font-size: 1.75rem;
+  font-weight: 500;
   margin: 12px 24px;
 }
