@@ -14,7 +14,7 @@
         {{inputRememberCheckboxLabelValue}}
       </label>
     </div>
-    <div class="col-6">
+    <div class="col-12">
       <div [ngClass]="{'login-remote-api':true}">
         <img [ngClass]="{'login-remote-api-icon': true}" src="assets/img/registration/login-google-icon.png">
         <p [ngClass]="{'login-remote-api-title':true}">{{loginRemoteGoogleTitleValue}}</p>
@@ -25,10 +25,10 @@
       </div>
     </div>
     <div class="col-12">
-      <div [ngClass]="{'login-button':true}">{{loginButtonTitleValue}}</div>
+      <div [ngClass]="{'button-orange-100':true}">{{loginButtonTitleValue}}</div>
     </div>
-    <div class="col-12" [ngClass]="{'forgot-password':true}">
-      <a [ngClass]="{'forgot-password-a':true}" href="">{{forgotPasswordLinkValue}}</a>
-    </div>
+    <label class="col-12" [ngClass]="{'link-a-label':true}">
+      <a [ngClass]="{'link-a':true}" href="">{{forgotPasswordLinkValue}}</a>
+    </label>
   </div>
 </div>
