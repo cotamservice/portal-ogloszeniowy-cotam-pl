@@ -1,55 +1,50 @@
-<div id="footer-logout">
-  <div class="container">
+<div *ngIf="isLogout()" [ngClass]="{'footer-logout':true}">
+  <div class="container" [ngClass]="{'footer-logout-container':true}">
     <div class="row">
-      <div class="col-6 footer-logout-text">
-
-        <h2>Zarejestruj się już teraz!</h2>
-        <p>Dzięki rejestracji będziesz mógł zarządzać dodanymi ogłoszeniami, a także dodawać
-          ogłoszenia do ulubionych, aby mieć do nich łatwy dostęp w każdej chwili!</p>
-        <div class="button-blue" (click)="openRegistration()">załóż konto</div>
+      <div class="col-xl-6 col-lg-12" [ngClass]="{'footer-logout-container-text':true}">
+        <label [ngClass]="{'title-label-175':true}">{{footerLogoutTitle}}</label>
+        <p>{{footerLogoutText}}</p>
+        <div [ngClass]="{'button-blue-small':true}" (click)="openRegistration()">załóż konto</div>
       </div>
-      <div class="col-6">
-        <img src="assets/img/footer/laptop.png">
+      <div class="col-xl-6 col-lg-12 text-center">
+        <img [ngClass]="{'footer-logout-icon':true}" src="assets/img/footer/footerLaptop.png">
       </div>
     </div>
-
   </div>
 
 </div>
 <footer>
-  <div class="container">
-    <div id="footer-main" class="row">
-      <div class="col-4">
-        <img id="footer-img-gift" src="assets/img/footer/gift.png">
+  <div class="container" [ngClass]="{'footer-container':true}">
+    <div class="row">
+      <div class="col-xl-4 coll-lg-12 text-center">
+        <img [ngClass]="{'footer-icon':true}" src="assets/img/footer/footerGift.png">
       </div>
-      <div class="col-8 text-right">
+      <div class="col-xl-8 col-lg-12" [ngClass]="{'footer-menu-container':true}">
         <ul>
-          <li><a href="">Polityka prywatnośći</a></li>
+          <li><a href="">{{privacyPoliticLinkName}}</a></li>
           <li>
-            <div class="vert-dash"></div>
+            <div [ngClass]="{'footer-vert-dash':true}"></div>
           </li>
-          <li><a href="">Reklama</a></li>
+          <li><a href="">{{adLinkName}}</a></li>
           <li>
-            <div class="vert-dash"></div>
+            <div [ngClass]="{'footer-vert-dash':true}"></div>
           </li>
-          <li><a href="">Cennik</a></li>
+          <li><a href="">{{priceLinkName}}</a></li>
           <li>
-            <div class="vert-dash"></div>
+            <div [ngClass]="{'footer-vert-dash':true}"></div>
           </li>
-          <li><a href="">Pomoc</a></li>
+          <li><a href="">{{helpLinkName}}</a></li>
           <li>
-            <div class="vert-dash"></div>
+            <div [ngClass]="{'footer-vert-dash':true}"></div>
           </li>
-          <li><a href="">Kontakt</a></li>
+          <li><a href="">{{contactLinkName}}</a></li>
         </ul>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-12">
-        <img id="footer-img-logo" src="assets/img/footer/footer-logo.png">
+      <div class="col-xl-6 col-lg-12" [ngClass]="{'footer-regulation': true}">
+        <p>{{regulationAcceptationText}} <a href="">{{regulationLinkName}}</a></p>
       </div>
-      <div id="footer-regulamin" class="col-12 text-left">
-        <p>Korzystanie z serwisu oznacza akceptację <a href="">regulaminu</a></p>
+      <div class="col-xl-6 col-lg-12 " [ngClass]="{'footer-logo-container':true}">
+        <img [ngClass]="{'footer-logo':true}" src="assets/img/footer/footerLogo.png">
       </div>
     </div>
   </div>

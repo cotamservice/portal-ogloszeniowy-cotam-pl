@@ -1,96 +1,150 @@
+.container{
+  margin: 0 auto;
+}
 footer {
-  text-align: center;
-  background: #2a2a2a;
   width: 100%;
-  top: calc(100% - 400px);
-  position: relative;
-  padding: 56px 12px 0 12px;
+  background-color: #2a2a2a;
 }
 
-#footer-img-gift {
-  height: 156px;
+.footer-container {
+  background-color: #2a2a2a;
+  padding: 24px;
+  margin: 0 auto;
 }
 
-ul {
+.footer-menu-container {
+  text-align: right;
+  vertical-align: middle;
+}
+
+.footer-menu-container ul {
   list-style: none;
-  line-height: 156px;
+  line-height: 150px;
+  margin: 0;
 }
 
-li {
+.footer-menu-container ul li {
   display: inline-block;
-  font-size: 1.25rem;
-  color: white;
-  padding: 0 6px;
+  margin: 12px;
 }
 
-.vert-dash {
+a {
+  color: white;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #45a1ac;
+}
+
+.footer-icon {
+  height: 150px;
+  margin: 0 auto;
+}
+
+.footer-vert-dash {
   height: 1.5rem;
   width: 1px;
   border: 1px solid white;
   padding: 0;
   position: relative;
-  top: .5rem;
+  top: 1.25rem;
+
 }
 
-a {
-  text-decoration: none;
+.footer-logo-container {
+  text-align: right;
+}
+
+.footer-logo {
+  height: 80px;
+}
+
+.footer-regulation {
   color: white;
+  height: 80px;
+  line-height: 80px;
+  vertical-align: bottom;
+  text-align: center;
 }
 
-a:hover {
-  color: #45a1ac;
+.footer-regulation p {
+  vertical-align: bottom;
+  margin: 0;
 }
 
-#footer-regulamin {
-  color: white;
-  font-size: 1rem;
-}
-
-#footer-img-logo {
-  position: relative;
-  height: 83px;
-  float: right;
-  display: inline-block;
-}
-
-#footer-logout {
+.footer-logout {
   width: 100%;
   background-color: #f6cb20;
-  height: 240px;
-  text-align: center;
 }
 
-#footer-logout img{
-  position: relative;
+.footer-logout-container {
+  height: 210px;
+  background-color: transparent;
+  padding: 0 24px;
+}
+
+.footer-logout-icon {
   height: 360px;
-
-  top: -60px;
-  z-index: 4;
+  transform: translateY(-80px);
 }
 
-.button-blue {
-  position: relative;
-  float: right;
-  color: white;
-  text-transform: uppercase;
-  text-align: center;
-  font-size: 1rem;
-  background-color: #45a1ac;
-  line-height: 43px;
-  padding: 0 12px;
-  margin-right: 24px;
-
-}
-
-.button-blue:hover {
-  background-color: #3b8790;
-}
-.footer-logout-text {
-  font-size: 1.25rem;
-  padding: 36px;
+.footer-logout-container-text {
   text-align: left;
 }
-.footer-logout-text h2{
-  font-weight: 700;
-}
 
+.button-blue-small {
+  float: right;
+}
+@media screen and (max-width: 1360px) {
+
+  .footer-menu-container ul li {
+    display: block;
+    margin: 0px;
+    font-size: 1.25rem;
+    line-height: 2.5rem;
+  }
+
+  .footer-menu-container {
+    text-align: center;
+  }
+
+  .footer-vert-dash {
+    height: 1.5rem;
+    width: 1px;
+    border: 1px solid white;
+    padding: 0;
+    position: relative;
+    top: 1.25rem;
+    display: none;
+  }
+
+  .footer-logo-container {
+    text-align: center;
+  }
+
+  .footer-regulation {
+    height: auto;
+    line-height: 1rem;
+    vertical-align: middle;
+  }
+  .footer-logout-icon {
+    display: none;
+  }
+
+  .footer-logout-container {
+    height: auto;
+  }
+
+  .button-blue-small {
+    margin: 12px auto;
+    float: none;
+  }
+
+  .footer-logout-container-text {
+    text-align: center;
+  }
+  .footer-regulation p {
+    vertical-align: middle;
+  }
+}

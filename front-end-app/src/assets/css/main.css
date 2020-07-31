@@ -116,6 +116,20 @@
   background-color: #e9bc09;
 }
 
+.button-blue-small{
+  color: white;
+  background-color: #45a1ac;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 1rem;
+  line-height: 43px;
+  padding: 0 12px;
+  width: 160px;
+}
+.button-blue-small:hover{
+  background-color: #3b8790;
+}
+
 .link-a {
   font-size: 1rem;
   text-decoration: none;
