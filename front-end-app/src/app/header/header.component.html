@@ -1,166 +1,130 @@
 <nav>
-  <ul>
-    <li class="parking">
-      <img src="assets/img/header/parking.png">
-      <span id="count-parking">99+</span>
+  <div [ngClass]="{'parking':true,'menu-parking-pick': isParkingPick}" (click)="pickParking()">
+    <img [ngClass]="{'parking-icon':true}" src="assets/img/header/parking.png">
+    <span [ngClass]="{'parking-count':true}">{{parkingCount}}</span>
+  </div>
+  <ul [ngClass]="{'menu-container': true}">
+    <li [ngClass]="{'menu-element':true, 'menu-element-pick': isPersonalCatPick}" (click)="pickPersonalCat()">
+      <img [ngClass]="{'menu-element-icon':true}" src="assets/img/header/personalCat.png">
     </li>
-  </ul>
-  <ul id="right-side">
-    <li class="menu-element-container hover-effect transition-effect" (click)="pickCategory('osobowe')">
-      <div id="osobowe" class="category">
-        <img src="assets/img/header/osobowe.png">
-      </div>
+    <li [ngClass]="{'menu-element':true, 'menu-element-pick': isMotorcycleCatPick}" (click)="pickMotorcycleCat()">
+      <img [ngClass]="{'menu-element-icon':true}" src="assets/img/header/motorcycleCat.png">
     </li>
-    <li class="menu-element-container hover-effect transition-effect" (click)="pickCategory('motocykle')">
-      <div id="motocykle" class="category">
-        <img src="assets/img/header/motocykle.png">
-      </div>
+    <li [ngClass]="{'menu-element':true, 'menu-element-pick': isProviderCatPick}" (click)="pickProviderCat()">
+      <img [ngClass]="{'menu-element-icon':true}" src="assets/img/header/providerCat.png">
     </li>
-    <li class="menu-element-container hover-effect transition-effect" (click)="pickCategory('dostawcze')">
-      <div id="dostawcze" class="category">
-        <img src="assets/img/header/dostawcze.png">
-      </div>
+    <li [ngClass]="{'menu-element':true, 'menu-element-pick': isTruckCatPick}" (click)="pickTruckCat()">
+      <img [ngClass]="{'menu-element-icon':true}" src="assets/img/header/truckCat.png">
     </li>
-    <li class="menu-element-container hover-effect transition-effect" (click)="pickCategory('ciezarowe')">
-      <div id="ciezarowe" class="category">
-        <img src="assets/img/header/ciezarowe.png">
-      </div>
+    <li [ngClass]="{'menu-element':true, 'menu-element-pick': isBuildCatPick}" (click)="pickBuildCat()">
+      <img [ngClass]="{'menu-element-icon':true}" src="assets/img/header/buildCat.png">
     </li>
-    <li class="menu-element-container hover-effect transition-effect" (click)="pickCategory('budowlane')">
-      <div id="budowlane" class="category">
-        <img src="assets/img/header/budowlane.png">
-      </div>
+    <li [ngClass]="{'menu-element':true, 'menu-element-pick': isAgriculturalCatPick}" (click)="pickAgriculturalCat()">
+      <img [ngClass]="{'menu-element-icon':true}" src="assets/img/header/agriculturalCat.png">
     </li>
-    <li class="menu-element-container hover-effect transition-effect" (click)="pickCategory('rolnicze')">
-      <div id="rolnicze" class="category">
-        <img src="assets/img/header/rolnicze.png">
-      </div>
+    <li [ngClass]="{'menu-element':true, 'menu-element-pick': isTrailerCatPick}" (click)="pickTrailerCat()">
+      <img [ngClass]="{'menu-element-icon':true}" src="assets/img/header/trailerCat.png">
     </li>
-    <li class="menu-element-container hover-effect transition-effect" (click)="pickCategory('przyczepy')">
-      <div id="przyczepy" class="category">
-        <img src="assets/img/header/przyczepy.png">
-      </div>
+    <li [ngClass]="{'menu-element':true, 'menu-element-pick': isBusCatPick}" (click)="pickBusCat()">
+      <img [ngClass]="{'menu-element-icon':true}" src="assets/img/header/busCat.png">
     </li>
-    <li class="menu-element-container hover-effect transition-effect" (click)="pickCategory('autobusy')">
-      <div id="autobusy" class="category">
-        <img src="assets/img/header/autobusy.png">
-      </div>
+    <li [ngClass]="{'menu-element':true, 'menu-element-pick': isShipCatPick}" (click)="pickShipCat()">
+      <img [ngClass]="{'menu-element-icon':true}" src="assets/img/header/shipCat.png">
     </li>
-    <li class="menu-element-container hover-effect transition-effect" (click)="pickCategory('statek')">
-      <div id="statek" class="category">
-        <img src="/assets/img/header/statek.png">
-      </div>
+    <li [ngClass]="{'menu-element':true, 'menu-element-pick': isPlaneCatPick}" (click)="pickPlaneCat()">
+      <img [ngClass]="{'menu-element-icon':true}" src="assets/img/header/planeCat.png">
     </li>
-    <li class="menu-element-container hover-effect transition-effect" (click)="pickCategory('samolot')">
-      <div id="samolot" class="category">
-        <img src="assets/img/header/samolot.png">
-      </div>
+    <li [ngClass]="{'menu-element':true, 'menu-element-pick': isPartCatPick}" (click)="pickPartCat()">
+      <img [ngClass]="{'menu-element-icon':true}" src="assets/img/header/partCat.png">
     </li>
-    <li class="menu-element-container hover-effect transition-effect" (click)="pickCategory('czesci')">
-      <div id="czesci" class="category">
-        <img src="assets/img/header/czesci.png">
-      </div>
-    </li>
-    <li class="menu-element-container hover-effect transition-effect">
-      <div id="country-select" class="select-css" (click)="openCloseMenuSelector('country-select-list')">
-        <img src="assets/img/header/countryflag.png">
-        <span>pl</span>
-        <img src="assets/img/header/arrowupwhite.png">
-      </div>
-      <div id="country-select-list" class="option-list">
-        <div class="option-css hover-effect transition-effect"
-             (click)="pickOption('pl', 'country-select', 'country-select-list')">
+    <li [ngClass]="{'menu-element':true, 'menu-element-pick': isCountryPick}" (click)="pickCountryCat()">
+      <img [ngClass]="{'select-icon':true}" src="assets/img/header/countryCat.png">
+      {{pickedCountry}}
+      <img [ngClass]="{'select-icon-arrow':true}" src="assets/img/header/arrowUpWhite.png">
+      <div [ngClass]="{'select-list':true, 'select-list-open': isCountryListOpen}">
+        <div [ngClass]="{'select-option':true}" (click)="pickCountry('pl')">
           <img src="assets/img/flag/PL.png">
           <span>pl</span>
         </div>
-        <div class="option-css hover-effect transition-effect"
-             (click)="pickOption('gb', 'country-select', 'country-select-list')">
+        <div [ngClass]="{'select-option':true}" (click)="pickCountry('gr')">
           <img src="assets/img/flag/PL.png">
-          <span>gb</span>
+          <span>gr</span>
         </div>
       </div>
     </li>
-    <li class="menu-element-container hover-effect transition-effect">
-      <div id="lang-select" class="select-css" (click)="openCloseMenuSelector('lang-select-list')">
-        <img src="../../assets/img/header/lipsflag.png">
-        <span>pl</span>
-        <img src="assets/img/header/arrowupwhite.png">
-      </div>
-      <div id="lang-select-list" class="option-list">
-        <div class="option-css hover-effect transition-effect"
-             (click)="pickOption('pl', 'lang-select', 'lang-select-list')">
+    <li [ngClass]="{'menu-element':true, 'menu-element-pick': isLangPick}" (click)="pickLangCat()">
+      <img [ngClass]="{'select-icon':true}" src="assets/img/header/langCat.png">
+      {{pickedLang}}
+      <img [ngClass]="{'select-icon-arrow':true}" src="assets/img/header/arrowUpWhite.png">
+      <div [ngClass]="{'select-list':true, 'select-list-open': isLangListOpen}">
+        <div [ngClass]="{'select-option':true}" (click)="pickLang('pl')">
           <img src="assets/img/flag/PL.png">
           <span>pl</span>
         </div>
-        <div class="option-css hover-effect transition-effect"
-             (click)="pickOption('gb', 'lang-select', 'lang-select-list')">
+        <div [ngClass]="{'select-option':true}" (click)="pickLang('gr')">
           <img src="assets/img/flag/PL.png">
-          <span>gb</span>
+          <span>gr</span>
         </div>
       </div>
     </li>
-    <li class="menu-element-container hover-effect transition-effect">
-      <div id="currency-select" class="select-css" (click)="openCloseMenuSelector('currency-select-list')">
-        <img src="assets/img/header/currencies.png">
-        <span>usd</span>
-        <img src="assets/img/header/arrowupwhite.png">
-      </div>
-      <div id="currency-select-list" class="option-list">
-        <div class="option-css hover-effect transition-effect"
-             (click)="pickOption('pln', 'currency-select', 'currency-select-list')">
+    <li [ngClass]="{'menu-element':true, 'menu-element-pick': isCurrencyPick}" (click)="pickCurrencyCat()">
+      <img [ngClass]="{'select-icon':true}" src="assets/img/header/currencyCat.png">
+      {{pickedCurrency}}
+      <img [ngClass]="{'select-icon-arrow':true}" src="assets/img/header/arrowUpWhite.png">
+      <div [ngClass]="{'select-list':true, 'select-list-open': isCurrencyListOpen}">
+        <div [ngClass]="{'select-option':true}" (click)="pickCurrency('pl')">
           <img src="assets/img/flag/PL.png">
-          <span>pln</span>
+          <span>pl</span>
         </div>
-        <div class="option-css hover-effect transition-effect"
-             (click)="pickOption('eur', 'currency-select', 'currency-select-list')">
+        <div [ngClass]="{'select-option':true}" (click)="pickCurrency('gr')">
           <img src="assets/img/flag/PL.png">
-          <span>eur</span>
+          <span>gr</span>
         </div>
       </div>
     </li>
-    <li class="menu-element-container vert-dash"></li>
-    <li class="menu-element-container hover-effect transition-effect">
-      <div id="banknotes">
-        <img src="assets/img/header/banknotes.png">
-        <span id="count-banknotes">999999</span>
+    <li [ngClass]="{'menu-element':true}">
+      <img [ngClass]="{'menu-element-icon-vert-dash':true}" src="assets/img/header/vertDash.png">
+    </li>
+    <li [ngClass]="{'menu-element':true}" (click)="pickBanknotes()">
+      <img [ngClass]="{'menu-element-icon':true}" src="assets/img/header/banknotesCat.png">
+      <span [ngClass]="{'banknotes-count':true}">{{banknotesValue}}</span>
+    </li>
+    <li [ngClass]="{'menu-element':true}">
+      <img [ngClass]="{'menu-element-icon-vert-dash':true}" src="assets/img/header/vertDash.png">
+    </li>
+    <li [ngClass]="{'menu-element':true}">
+      <div *ngIf="!isAccountLogout" [ngClass]="{'menu-account':true, 'menu-account-pick':isAccountPick}"
+           (click)="pickAccount()">
+        <img *ngIf="isAccountBrokerLogin" [ngClass]="{'menu-account-icon':true}"
+             src="assets/img/header/brokerIcon.png">
+        <span *ngIf="isAccountBrokerLogin" [ngClass]="{'menu-account-type': true}">{{accountBrokerTypeName}}</span>
+        <img *ngIf="isAccountCommissionLogin" [ngClass]="{'menu-account-icon':true}"
+             src="assets/img/header/commissionIcon.png">
+        <span *ngIf="isAccountCommissionLogin"
+              [ngClass]="{'menu-account-type': true}">{{accountCommissionTypeName}}</span>
+        <img *ngIf="isAccountIndividualLogin" [ngClass]="{'menu-account-icon':true}"
+             src="assets/img/header/individualIcon.png">
+        <span *ngIf="isAccountIndividualLogin"
+              [ngClass]="{'menu-account-type': true}">{{accountIndividualTypeName}}</span>
+        <span [ngClass]="{'menu-account-name': true}">{{accountName}}</span>
+      </div>
+      <div *ngIf="isAccountLogout" [ngClass]="{'menu-account':true, 'menu-account-pick':isAccountPick}"
+           (click)="pickAccount()">
+        <img [ngClass]="{'menu-account-logout-icon':true}" src="assets/img/header/individualIcon.png">
+        <span [ngClass]="{'menu-account-logout-name': true}">{{logoutAccountName}}</span>
       </div>
     </li>
-    <li class="menu-element-container vert-dash"></li>
-    <!--    Accounts   -->
-    <!--    <li class="menu-element-container hover-effect transition-effect">-->
-    <!--        <div id="account" class="account">-->
-    <!--          <img src="assets/img/header/type-cup.png">-->
-    <!--          <span class="account-type">Dealer/Broker</span>-->
-    <!--          <span class="account-name">bbb.fffff.eee.2222@gmail.com</span>-->
-    <!--        </div>-->
-    <!--    </li>-->
-    <!--    <li class="menu-element-container hover-effect transition-effect">-->
-    <!--        <div id="account" class="account">-->
-    <!--          <img src="assets/img/header/type-medal.png">-->
-    <!--          <span class="account-type">Komis</span>-->
-    <!--          <span class="account-name">bbb.fffff.eee.2222@gmail.com</span>-->
-    <!--        </div>-->
-    <!--    </li>-->
-    <!--    <li class="menu-element-container hover-effect transition-effect">-->
-    <!--      <div id="account" class="account">-->
-    <!--        <img src="assets/img/header/type-individual.png">-->
-    <!--        <span class="account-type">Indywidualne</span>-->
-    <!--        <span class="account-name">bbb.fffff.eee.2222@gmail.com</span>-->
-    <!--      </div>-->
-    <!--    </li>-->
-    <li class="menu-element-container hover-effect transition-effect" (click)="pickRegistration()">
-      <div id="account" class="account">
-        <img id="account-logout-icon" src="assets/img/header/type-individual.png">
-        Moje Konto
+    <li [ngClass]="{'menu-element':true}">
+      <img [ngClass]="{'menu-element-icon-vert-dash':true}" src="assets/img/header/vertDash.png">
+    </li>
+    <li [ngClass]="{'menu-element':true}">
+      <div [ngClass]="{'menu-post-add':true, 'menu-post-add-pick':isMenuAddPostPick}" (click)="pickAddPost()">
+        <img [ngClass]="{'menu-account-logout-icon':true}" src="assets/img/header/postAdd.png">
+        <span [ngClass]="{'menu-account-logout-name': true}">{{menuPostAddName}}</span>
       </div>
     </li>
-    <li class="menu-element-container vert-dash"></li>
-    <li class="menu-element-container hover-effect transition-effect">
-      <div class="add-post">
-        <img src="assets/img/header/add-post.png">
-        <span class="add=post-text">Dodaj ogłoszenie</span>
-      </div>
+    <li [ngClass]="{'menu-element':true}">
+      <img [ngClass]="{'menu-element-icon-vert-dash':true}" src="assets/img/header/vertDash.png">
     </li>
-    <li class="menu-element-container vert-dash"></li>
   </ul>
 </nav>
