@@ -149,13 +149,13 @@ form {
 
 .link-a {
   font-size: 1rem;
-  text-decoration: none;
   color: #45a1ac;
 }
 
 .link-a:hover {
   color: #3b8790;
   font-weight: 400;
+  text-decoration: none;
 }
 
 .link-a-label {
