@@ -167,7 +167,7 @@ nav {
   border: 3px solid #f6cb20;
   padding: 29px 16px;
   color: black;
-  margin:0 24px;
+  margin: 0 24px;
   text-align: center;
 }
 
@@ -183,7 +183,120 @@ nav {
   font-weight: 500;
 }
 
-.menu-parking-pick{
+.menu-parking-pick {
   background-color: #3b8790;
   color: white;
+}
+
+.menu-mobile-container {
+}
+
+.menu-mobile-title {
+  display: none;
+  color: white;
+  opacity: 0;
+  margin: 0 auto;
+  flex: content;
+  font-size: 24px;
+  line-height: 24px;
+  vertical-align: bottom;
+  animation-name: fade_in;
+  animation-duration: 1.5s;
+  animation-delay: .3s;
+  text-transform: uppercase;
+  padding-right: 24px;
+  -webkit-animation-fill-mode: forwards;
+}
+
+.menu-mobile-title-visible {
+  display: inline-block;
+}
+
+.menu-mobile-icon-container {
+  display: none;
+  padding: 36px 16px;
+  margin: 12px 24px;
+  width: 62px;
+  height: 102px;
+  border: 3px solid #f6cb20;
+  line-height: 0;
+  transition-duration: .3s;
+  transition-timing-function: ease-in;
+}
+
+.menu-open-width {
+  width: 170px;
+}
+
+.menu-mobile-icon {
+  height: 24px;
+  animation-name: fade_in;
+  animation-duration: 1.5s;
+  display: inline-block;
+  animation-delay: .3s;
+  opacity: 0;
+  -webkit-animation-fill-mode: forwards;
+}
+
+.menu-mobile-icon-hide {
+  display: none;
+}
+
+@keyframes fade_in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.menu-mobile-list {
+  display: none;
+  text-align: left;
+  width: 100%;
+  background-color: #2a2a2a;
+  z-index: 20;
+}
+
+.menu-mobile-open {
+  display: block;
+}
+
+.menu-mobile-element {
+  text-align: center;
+  display: inline-block;
+  padding: 18px;
+}
+
+.menu-mobile-element-icon {
+  height: 18px;
+}
+
+@media screen and (min-width: 1360px) {
+  .menu-mobile-list {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1360px) {
+  .menu-container {
+    display: none;
+  }
+
+  nav {
+    margin-top: 0;
+    height: auto;
+  }
+
+  .parking {
+    transform: translate(0, 0);
+    color: white;
+    margin: 12px 24px;
+    text-align: center;
+  }
+
+  .menu-mobile-icon-container {
+    display: inline-block;
+  }
 }

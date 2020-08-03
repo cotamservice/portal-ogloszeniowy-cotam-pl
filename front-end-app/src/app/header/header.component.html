@@ -127,4 +127,51 @@
       <img [ngClass]="{'menu-element-icon-vert-dash':true}" src="assets/img/header/vertDash.png">
     </li>
   </ul>
+
+  <div [ngClass]="{'menu-mobile-container':true}">
+    <div [ngClass]="{'menu-mobile-icon-container':true, 'menu-open-width':isMobileMenuOpen}">
+      <div
+        [ngClass]="{'menu-mobile-title':true, 'menu-mobile-title-visible':isMobileMenuOpen}">{{menuMobileTitle}}</div>
+      <img [ngClass]="{'menu-mobile-icon':true, 'menu-mobile-icon-hide':isMobileMenuOpen}"
+           src="assets/img/header/mobileMenu.png" (click)="openMobileMenu()">
+      <img [ngClass]="{'menu-mobile-icon':true, 'menu-mobile-icon-hide':!isMobileMenuOpen}"
+           src="assets/img/header/crossWhite.png" (click)="openMobileMenu()">
+    </div>
+
+    <ul [ngClass]="{'menu-mobile-list':true, 'menu-mobile-open': isMobileMenuOpen}">
+      <li [ngClass]="{'menu-mobile-element':true}" (click)="pickPersonalCat(); openMobileMenu()">
+        <img [ngClass]="{'menu-element-icon':true}" src="assets/img/header/personalCat.png">
+      </li>
+      <li [ngClass]="{'menu-mobile-element':true}" (click)="pickMotorcycleCat(); openMobileMenu()">
+        <img [ngClass]="{'menu-element-icon':true}" src="assets/img/header/motorcycleCat.png">
+      </li>
+      <li [ngClass]="{'menu-mobile-element':true}" (click)="pickProviderCat(); openMobileMenu()">
+        <img [ngClass]="{'menu-element-icon':true}" src="assets/img/header/providerCat.png">
+      </li>
+      <li [ngClass]="{'menu-mobile-element':true}" (click)="pickTruckCat(); openMobileMenu()">
+        <img [ngClass]="{'menu-element-icon':true}" src="assets/img/header/truckCat.png">
+      </li>
+      <li [ngClass]="{'menu-mobile-element':true}" (click)="pickBuildCat(); openMobileMenu()">
+        <img [ngClass]="{'menu-element-icon':true}" src="assets/img/header/buildCat.png">
+      </li>
+      <li [ngClass]="{'menu-mobile-element':true}" (click)="pickAgriculturalCat(); openMobileMenu()">
+        <img [ngClass]="{'menu-element-icon':true}" src="assets/img/header/agriculturalCat.png">
+      </li>
+      <li [ngClass]="{'menu-mobile-element':true}" (click)="pickTrailerCat(); openMobileMenu()">
+        <img [ngClass]="{'menu-element-icon':true}" src="assets/img/header/trailerCat.png">
+      </li>
+      <li [ngClass]="{'menu-mobile-element':true}" (click)="pickBusCat(); openMobileMenu()">
+        <img [ngClass]="{'menu-element-icon':true}" src="assets/img/header/busCat.png">
+      </li>
+      <li [ngClass]="{'menu-mobile-element':true}" (click)="pickShipCat(); openMobileMenu()">
+        <img [ngClass]="{'menu-element-icon':true}" src="assets/img/header/shipCat.png">
+      </li>
+      <li [ngClass]="{'menu-mobile-element':true}" (click)="pickPlaneCat(); openMobileMenu()">
+        <img [ngClass]="{'menu-element-icon':true}" src="assets/img/header/planeCat.png">
+      </li>
+      <li [ngClass]="{'menu-mobile-element':true}" (click)="pickPartCat(); openMobileMenu()">
+        <img [ngClass]="{'menu-element-icon':true}" src="assets/img/header/partCat.png">
+      </li>
+    </ul>
+  </div>
 </nav>

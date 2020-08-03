@@ -4,7 +4,7 @@ import {Router} from "@angular/router";
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
 
@@ -198,10 +198,10 @@ export class HeaderComponent implements OnInit {
   pickAccount(): void {
     this.unPickAll();
     this.isAccountPick = true;
-    if(this.isAccountLogout){
+    if (this.isAccountLogout) {
       console.log('try redirect to login');
-      this.redirectTo(  'login');
-    }else{
+      this.redirectTo('login');
+    } else {
       console.log('cant redirect to login');
     }
   }
@@ -251,6 +251,17 @@ export class HeaderComponent implements OnInit {
     this.isAccountPick = false;
     this.isMenuAddPostPick = false;
     this.isParkingPick = false;
+  }
+
+  isMobileMenuOpen: boolean = false;
+  menuMobileTitle: string = 'menu';
+
+  openMobileMenu(): void {
+    if (this.isMobileMenuOpen) {
+      this.isMobileMenuOpen = false;
+    } else {
+      this.isMobileMenuOpen = true;
+    }
   }
 
   redirectTo(pagename: string, param?: object): void {
