@@ -199,10 +199,7 @@ export class HeaderComponent implements OnInit {
     this.unPickAll();
     this.isAccountPick = true;
     if (this.isAccountLogout) {
-      console.log('try redirect to login');
       this.redirectTo('login');
-    } else {
-      console.log('cant redirect to login');
     }
   }
 

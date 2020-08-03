@@ -45,20 +45,28 @@ export class RegistrationComponent implements OnInit {
   openLoginForm(): void {
     this.closeAllForms();
     this.isLoginFormOpen = true;
+    this.redirectTo('login');
   }
 
   openRegistrationIndividualForm(): void {
     this.closeAllForms();
     this.isRegistrationIndividualFormOpen = true;
+    this.redirectTo('registration');
   }
 
   openRegistrationCommissionForm(): void {
     this.closeAllForms();
     this.isRegistrationCommissionFormOpen = true;
+    this.redirectTo('registration');
   }
 
   openRegistrationBrokerForm(): void {
     this.closeAllForms();
     this.isRegistrationBrokerFormOpen = true;
+    this.redirectTo('registration');
+  }
+
+  redirectTo(pagename: string): void {
+    this.router.navigate(['/' + pagename]);
   }
 }

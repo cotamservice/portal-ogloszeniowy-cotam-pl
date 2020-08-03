@@ -1,0 +1,106 @@
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <label [ngClass]="{'title-label-125': true}">{{generalInfoTitleValue}}</label>
+      <label for="{{inputEmailId}}" [ngClass]="{'input-label':true}">{{inputEmailLabelValue}}
+        <input id="{{inputEmailId}}" [ngClass]="{'input':true}" type="text"
+               placeholder="{{inputEmailPlaceholderValue}}">
+      </label>
+      <label for="{{inputPasswordId}}" [ngClass]="{'input-label':true}">{{inputPasswordLabelValue}}
+        <input id="{{inputPasswordId}}" [ngClass]="{'input':true}" type="text"
+               placeholder="{{inputPasswordPlaceholderValue}}">
+      </label>
+      <label for="{{inputPasswordConfirmId}}" [ngClass]="{'input-label':true}">{{inputPasswordConfirmLabelValue}}
+        <input id="{{inputPasswordConfirmId}}" [ngClass]="{'input':true}" type="text"
+               placeholder="{{inputPasswordConfirmPlaceholderValue}}">
+      </label>
+      <label for="{{inputWordId}}" [ngClass]="{'input-label':true}">{{inputWordLabelValue}}
+        <input id="{{inputWordId}}" [ngClass]="{'input':true}" type="text"
+               placeholder="{{inputWordPlaceholderValue}}">
+      </label>
+      <label [ngClass]="{'title-label-125': true}">{{companyInfoTitleValue}}</label>
+      <label for="{{inputNipId}}" [ngClass]="{'input-label':true}">{{inputNipLabelValue}}
+        <input id="{{inputNipId}}" [ngClass]="{'input':true}" type="text"
+               placeholder="{{inputNipPlaceholderValue}}">
+      </label>
+      <label for="{{inputCompanyNameId}}" [ngClass]="{'input-label':true}">{{inputCompanyNameLabelValue}}
+        <input id="{{inputCompanyNameId}}" [ngClass]="{'input':true}" type="text"
+               placeholder="{{inputCompanyNamePlaceholderValue}}">
+      </label>
+
+      <label for="{{selectCompanyTypeId}}" [ngClass]="{'input-label':true}">{{selectCompanyTypeLabelValue}}
+        <select id="{{selectCompanyTypeId}}" [ngClass]="{'input-select':true}">
+          <option disabled selected>{{selectCompanyTypeDefaultValue}}</option>
+          <option *ngFor="let option of selectCompanyOptionList">{{option}}</option>
+        </select>
+      </label>
+
+      <label for="{{inputNameId}}" [ngClass]="{'input-label':true}">{{inputNameLabelValue}}
+        <input id="{{inputNameId}}" [ngClass]="{'input':true}" type="text"
+               placeholder="{{inputNamePlaceholderValue}}">
+      </label>
+      <label for="{{inputSurnameId}}" [ngClass]="{'input-label':true}">{{inputSurnameLabelValue}}
+        <input id="{{inputSurnameId}}" [ngClass]="{'input':true}" type="text"
+               placeholder="{{inputSurnamePlaceholderValue}}">
+      </label>
+      <label for="{{inputCountryId}}" [ngClass]="{'input-label':true}">{{inputCountryLabelValue}}
+        <input id="{{inputCountryId}}" [ngClass]="{'input':true}" type="text"
+               placeholder="{{inputCountryPlaceholderValue}}">
+      </label>
+      <label for="{{inputAddressId}}" [ngClass]="{'input-label':true}">{{inputAddressLabelValue}}
+        <input id="{{inputAddressId}}" [ngClass]="{'input':true}" type="text"
+               placeholder="{{inputAddressPlaceholderValue}}">
+      </label>
+      <label for="{{inputZipId}}" [ngClass]="{'input-label':true}">{{inputZipLabelValue}}
+        <input id="{{inputZipId}}" [ngClass]="{'input':true}" type="text"
+               placeholder="{{inputZipPlaceholderValue}}">
+      </label>
+      <label for="{{inputCityId}}" [ngClass]="{'input-label':true}">{{inputCityLabelValue}}
+        <input id="{{inputCityId}}" [ngClass]="{'input':true}" type="text"
+               placeholder="{{inputCityPlaceholderValue}}">
+      </label>
+      <label for="{{inputPhoneId}}" [ngClass]="{'input-label':true}">{{inputPhoneLabelValue}}
+        <input id="{{inputPhoneId}}" [ngClass]="{'input':true}" type="text"
+               placeholder="{{inputPhonePlaceholderValue}}">
+      </label>
+      <label for="{{inputAcceptCheckboxId}}" [ngClass]="{'input-checkbox-label':true}">
+        <input id="{{inputAcceptCheckboxId}}" [ngClass]="{'input-checkbox':true}" type="checkbox">
+        <a [ngClass]="{'accept':true}" href="">{{inputAcceptCheckboxTitleValue}}</a>
+      </label>
+    </div>
+    <div class="col-6" [ngClass]="{'salon-container': true}">
+      <label [ngClass]="{'title-label-125': true}">{{salonInfoTitleValue}}</label>
+      <label for="{{inputSalonNameId}}" [ngClass]="{'input-label':true}">{{inputSalonNameLabelValue}}
+        <input id="{{inputSalonNameId}}" [ngClass]="{'input':true}" type="text"
+               placeholder="{{inputSalonNamePlaceholderValue}}">
+      </label>
+      <label for="{{inputSalonCountryId}}" [ngClass]="{'input-label':true}">{{inputSalonCountryLabelValue}}
+        <input id="{{inputSalonCountryId}}" [ngClass]="{'input':true}" type="text"
+               placeholder="{{inputSalonCountryPlaceholderValue}}">
+      </label>
+      <label for="{{inputSalonAddressId}}" [ngClass]="{'input-label':true}">{{inputSalonAddressLabelValue}}
+        <input id="{{inputSalonAddressId}}" [ngClass]="{'input':true}" type="text"
+               placeholder="{{inputSalonAddressPlaceholderValue}}">
+      </label>
+      <label for="{{inputSalonZipId}}" [ngClass]="{'input-label':true}">{{inputSalonZipLabelValue}}
+        <input id="{{inputSalonZipId}}" [ngClass]="{'input':true}" type="text"
+               placeholder="{{inputSalonZipPlaceholderValue}}">
+      </label>
+      <label for="{{inputSalonCityId}}" [ngClass]="{'input-label':true}">{{inputSalonCityLabelValue}}
+        <input id="{{inputSalonCityId}}" [ngClass]="{'input':true}" type="text"
+               placeholder="{{inputSalonCityPlaceholderValue}}">
+      </label>
+      <label for="{{inputSalonPhoneId}}" [ngClass]="{'input-label':true}">{{inputSalonPhoneLabelValue}}
+        <input id="{{inputSalonPhoneId}}" [ngClass]="{'input':true}" type="text"
+               placeholder="{{inputSalonPhonePlaceholderValue}}">
+      </label>
+      <label for="{{inputSalonPhone2Id}}" [ngClass]="{'input-label':true}">{{inputSalonPhoneLabelValue}}
+        <input id="{{inputSalonPhone2Id}}" [ngClass]="{'input':true}" type="text"
+               placeholder="{{inputSalonPhonePlaceholderValue}}">
+      </label>
+    </div>
+    <div class="col-12">
+      <div [ngClass]="{'button-orange-100':true}">{{registrationButtonTitleValue}}</div>
+    </div>
+  </div>
+</div>
