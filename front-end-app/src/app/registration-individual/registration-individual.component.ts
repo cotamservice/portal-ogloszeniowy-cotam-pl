@@ -33,4 +33,7 @@ export class RegistrationIndividualComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  registrationIndividualFormSubmit() {
+    console.log('registration individual form click submit')
+  }
 }
