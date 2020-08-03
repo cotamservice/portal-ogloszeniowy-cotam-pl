@@ -3,28 +3,28 @@
     <form (submit)="registrationIndividualFormSubmit()">
       <div class="col-12">
         <label for="{{inputEmailId}}" [ngClass]="{'input-label':true}">{{inputEmailLabelValue}}
-          <input id="{{inputEmailId}}" [ngClass]="{'input':true}" type="text"
+          <input id="{{inputEmailId}}" [ngClass]="{'input':true}" type="text" [(ngModel)]="email" name="email"
                  placeholder="{{inputEmailPlaceholderValue}}">
         </label>
         <label for="{{inputPasswordId}}" [ngClass]="{'input-label':true}">{{inputPasswordLabelValue}}
-          <input id="{{inputPasswordId}}" [ngClass]="{'input':true}" type="text"
+          <input id="{{inputPasswordId}}" [ngClass]="{'input':true}" type="password"  [(ngModel)]="password" name="password"
                  placeholder="{{inputPasswordPlaceholderValue}}">
         </label>
         <label for="{{inputPasswordConfirmId}}" [ngClass]="{'input-label':true}">{{inputPasswordConfirmLabelValue}}
-          <input id="{{inputPasswordConfirmId}}" [ngClass]="{'input':true}" type="text"
+          <input id="{{inputPasswordConfirmId}}" [ngClass]="{'input':true}" type="password" [(ngModel)]="confirm" name="confirm"
                  placeholder="{{inputPasswordConfirmPlaceholderValue}}">
         </label>
         <label for="{{inputWordId}}" [ngClass]="{'input-label':true}">{{inputWordLabelValue}}
-          <input id="{{inputWordId}}" [ngClass]="{'input':true}" type="text"
+          <input id="{{inputWordId}}" [ngClass]="{'input':true}" type="text"  [(ngModel)]="secretWord" name="secretWord"
                  placeholder="{{inputWordPlaceholderValue}}">
         </label>
         <label for="{{inputAcceptCheckboxId}}" [ngClass]="{'input-checkbox-label':true}">
-          <input id="{{inputAcceptCheckboxId}}" [ngClass]="{'input-checkbox':true}" type="checkbox">
+          <input id="{{inputAcceptCheckboxId}}" [ngClass]="{'input-checkbox':true}" type="checkbox"  [(ngModel)]="isRegulationAccept" name="accept">
           <a [ngClass]="{'accept':true}" href="">{{inputAcceptCheckboxTitleValue}}</a>
         </label>
       </div>
       <div class="col-12">
-        <input type="submit" [ngClass]="{'button-orange-100':true}" [value]="registrationButtonTitleValue">
+        <input type="submit" [ngClass]="{'button-orange-100':true, 'button-shadow-hover': true}" [value]="registrationButtonTitleValue">
       </div>
     </form>
   </div>

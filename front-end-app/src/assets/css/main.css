@@ -7,10 +7,14 @@
   user-select: none;
   padding: 0;
   margin: 0;
+  transition-duration: .3s;
+  transition-timing-function: ease-in-out;
 }
+
 form {
   width: 100%;
 }
+
 .container {
   background-color: white;
   margin: 0 auto 24px auto;
@@ -73,6 +77,7 @@ form {
   line-height: 43px;
   padding: 0 24px;
   font-size: 1rem;
+  border-radius: 3px;
 }
 
 .input::placeholder {
@@ -103,6 +108,10 @@ form {
   margin: 12px 24px;
 }
 
+.button-shadow-hover:hover {
+  box-shadow: -5px 5px 10px 0px rgba(0, 0, 0, 0.5);
+}
+
 .button-orange-100 {
   background-color: #f6cb20;
   border: 1px solid #e9bc09;
@@ -113,14 +122,15 @@ form {
   line-height: 1.25rem;
   margin: 12px 24px;
   width: calc(100% - 48px);
-
+  outline: none;
+  border-radius: 2px;
 }
 
 .button-orange-100:hover {
   background-color: #e9bc09;
 }
 
-.button-blue-small{
+.button-blue-small {
   color: white;
   background-color: #45a1ac;
   text-transform: uppercase;
@@ -129,8 +139,11 @@ form {
   line-height: 43px;
   padding: 0 12px;
   width: 160px;
+  outline: none;
+  border-radius: 2px;
 }
-.button-blue-small:hover{
+
+.button-blue-small:hover {
   background-color: #3b8790;
 }
 

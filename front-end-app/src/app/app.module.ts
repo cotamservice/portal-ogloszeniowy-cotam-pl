@@ -14,6 +14,7 @@ import { RegistrationLoginComponent } from './registration-login/registration-lo
 import { RegistrationIndividualComponent } from './registration-individual/registration-individual.component';
 import { RegistrationCommissionComponent } from './registration-commission/registration-commission.component';
 import { RegistrationBrokerComponent } from './registration-broker/registration-broker.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
     declarations: [
@@ -32,6 +33,7 @@ import { RegistrationBrokerComponent } from './registration-broker/registration-
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
