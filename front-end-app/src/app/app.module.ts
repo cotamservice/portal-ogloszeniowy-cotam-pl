@@ -16,13 +16,6 @@ import { RegistrationIndividualComponent } from './registration-individual/regis
 import { RegistrationCommissionComponent } from './registration-commission/registration-commission.component';
 import { RegistrationBrokerComponent } from './registration-broker/registration-broker.component';
 
-const appRoute: Routes = [
-  {path: '', component: HomeComponent},
-  {path: 'registration', component: RegistrationComponent},
-  {path: 'login', component: RegistrationComponent},
-  {path: 'authentication', component: AuthenticateComponent},
-];
-
 @NgModule({
     declarations: [
         AppComponent,
@@ -40,9 +33,8 @@ const appRoute: Routes = [
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule.forRoot(appRoute),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
