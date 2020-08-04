@@ -17,6 +17,7 @@ import {RegistrationBrokerComponent} from './registration-broker/registration-br
 import {FormsModule} from "@angular/forms";
 import {RegistrationFormValidationService} from "./service/form/registration-form-validation.service";
 import {AuthenticateService} from "./service/authenticate/authenticate.service";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import {AuthenticateService} from "./service/authenticate/authenticate.service";
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule
   ],
   providers: [RegistrationFormValidationService, AuthenticateService],
   bootstrap: [AppComponent],

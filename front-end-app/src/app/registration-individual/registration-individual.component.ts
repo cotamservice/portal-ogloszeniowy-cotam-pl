@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {RegistrationFormValidationService} from "../service/form/registration-form-validation.service";
+import {AuthenticateService} from "../service/authenticate/authenticate.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-registration-individual',
@@ -52,11 +54,18 @@ export class RegistrationIndividualComponent implements OnInit {
     regulationAccept: ''
   };
 
-  constructor(private validation: RegistrationFormValidationService) {
-
+  constructor(
+    private validation: RegistrationFormValidationService,
+    private authenticate: AuthenticateService,
+    private router: Router,
+  ) {
   }
 
   ngOnInit(): void {
+  }
+
+  isFormValid(): boolean {
+    return this.isValid.email && this.isValid.password && this.isValid.confirm && this.isValid.secretWord && this.value.isRegulationAccept;
   }
 
   registrationIndividualFormSubmit() {
@@ -90,6 +99,17 @@ export class RegistrationIndividualComponent implements OnInit {
     }
     if (!this.isValid.isRegulationAccept) {
       this.invalidMsg.regulationAccept = 'Before registration u must read and accept service regulation';
+    }
+
+    if (this.isFormValid()) {
+      let result = this.authenticate.registrationIndividual(form)
+        .subscribe((data) => {
+          if (!data['success']) {
+            this.router.navigate(['/registration/success']);
+          } else {
+            this.router.navigate(['/login']);
+          }
+        });
     }
   }
 }

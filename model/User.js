@@ -2,22 +2,17 @@ const config = require('../config');
 const mongoose = require('mongoose');
 const bCrypt = require('bcryptjs');
 
-module.exports.UserRole = {
-    individual: 'individual',
-    commission: 'commission',
-    broker: 'broker',
-}
 
 const UserSchema = mongoose.Schema({
-    username: {
-        type: String,
-        required: true
-    },
     email: {
         type: String,
         required: true
     },
     password: {
+        type: String,
+        required: true
+    },
+    secretWord: {
         type: String,
         required: true
     },
@@ -29,10 +24,6 @@ const UserSchema = mongoose.Schema({
 
 const User = module.exports = mongoose.model('User', UserSchema);
 
-module.exports.getUserByUsername = (username, cb) => {
-    const query = {username: username};
-    User.findOne(query, cb);
-}
 module.exports.getUserByEmail = (email, cb) => {
     const query = {email: email};
     User.findOne(query, cb);
@@ -56,3 +47,9 @@ module.exports.comparePass = (passToCompare, passCompareWith, cb) => {
     });
 }
 
+module.exports.role = {
+    individual: 'individual',
+    commission: 'commission',
+    broker: 'broker',
+    user: 'service_user'
+}

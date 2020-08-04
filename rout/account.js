@@ -6,27 +6,15 @@ const config = require('../config');
 const User = require('../model').User;
 
 router.post('/registration/individual', (req, res) => {
+    let roles = [require('../model').User.role.user,require('../model').User.role.individual]
     let newUser = new User({
         email: req.body.email,
         password: req.body.password,
-        roles: User.UserRole.individual,
+        roles: roles,
+        secretWord: req.body.secretWord
     })
     User.addUser(newUser, (err, user) => {
-        if (err) {
-            res.json({success: false, msg: "User was not added"});
-        } else {
-            res.json({success: true, msg: "User was added"});
-        }
-    });
-})
-router.post('/registration', (req, res) => {
-    let newUser = new User({
-        username: req.body.username,
-        password: req.body.password,
-        roles: req.body.roles,
-        email: req.body.email
-    })
-    User.addUser(newUser, (err, user) => {
+        console.log('in add user:' +user);
         if (err) {
             res.json({success: false, msg: "User was not added"});
         } else {
