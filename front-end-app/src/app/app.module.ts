@@ -16,6 +16,7 @@ import {RegistrationCommissionComponent} from './registration-commission/registr
 import {RegistrationBrokerComponent} from './registration-broker/registration-broker.component';
 import {FormsModule} from "@angular/forms";
 import {RegistrationFormValidationService} from "./service/form/registration-form-validation.service";
+import {AuthenticateService} from "./service/authenticate/authenticate.service";
 
 @NgModule({
   declarations: [
@@ -36,7 +37,7 @@ import {RegistrationFormValidationService} from "./service/form/registration-for
     AppRoutingModule,
     FormsModule,
   ],
-  providers: [RegistrationFormValidationService],
+  providers: [RegistrationFormValidationService, AuthenticateService],
   bootstrap: [AppComponent],
 })
 export class AppModule {
