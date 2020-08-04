@@ -65,6 +65,7 @@ export class RegistrationComponent implements OnInit {
     this.isRegistrationIndividualFormOpen = true;
     if (!this.router.url.endsWith("individual")) {
       this.redirectTo("registration/individual")
+
     }
   }
 
@@ -84,7 +85,7 @@ export class RegistrationComponent implements OnInit {
     }
   }
 
-  redirectTo(pagename: string): void {
-    this.router.navigate(['/' + pagename]);
+  redirectTo(path: string): void {
+    this.router.navigate([path]);
   }
 }
