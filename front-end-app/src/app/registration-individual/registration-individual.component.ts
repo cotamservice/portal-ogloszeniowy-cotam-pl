@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {RegistrationFormValidationService} from "../registration-form-validation.service";
 
 @Component({
   selector: 'app-registration-individual',
@@ -33,18 +34,33 @@ export class RegistrationIndividualComponent implements OnInit {
   secretWord: string;
   isRegulationAccept: boolean;
 
-  constructor() {
+  constructor(private validation: RegistrationFormValidationService) {
   }
 
   ngOnInit(): void {
   }
 
   registrationIndividualFormSubmit() {
-    console.log('email :' + this.email );
-    console.log('password :' + this.password );
-    console.log('confirm :' + this.confirm );
-    console.log('secret word :' + this.secretWord );
-    console.log('is accepted :' + this.isRegulationAccept );
+    const user = {
+      email: this.email,
+      password: this.password,
+      confirm: this.confirm,
+      secretWord: this.secretWord,
+      isRegulationAccept: this.isRegulationAccept,
+    }
+
+    if(this.validation.isEmailValid(user.email)){
+      console.log('email is valid');
+    }else{
+      console.log('email is not valid');
+      return false;
+    }
+    if(this.validation.isPasswordConfirm(user.password, user.confirm)){
+      console.log('password confirm');
+    }else{
+      console.log('password not confirm');
+      return false;
+    }
 
   }
 }

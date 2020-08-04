@@ -10,8 +10,6 @@
   user-select: none;
   padding: 0;
   margin: 0;
-  transition-duration: .3s;
-  transition-timing-function: ease-in-out;
 }
 
 form {
@@ -109,10 +107,6 @@ form {
   line-height: 24px;
   font-size: 1rem;
   margin: 12px 24px;
-}
-
-.button-shadow-hover:hover {
-  box-shadow: -5px 5px 10px 0px rgba(0, 0, 0, 0.5);
 }
 
 .button-orange-100 {
