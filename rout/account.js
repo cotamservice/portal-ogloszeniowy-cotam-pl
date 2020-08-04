@@ -5,7 +5,21 @@ const jwt = require('jsonwebtoken');
 const config = require('../config');
 const User = require('../model').User;
 
-router.post('/reg', (req, res) => {
+router.post('/registration/individual', (req, res) => {
+    let newUser = new User({
+        email: req.body.email,
+        password: req.body.password,
+        roles: User.UserRole.individual,
+    })
+    User.addUser(newUser, (err, user) => {
+        if (err) {
+            res.json({success: false, msg: "User was not added"});
+        } else {
+            res.json({success: true, msg: "User was added"});
+        }
+    });
+})
+router.post('/registration', (req, res) => {
     let newUser = new User({
         username: req.body.username,
         password: req.body.password,
@@ -21,7 +35,7 @@ router.post('/reg', (req, res) => {
     });
 })
 
-router.post('/auth', (req, res) => {
+router.post('/authenticate', (req, res) => {
 
     const username = req.body.username;
     const password = req.body.password;
@@ -31,9 +45,9 @@ router.post('/auth', (req, res) => {
         if (!user) {
             return res.json({success: false, msg: "User dont exist"});
         }
-        User.comparePass(password, user.password, (err, isMatch)=>{
+        User.comparePass(password, user.password, (err, isMatch) => {
             if (err) throw  err;
-            if(isMatch){
+            if (isMatch) {
                 const token = jwt.sign(user, config.passport.secretKey, {
                     expiresIn: 3600 * 24
                 });
