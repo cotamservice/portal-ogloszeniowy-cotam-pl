@@ -3,24 +3,39 @@
     <form (submit)="registrationIndividualFormSubmit()">
       <div class="col-12">
         <label for="{{inputEmailId}}" [ngClass]="{'input-label':true}">{{inputEmailLabelValue}}
-          <input id="{{inputEmailId}}" [ngClass]="{'input':true}" type="text" [(ngModel)]="email" name="email"
+          <span
+            [ngClass]="{'input-invalid-tip':true,'input-invalid-tip-display':!isValid.email}">{{invalidMsg.email}}</span>
+          <input id="{{inputEmailId}}" [ngClass]="{'input':true,'input-invalid':!isValid.email}" type="text"
+                 [(ngModel)]="value.email" name="email"
                  placeholder="{{inputEmailPlaceholderValue}}">
         </label>
         <label for="{{inputPasswordId}}" [ngClass]="{'input-label':true}">{{inputPasswordLabelValue}}
-          <input id="{{inputPasswordId}}" [ngClass]="{'input':true}" type="password"  [(ngModel)]="password" name="password"
+          <span
+            [ngClass]="{'input-invalid-tip':true,'input-invalid-tip-display':!isValid.password}">{{invalidMsg.password}}</span>
+          <input id="{{inputPasswordId}}" [ngClass]="{'input':true,'input-invalid':!isValid.password}" type="password"
+                 [(ngModel)]="value.password" name="password"
                  placeholder="{{inputPasswordPlaceholderValue}}">
         </label>
         <label for="{{inputPasswordConfirmId}}" [ngClass]="{'input-label':true}">{{inputPasswordConfirmLabelValue}}
-          <input id="{{inputPasswordConfirmId}}" [ngClass]="{'input':true}" type="password" [(ngModel)]="confirm" name="confirm"
+          <span
+            [ngClass]="{'input-invalid-tip':true,'input-invalid-tip-display':!isValid.confirm}">{{invalidMsg.confirm}}</span>
+          <input id="{{inputPasswordConfirmId}}" [ngClass]="{'input':true,'input-invalid':!isValid.confirm}"
+                 type="password" [(ngModel)]="value.confirm" name="confirm"
                  placeholder="{{inputPasswordConfirmPlaceholderValue}}">
         </label>
         <label for="{{inputWordId}}" [ngClass]="{'input-label':true}">{{inputWordLabelValue}}
-          <input id="{{inputWordId}}" [ngClass]="{'input':true}" type="text"  [(ngModel)]="secretWord" name="secretWord"
+          <span
+            [ngClass]="{'input-invalid-tip':true,'input-invalid-tip-display':!isValid.secretWord}">{{invalidMsg.secretWord}}</span>
+          <input id="{{inputWordId}}" [ngClass]="{'input':true,'input-invalid':!isValid.secretWord}" type="text"
+                 [(ngModel)]="value.secretWord" name="secretWord"
                  placeholder="{{inputWordPlaceholderValue}}">
         </label>
         <label for="{{inputAcceptCheckboxId}}" [ngClass]="{'input-checkbox-label':true}">
-          <input id="{{inputAcceptCheckboxId}}" [ngClass]="{'input-checkbox':true}" type="checkbox"  [(ngModel)]="isRegulationAccept" name="accept">
+          <input id="{{inputAcceptCheckboxId}}" [ngClass]="{'input-checkbox':true,'input-invalid':!isValid.isRegulationAccept}"
+                 type="checkbox" [(ngModel)]="value.isRegulationAccept" name="accept">
           <a [ngClass]="{'link-a':true}" href="">{{inputAcceptCheckboxTitleValue}}</a>
+          <span
+            [ngClass]="{'input-invalid-tip':true,'input-invalid-tip-display':!isValid.isRegulationAccept}">{{invalidMsg.regulationAccept}}</span>
         </label>
       </div>
       <div class="col-12">

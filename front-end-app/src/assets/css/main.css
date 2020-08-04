@@ -77,6 +77,17 @@ form {
   font-size: 1rem;
   border-radius: 3px;
 }
+.input-invalid {
+  border: 1px solid red;
+}
+.input-invalid-tip{
+  display: none;
+  font-size: .8rem;
+  color: red;
+}
+.input-invalid-tip-display{
+  display: inline-block;
+}
 
 .input::placeholder {
   font-size: 1rem;
@@ -118,6 +129,7 @@ form {
   width: calc(100% - 48px);
   outline: none;
   border-radius: 2px;
+  text-align: center;
 }
 
 .button-orange-100:hover {

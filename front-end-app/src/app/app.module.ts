@@ -15,8 +15,7 @@ import {RegistrationIndividualComponent} from './registration-individual/registr
 import {RegistrationCommissionComponent} from './registration-commission/registration-commission.component';
 import {RegistrationBrokerComponent} from './registration-broker/registration-broker.component';
 import {FormsModule} from "@angular/forms";
-import {FlashMessagesModule} from "angular2-flash-messages";
-import {RegistrationFormValidationService} from "./registration-form-validation.service";
+import {RegistrationFormValidationService} from "./service/form/registration-form-validation.service";
 
 @NgModule({
   declarations: [
@@ -36,7 +35,6 @@ import {RegistrationFormValidationService} from "./registration-form-validation.
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    FlashMessagesModule
   ],
   providers: [RegistrationFormValidationService],
   bootstrap: [AppComponent],

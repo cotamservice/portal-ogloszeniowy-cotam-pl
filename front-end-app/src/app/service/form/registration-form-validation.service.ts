@@ -24,7 +24,7 @@ export class RegistrationFormValidationService {
     } else if (value === '') {
       return false;
     } else {
-      return /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/.test(value);
+      return /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/.test(value);
       ;
     }
   }
