@@ -1,6 +1,14 @@
 <div class="container">
   <div class="row">
-    <form (submit)="registrationIndividualFormSubmit()">
+    <div class="col-12 text-center">
+      <label *ngIf="isSuccess" [ngClass]="{'title-label-150':true}">
+        rejestracja jest prawidłowa
+      </label>
+      <label *ngIf="isServerDontResponse" [ngClass]="{'title-label-150':true}">
+        no response from server try later
+      </label>
+    </div>
+    <form *ngIf="!isSuccess && !isServerDontResponse" (submit)="registrationIndividualFormSubmit()">
       <div class="col-12">
         <label for="{{inputEmailId}}" [ngClass]="{'input-label':true}">{{inputEmailLabelValue}}
           <span
@@ -31,7 +39,8 @@
                  placeholder="{{inputWordPlaceholderValue}}">
         </label>
         <label for="{{inputAcceptCheckboxId}}" [ngClass]="{'input-checkbox-label':true}">
-          <input id="{{inputAcceptCheckboxId}}" [ngClass]="{'input-checkbox':true,'input-invalid':!isValid.isRegulationAccept}"
+          <input id="{{inputAcceptCheckboxId}}"
+                 [ngClass]="{'input-checkbox':true,'input-invalid':!isValid.isRegulationAccept}"
                  type="checkbox" [(ngModel)]="value.isRegulationAccept" name="accept">
           <a [ngClass]="{'link-a':true}" href="">{{inputAcceptCheckboxTitleValue}}</a>
           <span

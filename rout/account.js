@@ -13,7 +13,7 @@ router.post('/registration/individual', (req, res) => {
         roles: roles,
         secretWord: req.body.secretWord
     })
-    User.addUser(newUser, (err, user) => {
+    User.addUser(newUser, (err) => {
         if (err) {
             res.json({success: false});
         } else {

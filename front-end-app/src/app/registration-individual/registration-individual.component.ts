@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {RegistrationFormValidationService} from "../service/form/registration-form-validation.service";
 import {AuthenticateService} from "../service/authenticate/authenticate.service";
 import {Router} from "@angular/router";
+import {catchError} from "rxjs/operators";
 
 @Component({
   selector: 'app-registration-individual',
@@ -30,12 +31,16 @@ export class RegistrationIndividualComponent implements OnInit {
   inputAcceptCheckboxId = 'accept';
   inputAcceptCheckboxTitleValue = 'Akceptuję regulamin serwisu';
 
+  isSuccess: boolean;
+  isServerDontResponse: boolean;
+
   value = {
     email: '',
     password: '',
     confirm: '',
     secretWord: '',
-    isRegulationAccept: false
+    isRegulationAccept: false,
+
   }
 
   isValid = {
@@ -53,6 +58,7 @@ export class RegistrationIndividualComponent implements OnInit {
     secretWord: '',
     regulationAccept: ''
   };
+
 
   constructor(
     private validation: RegistrationFormValidationService,
@@ -104,10 +110,16 @@ export class RegistrationIndividualComponent implements OnInit {
     if (this.isFormValid()) {
       let result = this.authenticate.registrationIndividual(form)
         .subscribe((data) => {
-          if (!data['success']) {
-            this.router.navigate(['/registration/success']);
+          if (data['success']) {
+            this.isSuccess = true;
+            setTimeout(() => {
+              this.router.navigate(['login']);
+            }, 4000);  //5s
           } else {
-            this.router.navigate(['/login']);
+            this.isServerDontResponse = true;
+            setTimeout(() => {
+              this.isServerDontResponse = false;
+            }, 5000);  //5s
           }
         });
     }
