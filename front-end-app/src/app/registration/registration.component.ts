@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Router, ActivatedRoute, Params} from '@angular/router';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-registration',
@@ -24,14 +25,23 @@ export class RegistrationComponent implements OnInit {
   isRegistrationBrokerFormOpen: boolean = false;
   registrationBrokerElementTextValue = 'dealer/broker';
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router) {
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private location: Location) {
   }
 
   ngOnInit(): void {
     if (this.router.url.endsWith("login")) {
       this.openLoginForm();
     } else if (this.router.url.endsWith("registration")) {
+      this.closeAllForms();
+    } else if (this.router.url.endsWith("registration/individual")) {
       this.openRegistrationIndividualForm();
+    } else if (this.router.url.endsWith("registration/commission")) {
+      this.openRegistrationCommissionForm();
+    } else if (this.router.url.endsWith("registration/broker")) {
+      this.openRegistrationBrokerForm();
     }
   }
 
@@ -45,25 +55,33 @@ export class RegistrationComponent implements OnInit {
   openLoginForm(): void {
     this.closeAllForms();
     this.isLoginFormOpen = true;
-    this.redirectTo('login');
+    if (!this.router.url.endsWith("login")) {
+      this.redirectTo("login")
+    }
   }
 
   openRegistrationIndividualForm(): void {
     this.closeAllForms();
     this.isRegistrationIndividualFormOpen = true;
-    this.redirectTo('registration');
+    if (!this.router.url.endsWith("individual")) {
+      this.redirectTo("registration/individual")
+    }
   }
 
   openRegistrationCommissionForm(): void {
     this.closeAllForms();
     this.isRegistrationCommissionFormOpen = true;
-    this.redirectTo('registration');
+    if (!this.router.url.endsWith("commission")) {
+      this.redirectTo("registration/commission")
+    }
   }
 
   openRegistrationBrokerForm(): void {
     this.closeAllForms();
     this.isRegistrationBrokerFormOpen = true;
-    this.redirectTo('registration');
+    if (!this.router.url.endsWith("broker")) {
+      this.redirectTo("registration/broker")
+    }
   }
 
   redirectTo(pagename: string): void {

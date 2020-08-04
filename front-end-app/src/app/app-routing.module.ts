@@ -7,6 +7,9 @@ import {AuthenticateComponent} from "./authenticate/authenticate.component";
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'registration', component: RegistrationComponent,},
+  {path: 'registration/individual', component: RegistrationComponent,},
+  {path: 'registration/commission', component: RegistrationComponent,},
+  {path: 'registration/broker', component: RegistrationComponent,},
   {path: 'login', component: RegistrationComponent},
   {path: 'authentication', component: AuthenticateComponent},
   {path: '**', component: HomeComponent},
