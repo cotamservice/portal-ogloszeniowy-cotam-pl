@@ -14,11 +14,10 @@ router.post('/registration/individual', (req, res) => {
         secretWord: req.body.secretWord
     })
     User.addUser(newUser, (err, user) => {
-        console.log('in add user:' +user);
         if (err) {
-            res.json({success: false, msg: "User was not added"});
+            res.json({success: false});
         } else {
-            res.json({success: true, msg: "User was added"});
+            res.json({success: true});
         }
     });
 })
