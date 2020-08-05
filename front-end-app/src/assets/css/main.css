@@ -143,6 +143,7 @@ form {
   width: 160px;
   outline: none;
   border-radius: 2px;
+  border-width: 0;
 }
 
 .button-blue-small:hover {
