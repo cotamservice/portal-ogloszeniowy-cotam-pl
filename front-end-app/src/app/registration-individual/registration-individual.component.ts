@@ -40,7 +40,7 @@ export class RegistrationIndividualComponent implements OnInit {
 
   constructor(
     private validation: RegistrationFormValidationService,
-    private authenticate: AuthenticateService,
+    private authenticateS: AuthenticateService,
     private router: Router) {
   }
 
@@ -107,18 +107,17 @@ export class RegistrationIndividualComponent implements OnInit {
         secretWord: this.value.secretWord.trim(),
       }
 
-      this.authenticate
+      this.authenticateS
         .verifyEmail(user.email)
-        .subscribe((data) => {
-          let result = data['success'];
-          if (result) {
+        .subscribe(data => {
+          if (data['success']) {
             this.isValid.email = false;
             this.invalidMsg.email = 'wybierz inny';
             this.value.password = '';
             this.value.confirm = '';
             return false;
           } else {
-            this.authenticate
+            this.authenticateS
               .registrationIndividual(user)
               .subscribe((data) => {
                 this.startTimer();
@@ -135,7 +134,7 @@ export class RegistrationIndividualComponent implements OnInit {
                 }
               });
           }
-        })
+        });
     } else {
       this.value.isRegulationAccept = false;
     }
