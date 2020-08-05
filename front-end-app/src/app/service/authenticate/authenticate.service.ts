@@ -7,8 +7,15 @@ import {map} from "rxjs/operators";
 })
 
 export class AuthenticateService {
-  token: any;
-  user: any;
+  token: any = null;
+  user: any = null;
+
+  roles = {
+    user: 'service_user',
+    individual: 'individual',
+    commission: 'commission',
+    broker: 'broker'
+  }
 
   constructor(private http: HttpClient) {
   }
@@ -44,4 +51,14 @@ export class AuthenticateService {
       .pipe(map(res => res));
   }
 
+  authenticateOut() {
+    this.isIndividual();
+    this.token = null;
+    this.user = null;
+    localStorage.clear();
+  }
+
+  isIndividual() {
+    console.log(this.user.roles);
+  }
 }

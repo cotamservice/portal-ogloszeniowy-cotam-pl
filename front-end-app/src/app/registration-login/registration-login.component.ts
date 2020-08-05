@@ -39,7 +39,6 @@ export class RegistrationLoginComponent implements OnInit {
   authenticateIn() {
     this.verifyFormInput();
     this.value.isRemember = false;
-
     if (this.isFormValid()) {
       const user = {
         email: this.value.email.trim(),
@@ -54,16 +53,19 @@ export class RegistrationLoginComponent implements OnInit {
               .subscribe(data => {
                 if (data['success']) {
                   this.authenticateS.storeUser(data['token'], data['user'])
-                  this.router.navigate(['']);
+                  this.router.navigate(['dashboard']);
                 } else {
                   this.isValid.email = false;
                   this.invalidMsg.email = 'Uwierzytelnianie nie powiodło się';
                   this.value.password = '';
                 }
               });
+          } else {
+            this.isValid.email = false;
+            this.invalidMsg.email = 'Uwierzytelnianie nie powiodło się';
+            this.value.password = '';
           }
         });
-
     }
 
   }
