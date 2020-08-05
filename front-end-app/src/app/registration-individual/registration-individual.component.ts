@@ -77,23 +77,23 @@ export class RegistrationIndividualComponent implements OnInit {
 
   verifyFormInput() {
     if (!this.isEmailValid()) {
-      this.invalidMsg.email = 'email is invalid';
+      this.invalidMsg.email = 'jest nie prawidłowy';
     }
     if (!this.isPasswordValid()) {
       this.value.password = '';
       this.value.confirm = '';
-      this.invalidMsg.password = 'Password must consist at least one Uppercase and number and length more then 8'
+      this.invalidMsg.password = 'musi zawierać co najmniej jedną wielką literę i cyfrę, a długość musi być większa niż 8';
     }
     if (!this.isConfirmValid()) {
       this.value.password = '';
       this.value.confirm = '';
-      this.invalidMsg.confirm = 'Invalid password confirm';
+      this.invalidMsg.confirm = 'nieprawidłowe';
     }
     if (!this.isSecretWordValid()) {
-      this.invalidMsg.secretWord = 'Secret must exist';
+      this.invalidMsg.secretWord = 'musi istnieć';
     }
     if (!this.isRegulationAccept()) {
-      this.invalidMsg.regulationAccept = 'Before registration u must read and accept service regulation';
+      this.invalidMsg.regulationAccept = 'Przed rejestracją należy zapoznać się z regulaminem serwisu i zaakceptować go';
     }
   }
 
@@ -113,7 +113,7 @@ export class RegistrationIndividualComponent implements OnInit {
           let result = data['success'];
           if (result) {
             this.isValid.email = false;
-            this.invalidMsg.email = 'choose other email';
+            this.invalidMsg.email = 'wybierz inny';
             this.value.password = '';
             this.value.confirm = '';
             return false;
