@@ -20,11 +20,10 @@ router.get('/registration/verify/email/:email', (req, res) => {
     })
 })
 router.post('/registration/individual', (req, res) => {
-    let roles = [require('../model').User.role.user, require('../model').User.role.individual]
     let newUser = new User({
         email: req.body.email,
         password: req.body.password,
-        roles: roles,
+        roles: req.body.roles,
         secretWord: req.body.secretWord
     })
     User.addUser(newUser, (err) => {

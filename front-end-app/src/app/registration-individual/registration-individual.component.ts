@@ -105,6 +105,7 @@ export class RegistrationIndividualComponent implements OnInit {
         email: this.value.email.trim(),
         password: this.value.password.trim(),
         secretWord: this.value.secretWord.trim(),
+        roles: [this.authenticateS.roles.user, this.authenticateS.roles.individual]
       }
 
       this.authenticateS
