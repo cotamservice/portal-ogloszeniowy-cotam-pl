@@ -4,16 +4,20 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const config = require('../config');
 const User = require('../model').User;
-router.get('/verify/email/:email', (req, res) => {
+router.get('/registration/verify/email/:email', (req, res) => {
     let email = req.params.email;
+    console.log('verify email = ' + email);
     User.getUserByEmail(email, (err, user) => {
         if (err) {
             res.json({success: false});
+            console.log('verify email is exist: error on verify');
         } else {
             if (user) {
                 res.json({success: true});
+                console.log('verify email is exist: true');
             } else {
                 res.json({success: false});
+                console.log('verify email is exist: false');
             }
         }
     })

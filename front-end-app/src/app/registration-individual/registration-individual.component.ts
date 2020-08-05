@@ -84,20 +84,34 @@ export class RegistrationIndividualComponent implements OnInit {
     }
 
     if (this.isFormValid()) {
-      this.authenticate.registrationIndividual(form)
+      this.authenticate
+        .verifyEmail(form.email)
         .subscribe((data) => {
-          if (data['success']) {
-            this.isSuccess = true;
-            setTimeout(() => {
-              this.router.navigate(['login']);
-            }, 4000);  //5s
+          let result = data['success'];
+          if (result) {
+            this.isValid.email = false;
+            this.invalidMsg.email = 'choose other email';
+            this.value.password = '';
+            this.value.confirm = '';
+            return false;
           } else {
-            this.isServerDontResponse = true;
-            setTimeout(() => {
-              this.isServerDontResponse = false;
-            }, 5000);  //5s
+            this.authenticate
+              .registrationIndividual(form)
+              .subscribe((data) => {
+                if (data['success']) {
+                  this.isSuccess = true;
+                  setTimeout(() => {
+                    this.router.navigate(['login']);
+                  }, 4000);  //5s
+                } else {
+                  this.isServerDontResponse = true;
+                  setTimeout(() => {
+                    this.isServerDontResponse = false;
+                  }, 5000);  //5s
+                }
+              });
           }
-        });
+        })
     }
   }
 }
