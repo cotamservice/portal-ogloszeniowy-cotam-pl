@@ -84,6 +84,10 @@ form {
   font-size: .8rem;
   color: red;
 }
+.input-valid-tip{
+  font-size: .8rem;
+  color: green;
+}
 
 .input::placeholder {
   font-size: 1rem;
