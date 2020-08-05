@@ -11,6 +11,7 @@ import {Router} from "@angular/router";
 export class RegistrationIndividualComponent implements OnInit {
   redirectTimer;
   redirectTimeLeft = 5;
+
   isSuccess: boolean;
   isServerDontResponse: boolean;
 
@@ -47,62 +48,67 @@ export class RegistrationIndividualComponent implements OnInit {
   }
 
   isFormValid(): boolean {
-    return this.isValid.email && this.isValid.password && this.isValid.confirm && this.isValid.secretWord && this.value.isRegulationAccept;
+    return this.isEmailValid() && this.isPasswordValid() && this.isConfirmValid() && this.isSecretWordValid() && this.isRegulationAccept();
   }
 
   isEmailValid() {
-    this.isValid.email = this.validation.isEmailValid(this.value.email);
+    this.isValid.email = this.validation.isEmailValid(this.value.email.trim());
+    return this.isValid.email;
   }
 
   isPasswordValid() {
-    this.isValid.password = this.validation.isPasswordValid(this.value.password);
+    this.isValid.password = this.validation.isPasswordValid(this.value.password.trim());
+    return this.isValid.password;
   }
 
   isConfirmValid() {
-    this.isValid.confirm = this.validation.isPasswordConfirm(this.value.password, this.value.confirm);
+    this.isValid.confirm = this.validation.isPasswordConfirm(this.value.password.trim(), this.value.confirm.trim());
+    return this.isValid.confirm;
   }
 
   isSecretWordValid() {
-    this.isValid.secretWord = this.validation.isSecretWordValid(this.value.secretWord);
+    this.isValid.secretWord = this.validation.isSecretWordValid(this.value.secretWord.trim());
+    return this.isValid.secretWord;
   }
 
-  registrationIndividualFormSubmit() {
-    const form = {
-      email: this.value.email,
-      password: this.value.password,
-      confirm: this.value.confirm,
-      secretWord: this.value.secretWord,
-      isRegulationNotAccept: this.value.isRegulationAccept,
-    }
+  isRegulationAccept() {
+    return this.value.isRegulationAccept;
+  }
 
-    this.isValid.email = this.validation.isEmailValid(form.email);
-    this.isValid.password = this.validation.isPasswordValid(form.password);
-    this.isValid.confirm = this.validation.isPasswordConfirm(form.password, form.confirm);
-    this.isValid.secretWord = this.validation.isSecretWordValid(form.secretWord);
-
-    if (!this.isValid.email) {
+  verifyFormInput() {
+    if (!this.isEmailValid()) {
       this.invalidMsg.email = 'email is invalid';
     }
-    if (!this.isValid.password) {
+    if (!this.isPasswordValid()) {
       this.value.password = '';
       this.value.confirm = '';
       this.invalidMsg.password = 'Password must consist at least one Uppercase and number and length more then 8'
     }
-    if (!this.isValid.confirm) {
+    if (!this.isConfirmValid()) {
       this.value.password = '';
       this.value.confirm = '';
       this.invalidMsg.confirm = 'Invalid password confirm';
     }
-    if (!this.isValid.secretWord) {
+    if (!this.isSecretWordValid()) {
       this.invalidMsg.secretWord = 'Secret must exist';
     }
-    if (!this.value.isRegulationAccept) {
+    if (!this.isRegulationAccept()) {
       this.invalidMsg.regulationAccept = 'Before registration u must read and accept service regulation';
     }
+  }
+
+  registrationIndividualFormSubmit() {
+    this.verifyFormInput();
 
     if (this.isFormValid()) {
+      const user = {
+        email: this.value.email.trim(),
+        password: this.value.password.trim(),
+        secretWord: this.value.secretWord.trim(),
+      }
+
       this.authenticate
-        .verifyEmail(form.email)
+        .verifyEmail(user.email)
         .subscribe((data) => {
           let result = data['success'];
           if (result) {
@@ -113,23 +119,25 @@ export class RegistrationIndividualComponent implements OnInit {
             return false;
           } else {
             this.authenticate
-              .registrationIndividual(form)
+              .registrationIndividual(user)
               .subscribe((data) => {
                 this.startTimer();
                 if (data['success']) {
                   this.isSuccess = true;
                   setTimeout(() => {
                     this.router.navigate(['login']);
-                  }, 5000);  //5s
+                  }, 5000);
                 } else {
                   this.isServerDontResponse = true;
                   setTimeout(() => {
                     this.isServerDontResponse = false;
-                  }, 5000);  //5s
+                  }, 5000);
                 }
               });
           }
         })
+    } else {
+      this.value.isRegulationAccept = false;
     }
   }
 

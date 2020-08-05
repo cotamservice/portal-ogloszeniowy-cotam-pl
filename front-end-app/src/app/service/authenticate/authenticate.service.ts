@@ -11,6 +11,14 @@ export class AuthenticateService {
   constructor(private http: HttpClient) {
   }
 
+  authenticate(user) {
+    let headers = new HttpHeaders();
+    headers.append('Content-type', 'application/json');
+    return this.http
+      .post('http://localhost:3000/account/authenticate', user, {headers: headers})
+      .pipe(map(res => res));
+  }
+
   registrationIndividual(user) {
     let headers = new HttpHeaders();
     headers.append('Content-type', 'application/json');

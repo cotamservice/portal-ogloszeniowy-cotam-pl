@@ -4,20 +4,18 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const config = require('../config');
 const User = require('../model').User;
+
 router.get('/registration/verify/email/:email', (req, res) => {
     let email = req.params.email;
     console.log('verify email = ' + email);
     User.getUserByEmail(email, (err, user) => {
         if (err) {
             res.json({success: false});
-            console.log('verify email is exist: error on verify');
         } else {
             if (user) {
                 res.json({success: true});
-                console.log('verify email is exist: true');
             } else {
                 res.json({success: false});
-                console.log('verify email is exist: false');
             }
         }
     })
@@ -41,13 +39,13 @@ router.post('/registration/individual', (req, res) => {
 
 router.post('/authenticate', (req, res) => {
 
-    const username = req.body.username;
+    const email = req.body.email;
     const password = req.body.password;
 
-    User.getUserByUsername(username, (err, user) => {
+    User.getUserByEmail(email, (err, user) => {
         if (err) throw  err;
         if (!user) {
-            return res.json({success: false, msg: "User dont exist"});
+            return res.json({success: false});
         }
         User.comparePass(password, user.password, (err, isMatch) => {
             if (err) throw  err;
@@ -60,12 +58,14 @@ router.post('/authenticate', (req, res) => {
                     token: 'JWT ' + token,
                     user: {
                         id: user._id,
-                        username: user.username,
-                        email: user.email
+                        email: user.email,
+                        password: user.password,
+                        roles: user.roles,
+                        secretWord: user.secretWord
                     }
                 });
             } else {
-                return res.json({success: false, msg: "User password not match"});
+                return res.json({success: false});
             }
         });
     });
