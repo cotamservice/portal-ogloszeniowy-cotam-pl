@@ -10,27 +10,6 @@ import {catchError} from "rxjs/operators";
   styleUrls: ['./registration-individual.component.css']
 })
 export class RegistrationIndividualComponent implements OnInit {
-  registrationButtonTitleValue = 'Zarejestruje się';
-
-  inputEmailId = 'id';
-  inputEmailLabelValue = 'Email';
-  inputEmailPlaceholderValue = 'wpiś email';
-
-  inputPasswordId = 'password';
-  inputPasswordLabelValue = 'Hasło';
-  inputPasswordPlaceholderValue = 'wpiś hasło';
-
-  inputPasswordConfirmId = 'confirm';
-  inputPasswordConfirmLabelValue = 'Powtóż hasło';
-  inputPasswordConfirmPlaceholderValue = 'powtóż hasło';
-
-  inputWordId = 'word';
-  inputWordLabelValue = 'Słowo kluczowe';
-  inputWordPlaceholderValue = 'wpiś słowo kluczowe';
-
-  inputAcceptCheckboxId = 'accept';
-  inputAcceptCheckboxTitleValue = 'Akceptuję regulamin serwisu';
-
   isSuccess: boolean;
   isServerDontResponse: boolean;
 
@@ -40,7 +19,6 @@ export class RegistrationIndividualComponent implements OnInit {
     confirm: '',
     secretWord: '',
     isRegulationAccept: false,
-
   }
 
   isValid = {
@@ -59,12 +37,10 @@ export class RegistrationIndividualComponent implements OnInit {
     regulationAccept: ''
   };
 
-
   constructor(
     private validation: RegistrationFormValidationService,
     private authenticate: AuthenticateService,
-    private router: Router,
-  ) {
+    private router: Router) {
   }
 
   ngOnInit(): void {
@@ -108,7 +84,7 @@ export class RegistrationIndividualComponent implements OnInit {
     }
 
     if (this.isFormValid()) {
-      let result = this.authenticate.registrationIndividual(form)
+      this.authenticate.registrationIndividual(form)
         .subscribe((data) => {
           if (data['success']) {
             this.isSuccess = true;

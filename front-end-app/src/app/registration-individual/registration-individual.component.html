@@ -10,45 +10,45 @@
     </div>
     <form *ngIf="!isSuccess && !isServerDontResponse" (submit)="registrationIndividualFormSubmit()">
       <div class="col-12">
-        <label for="{{inputEmailId}}" [ngClass]="{'input-label':true}">{{inputEmailLabelValue}}
+        <label for="email" [ngClass]="{'input-label':true}">Email
           <span
             [ngClass]="{'input-invalid-tip':true,'input-invalid-tip-display':!isValid.email}">{{invalidMsg.email}}</span>
-          <input id="{{inputEmailId}}" [ngClass]="{'input':true,'input-invalid':!isValid.email}" type="text"
+          <input id="email" [ngClass]="{'input':true,'input-invalid':!isValid.email}" type="text"
                  [(ngModel)]="value.email" name="email"
-                 placeholder="{{inputEmailPlaceholderValue}}">
+                 placeholder="wpiś email">
         </label>
-        <label for="{{inputPasswordId}}" [ngClass]="{'input-label':true}">{{inputPasswordLabelValue}}
+        <label for="password" [ngClass]="{'input-label':true}">Hasło
           <span
             [ngClass]="{'input-invalid-tip':true,'input-invalid-tip-display':!isValid.password}">{{invalidMsg.password}}</span>
-          <input id="{{inputPasswordId}}" [ngClass]="{'input':true,'input-invalid':!isValid.password}" type="password"
+          <input id="password" [ngClass]="{'input':true,'input-invalid':!isValid.password}" type="password"
                  [(ngModel)]="value.password" name="password"
-                 placeholder="{{inputPasswordPlaceholderValue}}">
+                 placeholder="wpiś hasło">
         </label>
-        <label for="{{inputPasswordConfirmId}}" [ngClass]="{'input-label':true}">{{inputPasswordConfirmLabelValue}}
+        <label for="confirm" [ngClass]="{'input-label':true}">Powtóż hasło
           <span
             [ngClass]="{'input-invalid-tip':true,'input-invalid-tip-display':!isValid.confirm}">{{invalidMsg.confirm}}</span>
-          <input id="{{inputPasswordConfirmId}}" [ngClass]="{'input':true,'input-invalid':!isValid.confirm}"
+          <input id="confirm" [ngClass]="{'input':true,'input-invalid':!isValid.confirm}"
                  type="password" [(ngModel)]="value.confirm" name="confirm"
-                 placeholder="{{inputPasswordConfirmPlaceholderValue}}">
+                 placeholder="powtóż hasło">
         </label>
-        <label for="{{inputWordId}}" [ngClass]="{'input-label':true}">{{inputWordLabelValue}}
+        <label for="word" [ngClass]="{'input-label':true}">Słowo kluczowe
           <span
             [ngClass]="{'input-invalid-tip':true,'input-invalid-tip-display':!isValid.secretWord}">{{invalidMsg.secretWord}}</span>
-          <input id="{{inputWordId}}" [ngClass]="{'input':true,'input-invalid':!isValid.secretWord}" type="text"
+          <input id="word" [ngClass]="{'input':true,'input-invalid':!isValid.secretWord}" type="text"
                  [(ngModel)]="value.secretWord" name="secretWord"
-                 placeholder="{{inputWordPlaceholderValue}}">
+                 placeholder="wpiś słowo kluczowe">
         </label>
-        <label for="{{inputAcceptCheckboxId}}" [ngClass]="{'input-checkbox-label':true}">
-          <input id="{{inputAcceptCheckboxId}}"
+        <label for="accept" [ngClass]="{'input-checkbox-label':true}">
+          <input id="accept"
                  [ngClass]="{'input-checkbox':true,'input-invalid':!isValid.isRegulationAccept}"
                  type="checkbox" [(ngModel)]="value.isRegulationAccept" name="accept">
-          <a [ngClass]="{'link-a':true}" href="">{{inputAcceptCheckboxTitleValue}}</a>
+          <a [ngClass]="{'link-a':true}" href="">Akceptuję regulamin serwisu</a>
           <span
             [ngClass]="{'input-invalid-tip':true,'input-invalid-tip-display':!isValid.isRegulationAccept}">{{invalidMsg.regulationAccept}}</span>
         </label>
       </div>
       <div class="col-12">
-        <input type="submit" [ngClass]="{'button-orange-100':true}" [value]="registrationButtonTitleValue">
+        <input type="submit" [ngClass]="{'button-orange-100':true}" value="Zarejestruje się">
       </div>
     </form>
   </div>
