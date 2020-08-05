@@ -139,6 +139,7 @@ export class RegistrationIndividualComponent implements OnInit {
         this.redirectTimeLeft--;
       } else {
         this.redirectTimeLeft = 5;
+        clearInterval(this.redirectTimer);
       }
     }, 1000)
   }
