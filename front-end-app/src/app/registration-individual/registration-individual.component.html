@@ -1,50 +1,50 @@
 <div class="container">
   <div class="row">
     <div class="col-12 text-center">
-      <label *ngIf="isSuccess" [ngClass]="{'title-label-150':true}">
-        rejestracja jest prawidłowa
+      <label *ngIf="isSuccess" [ngClass]="{'title-label-100':true}">
+        rejestracja jest prawidłowa, przekierowanie za {{redirectTimeLeft}}
       </label>
-      <label *ngIf="isServerDontResponse" [ngClass]="{'title-label-150':true}">
+      <label *ngIf="isServerDontResponse" [ngClass]="{'title-label-100':true}">
         no response from server try later
       </label>
     </div>
     <form *ngIf="!isSuccess && !isServerDontResponse" (submit)="registrationIndividualFormSubmit()">
       <div class="col-12">
         <label for="email" [ngClass]="{'input-label':true}">Email
-          <span
-            [ngClass]="{'input-invalid-tip':true,'input-invalid-tip-display':!isValid.email}">{{invalidMsg.email}}</span>
+          <span *ngIf="!isValid.email"
+            [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.email}}</span>
           <input id="email" [ngClass]="{'input':true,'input-invalid':!isValid.email}" type="text"
-                 [(ngModel)]="value.email" name="email"
+                 [(ngModel)]="value.email" name="email" (change)="isEmailValid()"
                  placeholder="wpiś email">
         </label>
         <label for="password" [ngClass]="{'input-label':true}">Hasło
-          <span
-            [ngClass]="{'input-invalid-tip':true,'input-invalid-tip-display':!isValid.password}">{{invalidMsg.password}}</span>
+          <span *ngIf="!isValid.password"
+            [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.password}}</span>
           <input id="password" [ngClass]="{'input':true,'input-invalid':!isValid.password}" type="password"
-                 [(ngModel)]="value.password" name="password"
+                 [(ngModel)]="value.password" name="password" (change)="isPasswordValid()"
                  placeholder="wpiś hasło">
         </label>
         <label for="confirm" [ngClass]="{'input-label':true}">Powtóż hasło
-          <span
-            [ngClass]="{'input-invalid-tip':true,'input-invalid-tip-display':!isValid.confirm}">{{invalidMsg.confirm}}</span>
+          <span *ngIf="!isValid.confirm"
+            [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.confirm}}</span>
           <input id="confirm" [ngClass]="{'input':true,'input-invalid':!isValid.confirm}"
-                 type="password" [(ngModel)]="value.confirm" name="confirm"
+                 type="password" [(ngModel)]="value.confirm" name="confirm"  (change)="isConfirmValid()"
                  placeholder="powtóż hasło">
         </label>
         <label for="word" [ngClass]="{'input-label':true}">Słowo kluczowe
-          <span
-            [ngClass]="{'input-invalid-tip':true,'input-invalid-tip-display':!isValid.secretWord}">{{invalidMsg.secretWord}}</span>
+          <span *ngIf="!isValid.secretWord"
+            [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.secretWord}}</span>
           <input id="word" [ngClass]="{'input':true,'input-invalid':!isValid.secretWord}" type="text"
-                 [(ngModel)]="value.secretWord" name="secretWord"
+                 [(ngModel)]="value.secretWord" name="secretWord"  (change)="isSecretWordValid()"
                  placeholder="wpiś słowo kluczowe">
         </label>
         <label for="accept" [ngClass]="{'input-checkbox-label':true}">
           <input id="accept"
-                 [ngClass]="{'input-checkbox':true,'input-invalid':!isValid.isRegulationAccept}"
+                 [ngClass]="{'input-checkbox':true,'input-invalid':!value.isRegulationAccept}"
                  type="checkbox" [(ngModel)]="value.isRegulationAccept" name="accept">
           <a [ngClass]="{'link-a':true}" href="">Akceptuję regulamin serwisu</a>
-          <span
-            [ngClass]="{'input-invalid-tip':true,'input-invalid-tip-display':!isValid.isRegulationAccept}">{{invalidMsg.regulationAccept}}</span>
+          <span *ngIf="!value.isRegulationAccept"
+            [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.regulationAccept}}</span>
         </label>
       </div>
       <div class="col-12">

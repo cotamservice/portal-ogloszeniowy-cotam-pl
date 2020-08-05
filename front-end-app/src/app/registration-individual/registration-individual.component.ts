@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {RegistrationFormValidationService} from "../service/form/registration-form-validation.service";
 import {AuthenticateService} from "../service/authenticate/authenticate.service";
 import {Router} from "@angular/router";
-import {catchError} from "rxjs/operators";
 
 @Component({
   selector: 'app-registration-individual',
@@ -10,6 +9,8 @@ import {catchError} from "rxjs/operators";
   styleUrls: ['./registration-individual.component.css']
 })
 export class RegistrationIndividualComponent implements OnInit {
+  redirectTimer;
+  redirectTimeLeft = 5;
   isSuccess: boolean;
   isServerDontResponse: boolean;
 
@@ -26,7 +27,6 @@ export class RegistrationIndividualComponent implements OnInit {
     password: true,
     confirm: true,
     secretWord: true,
-    isRegulationAccept: false
   }
 
   invalidMsg = {
@@ -50,13 +50,29 @@ export class RegistrationIndividualComponent implements OnInit {
     return this.isValid.email && this.isValid.password && this.isValid.confirm && this.isValid.secretWord && this.value.isRegulationAccept;
   }
 
+  isEmailValid() {
+    this.isValid.email = this.validation.isEmailValid(this.value.email);
+  }
+
+  isPasswordValid() {
+    this.isValid.password = this.validation.isPasswordValid(this.value.password);
+  }
+
+  isConfirmValid() {
+    this.isValid.confirm = this.validation.isPasswordConfirm(this.value.password, this.value.confirm);
+  }
+
+  isSecretWordValid() {
+    this.isValid.secretWord = this.validation.isSecretWordValid(this.value.secretWord);
+  }
+
   registrationIndividualFormSubmit() {
     const form = {
       email: this.value.email,
       password: this.value.password,
       confirm: this.value.confirm,
       secretWord: this.value.secretWord,
-      isRegulationAccept: this.value.isRegulationAccept,
+      isRegulationNotAccept: this.value.isRegulationAccept,
     }
 
     this.isValid.email = this.validation.isEmailValid(form.email);
@@ -69,6 +85,7 @@ export class RegistrationIndividualComponent implements OnInit {
     }
     if (!this.isValid.password) {
       this.value.password = '';
+      this.value.confirm = '';
       this.invalidMsg.password = 'Password must consist at least one Uppercase and number and length more then 8'
     }
     if (!this.isValid.confirm) {
@@ -79,7 +96,7 @@ export class RegistrationIndividualComponent implements OnInit {
     if (!this.isValid.secretWord) {
       this.invalidMsg.secretWord = 'Secret must exist';
     }
-    if (!this.isValid.isRegulationAccept) {
+    if (!this.value.isRegulationAccept) {
       this.invalidMsg.regulationAccept = 'Before registration u must read and accept service regulation';
     }
 
@@ -98,11 +115,12 @@ export class RegistrationIndividualComponent implements OnInit {
             this.authenticate
               .registrationIndividual(form)
               .subscribe((data) => {
+                this.startTimer();
                 if (data['success']) {
                   this.isSuccess = true;
                   setTimeout(() => {
                     this.router.navigate(['login']);
-                  }, 4000);  //5s
+                  }, 5000);  //5s
                 } else {
                   this.isServerDontResponse = true;
                   setTimeout(() => {
@@ -113,5 +131,15 @@ export class RegistrationIndividualComponent implements OnInit {
           }
         })
     }
+  }
+
+  startTimer() {
+    this.redirectTimer = setInterval(() => {
+      if (this.redirectTimeLeft > 0) {
+        this.redirectTimeLeft--;
+      } else {
+        this.redirectTimeLeft = 5;
+      }
+    }, 1000)
   }
 }

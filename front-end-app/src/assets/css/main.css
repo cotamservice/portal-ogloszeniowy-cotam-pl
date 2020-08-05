@@ -81,12 +81,8 @@ form {
   border: 1px solid red;
 }
 .input-invalid-tip{
-  display: none;
   font-size: .8rem;
   color: red;
-}
-.input-invalid-tip-display{
-  display: inline-block;
 }
 
 .input::placeholder {
