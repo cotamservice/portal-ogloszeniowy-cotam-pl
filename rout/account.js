@@ -7,7 +7,6 @@ const User = require('../model').User;
 
 router.get('/registration/verify/email/:email', (req, res) => {
     let email = req.params.email;
-    console.log('verify email = ' + email);
     User.getUserByEmail(email, (err, user) => {
         if (err) {
             res.json({success: false});
@@ -50,7 +49,7 @@ router.post('/authenticate', (req, res) => {
         User.comparePass(password, user.password, (err, isMatch) => {
             if (err) throw  err;
             if (isMatch) {
-                const token = jwt.sign(user, config.passport.secretKey, {
+                const token = jwt.sign(user.toJSON(), require('../config').passport.secretKey, {
                     expiresIn: 3600 * 24
                 });
                 res.json({

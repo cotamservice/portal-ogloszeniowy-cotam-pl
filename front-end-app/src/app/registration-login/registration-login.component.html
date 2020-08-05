@@ -1,34 +1,44 @@
 <div class="container">
   <div class="row">
-    <div class="col-12">
-      <label for="{{inputEmailId}}" [ngClass]="{'input-label':true}">{{inputEmailLabelValue}}
-        <input id="{{inputEmailId}}" [ngClass]="{'input':true}" type="text"
-               placeholder="{{inputEmailPlaceholder}}">
-      </label>
-      <label for="{{inputPasswordId}}" [ngClass]="{'input-label':true}">{{inputPasswordLabelValue}}
-        <input id="{{inputPasswordId}}" [ngClass]="{'input':true}" type="text"
-               placeholder="{{inputPasswordPlaceholder}}">
-      </label>
-      <label for="{{inputRememberCheckboxId}}" [ngClass]="{'input-checkbox-label':true}">
-        <input id="{{inputRememberCheckboxId}}" [ngClass]="{'input-checkbox': true}" type="checkbox">
-        {{inputRememberCheckboxLabelValue}}
-      </label>
-    </div>
-    <div class="col-12">
-      <div [ngClass]="{'login-remote-api':true}">
-        <img [ngClass]="{'login-remote-api-icon': true}" src="assets/img/registration/login-google-icon.png">
-        <p [ngClass]="{'login-remote-api-title':true}">{{loginRemoteGoogleTitleValue}}</p>
+    <form (submit)="authenticateIn()">
+      <div class="col-12">
+        <label for="email" [ngClass]="{'input-label':true}">Email
+          <span *ngIf="!isValid.email"
+                [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.email}}</span>
+          <input id="email" [ngClass]="{'input':true,'input-invalid':!isValid.email}" type="text"
+                 [(ngModel)]="value.email" name="email" (change)="isEmailValid()"
+                 placeholder="wprowadż swój email">
+        </label>
+        <label for="password" [ngClass]="{'input-label':true}">Hasło
+          <span *ngIf="!isValid.password"
+                [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.password}}</span>
+          <input id="password" [ngClass]="{'input':true,'input-invalid':!isValid.password}" type="password"
+                 [(ngModel)]="value.password" name="password" (change)="isPasswordValid()"
+                 placeholder="wprowadż swoe hasło">
+        </label>
+        <label for="remember" [ngClass]="{'input-checkbox-label':true}">
+          <input id="remember" [ngClass]="{'input-checkbox': true}" type="checkbox" [(ngModel)]="value.isRemember" name="remember">
+          Zapamiętaj mnie
+          <span *ngIf="value.isRemember"
+                [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.remember}}</span>
+        </label>
       </div>
-      <div [ngClass]="{'login-remote-api':true}">
-        <img [ngClass]="{'login-remote-api-icon': true}" src="assets/img/registration/login-fb-icon.png">
-        <p [ngClass]="{'login-remote-api-title':true}">{{loginRemoteFBTitleValue}}</p>
+      <div class="col-12">
+        <div [ngClass]="{'login-remote-api':true}">
+          <img [ngClass]="{'login-remote-api-icon': true}" src="assets/img/registration/login-google-icon.png">
+          <p [ngClass]="{'login-remote-api-title':true}">Zaloguj się przez google</p>
+        </div>
+        <div [ngClass]="{'login-remote-api':true}">
+          <img [ngClass]="{'login-remote-api-icon': true}" src="assets/img/registration/login-fb-icon.png">
+          <p [ngClass]="{'login-remote-api-title':true}">Zaloguj się przez facebook</p>
+        </div>
       </div>
-    </div>
-    <div class="col-12">
-      <div [ngClass]="{'button-orange-100':true}">{{loginButtonTitleValue}}</div>
-    </div>
-    <label class="col-12" [ngClass]="{'link-a-label':true}">
-      <a [ngClass]="{'link-a':true}" href="">{{forgotPasswordLinkValue}}</a>
-    </label>
+      <div class="col-12">
+        <input type="submit" [ngClass]="{'button-orange-100':true}" value="Zaloguj się">
+      </div>
+      <label class="col-12" [ngClass]="{'link-a-label':true}">
+        <a [ngClass]="{'link-a':true}" href="">Zaponiałeś hasło?</a>
+      </label>
+    </form>
   </div>
 </div>

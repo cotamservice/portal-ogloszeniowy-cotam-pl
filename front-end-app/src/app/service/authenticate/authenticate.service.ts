@@ -7,8 +7,17 @@ import {map} from "rxjs/operators";
 })
 
 export class AuthenticateService {
+  token: any;
+  user: any;
 
   constructor(private http: HttpClient) {
+  }
+
+  storeUser(token, user) {
+    localStorage.setItem('token', token);
+    localStorage.setItem('user', JSON.stringify(user));
+    this.token = token;
+    this.user = user;
   }
 
   authenticate(user) {

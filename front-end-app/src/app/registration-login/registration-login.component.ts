@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {NgModel} from "@angular/forms";
+import {RegistrationFormValidationService} from "../service/form/registration-form-validation.service";
+import {AuthenticateService} from "../service/authenticate/authenticate.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-registration-login',
@@ -8,27 +10,85 @@ import {NgModel} from "@angular/forms";
 })
 
 export class RegistrationLoginComponent implements OnInit {
-  inputEmailId = 'email';
-  inputEmailLabelValue = 'Email';
-  inputEmailPlaceholder = 'wprowadż swój email';
 
-  inputPasswordId = 'password';
-  inputPasswordLabelValue = 'Hasło';
-  inputPasswordPlaceholder = 'wprowadż swoe hasło';
+  value = {
+    email: '',
+    password: '',
+    isRemember: false,
+  }
+  isValid = {
+    email: true,
+    password: true,
+  }
 
-  inputRememberCheckboxId = 'remember';
-  inputRememberCheckboxLabelValue = 'Zapamiętaj mnie'
+  invalidMsg = {
+    email: '',
+    password: '',
+    remember: 'Wybierz tę opcję tylko wtedy, gdy ufasz temu komputerowi i przeglądarce',
+  };
 
-  loginRemoteGoogleTitleValue = 'Zaloguj się przez google';
-  loginRemoteFBTitleValue = 'Zaloguj się przez facebook';
-
-  loginButtonTitleValue = 'Zaloguj się';
-  forgotPasswordLinkValue = 'Zaponiałeś hasło?';
-
-  constructor() {
+  constructor(
+    private validation: RegistrationFormValidationService,
+    private authenticateS: AuthenticateService,
+    private router: Router) {
   }
 
   ngOnInit(): void {
   }
 
+  authenticateIn() {
+    this.verifyFormInput();
+    this.value.isRemember = false;
+
+    if (this.isFormValid()) {
+      const user = {
+        email: this.value.email.trim(),
+        password: this.value.password.trim(),
+      }
+      this.authenticateS
+        .verifyEmail(user.email)
+        .subscribe(data => {
+          if (data['success']) {
+            this.authenticateS
+              .authenticate(user)
+              .subscribe(data => {
+                if (data['success']) {
+                  this.authenticateS.storeUser(data['token'], data['user'])
+                  this.router.navigate(['']);
+                } else {
+                  this.isValid.email = false;
+                  this.invalidMsg.email = 'Uwierzytelnianie nie powiodło się';
+                  this.value.password = '';
+                }
+              });
+          }
+        });
+
+    }
+
+  }
+
+  isFormValid(): boolean {
+    return this.isEmailValid() && this.isPasswordValid();
+  }
+
+  verifyFormInput() {
+    if (!this.isEmailValid()) {
+      this.invalidMsg.email = 'jest nie prawidłowy';
+    }
+    if (!this.isPasswordValid()) {
+      this.value.password = '';
+      this.invalidMsg.password = 'musi zawierać co najmniej jedną wielką literę i cyfrę, a długość musi być większa niż 8';
+    }
+  }
+
+  isEmailValid() {
+    this.isValid.email = this.validation.isEmailValid(this.value.email.trim());
+    return this.isValid.email;
+  }
+
+  isPasswordValid() {
+    this.isValid.password = this.validation.isPasswordValid(this.value.password.trim());
+    return this.isValid.password;
+  }
 }
