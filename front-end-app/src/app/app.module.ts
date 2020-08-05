@@ -6,7 +6,6 @@ import {AppComponent} from './app.component';
 import {HeaderComponent} from './header/header.component';
 import {RegistrationComponent} from './registration/registration.component';
 import {FooterComponent} from './footer/footer.component';
-import {AuthenticateComponent} from './authenticate/authenticate.component';
 import {HomeComponent} from './home/home.component';
 
 import {ToStartArrowComponent} from './to-start-arrow/to-start-arrow.component';
@@ -26,7 +25,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     HeaderComponent,
     RegistrationComponent,
     FooterComponent,
-    AuthenticateComponent,
     HomeComponent,
     ToStartArrowComponent,
     RegistrationLoginComponent,
