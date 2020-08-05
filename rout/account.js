@@ -4,9 +4,22 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const config = require('../config');
 const User = require('../model').User;
-
+router.get('/verify/email/:email', (req, res) => {
+    let email = req.params.email;
+    User.getUserByEmail(email, (err, user) => {
+        if (err) {
+            res.json({success: false});
+        } else {
+            if (user) {
+                res.json({success: true});
+            } else {
+                res.json({success: false});
+            }
+        }
+    })
+})
 router.post('/registration/individual', (req, res) => {
-    let roles = [require('../model').User.role.user,require('../model').User.role.individual]
+    let roles = [require('../model').User.role.user, require('../model').User.role.individual]
     let newUser = new User({
         email: req.body.email,
         password: req.body.password,
