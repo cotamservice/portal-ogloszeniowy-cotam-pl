@@ -25,7 +25,6 @@ export class AuthenticateService {
     return this.http
       .get('http://localhost:3000/account/registration/verify/email/' + value, {headers: headers})
       .pipe(map(res => res));
-
   }
 
 }
