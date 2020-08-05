@@ -18,6 +18,7 @@ import {FormsModule} from "@angular/forms";
 import {RegistrationFormValidationService} from "./service/form/registration-form-validation.service";
 import {AuthenticateService} from "./service/authenticate/authenticate.service";
 import {HttpClientModule} from "@angular/common/http";
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import {HttpClientModule} from "@angular/common/http";
     RegistrationIndividualComponent,
     RegistrationCommissionComponent,
     RegistrationBrokerComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
