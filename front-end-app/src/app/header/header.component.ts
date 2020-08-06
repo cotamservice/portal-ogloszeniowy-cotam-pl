@@ -255,6 +255,7 @@ export class HeaderComponent implements OnInit {
     this.isAccountPick = true;
     if (this.isLogin()) {
       //redirect to dashboard depend on role
+      this.router.navigate(['dashboard']);
     } else {
       this.redirectTo('login');
     }
