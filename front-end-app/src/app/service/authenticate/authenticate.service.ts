@@ -17,7 +17,6 @@ export class AuthenticateService {
     private jwt: JwtHelperService) {
   }
 
-
   registrationIndividual(user: UserModel) {
     let headers = new HttpHeaders();
     headers.append('Content-type', 'application/json');
@@ -48,13 +47,6 @@ export class AuthenticateService {
   }
 
   isAuthenticate(): boolean {
-    try {
-      console.log(this.getAuthenticationUser());
-      console.log(this.getAuthenticationToken());
-    } catch (e) {
-      console.log(e);
-    }
-    console.log('IS TOKEN EXPIRE: ' + this.jwt.isTokenExpired());
     return !this.jwt.isTokenExpired();
   }
 
@@ -62,14 +54,8 @@ export class AuthenticateService {
     localStorage.clear();
   }
 
-  getAuthenticationUser(): UserModel {
-    let val = JSON.parse(localStorage.getItem('authenticate_user'));
-    console.log(val);
+  getAuthenticateUser(): UserModel {
     let user: UserModel = new UserModel().deserializable(JSON.parse(localStorage.getItem('authenticate_user')));
-    console.log('id:' + user.id);
-    console.log('email:' + user.email);
-    console.log('password:' + user.password);
-    console.log('roles:' + user.roles);
     console.log('is user role:' + user.roles.find(val => {
       return val === RolesModel.UserRole;
     }));
@@ -86,7 +72,19 @@ export class AuthenticateService {
     return user;
   }
 
-  private getAuthenticationToken(): string {
+  getAuthenticateToken(): string {
     return localStorage.getItem('authenticate_token');
+  }
+
+  isAuthenticateIndividual(): boolean {
+    return this.getAuthenticateUser().roles.indexOf(RolesModel.IndividualRole) > -1;
+  }
+
+  isAuthenticateCommission(): boolean {
+    return this.getAuthenticateUser().roles.indexOf(RolesModel.CommissionRole) > -1;
+  }
+
+  isAuthenticateBroker(): boolean {
+    return this.getAuthenticateUser().roles.indexOf(RolesModel.BrokerRole) > -1;
   }
 }
