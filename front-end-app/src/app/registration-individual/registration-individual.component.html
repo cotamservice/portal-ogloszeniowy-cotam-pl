@@ -41,7 +41,7 @@
         <label for="accept" [ngClass]="{'input-checkbox-label':true}">
           <input id="accept"
                  [ngClass]="{'input-checkbox':true,'input-invalid':!value.isRegulationAccept}"
-                 type="checkbox" [(ngModel)]="value.isRegulationAccept" name="accept">
+                 type="checkbox" [(ngModel)]="value.isRegulationAccept" name="accept" (change)="isRegulationAccept()">
           <a [ngClass]="{'link-a':true}" href="">Akceptuję regulamin serwisu</a>
           <span *ngIf="!value.isRegulationAccept"
             [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.regulationAccept}}</span>
