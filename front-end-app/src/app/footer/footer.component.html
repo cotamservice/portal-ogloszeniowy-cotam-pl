@@ -1,4 +1,4 @@
-<div *ngIf="isLogout()" [ngClass]="{'footer-logout':true}">
+<div *ngIf="!isLogin()" [ngClass]="{'footer-logout':true}">
   <div class="container" [ngClass]="{'footer-logout-container':true}">
     <div class="row">
       <div class="col-xl-6 col-lg-12" [ngClass]="{'footer-logout-container-text':true}">

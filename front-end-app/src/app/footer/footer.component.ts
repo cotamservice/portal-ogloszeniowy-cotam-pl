@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
+import {AuthenticateService} from "../service/authenticate/authenticate.service";
 
 @Component({
   selector: 'app-footer',
@@ -8,7 +9,9 @@ import {Router} from "@angular/router";
 })
 export class FooterComponent implements OnInit {
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private authenticateS: AuthenticateService) {
   }
 
   ngOnInit(): void {
@@ -16,7 +19,6 @@ export class FooterComponent implements OnInit {
 
   openRegistration(): void {
     this.redirectTo('registration');
-
   }
 
   privacyPoliticLinkName: string = 'Polityka prywatności';
@@ -27,12 +29,12 @@ export class FooterComponent implements OnInit {
   regulationLinkName: string = 'regulaminu';
   regulationAcceptationText: string = 'Korzystanie z serwisu oznacza akceptację';
 
-  isLogout(): boolean {
-    return true;
+  isLogin(): boolean {
+    return this.authenticateS.isAuthenticate();
   }
 
-  footerLogoutTitle:string = 'Zarejestruj się już teraz!';
-  footerLogoutText:string = 'Dzięki rejestracji będziesz mógł zarządzać dodanymi ogłoszeniami, a także dodawać\n' +
+  footerLogoutTitle: string = 'Zarejestruj się już teraz!';
+  footerLogoutText: string = 'Dzięki rejestracji będziesz mógł zarządzać dodanymi ogłoszeniami, a także dodawać\n' +
     '          ogłoszenia do ulubionych, aby mieć do nich łatwy dostęp w każdej chwili!';
 
   redirectTo(pagename: string): void {
