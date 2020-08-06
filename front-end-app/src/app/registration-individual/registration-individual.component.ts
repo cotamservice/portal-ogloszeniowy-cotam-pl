@@ -53,31 +53,31 @@ export class RegistrationIndividualComponent implements OnInit {
     return this.isEmailValid() && this.isPasswordValid() && this.isConfirmValid() && this.isSecretWordValid() && this.isRegulationAccept();
   }
 
-  isEmailValid() {
+  isEmailValid(): boolean {
     this.isValid.email = this.validation.isEmailValid(this.value.email.trim());
     return this.isValid.email;
   }
 
-  isPasswordValid() {
+  isPasswordValid(): boolean {
     this.isValid.password = this.validation.isPasswordValid(this.value.password.trim());
     return this.isValid.password;
   }
 
-  isConfirmValid() {
+  isConfirmValid(): boolean {
     this.isValid.confirm = this.validation.isPasswordConfirm(this.value.password.trim(), this.value.confirm.trim());
     return this.isValid.confirm;
   }
 
-  isSecretWordValid() {
+  isSecretWordValid(): boolean {
     this.isValid.secretWord = this.validation.isSecretWordValid(this.value.secretWord.trim());
     return this.isValid.secretWord;
   }
 
-  isRegulationAccept() {
+  isRegulationAccept(): boolean {
     return this.value.isRegulationAccept;
   }
 
-  verifyFormInput() {
+  verifyFormInput(): void {
     if (!this.isEmailValid()) {
       this.invalidMsg.email = 'jest nie prawidłowy';
     }
@@ -99,22 +99,15 @@ export class RegistrationIndividualComponent implements OnInit {
     }
   }
 
-  registrationIndividualFormSubmit() {
+  registrationIndividualFormSubmit(): void {
     this.verifyFormInput();
 
     if (this.isFormValid()) {
-      const user : UserModel = new UserModel();
+      const user: UserModel = new UserModel();
       user.email = this.value.email.trim();
       user.password = this.value.password.trim();
       user.secretWord = this.value.secretWord.trim();
       user.roles = [RolesModel.UserRole, RolesModel.IndividualRole];
-      //
-      // const user = {
-      //   email: this.value.email.trim(),
-      //   password: this.value.password.trim(),
-      //   secretWord: this.value.secretWord.trim(),
-      //   roles: [RolesModel.UserRole, RolesModel.IndividualRole]
-      // }
 
       this.authenticateS
         .verifyEmail(user.email)
@@ -149,7 +142,7 @@ export class RegistrationIndividualComponent implements OnInit {
     }
   }
 
-  startTimer() {
+  startTimer(): void {
     this.redirectTimer = setInterval(() => {
       if (this.redirectTimeLeft > 0) {
         this.redirectTimeLeft--;
