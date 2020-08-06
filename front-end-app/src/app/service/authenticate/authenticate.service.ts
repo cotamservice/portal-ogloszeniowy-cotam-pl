@@ -63,7 +63,6 @@ export class AuthenticateService {
   }
 
   getAuthenticationUser(): UserModel {
-    // let user: UserModel = JSON.parse(localStorage.getItem('authenticate_user'));
     let val = JSON.parse(localStorage.getItem('authenticate_user'));
     console.log(val);
     let user: UserModel = new UserModel().deserializable(JSON.parse(localStorage.getItem('authenticate_user')));

@@ -38,7 +38,7 @@ export class RegistrationLoginComponent implements OnInit {
   }
 
   authenticateIn(): void {
-    this.verifyFormInput();
+
     this.value.isRemember = false;
     if (this.isFormValid()) {
       const user: UserModel = new UserModel();
@@ -75,23 +75,15 @@ export class RegistrationLoginComponent implements OnInit {
     return this.isEmailValid() && this.isPasswordValid();
   }
 
-  verifyFormInput(): void {
-    if (!this.isEmailValid()) {
-      this.invalidMsg.email = 'jest nie prawidłowy';
-    }
-    if (!this.isPasswordValid()) {
-      this.value.password = '';
-      this.invalidMsg.password = 'musi zawierać co najmniej jedną wielką literę i cyfrę, a długość musi być większa niż 8';
-    }
-  }
-
   isEmailValid(): boolean {
     this.isValid.email = this.validation.isEmailValid(this.value.email.trim());
+    this.invalidMsg.email = 'jest nie prawidłowy';
     return this.isValid.email;
   }
 
   isPasswordValid(): boolean {
     this.isValid.password = this.validation.isPasswordValid(this.value.password.trim());
+    this.invalidMsg.password = 'musi zawierać co najmniej jedną wielką literę i cyfrę, a długość musi być większa niż 8';
     return this.isValid.password;
   }
 }
