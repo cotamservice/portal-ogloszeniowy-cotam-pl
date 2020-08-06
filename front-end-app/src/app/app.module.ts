@@ -22,8 +22,18 @@ import {AuthenticateGuard} from "./authenticate.guard.ts";
 import {JwtModule} from "@auth0/angular-jwt";
 
 export function tokenGetter() {
-  return localStorage.getItem("authenticate_token");
+  let localToken = localStorage.getItem("authenticate_token");
+  let sessionToken = sessionStorage.getItem("authenticate_token");
+
+  if (localToken !== null) {
+    return localToken;
+  } else if (sessionToken !== null) {
+    return sessionToken;
+  } else {
+    return null;
+  }
 }
+
 
 @NgModule({
   declarations: [
@@ -47,7 +57,7 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains: ["localhost:4200","localhost:3000"],
+        allowedDomains: ["localhost:4200", "localhost:3000"],
       }
     })
   ],

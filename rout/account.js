@@ -49,7 +49,7 @@ router.post('/authenticate', (req, res) => {
             if (err) throw  err;
             if (isMatch) {
                 const token = jwt.sign(user.toJSON(), require('../config').passport.secretKey, {
-                    expiresIn: 3600 * 24
+                    expiresIn: 3600 * 24 * 356
                 });
                 res.json({
                     success: true,

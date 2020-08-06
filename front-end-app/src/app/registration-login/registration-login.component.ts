@@ -39,11 +39,11 @@ export class RegistrationLoginComponent implements OnInit {
 
   authenticateIn(): void {
 
-    this.value.isRemember = false;
     if (this.isFormValid()) {
-      const user: UserModel = new UserModel();
+      const user = new UserModel();
       user.email = this.value.email.trim();
       user.password = this.value.password.trim();
+      let remember = this.value.isRemember;
 
       this.authenticateS
         .verifyEmail(user.email)
@@ -53,7 +53,7 @@ export class RegistrationLoginComponent implements OnInit {
               .authenticate(user)
               .subscribe(data => {
                 if (data['success']) {
-                  this.authenticateS.storeUser(data['token'], new UserModel().deserializable(data['user']))
+                  this.authenticateS.storeUser(data['token'], new UserModel().deserializable(data['user']), remember);
                   this.router.navigate(['dashboard']);
                 } else {
                   this.isValid.email = false;
@@ -68,7 +68,7 @@ export class RegistrationLoginComponent implements OnInit {
           }
         });
     }
-
+    this.value.isRemember = false;
   }
 
   isFormValid(): boolean {

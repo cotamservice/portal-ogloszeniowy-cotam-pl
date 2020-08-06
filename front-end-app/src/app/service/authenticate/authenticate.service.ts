@@ -33,9 +33,14 @@ export class AuthenticateService {
       .pipe(map(res => res));
   }
 
-  storeUser(token: string, user: UserModel) {
-    localStorage.setItem('authenticate_token', token);
-    localStorage.setItem('authenticate_user', JSON.stringify(user));
+  storeUser(token: string, user: UserModel, isRemember: boolean) {
+    if (isRemember === true) {
+      localStorage.setItem('authenticate_token', token);
+      localStorage.setItem('authenticate_user', JSON.stringify(user));
+    } else {
+      sessionStorage.setItem('authenticate_token', token);
+      sessionStorage.setItem('authenticate_user', JSON.stringify(user));
+    }
   }
 
   authenticate(user: UserModel) {
@@ -52,17 +57,20 @@ export class AuthenticateService {
 
   authenticateOut(): void {
     localStorage.clear();
+    sessionStorage.clear();
   }
 
   getAuthenticateUser(): UserModel {
-    if (this.isAuthenticate()) {
-      return new UserModel().deserializable(JSON.parse(localStorage.getItem('authenticate_user')));
+    let fromLocal = localStorage.getItem('authenticate_user');
+    let fromSession = sessionStorage.getItem('authenticate_user');
+    if (fromLocal !== null) {
+      return new UserModel().deserializable(JSON.parse(fromLocal));
+    } else if (fromSession !== null) {
+      return new UserModel().deserializable(JSON.parse(fromSession));
+    } else {
+      return null;
     }
-    return null;
-  }
 
-  getAuthenticateToken(): string {
-    return localStorage.getItem('authenticate_token');
   }
 
   isAuthenticateIndividual(): boolean {

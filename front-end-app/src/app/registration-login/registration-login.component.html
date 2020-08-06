@@ -3,24 +3,19 @@
     <form (submit)="authenticateIn()">
       <div class="col-12">
         <label for="email" [ngClass]="{'input-label':true}">Email
-          <span *ngIf="!isValid.email"
-                [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.email}}</span>
-          <input id="email" [ngClass]="{'input':true,'input-invalid':!isValid.email}" type="text"
-                 [(ngModel)]="value.email" name="email" (change)="isEmailValid()"
-                 placeholder="wprowadż swój email">
+          <span *ngIf="!isValid.email" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.email}}</span>
+          <input id="email" type="text" name="email" placeholder="wprowadż swój email"
+                 [ngClass]="{'input':true,'input-invalid':!isValid.email}" [(ngModel)]="value.email" (change)="isEmailValid()">
         </label>
         <label for="password" [ngClass]="{'input-label':true}">Hasło
-          <span *ngIf="!isValid.password"
-                [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.password}}</span>
-          <input id="password" [ngClass]="{'input':true,'input-invalid':!isValid.password}" type="password"
-                 [(ngModel)]="value.password" name="password" (change)="isPasswordValid()"
-                 placeholder="wprowadż swoe hasło">
+          <span *ngIf="!isValid.password" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.password}}</span>
+          <input id="password" type="password" name="password" placeholder="wprowadż swoe hasło"
+                 [ngClass]="{'input':true,'input-invalid':!isValid.password}" [(ngModel)]="value.password" (change)="isPasswordValid()">
         </label>
         <label for="remember" [ngClass]="{'input-checkbox-label':true}">
-          <input id="remember" [ngClass]="{'input-checkbox': true}" type="checkbox" [(ngModel)]="value.isRemember" name="remember">
+          <input id="remember" type="checkbox" name="remember" [ngClass]="{'input-checkbox': true}" [(ngModel)]="value.isRemember">
           Zapamiętaj mnie
-          <span *ngIf="value.isRemember"
-                [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.remember}}</span>
+          <span *ngIf="value.isRemember" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.remember}}</span>
         </label>
       </div>
       <div class="col-12">
