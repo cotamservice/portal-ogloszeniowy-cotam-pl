@@ -37,14 +37,14 @@ export class RegistrationLoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  authenticateIn() {
+  authenticateIn(): void {
     this.verifyFormInput();
     this.value.isRemember = false;
     if (this.isFormValid()) {
-      const user = {
-        email: this.value.email.trim(),
-        password: this.value.password.trim(),
-      }
+      const user: UserModel = new UserModel();
+      user.email = this.value.email.trim();
+      user.password = this.value.password.trim();
+
       this.authenticateS
         .verifyEmail(user.email)
         .subscribe(data => {
@@ -53,7 +53,7 @@ export class RegistrationLoginComponent implements OnInit {
               .authenticate(user)
               .subscribe(data => {
                 if (data['success']) {
-                  this.authenticateS.storeUser(data['token'], data['user'])
+                  this.authenticateS.storeUser(data['token'], new UserModel().deserializable(data['user']))
                   this.router.navigate(['dashboard']);
                 } else {
                   this.isValid.email = false;
@@ -75,7 +75,7 @@ export class RegistrationLoginComponent implements OnInit {
     return this.isEmailValid() && this.isPasswordValid();
   }
 
-  verifyFormInput() {
+  verifyFormInput(): void {
     if (!this.isEmailValid()) {
       this.invalidMsg.email = 'jest nie prawidłowy';
     }
@@ -85,12 +85,12 @@ export class RegistrationLoginComponent implements OnInit {
     }
   }
 
-  isEmailValid() {
+  isEmailValid(): boolean {
     this.isValid.email = this.validation.isEmailValid(this.value.email.trim());
     return this.isValid.email;
   }
 
-  isPasswordValid() {
+  isPasswordValid(): boolean {
     this.isValid.password = this.validation.isPasswordValid(this.value.password.trim());
     return this.isValid.password;
   }

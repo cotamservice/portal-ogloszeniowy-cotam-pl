@@ -2,6 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {map} from "rxjs/operators";
 import {JwtHelperService} from "@auth0/angular-jwt";
+import {UserModel} from '../../model/user.model';
+import {RolesModel} from "../../model/roles.model";
 
 
 @Injectable({
@@ -9,15 +11,6 @@ import {JwtHelperService} from "@auth0/angular-jwt";
 })
 
 export class AuthenticateService {
-  token: any;
-  user: any;
-
-  roles = {
-    user: 'service_user',
-    individual: 'individual',
-    commission: 'commission',
-    broker: 'broker'
-  }
 
   constructor(
     private http: HttpClient,
@@ -25,7 +18,7 @@ export class AuthenticateService {
   }
 
 
-  registrationIndividual(user) {
+  registrationIndividual(user: UserModel) {
     let headers = new HttpHeaders();
     headers.append('Content-type', 'application/json');
     return this.http
@@ -33,7 +26,7 @@ export class AuthenticateService {
       .pipe(map(res => res));
   }
 
-  verifyEmail(value) {
+  verifyEmail(value: string) {
     let headers = new HttpHeaders();
     headers.append('Content-type', 'application/json');
     return this.http
@@ -41,14 +34,12 @@ export class AuthenticateService {
       .pipe(map(res => res));
   }
 
-  storeUser(token, user) {
+  storeUser(token : string, user : UserModel) {
     localStorage.setItem('access_token', token);
     localStorage.setItem('authenticate_user', JSON.stringify(user));
-    this.token = token;
-    this.user = user;
   }
 
-  authenticate(user) {
+  authenticate(user : UserModel) {
     let headers = new HttpHeaders();
     headers.append('Content-type', 'application/json');
     return this.http
@@ -57,12 +48,36 @@ export class AuthenticateService {
   }
 
   isAuthenticate() {
+    console.log(this.getAuthenticationUser());
     return !this.jwt.isTokenExpired();
   }
 
   authenticateOut() {
-    this.token = null;
-    this.user = null;
     localStorage.clear();
+  }
+
+  getAuthenticationUser() {
+    // let user: UserModel = JSON.parse(localStorage.getItem('authenticate_user'));
+    let val = JSON.parse(localStorage.getItem('authenticate_user'));
+    console.log(val);
+    let user: UserModel = new UserModel().deserializable(JSON.parse(localStorage.getItem('authenticate_user')));
+    console.log('id:' + user.id);
+    console.log('email:' + user.email);
+    console.log('password:' + user.password);
+    console.log('roles:' + user.roles);
+    console.log('is user role:' + user.roles.find(val => {
+      return val === RolesModel.UserRole;
+    }));
+    console.log('is individual role:' + user.roles.find(val => {
+      return val === RolesModel.IndividualRole;
+    }));
+    console.log('is commission role:' + user.roles.find(val => {
+      return val === RolesModel.CommissionRole;
+    }));
+    console.log('is broker role:' + user.roles.find(val => {
+      return val === RolesModel.BrokerRole;
+    }));
+
+    return user;
   }
 }
