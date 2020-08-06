@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
+import {AuthenticateService} from "../service/authenticate/authenticate.service";
+import {UserModel} from "../model/user.model";
 
 @Component({
   selector: 'app-header',
@@ -8,9 +10,9 @@ import {Router} from "@angular/router";
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private router: Router) {
-    // this.isAccountLogout = false;
-    // this.isAccountBrokerLogin = true;
+  constructor(
+    private router: Router,
+    private authenticateS: AuthenticateService) {
   }
 
   ngOnInit(): void {
@@ -184,31 +186,6 @@ export class HeaderComponent implements OnInit {
 
   }
 
-  isAccountPick: boolean = false;
-  accountName: string = 'bbb.fffff.eee.2222@gmail.cddddom';
-  isAccountBrokerLogin: boolean = false;
-  accountBrokerTypeName: string = 'Dealer/Broker';
-  isAccountCommissionLogin: boolean = false;
-  accountCommissionTypeName: string = 'Komis';
-  isAccountIndividualLogin: boolean = false;
-  accountIndividualTypeName: string = 'Indywidualne';
-  isAccountLogout: boolean = true;
-  logoutAccountName: string = 'Moje konto';
-
-  pickAccount(): void {
-    this.unPickAll();
-    this.isAccountPick = true;
-    if (this.isAccountLogout) {
-      this.redirectTo('login');
-    }
-  }
-
-  logout(): void {
-    this.isAccountBrokerLogin = false;
-    this.isAccountIndividualLogin = false;
-    this.isAccountCommissionLogin = false;
-    this.isAccountLogout = true;
-  }
 
   menuPostAddName: string = 'dodaj ogłoszenie';
   isMenuAddPostPick: boolean = false;
@@ -267,5 +244,58 @@ export class HeaderComponent implements OnInit {
     } else {
       this.router.navigate(['/' + pagename]);
     }
+  }
+
+  isAccountPick: boolean = false;
+  accountTypeName: string;
+  accountName: string;
+
+  pickAccount(): void {
+    this.unPickAll();
+    this.isAccountPick = true;
+    if (this.isLogin()) {
+      //redirect to dashboard depend on role
+    } else {
+      this.redirectTo('login');
+    }
+  }
+
+  isLogin(): boolean {
+    if (!this.authenticateS.isAuthenticate()) {
+      this.accountName = 'Moje Konto';
+      this.accountTypeName = '';
+      return false;
+    }
+    return true;
+  }
+
+  isAccountBrokerLogin() {
+    if (this.authenticateS.isAuthenticateBroker()) {
+      let user: UserModel = this.authenticateS.getAuthenticateUser()
+      this.accountName = user.email;
+      this.accountTypeName = 'Dealer / Broker';
+      return true;
+    }
+    return false;
+  }
+
+  isAccountCommissionLogin() {
+    if (this.authenticateS.isAuthenticateCommission()) {
+      let user: UserModel = this.authenticateS.getAuthenticateUser()
+      this.accountName = user.email;
+      this.accountTypeName = 'Komis';
+      return true;
+    }
+    return false;
+  }
+
+  isAccountIndividualLogin() {
+    if (this.authenticateS.isAuthenticateIndividual()) {
+      let user: UserModel = this.authenticateS.getAuthenticateUser()
+      this.accountName = user.email;
+      this.accountTypeName = 'Indywidualne';
+      return true;
+    }
+    return false;
   }
 }

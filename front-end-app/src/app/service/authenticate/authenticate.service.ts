@@ -55,21 +55,10 @@ export class AuthenticateService {
   }
 
   getAuthenticateUser(): UserModel {
-    let user: UserModel = new UserModel().deserializable(JSON.parse(localStorage.getItem('authenticate_user')));
-    console.log('is user role:' + user.roles.find(val => {
-      return val === RolesModel.UserRole;
-    }));
-    console.log('is individual role:' + user.roles.find(val => {
-      return val === RolesModel.IndividualRole;
-    }));
-    console.log('is commission role:' + user.roles.find(val => {
-      return val === RolesModel.CommissionRole;
-    }));
-    console.log('is broker role:' + user.roles.find(val => {
-      return val === RolesModel.BrokerRole;
-    }));
-
-    return user;
+    if (this.isAuthenticate()) {
+      return new UserModel().deserializable(JSON.parse(localStorage.getItem('authenticate_user')));
+    }
+    return null;
   }
 
   getAuthenticateToken(): string {
@@ -77,14 +66,24 @@ export class AuthenticateService {
   }
 
   isAuthenticateIndividual(): boolean {
-    return this.getAuthenticateUser().roles.indexOf(RolesModel.IndividualRole) > -1;
+    if (this.isAuthenticate()) {
+      return this.getAuthenticateUser().roles.indexOf(RolesModel.IndividualRole) > -1;
+    }
+    return false;
   }
 
   isAuthenticateCommission(): boolean {
-    return this.getAuthenticateUser().roles.indexOf(RolesModel.CommissionRole) > -1;
+    if (this.isAuthenticate()) {
+      return this.getAuthenticateUser().roles.indexOf(RolesModel.CommissionRole) > -1;
+    }
+    return false;
   }
 
   isAuthenticateBroker(): boolean {
-    return this.getAuthenticateUser().roles.indexOf(RolesModel.BrokerRole) > -1;
+    if (this.isAuthenticate()) {
+      return this.getAuthenticateUser().roles.indexOf(RolesModel.BrokerRole) > -1;
+    }
+    return false;
   }
+
 }

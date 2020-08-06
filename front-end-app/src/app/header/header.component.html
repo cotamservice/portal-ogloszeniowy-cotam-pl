@@ -53,8 +53,7 @@
       </div>
     </li>
     <li [ngClass]="{'menu-element':true, 'menu-element-pick': isLangPick}" (click)="pickLangCat()">
-      <img [ngClass]="{'select-icon':true}" src="assets/img/header/langCat.png">
-      {{pickedLang}}
+      <img [ngClass]="{'select-icon':true}" src="assets/img/header/langCat.png">      {{pickedLang}}
       <img [ngClass]="{'select-icon-arrow':true}" src="assets/img/header/arrowUpWhite.png">
       <div [ngClass]="{'select-list':true, 'select-list-open': isLangListOpen}">
         <div [ngClass]="{'select-option':true}" (click)="pickLang('pl')">
@@ -68,8 +67,7 @@
       </div>
     </li>
     <li [ngClass]="{'menu-element':true, 'menu-element-pick': isCurrencyPick}" (click)="pickCurrencyCat()">
-      <img [ngClass]="{'select-icon':true}" src="assets/img/header/currencyCat.png">
-      {{pickedCurrency}}
+      <img [ngClass]="{'select-icon':true}" src="assets/img/header/currencyCat.png">      {{pickedCurrency}}
       <img [ngClass]="{'select-icon-arrow':true}" src="assets/img/header/arrowUpWhite.png">
       <div [ngClass]="{'select-list':true, 'select-list-open': isCurrencyListOpen}">
         <div [ngClass]="{'select-option':true}" (click)="pickCurrency('pl')">
@@ -93,25 +91,16 @@
       <img [ngClass]="{'menu-element-icon-vert-dash':true}" src="assets/img/header/vertDash.png">
     </li>
     <li [ngClass]="{'menu-element':true}">
-      <div *ngIf="!isAccountLogout" [ngClass]="{'menu-account':true, 'menu-account-pick':isAccountPick}"
-           (click)="pickAccount()">
-        <img *ngIf="isAccountBrokerLogin" [ngClass]="{'menu-account-icon':true}"
-             src="assets/img/header/brokerIcon.png">
-        <span *ngIf="isAccountBrokerLogin" [ngClass]="{'menu-account-type': true}">{{accountBrokerTypeName}}</span>
-        <img *ngIf="isAccountCommissionLogin" [ngClass]="{'menu-account-icon':true}"
-             src="assets/img/header/commissionIcon.png">
-        <span *ngIf="isAccountCommissionLogin"
-              [ngClass]="{'menu-account-type': true}">{{accountCommissionTypeName}}</span>
-        <img *ngIf="isAccountIndividualLogin" [ngClass]="{'menu-account-icon':true}"
-             src="assets/img/header/individualIcon.png">
-        <span *ngIf="isAccountIndividualLogin"
-              [ngClass]="{'menu-account-type': true}">{{accountIndividualTypeName}}</span>
+      <div *ngIf="isLogin()" [ngClass]="{'menu-account':true, 'menu-account-pick':isAccountPick}" (click)="pickAccount()">
+        <img *ngIf="isAccountBrokerLogin()" [ngClass]="{'menu-account-icon':true}" src="assets/img/header/brokerIcon.png">
+        <img *ngIf="isAccountCommissionLogin()" [ngClass]="{'menu-account-icon':true}" src="assets/img/header/commissionIcon.png">
+        <img *ngIf="isAccountIndividualLogin()" [ngClass]="{'menu-account-icon':true}" src="assets/img/header/individualIcon.png">
+        <span *ngIf="isAccountIndividualLogin()" [ngClass]="{'menu-account-type': true}">{{accountTypeName}}</span>
         <span [ngClass]="{'menu-account-name': true}">{{accountName}}</span>
       </div>
-      <div *ngIf="isAccountLogout" [ngClass]="{'menu-account':true, 'menu-account-pick':isAccountPick}"
-           (click)="pickAccount()">
+      <div *ngIf="!isLogin()" [ngClass]="{'menu-account':true, 'menu-account-pick':isAccountPick}" (click)="pickAccount()">
         <img [ngClass]="{'menu-account-logout-icon':true}" src="assets/img/header/individualIcon.png">
-        <span [ngClass]="{'menu-account-logout-name': true}">{{logoutAccountName}}</span>
+        <span [ngClass]="{'menu-account-logout-name': true}">{{accountName}}</span>
       </div>
     </li>
     <li [ngClass]="{'menu-element':true}">
@@ -132,10 +121,8 @@
     <div [ngClass]="{'menu-mobile-icon-container':true, 'menu-open-width':isMobileMenuOpen}">
       <div
         [ngClass]="{'menu-mobile-title':true, 'menu-mobile-title-visible':isMobileMenuOpen}">{{menuMobileTitle}}</div>
-      <img [ngClass]="{'menu-mobile-icon':true, 'menu-mobile-icon-hide':isMobileMenuOpen}"
-           src="assets/img/header/mobileMenu.png" (click)="openMobileMenu()">
-      <img [ngClass]="{'menu-mobile-icon':true, 'menu-mobile-icon-hide':!isMobileMenuOpen}"
-           src="assets/img/header/crossWhite.png" (click)="openMobileMenu()">
+      <img [ngClass]="{'menu-mobile-icon':true, 'menu-mobile-icon-hide':isMobileMenuOpen}" src="assets/img/header/mobileMenu.png" (click)="openMobileMenu()">
+      <img [ngClass]="{'menu-mobile-icon':true, 'menu-mobile-icon-hide':!isMobileMenuOpen}" src="assets/img/header/crossWhite.png" (click)="openMobileMenu()">
     </div>
 
     <ul [ngClass]="{'menu-mobile-list':true, 'menu-mobile-open': isMobileMenuOpen}">
