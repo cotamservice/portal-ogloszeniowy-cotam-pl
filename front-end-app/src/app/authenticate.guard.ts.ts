@@ -10,14 +10,11 @@ export class AuthenticateGuard implements CanActivate {
   }
 
   canActivate() {
-    console.log('Authenticate Guard is here');
     if (!this.authenticateS.isAuthenticate()) {
       this.router.navigate(['login']);
       return false;
     } else {
       return true;
     }
-
   }
-
 }
