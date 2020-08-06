@@ -17,7 +17,13 @@ import {FormsModule} from "@angular/forms";
 import {RegistrationFormValidationService} from "./service/form/registration-form-validation.service";
 import {AuthenticateService} from "./service/authenticate/authenticate.service";
 import {HttpClientModule} from "@angular/common/http";
-import { DashboardComponent } from './dashboard/dashboard.component';
+import {DashboardComponent} from './dashboard/dashboard.component';
+import {AuthenticateGuard} from "./authenticate.guard.ts";
+import {JwtModule} from "@auth0/angular-jwt";
+
+export function tokenGetter() {
+  return localStorage.getItem("access_token");
+}
 
 @NgModule({
   declarations: [
@@ -37,9 +43,14 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+      }
+    })
   ],
-  providers: [RegistrationFormValidationService, AuthenticateService],
+  providers: [RegistrationFormValidationService, AuthenticateService, AuthenticateGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {
