@@ -34,12 +34,12 @@ export class AuthenticateService {
       .pipe(map(res => res));
   }
 
-  storeUser(token : string, user : UserModel) {
-    localStorage.setItem('access_token', token);
+  storeUser(token: string, user: UserModel) {
+    localStorage.setItem('authenticate_token', token);
     localStorage.setItem('authenticate_user', JSON.stringify(user));
   }
 
-  authenticate(user : UserModel) {
+  authenticate(user: UserModel) {
     let headers = new HttpHeaders();
     headers.append('Content-type', 'application/json');
     return this.http
@@ -47,16 +47,22 @@ export class AuthenticateService {
       .pipe(map(res => res));
   }
 
-  isAuthenticate() {
-    console.log(this.getAuthenticationUser());
+  isAuthenticate(): boolean {
+    try {
+      console.log(this.getAuthenticationUser());
+      console.log(this.getAuthenticationToken());
+    } catch (e) {
+      console.log(e);
+    }
+    console.log('IS TOKEN EXPIRE: ' + this.jwt.isTokenExpired());
     return !this.jwt.isTokenExpired();
   }
 
-  authenticateOut() {
+  authenticateOut(): void {
     localStorage.clear();
   }
 
-  getAuthenticationUser() {
+  getAuthenticationUser(): UserModel {
     // let user: UserModel = JSON.parse(localStorage.getItem('authenticate_user'));
     let val = JSON.parse(localStorage.getItem('authenticate_user'));
     console.log(val);
@@ -79,5 +85,9 @@ export class AuthenticateService {
     }));
 
     return user;
+  }
+
+  private getAuthenticationToken(): string {
+    return localStorage.getItem('authenticate_token');
   }
 }

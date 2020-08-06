@@ -22,7 +22,7 @@ import {AuthenticateGuard} from "./authenticate.guard.ts";
 import {JwtModule} from "@auth0/angular-jwt";
 
 export function tokenGetter() {
-  return localStorage.getItem("access_token");
+  return localStorage.getItem("authenticate_token");
 }
 
 @NgModule({
@@ -47,6 +47,7 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
+        allowedDomains: ["localhost:4200","localhost:3000"],
       }
     })
   ],
