@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {RegistrationFormValidationService} from "../service/form/registration-form-validation.service";
 import {AuthenticateService} from "../service/authenticate/authenticate.service";
 import {Router} from "@angular/router";
+import {RolesModel} from "../model/roles.model";
+import {UserModel} from "../model/user.model";
 
 @Component({
   selector: 'app-registration-individual',
@@ -101,12 +103,18 @@ export class RegistrationIndividualComponent implements OnInit {
     this.verifyFormInput();
 
     if (this.isFormValid()) {
-      const user = {
-        email: this.value.email.trim(),
-        password: this.value.password.trim(),
-        secretWord: this.value.secretWord.trim(),
-        roles: [this.authenticateS.roles.user, this.authenticateS.roles.individual]
-      }
+      const user : UserModel = new UserModel();
+      user.email = this.value.email.trim();
+      user.password = this.value.password.trim();
+      user.secretWord = this.value.secretWord.trim();
+      user.roles = [RolesModel.UserRole, RolesModel.IndividualRole];
+      //
+      // const user = {
+      //   email: this.value.email.trim(),
+      //   password: this.value.password.trim(),
+      //   secretWord: this.value.secretWord.trim(),
+      //   roles: [RolesModel.UserRole, RolesModel.IndividualRole]
+      // }
 
       this.authenticateS
         .verifyEmail(user.email)
