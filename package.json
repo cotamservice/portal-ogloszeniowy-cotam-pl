@@ -20,10 +20,12 @@
     "body-parser": "*",
     "cors": "*",
     "express": "*",
+    "googleapis": "^58.0.0",
     "jsonwebtoken": "*",
     "mongoose": "*",
     "npm": "^6.14.5",
     "passport": "*",
+    "passport-google-oauth20": "^2.0.0",
     "passport-jwt": "*"
   },
   "devDependencies": {
