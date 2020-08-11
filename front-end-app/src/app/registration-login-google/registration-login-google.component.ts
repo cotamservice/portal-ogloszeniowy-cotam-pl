@@ -27,14 +27,12 @@ export class RegistrationLoginGoogleComponent implements OnInit {
 
   authenticateIn(): void {
     gapi.load('auth2', () => {
-      console.log('LOAD GAPI LIB');
       let params = {
         client_id: '216771643471-695lth4b4nhl4qmqiqmjpkodtdfgpefb.apps.googleusercontent.com',
         scope: ['profile', 'email'].join(" "),
       };
       gapi.auth2.init(params)
         .then((googleAuth) => {
-          console.log('GOOGLE ON INIT FUNC');
           googleAuth.signIn().then((googleUser) => {
             const googleEmail = googleUser.getBasicProfile().getEmail();
             const googleId = googleUser.getBasicProfile().getId();
