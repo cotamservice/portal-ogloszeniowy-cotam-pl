@@ -22,6 +22,6 @@ export class DashboardComponent implements OnInit {
   authenticateOut() {
     this.authenticateS.authenticateOut();
     this.router.navigate(['login']);
-    return false;
+    return true;
   }
 }

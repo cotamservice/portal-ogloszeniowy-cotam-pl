@@ -21,8 +21,9 @@
     "@angular/platform-browser-dynamic": "~10.0.4",
     "@angular/router": "~10.0.4",
     "@auth0/angular-jwt": "^5.0.1",
+    "@types/gapi": "0.0.39",
+    "@types/gapi.auth2": "0.0.52",
     "angular2-flash-messages": "^3.0.1",
-    "ng-gapi": "0.0.93",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
