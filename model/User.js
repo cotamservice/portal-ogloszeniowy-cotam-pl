@@ -19,6 +19,10 @@ const UserSchema = mongoose.Schema({
     roles: {
         type: Array,
         required: true
+    },
+    isGoogleAuthenticate: {
+        type: Boolean,
+        required: true
     }
 })
 
