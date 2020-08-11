@@ -9,7 +9,7 @@ router.get('/registration/verify/email/:email', (req, res) => {
     let email = req.params.email;
     User.getUserByEmail(email, (err, user) => {
         if (err) {
-            res.json({success: false});
+            res.json({success: null});
         } else {
             if (user) {
                 res.json({success: true});
@@ -24,7 +24,8 @@ router.post('/registration/individual', (req, res) => {
         email: req.body.email,
         password: req.body.password,
         roles: req.body.roles,
-        secretWord: req.body.secretWord
+        secretWord: req.body.secretWord,
+        isGoogleAuthenticate: req.body.isGoogleAuthenticate
     })
     User.addUser(newUser, (err) => {
         if (err) {
@@ -45,31 +46,49 @@ router.post('/authenticate', (req, res) => {
         if (!user) {
             return res.json({success: false});
         }
-        User.comparePass(password, user.password, (err, isMatch) => {
-            if (err) throw  err;
-            if (isMatch) {
-                const token = jwt.sign(user.toJSON(), require('../config').passport.secretKey, {
-                    expiresIn: 3600 * 24 * 356
-                });
-                res.json({
-                    success: true,
-                    token: 'JWT ' + token,
-                    user: {
-                        id: user._id,
-                        email: user.email,
-                        password: user.password,
-                        roles: user.roles,
-                        secretWord: user.secretWord
-                    }
-                });
-            } else {
-                return res.json({success: false});
-            }
-        });
+        if (user.isGoogleAuthenticate) {
+            const token = jwt.sign(user.toJSON(), require('../config').passport.secretKey, {
+                expiresIn: 3600 * 24 * 356
+            });
+            res.json({
+                success: true,
+                token: 'JWT ' + token,
+                user: {
+                    id: user._id,
+                    email: user.email,
+                    password: user.password,
+                    roles: user.roles,
+                    secretWord: user.secretWord,
+                    isGoogleAuthenticate: user.isGoogleAuthenticate
+                }
+            });
+        } else {
+            User.comparePass(password, user.password, (err, isMatch) => {
+                if (err) throw  err;
+                if (isMatch) {
+                    const token = jwt.sign(user.toJSON(), require('../config').passport.secretKey, {
+                        expiresIn: 3600 * 24 * 356
+                    });
+                    res.json({
+                        success: true,
+                        token: 'JWT ' + token,
+                        user: {
+                            id: user._id,
+                            email: user.email,
+                            password: user.password,
+                            roles: user.roles,
+                            secretWord: user.secretWord,
+                            isGoogleAuthenticate: user.isGoogleAuthenticate
+                        }
+                    });
+                } else {
+                    return res.json({success: false});
+                }
+            });
+        }
     });
-
-
 })
+
 router.get('/dashboard', passport.authenticate('jwt', {session: false}), (req, res) => {
     res.send('Hello world from account/dashboard');
 })

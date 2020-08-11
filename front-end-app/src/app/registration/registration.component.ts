@@ -45,6 +45,7 @@ export class RegistrationComponent implements OnInit {
         this.openRegistrationCommissionForm();
       } else if (this.router.url.endsWith("registration/broker")) {
         this.openRegistrationBrokerForm();
+      } else {
       }
     }
   }

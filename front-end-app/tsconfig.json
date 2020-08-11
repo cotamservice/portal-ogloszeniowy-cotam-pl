@@ -13,5 +13,13 @@
     {
       "path": "./tsconfig.spec.json"
     }
-]
+  ],
+  "compilerOptions": {
+    "types": [
+      "jest",
+      "lodash",
+      "gapi",
+      "gapi.auth2"
+    ]
+  }
 }

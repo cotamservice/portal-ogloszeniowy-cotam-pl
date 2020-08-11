@@ -1,0 +1,23 @@
+.login-remote-api {
+  display: inline-block;
+  padding: 12px;
+  margin: 12px 24px;
+  border: 1px solid white;
+}
+
+.login-remote-api:hover {
+  border-color: #e9bc09;
+
+}
+
+.login-remote-api-title {
+  display: inline-block;
+  padding: 0;
+  margin: 0 12px;
+  line-height: 24px;
+}
+
+.login-remote-api-icon {
+  height: 24px;
+  display: inline-block;
+}

@@ -1,10 +1,11 @@
-import {Injectable} from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {map} from "rxjs/operators";
 import {JwtHelperService} from "@auth0/angular-jwt";
 import {UserModel} from '../../model/user.model';
 import {RolesModel} from "../../model/roles.model";
-
+import {Router} from "@angular/router";
+import {DOCUMENT} from "@angular/common";
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,8 @@ export class AuthenticateService {
 
   constructor(
     private http: HttpClient,
+    private router: Router,
+    @Inject(DOCUMENT) private document: Document,
     private jwt: JwtHelperService) {
   }
 
@@ -70,7 +73,6 @@ export class AuthenticateService {
     } else {
       return null;
     }
-
   }
 
   isAuthenticateIndividual(): boolean {

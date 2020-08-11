@@ -14,6 +14,7 @@ const routes: Routes = [
       {path: 'individual', component: RegistrationComponent},
       {path: 'commission', component: RegistrationComponent},
       {path: 'broker', component: RegistrationComponent},
+      {path: 'google', component: RegistrationComponent},
     ]
   },
   {path: 'login', component: RegistrationComponent},

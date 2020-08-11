@@ -90,6 +90,7 @@ export class RegistrationIndividualComponent implements OnInit {
       user.password = this.value.password.trim();
       user.secretWord = this.value.secretWord.trim();
       user.roles = [RolesModel.UserRole, RolesModel.IndividualRole];
+      user.isGoogleAuthenticate = false;
 
       this.authenticateS
         .verifyEmail(user.email)
@@ -109,12 +110,12 @@ export class RegistrationIndividualComponent implements OnInit {
                   this.isSuccess = true;
                   setTimeout(() => {
                     this.router.navigate(['login']);
-                  }, 5000);
+                  }, 4000);
                 } else {
                   this.isServerDontResponse = true;
                   setTimeout(() => {
                     this.isServerDontResponse = false;
-                  }, 5000);
+                  }, 4000);
                 }
               });
           }

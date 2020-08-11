@@ -11,7 +11,7 @@ config.cors.configUse(app);
 config.bodyParser.configUse(app);
 config.passport.configUse(app, passport);
 config.passport.passport(passport);
-config.passport.passportGoogle(passport);
+// config.passport.passportGoogle(passport);
 rout.configUse(app);
 
 async function start() {

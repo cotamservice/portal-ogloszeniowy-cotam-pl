@@ -34,7 +34,8 @@ export class RegistrationLoginComponent implements OnInit {
     private router: Router) {
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+
   }
 
   authenticateIn(): void {
@@ -48,7 +49,7 @@ export class RegistrationLoginComponent implements OnInit {
       this.authenticateS
         .verifyEmail(user.email)
         .subscribe(data => {
-          if (data['success']) {
+          if (data['success'] === true) {
             this.authenticateS
               .authenticate(user)
               .subscribe(data => {
@@ -86,4 +87,5 @@ export class RegistrationLoginComponent implements OnInit {
     this.invalidMsg.password = 'musi zawierać co najmniej jedną wielką literę i cyfrę, a długość musi być większa niż 8';
     return this.isValid.password;
   }
+
 }

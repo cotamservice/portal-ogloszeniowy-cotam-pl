@@ -3,11 +3,9 @@ const User = require('../model').User;
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 const secretKey = 'superSecretKey';
-const GOOGLE_CLIENT_ID = '216771643471-695lth4b4nhl4qmqiqmjpkodtdfgpefb.apps.googleusercontent.com';
-const GOOGLE_CLIENT_SECRET = 'ogb0F_FTo6gWet9Mv-mhysTp';
 
 module.exports = {
     configUse: (app, passport) => {
@@ -32,19 +30,4 @@ module.exports = {
             });
         }));
     },
-    passportGoogle: (passport) => {
-        passport.use(new GoogleStrategy({
-                clientID: GOOGLE_CLIENT_ID,
-                clientSecret: GOOGLE_CLIENT_SECRET,
-                callbackURL: "http://www.example.com/auth/google/callback"
-            },
-            function (accessToken, refreshToken, profile, cb) {
-            console.log('id:'+profile.id);
-            console.log('email:'+profile.email);
-                // User.findOrCreate({googleId: profile.id}, function (err, user) {
-                //     return cb(err, user);
-                // });
-            }
-        ));
-    }
 }

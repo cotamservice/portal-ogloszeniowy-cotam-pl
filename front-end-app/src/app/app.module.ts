@@ -20,6 +20,22 @@ import {HttpClientModule} from "@angular/common/http";
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {AuthenticateGuard} from "./authenticate.guard.ts";
 import {JwtModule} from "@auth0/angular-jwt";
+import {RegistrationLoginGoogleComponent} from './registration-login-google/registration-login-google.component';
+import {
+  GoogleApiModule,
+  GoogleApiService,
+  GoogleAuthService,
+  NgGapiClientConfig,
+  NG_GAPI_CONFIG,
+  GoogleApiConfig
+} from "ng-gapi/lib/src";
+
+let gapiClientConfig: NgGapiClientConfig = {
+  discoveryDocs: [],
+  client_id: "216771643471-695lth4b4nhl4qmqiqmjpkodtdfgpefb.apps.googleusercontent.com",
+  redirect_uri: "http://localhost:4200/registration/google",
+  scope: ['email', 'profile'].join(" ")
+};
 
 export function tokenGetter() {
   let localToken = localStorage.getItem("authenticate_token");
@@ -48,6 +64,7 @@ export function tokenGetter() {
     RegistrationCommissionComponent,
     RegistrationBrokerComponent,
     DashboardComponent,
+    RegistrationLoginGoogleComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,7 +76,11 @@ export function tokenGetter() {
         tokenGetter: tokenGetter,
         allowedDomains: ["localhost:4200", "localhost:3000"],
       }
-    })
+    }),
+    GoogleApiModule.forRoot({
+      provide: NG_GAPI_CONFIG,
+      useValue: gapiClientConfig
+    }),
   ],
   providers: [RegistrationFormValidationService, AuthenticateService, AuthenticateGuard],
   bootstrap: [AppComponent],
