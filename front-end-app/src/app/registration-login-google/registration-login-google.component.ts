@@ -39,8 +39,6 @@ export class RegistrationLoginGoogleComponent implements OnInit {
             this.googleAuthenticate(googleEmail, googleId);
           });
 
-        }, () => {
-          console.log('ERROR IN GOOGLE AUTHENTICATE');
         });
     });
   }
