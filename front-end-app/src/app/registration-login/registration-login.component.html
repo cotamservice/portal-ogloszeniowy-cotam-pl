@@ -20,10 +20,7 @@
       </div>
       <div class="col-12">
         <app-registration-login-google></app-registration-login-google>
-        <div [ngClass]="{'login-remote-api':true}">
-          <img [ngClass]="{'login-remote-api-icon': true}" src="assets/img/registration/login-fb-icon.png">
-          <p [ngClass]="{'login-remote-api-title':true}">Zaloguj się przez facebook</p>
-        </div>
+        <app-registration-login-fb></app-registration-login-fb>
       </div>
       <div class="col-12">
         <input type="submit" [ngClass]="{'button-orange-100':true}" value="Zaloguj się">

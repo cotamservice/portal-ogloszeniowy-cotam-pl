@@ -21,6 +21,7 @@ import {DashboardComponent} from './dashboard/dashboard.component';
 import {AuthenticateGuard} from "./authenticate.guard.ts";
 import {JwtModule} from "@auth0/angular-jwt";
 import {RegistrationLoginGoogleComponent} from './registration-login-google/registration-login-google.component';
+import {RegistrationLoginFbComponent} from './registration-login-fb/registration-login-fb.component';
 
 export function tokenGetter() {
   let localToken = localStorage.getItem("authenticate_token");
@@ -50,6 +51,7 @@ export function tokenGetter() {
     RegistrationBrokerComponent,
     DashboardComponent,
     RegistrationLoginGoogleComponent,
+    RegistrationLoginFbComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,6 +64,7 @@ export function tokenGetter() {
         allowedDomains: ["localhost:4200", "localhost:3000"],
       }
     }),
+
   ],
   providers: [RegistrationFormValidationService, AuthenticateService, AuthenticateGuard],
   bootstrap: [AppComponent],

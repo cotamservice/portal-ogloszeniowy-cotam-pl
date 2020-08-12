@@ -1,9 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit,NgZone} from '@angular/core';
 import {AuthenticateService} from "../service/authenticate/authenticate.service";
 import {UserModel} from "../model/user.model";
 import {Router} from "@angular/router";
 import {RolesModel} from "../model/roles.model";
-import {NgZone} from "@angular/core";
 /// <reference path="../../../node_modules/@types/gapi/index.d.ts" />
 declare var gapi: any;
 
@@ -51,6 +50,7 @@ export class RegistrationLoginGoogleComponent implements OnInit {
       user.secretWord = googleId;
       user.roles = [RolesModel.UserRole, RolesModel.IndividualRole];
       user.isGoogleAuthenticate = true;
+      user.isFBAuthenticate = false;
 
       this.authenticateS
         .verifyEmail(user.email)

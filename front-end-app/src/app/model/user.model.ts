@@ -8,6 +8,7 @@ export class UserModel implements DeserializableModel {
   roles: Array<RolesModel>;
   secretWord: string;
   isGoogleAuthenticate: boolean;
+  isFBAuthenticate: boolean;
 
   deserializable(input: any): this {
     Object.assign(this, input);

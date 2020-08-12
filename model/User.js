@@ -23,6 +23,10 @@ const UserSchema = mongoose.Schema({
     isGoogleAuthenticate: {
         type: Boolean,
         required: true
+    },
+    isFBAuthenticate: {
+        type: Boolean,
+        required: true
     }
 })
 
