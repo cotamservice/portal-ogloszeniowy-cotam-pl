@@ -38,7 +38,7 @@ export class RegistrationLoginFbComponent implements OnInit {
               let email = result.email;
               if (email) {
                 this.errorMsg = '';
-                this.fbAuthenticate(email, id);
+                this.authenticateS.authenticateByFbGo(email, id, false, true);
               } else {
                 this.errorMsg = 'twój adres email nie widoczny, zmien ustawienia na FB';
               }
@@ -46,46 +46,6 @@ export class RegistrationLoginFbComponent implements OnInit {
           })
       }
     }, {scope: 'email'});
-  }
-
-  private fbAuthenticate(fbEmail: string, fbId: string) {
-    if (fbEmail) {
-      let user: UserModel = new UserModel();
-      user.email = fbEmail;
-      user.password = fbId;
-      user.secretWord = fbId;
-      user.roles = [RolesModel.UserRole, RolesModel.IndividualRole];
-      user.isFBAuthenticate = true;
-      user.isGoogleAuthenticate = false;
-      console.log('USER: ' + user);
-      this.authenticateS
-        .verifyEmail(user.email)
-        .subscribe(data => {
-          if (data['success'] === true) {
-            this.authenticateS
-              .authenticate(user)
-              .subscribe(data => {
-                if (data['success']) {
-                  this.authenticateS.storeUser(data['token'], new UserModel().deserializable(data['user']), true);
-                  this.ngZone.run(() => this.router.navigate(['./dashboard'])).then();
-                }
-              });
-          } else if (data['success'] === false) {
-            this.authenticateS.registrationIndividual(user).subscribe(data => {
-              if (data['success'] === true) {
-                this.authenticateS
-                  .authenticate(user)
-                  .subscribe(data => {
-                    if (data['success']) {
-                      this.authenticateS.storeUser(data['token'], new UserModel().deserializable(data['user']), true);
-                      this.ngZone.run(() => this.router.navigate(['./dashboard'])).then();
-                    }
-                  });
-              }
-            })
-          }
-        });
-    }
   }
 }
 

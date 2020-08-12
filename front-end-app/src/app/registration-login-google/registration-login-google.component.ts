@@ -35,50 +35,10 @@ export class RegistrationLoginGoogleComponent implements OnInit {
           googleAuth.signIn().then((googleUser) => {
             const googleEmail = googleUser.getBasicProfile().getEmail();
             const googleId = googleUser.getBasicProfile().getId();
-            this.googleAuthenticate(googleEmail, googleId);
+            this.authenticateS.authenticateByFbGo(googleEmail, googleId,true,false);
           });
 
         });
     });
-  }
-
-  private googleAuthenticate(googleEmail: string, googleId: string) {
-    if (googleEmail) {
-      let user: UserModel = new UserModel();
-      user.email = googleEmail;
-      user.password = googleId;
-      user.secretWord = googleId;
-      user.roles = [RolesModel.UserRole, RolesModel.IndividualRole];
-      user.isGoogleAuthenticate = true;
-      user.isFBAuthenticate = false;
-
-      this.authenticateS
-        .verifyEmail(user.email)
-        .subscribe(data => {
-          if (data['success'] === true) {
-            this.authenticateS
-              .authenticate(user)
-              .subscribe(data => {
-                if (data['success']) {
-                  this.authenticateS.storeUser(data['token'], new UserModel().deserializable(data['user']), true);
-                  this.ngZone.run(()=>this.router.navigate(['./dashboard'])).then();
-                }
-              });
-          } else if (data['success'] === false) {
-            this.authenticateS.registrationIndividual(user).subscribe(data => {
-              if (data['success'] === true) {
-                this.authenticateS
-                  .authenticate(user)
-                  .subscribe(data => {
-                    if (data['success']) {
-                      this.authenticateS.storeUser(data['token'], new UserModel().deserializable(data['user']), true);
-                      this.ngZone.run(()=>this.router.navigate(['./dashboard'])).then();
-                    }
-                  });
-              }
-            })
-          }
-        });
-    }
   }
 }

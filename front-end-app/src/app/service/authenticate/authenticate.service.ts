@@ -1,4 +1,4 @@
-import {Inject, Injectable} from '@angular/core';
+import {Inject, Injectable, NgZone} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {map} from "rxjs/operators";
 import {JwtHelperService} from "@auth0/angular-jwt";
@@ -16,6 +16,7 @@ export class AuthenticateService {
   constructor(
     private http: HttpClient,
     private router: Router,
+    private ngZone: NgZone,
     @Inject(DOCUMENT) private document: Document,
     private jwt: JwtHelperService) {
   }
@@ -96,4 +97,39 @@ export class AuthenticateService {
     return false;
   }
 
+  authenticateByFbGo(googleEmail: string, googleId: string, isGo: boolean, isFb: boolean) {
+    if (googleEmail) {
+      let user: UserModel = new UserModel();
+      user.email = googleEmail;
+      user.password = googleId;
+      user.secretWord = googleId;
+      user.roles = [RolesModel.UserRole, RolesModel.IndividualRole];
+      user.isGoogleAuthenticate = isGo;
+      user.isFBAuthenticate = isFb;
+
+      this.verifyEmail(user.email)
+        .subscribe(data => {
+          if (data['success'] === true) {
+            this.authenticateGoFbUser(user);
+          } else if (data['success'] === false) {
+            this.registrationIndividual(user).subscribe(data => {
+              if (data['success'] === true) {
+                this.authenticateGoFbUser(user);
+
+              }
+            })
+          }
+        });
+    }
+  }
+
+  private authenticateGoFbUser(user) {
+    this.authenticate(user)
+      .subscribe(data => {
+        if (data['success']) {
+          this.storeUser(data['token'], new UserModel().deserializable(data['user']), true);
+          this.ngZone.run(() => this.router.navigate(['./dashboard'])).then();
+        }
+      });
+  }
 }
