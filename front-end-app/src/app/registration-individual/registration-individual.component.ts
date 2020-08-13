@@ -47,6 +47,15 @@ export class RegistrationIndividualComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.verifyForm();
+  }
+
+  verifyForm(): void {
+    this.isEmailValid();
+    this.isPasswordValid();
+    this.isConfirmValid();
+    this.isSecretWordValid();
+    this.isRegulationAccept();
   }
 
   isFormValid(): boolean {
