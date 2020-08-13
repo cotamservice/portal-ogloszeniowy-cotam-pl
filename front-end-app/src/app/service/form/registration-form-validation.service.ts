@@ -9,7 +9,7 @@ export class RegistrationFormValidationService {
   constructor() {
   }
 
-  isEmailValid(value) {
+  isEmailValid(value): boolean {
     if (value === undefined) {
       return false;
     } else if (value === '') {
@@ -19,7 +19,7 @@ export class RegistrationFormValidationService {
     }
   }
 
-  isPasswordValid(value) {
+  isPasswordValid(value): boolean {
     if (value === undefined) {
       return false;
     } else if (value === '') {
@@ -30,14 +30,14 @@ export class RegistrationFormValidationService {
     }
   }
 
-  isPasswordConfirm(password, confirm) {
+  isPasswordConfirm(password, confirm): boolean {
     if (this.isPasswordValid(confirm)) {
       return password === confirm;
     }
     return false;
   }
 
-  isSecretWordValid(value) {
+  isSecretWordValid(value): boolean {
     if (value === undefined) {
       return false;
     } else if (value === '') {
@@ -47,43 +47,47 @@ export class RegistrationFormValidationService {
     }
   }
 
-  isCompanyNipValid(nip: string) {
+  isCompanyNipValid(nip: string): boolean {
     return /^[0-9]{10}$/.test(nip);
   }
 
-  isCompanyNameValid(name: string) {
+  isCompanyNameValid(name: string): boolean {
     return name.length > 2;
   }
 
-  isCompanyPersonNameValid(name: string) {
+  isCompanyPersonNameValid(name: string): boolean {
     return name.length > 2;
   }
 
-  isCompanyPersonSurnameValid(surname: string) {
+  isCompanyPersonSurnameValid(surname: string): boolean {
     return surname.length > 2;
   }
 
-  isCountryValid(country: string) {
+  isCountryValid(country: string): boolean {
     return country.length > 2;
   }
 
-  isAddressValid(address: string) {
+  isAddressValid(address: string): boolean {
     return address.length > 2;
   }
 
-  isZipValid(zip: string) {
+  isZipValid(zip: string): boolean {
     return zip.length > 3;
   }
 
-  isCityValid(city: string) {
+  isCityValid(city: string): boolean {
     return city.length > 2;
   }
 
-  isPhoneValid(phone: string) {
+  isPhoneValid(phone: string): boolean {
     return /^[+]?[0-9, ]+$/.test(phone);
   }
 
-  isSalonNameValid(name: string) {
+  isSalonNameValid(name: string): boolean {
     return name.length > 2;
+  }
+
+  isCompanyTypeValid(type: string): boolean {
+    return type && type.length > 1;
   }
 }

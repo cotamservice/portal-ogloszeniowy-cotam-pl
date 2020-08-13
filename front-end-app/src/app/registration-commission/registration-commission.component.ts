@@ -4,6 +4,7 @@ import {AuthenticateService} from "../service/authenticate/authenticate.service"
 import {Router} from "@angular/router";
 import {UserModel} from "../model/user.model";
 import {RolesModel} from "../model/roles.model";
+import {CompanyTypeModel} from "../model/company.type.model";
 
 @Component({
   selector: 'app-registration-commission',
@@ -20,7 +21,7 @@ export class RegistrationCommissionComponent implements OnInit {
     confirm: '',
     secretWord: '',
     isRegulationAccept: false,
-    selectCompanyOptionList: ['spółka', 'jednoosobowa'],
+    selectCompanyOptionList: Object.values(CompanyTypeModel),
     companyNip: '',
     companyName: '',
     companyType: '',
@@ -89,12 +90,20 @@ export class RegistrationCommissionComponent implements OnInit {
     salonPhone2: '',
   };
 
+
   constructor(private validation: RegistrationFormValidationService,
               private authenticateS: AuthenticateService,
               private router: Router) {
   }
 
   ngOnInit(): void {
+    this.verifyForm();
+  }
+
+  getCompanyTypeName(companyType: string): string {
+    if (companyType === CompanyTypeModel.Company) return 'spółka';
+    if (companyType === CompanyTypeModel.SoloCompany) return 'jednoosobowa';
+    return '';
   }
 
   isEmailValid(): boolean {
@@ -122,107 +131,105 @@ export class RegistrationCommissionComponent implements OnInit {
   }
 
 
-  isCompanyNipValid() {
+  isCompanyNipValid(): boolean {
     this.isValid.companyNip = this.validation.isCompanyNipValid(this.value.companyNip.trim());
     this.invalidMsg.companyNip = 'nie prawidłowy nip';
     return this.isValid.companyNip;
   }
 
-  isCompanyNameValid() {
+  isCompanyNameValid(): boolean {
     this.isValid.companyName = this.validation.isCompanyNameValid(this.value.companyName.trim());
     this.invalidMsg.companyName = 'nie prawidłowa wartość';
     return this.isValid.companyName;
   }
 
-  isCompanyTypeValid() {
-    // this.isValid.companyName = this.validation.isCompanyNameValid(this.value.companyName.trim());
-    // this.invalidMsg.companyName = 'wybierz formę prawną';
-    console.log("SELECT VALUE: " + this.value.companyType);
-    // return this.isValid.companyType;
-    return false;
+  isCompanyTypeValid(): boolean {
+    this.isValid.companyType = this.validation.isCompanyTypeValid(this.value.companyType.trim());
+    this.invalidMsg.companyType = 'wybierz formę prawną';
+    return this.isValid.companyType;
   }
 
-  isCompanyPersonNameValid() {
+  isCompanyPersonNameValid(): boolean {
     this.isValid.companyPersonName = this.validation.isCompanyPersonNameValid(this.value.companyPersonName.trim());
     this.invalidMsg.companyPersonName = 'nie prawidłowa wartość';
     return this.isValid.companyPersonName;
   }
 
-  isCompanyPersonSurnameValid() {
+  isCompanyPersonSurnameValid(): boolean {
     this.isValid.companyPersonSurname = this.validation.isCompanyPersonSurnameValid(this.value.companyPersonSurname.trim());
     this.invalidMsg.companyPersonSurname = 'nie prawidłowa wartość';
     return this.isValid.companyPersonSurname;
 
   }
 
-  isCompanyCountryValid() {
+  isCompanyCountryValid(): boolean {
     this.isValid.companyCountry = this.validation.isCountryValid(this.value.companyCountry.trim());
     this.invalidMsg.companyCountry = 'nie prawidłowa wartość';
     // return this.isValid.companyCountry;
     return false;
   }
 
-  isCompanyAddressValid() {
+  isCompanyAddressValid(): boolean {
     this.isValid.companyAddress = this.validation.isAddressValid(this.value.companyAddress.trim());
     this.invalidMsg.companyAddress = 'nie prawidłowa wartość';
     return this.isValid.companyAddress;
   }
 
-  isCompanyZipValid() {
+  isCompanyZipValid(): boolean {
     this.isValid.companyZip = this.validation.isZipValid(this.value.companyZip.trim());
     this.invalidMsg.companyZip = 'nie prawidłowa wartość';
     return this.isValid.companyZip;
   }
 
-  isCompanyCityValid() {
+  isCompanyCityValid(): boolean {
     this.isValid.companyCity = this.validation.isCityValid(this.value.companyCity.trim());
     this.invalidMsg.companyCity = 'nie prawidłowa wartość';
     return this.isValid.companyCity;
   }
 
-  isCompanyPhoneValid() {
+  isCompanyPhoneValid(): boolean {
     this.isValid.companyPhone = this.validation.isPhoneValid(this.value.companyPhone.trim());
     this.invalidMsg.companyAddress = 'musi zawierać tylko cyfry z lub bez dodanym "+" na początku';
     return this.isValid.companyPhone;
   }
 
-  isSalonNameValid() {
+  isSalonNameValid(): boolean {
     this.isValid.salonName = this.validation.isSalonNameValid(this.value.salonName.trim());
     this.invalidMsg.salonName = 'nie prawidłowa wartość';
     return this.isValid.salonName;
   }
 
-  isSalonCountryValid() {
+  isSalonCountryValid(): boolean {
     this.isValid.salonCountry = this.validation.isCountryValid(this.value.salonCountry.trim());
     this.invalidMsg.salonCountry = 'nie prawidłowa wartość';
     return this.isValid.salonCountry;
   }
 
-  isSalonAddressValid() {
+  isSalonAddressValid(): boolean {
     this.isValid.salonAddress = this.validation.isAddressValid(this.value.salonAddress.trim());
     this.invalidMsg.salonAddress = 'nie prawidłowa wartość';
     return this.isValid.salonAddress;
   }
 
-  isSalonCityValid() {
+  isSalonCityValid(): boolean {
     this.isValid.salonCity = this.validation.isCityValid(this.value.salonCity.trim());
     this.invalidMsg.salonCity = 'nie prawidłowa wartość';
     return this.isValid.salonCity;
   }
 
-  isSalonZipValid() {
+  isSalonZipValid(): boolean {
     this.isValid.salonZip = this.validation.isZipValid(this.value.salonZip.trim());
     this.invalidMsg.salonZip = 'nie prawidłowa wartość';
     return this.isValid.salonZip;
   }
 
-  isSalonPhone1Valid() {
+  isSalonPhone1Valid(): boolean {
     this.isValid.salonPhone1 = this.validation.isPhoneValid(this.value.salonPhone1.trim());
     this.invalidMsg.salonPhone1 = 'nie prawidłowa wartość';
     return this.isValid.salonPhone1;
   }
 
-  isSalonPhone2Valid() {
+  isSalonPhone2Valid(): boolean {
     this.isValid.salonPhone2 = this.validation.isPhoneValid(this.value.salonPhone2.trim());
     this.invalidMsg.salonPhone2 = 'nie prawidłowa wartość';
     return this.isValid.salonPhone2;
@@ -231,6 +238,31 @@ export class RegistrationCommissionComponent implements OnInit {
   isRegulationAccept(): boolean {
     this.invalidMsg.regulationAccept = 'Przed rejestracją należy zapoznać się z regulaminem serwisu i zaakceptować go';
     return this.value.isRegulationAccept;
+  }
+
+  verifyForm(): void {
+    this.isEmailValid();
+    this.isPasswordValid();
+    this.isConfirmValid();
+    this.isSecretWordValid();
+    this.isCompanyAddressValid();
+    this.isCompanyCityValid();
+    this.isCompanyCountryValid();
+    this.isCompanyNameValid();
+    this.isCompanyNipValid();
+    this.isCompanyPersonNameValid();
+    this.isCompanyPersonSurnameValid();
+    this.isCompanyPhoneValid();
+    this.isCompanyTypeValid();
+    this.isCompanyZipValid();
+    this.isSalonAddressValid();
+    this.isSalonCityValid();
+    this.isSalonCountryValid();
+    this.isSalonNameValid();
+    this.isSalonPhone1Valid();
+    this.isSalonPhone2Valid();
+    this.isSalonZipValid();
+    this.isRegulationAccept();
   }
 
   isFormValid(): boolean {
@@ -267,6 +299,7 @@ export class RegistrationCommissionComponent implements OnInit {
       user.isGoogleAuthenticate = false;
       user.isFBAuthenticate = false;
       console.log(user);
+
 
     } else {
       this.value.isRegulationAccept = false;

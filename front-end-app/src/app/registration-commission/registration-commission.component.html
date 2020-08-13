@@ -54,7 +54,7 @@
           <select id="type" [ngClass]="{'input-select':true,'input-invalid':!isValid.companyType}"
                   [(ngModel)]="value.companyType" name="companyType" (change)="isCompanyTypeValid()">
             <option disabled selected>wybierz</option>
-            <option *ngFor="let option of value.selectCompanyOptionList">{{option}}</option>
+            <option *ngFor="let option of value.selectCompanyOptionList;" value="{{option}}" >{{getCompanyTypeName(option)}}</option>
           </select>
         </label>
         <label for="name" [ngClass]="{'input-label':true}">Imię
@@ -154,7 +154,7 @@
         </label>
       </div>
       <div class="col-12">
-        <div [ngClass]="{'button-orange-100':true}">Zarejestruje się</div>
+        <input type="submit" [ngClass]="{'button-orange-100':true}" value="Zarejestruje się">
       </div>
     </div>
   </form>
