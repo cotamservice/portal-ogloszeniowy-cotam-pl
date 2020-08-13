@@ -1,106 +1,161 @@
 <div class="container">
-  <div class="row">
-    <div class="col-6">
-      <label [ngClass]="{'title-label-125': true}">{{generalInfoTitleValue}}</label>
-      <label for="{{inputEmailId}}" [ngClass]="{'input-label':true}">{{inputEmailLabelValue}}
-        <input id="{{inputEmailId}}" [ngClass]="{'input':true}" type="text"
-               placeholder="{{inputEmailPlaceholderValue}}">
-      </label>
-      <label for="{{inputPasswordId}}" [ngClass]="{'input-label':true}">{{inputPasswordLabelValue}}
-        <input id="{{inputPasswordId}}" [ngClass]="{'input':true}" type="text"
-               placeholder="{{inputPasswordPlaceholderValue}}">
-      </label>
-      <label for="{{inputPasswordConfirmId}}" [ngClass]="{'input-label':true}">{{inputPasswordConfirmLabelValue}}
-        <input id="{{inputPasswordConfirmId}}" [ngClass]="{'input':true}" type="text"
-               placeholder="{{inputPasswordConfirmPlaceholderValue}}">
-      </label>
-      <label for="{{inputWordId}}" [ngClass]="{'input-label':true}">{{inputWordLabelValue}}
-        <input id="{{inputWordId}}" [ngClass]="{'input':true}" type="text"
-               placeholder="{{inputWordPlaceholderValue}}">
-      </label>
-      <label [ngClass]="{'title-label-125': true}">{{companyInfoTitleValue}}</label>
-      <label for="{{inputNipId}}" [ngClass]="{'input-label':true}">{{inputNipLabelValue}}
-        <input id="{{inputNipId}}" [ngClass]="{'input':true}" type="text"
-               placeholder="{{inputNipPlaceholderValue}}">
-      </label>
-      <label for="{{inputCompanyNameId}}" [ngClass]="{'input-label':true}">{{inputCompanyNameLabelValue}}
-        <input id="{{inputCompanyNameId}}" [ngClass]="{'input':true}" type="text"
-               placeholder="{{inputCompanyNamePlaceholderValue}}">
-      </label>
+  <form *ngIf="!isSuccess && !isServerDontResponse" (submit)="registrationIndividualFormSubmit()">
+    <div class="row">
+      <div class="col-12 text-center">
+        <label *ngIf="isSuccess" [ngClass]="{'title-label-100':true}">
+          rejestracja jest prawidłowa, przekierowanie za {{redirectTimeLeft}}
+        </label>
+        <label *ngIf="isServerDontResponse" [ngClass]="{'title-label-100':true}">
+          no response from server try later
+        </label>
+      </div>
+      <div class="col-lg-6 col-md-12">
+        <label [ngClass]="{'title-label-125': true}">Podstawowa informacja</label>
+        <label for="email" [ngClass]="{'input-label':true}">email
+          <span *ngIf="!isValid.email" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.email}}</span>
+          <input id="email" [ngClass]="{'input':true,'input-invalid':!isValid.email}" type="text"
+                 [(ngModel)]="value.email" name="email" (change)="isEmailValid()"
+                 placeholder="wpiś email">
+        </label>
+        <label for="password" [ngClass]="{'input-label':true}">Hasło
+          <span *ngIf="!isValid.password" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.password}}</span>
+          <input id="password" [ngClass]="{'input':true,'input-invalid':!isValid.password}" type="password"
+                 [(ngModel)]="value.password" name="password" (change)="isPasswordValid()"
+                 placeholder="wpiś hasło">
+        </label>
+        <label for="confirm" [ngClass]="{'input-label':true}">Powtóż hasło
+          <span *ngIf="!isValid.confirm" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.confirm}}</span>
+          <input id="confirm" [ngClass]="{'input':true,'input-invalid':!isValid.confirm}"
+                 type="password" [(ngModel)]="value.confirm" name="confirm" (change)="isConfirmValid()"
+                 placeholder="powtóż hasło">
+        </label>
+        <label for="word" [ngClass]="{'input-label':true}">Słowo kluczowe
+          <span *ngIf="!isValid.secretWord" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.secretWord}}</span>
+          <input id="word" [ngClass]="{'input':true,'input-invalid':!isValid.secretWord}" type="text"
+                 [(ngModel)]="value.secretWord" name="secretWord" (change)="isSecretWordValid()"
+                 placeholder="wpiś słowo kluczowe">
+        </label>
 
-      <label for="{{selectCompanyTypeId}}" [ngClass]="{'input-label':true}">{{selectCompanyTypeLabelValue}}
-        <select id="{{selectCompanyTypeId}}" [ngClass]="{'input-select':true}">
-          <option disabled selected>{{selectCompanyTypeDefaultValue}}</option>
-          <option *ngFor="let option of selectCompanyOptionList">{{option}}</option>
-        </select>
-      </label>
-
-      <label for="{{inputNameId}}" [ngClass]="{'input-label':true}">{{inputNameLabelValue}}
-        <input id="{{inputNameId}}" [ngClass]="{'input':true}" type="text"
-               placeholder="{{inputNamePlaceholderValue}}">
-      </label>
-      <label for="{{inputSurnameId}}" [ngClass]="{'input-label':true}">{{inputSurnameLabelValue}}
-        <input id="{{inputSurnameId}}" [ngClass]="{'input':true}" type="text"
-               placeholder="{{inputSurnamePlaceholderValue}}">
-      </label>
-      <label for="{{inputCountryId}}" [ngClass]="{'input-label':true}">{{inputCountryLabelValue}}
-        <input id="{{inputCountryId}}" [ngClass]="{'input':true}" type="text"
-               placeholder="{{inputCountryPlaceholderValue}}">
-      </label>
-      <label for="{{inputAddressId}}" [ngClass]="{'input-label':true}">{{inputAddressLabelValue}}
-        <input id="{{inputAddressId}}" [ngClass]="{'input':true}" type="text"
-               placeholder="{{inputAddressPlaceholderValue}}">
-      </label>
-      <label for="{{inputZipId}}" [ngClass]="{'input-label':true}">{{inputZipLabelValue}}
-        <input id="{{inputZipId}}" [ngClass]="{'input':true}" type="text"
-               placeholder="{{inputZipPlaceholderValue}}">
-      </label>
-      <label for="{{inputCityId}}" [ngClass]="{'input-label':true}">{{inputCityLabelValue}}
-        <input id="{{inputCityId}}" [ngClass]="{'input':true}" type="text"
-               placeholder="{{inputCityPlaceholderValue}}">
-      </label>
-      <label for="{{inputPhoneId}}" [ngClass]="{'input-label':true}">{{inputPhoneLabelValue}}
-        <input id="{{inputPhoneId}}" [ngClass]="{'input':true}" type="text"
-               placeholder="{{inputPhonePlaceholderValue}}">
-      </label>
-      <label for="{{inputAcceptCheckboxId}}" [ngClass]="{'input-checkbox-label':true}">
-        <input id="{{inputAcceptCheckboxId}}" [ngClass]="{'input-checkbox':true}" type="checkbox">
-        <a [ngClass]="{'link-a':true}" href="">{{inputAcceptCheckboxTitleValue}}</a>
-      </label>
+        <label [ngClass]="{'title-label-125': true}">Informacja o firmie</label>
+        <label for="nip" [ngClass]="{'input-label':true}">NIP
+          <span *ngIf="!isValid.companyNip" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.companyNip}}</span>
+          <input id="nip" [ngClass]="{'input':true,'input-invalid':!isValid.companyNip}" type="text"
+                 [(ngModel)]="value.companyNip" name="companyNip" (change)="isCompanyNipValid()"
+                 placeholder="wpiś nip">
+        </label>
+        <label for="company" [ngClass]="{'input-label':true}">Nazwa firmy
+          <span *ngIf="!isValid.companyName" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.companyName}}</span>
+          <input id="company" [ngClass]="{'input':true,'input-invalid':!isValid.companyName}" type="text"
+                 [(ngModel)]="value.companyName" name="companyName" (change)="isCompanyNameValid()"
+                 placeholder="wpiś pewną nazwe firmy">
+        </label>
+        <label for="type" [ngClass]="{'input-label':true}">Forma prawna
+          <span *ngIf="!isValid.companyType" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.companyType}}</span>
+          <select id="type" [ngClass]="{'input-select':true,'input-invalid':!isValid.companyType}"
+                  [(ngModel)]="value.companyType" name="companyType" (change)="isCompanyTypeValid()">
+            <option disabled selected>wybierz</option>
+            <option *ngFor="let option of value.selectCompanyOptionList">{{option}}</option>
+          </select>
+        </label>
+        <label for="name" [ngClass]="{'input-label':true}">Imię
+          <span *ngIf="!isValid.companyPersonName" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.companyPersonName}}</span>
+          <input id="name" [ngClass]="{'input':true,'input-invalid':!isValid.companyPersonName}" type="text"
+                 [(ngModel)]="value.companyPersonName" name="companyPersonName" (change)="isCompanyPersonNameValid()"
+                 placeholder="wpiś imię">
+        </label>
+        <label for="surname" [ngClass]="{'input-label':true}">Nazwisko
+          <span *ngIf="!isValid.companyPersonSurname" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.companyPersonSurname}}</span>
+          <input id="surname" [ngClass]="{'input':true,'input-invalid':!isValid.companyPersonSurname}" type="text"
+                 [(ngModel)]="value.companyPersonSurname" name="companyPersonSurname" (change)="isCompanyPersonSurnameValid()"
+                 placeholder="wpiś nazwisko">
+        </label>
+        <label for="country" [ngClass]="{'input-label':true}">Kraj
+          <span *ngIf="!isValid.companyCountry" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.companyCountry}}</span>
+          <input id="country" [ngClass]="{'input':true,'input-invalid':!isValid.companyCountry}" type="text"
+                 [(ngModel)]="value.companyCountry" name="companyCountry" (change)="isCompanyCountryValid()"
+                 placeholder="wpiś kraj">
+        </label>
+        <label for="address" [ngClass]="{'input-label':true}">Adres
+          <span *ngIf="!isValid.companyAddress" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.companyAddress}}</span>
+          <input id="address" [ngClass]="{'input':true,'input-invalid':!isValid.companyAddress}" type="text"
+                 [(ngModel)]="value.companyAddress" name="companyAddress" (change)="isCompanyAddressValid()"
+                 placeholder="wpiś addres">
+        </label>
+        <label for="zip" [ngClass]="{'input-label':true}">Kod pocztowy
+          <span *ngIf="!isValid.companyZip" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.companyZip}}</span>
+          <input id="zip" [ngClass]="{'input':true,'input-invalid':!isValid.companyZip}" type="text"
+                 [(ngModel)]="value.companyZip" name="companyZip" (change)="isCompanyZipValid()"
+                 placeholder="wpiś kod pocztowy">
+        </label>
+        <label for="city" [ngClass]="{'input-label':true}">Miasto
+          <span *ngIf="!isValid.companyCity" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.companyCity}}</span>
+          <input id="city" [ngClass]="{'input':true,'input-invalid':!isValid.companyCity}" type="text"
+                 [(ngModel)]="value.companyCity" name="companyCity" (change)="isCompanyCityValid()"
+                 placeholder="wpiś miasto">
+        </label>
+        <label for="phone" [ngClass]="{'input-label':true}">Telefon
+          <span *ngIf="!isValid.companyPhone" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.companyPhone}}</span>
+          <input id="phone" [ngClass]="{'input':true,'input-invalid':!isValid.companyPhone}" type="text"
+                 [(ngModel)]="value.companyPhone" name="companyPhone" (change)="isCompanyPhoneValid()"
+                 placeholder="wpiś telefon">
+        </label>
+      </div>
+      <div class="col-lg-6 col-md-12" [ngClass]="{'salon-container': true}">
+        <label [ngClass]="{'title-label-125': true}">Dodaj salon / plac</label>
+        <label for="salon-name" [ngClass]="{'input-label':true}">Nazwa salonu
+          <span *ngIf="!isValid.salonName" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.salonName}}</span>
+          <input id="salon-name" [ngClass]="{'input':true,'input-invalid':!isValid.salonName}" type="text"
+                 [(ngModel)]="value.salonName" name="salonName" (change)="isSalonNameValid()"
+                 placeholder="wpiś nazwę salonu">
+        </label>
+        <label for="salon-country" [ngClass]="{'input-label':true}">Kraj
+          <span *ngIf="!isValid.salonCountry" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.salonCountry}}</span>
+          <input id="salon-country" [ngClass]="{'input':true,'input-invalid':!isValid.salonCountry}" type="text"
+                 [(ngModel)]="value.salonCountry" name="salonCountry" (change)="isSalonCountryValid()"
+                 placeholder="wpiś kraj">
+        </label>
+        <label for="salon-address" [ngClass]="{'input-label':true}">Adres
+          <span *ngIf="!isValid.salonAddress" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.salonAddress}}</span>
+          <input id="salon-address" [ngClass]="{'input':true,'input-invalid':!isValid.salonAddress}" type="text"
+                 [(ngModel)]="value.salonAddress" name="salonAddress" (change)="isSalonAddressValid()"
+                 placeholder="wpiś adres">
+        </label>
+        <label for="salon-zip" [ngClass]="{'input-label':true}">Kod pocztowy
+          <span *ngIf="!isValid.salonZip" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.salonZip}}</span>
+          <input id="salon-zip" [ngClass]="{'input':true,'input-invalid':!isValid.salonZip}" type="text"
+                 [(ngModel)]="value.salonZip" name="salonZip" (change)="isSalonZipValid()"
+                 placeholder="wpiś kod pocztowy">
+        </label>
+        <label for="salon-city" [ngClass]="{'input-label':true}">Miasto
+          <span *ngIf="!isValid.salonCity" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.salonCity}}</span>
+          <input id="salon-city" [ngClass]="{'input':true,'input-invalid':!isValid.salonCity}" type="text"
+                 [(ngModel)]="value.salonCity" name="salonCity" (change)="isSalonCityValid()"
+                 placeholder="wpiś miasto">
+        </label>
+        <label for="salon-phone" [ngClass]="{'input-label':true}">Telefon
+          <span *ngIf="!isValid.salonPhone1" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.salonPhone1}}</span>
+          <input id="salon-phone" [ngClass]="{'input':true,'input-invalid':!isValid.salonPhone1}" type="text"
+                 [(ngModel)]="value.salonPhone1" name="salonPhone1" (change)="isSalonPhone1Valid()"
+                 placeholder="wpiś telefon">
+        </label>
+        <label for="salon-phone2" [ngClass]="{'input-label':true}">Telefon
+          <span *ngIf="!isValid.salonPhone2" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.salonPhone2}}</span>
+          <input id="salon-phone2" [ngClass]="{'input':true,'input-invalid':!isValid.salonPhone2}" type="text"
+                 [(ngModel)]="value.salonPhone2" name="salonPhone2" (change)="isSalonPhone2Valid()"
+                 placeholder="wpiś telefon">
+        </label>
+      </div>
+      <div class="col-12">
+        <label for="accept" [ngClass]="{'input-checkbox-label':true}">
+          <input id="accept" [ngClass]="{'input-checkbox':true,'input-invalid':!value.isRegulationAccept}"
+                 type="checkbox" [(ngModel)]="value.isRegulationAccept" name="accept" (change)="isRegulationAccept()">
+          <a [ngClass]="{'link-a':true}" href="">Akceptuję regulamin serwisu</a>
+          <span *ngIf="!value.isRegulationAccept" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.regulationAccept}}</span>
+        </label>
+      </div>
+      <div class="col-12">
+        <div [ngClass]="{'button-orange-100':true}">Zarejestruje się</div>
+      </div>
     </div>
-    <div class="col-6" [ngClass]="{'salon-container': true}">
-      <label [ngClass]="{'title-label-125': true}">{{salonInfoTitleValue}}</label>
-      <label for="{{inputSalonNameId}}" [ngClass]="{'input-label':true}">{{inputSalonNameLabelValue}}
-        <input id="{{inputSalonNameId}}" [ngClass]="{'input':true}" type="text"
-               placeholder="{{inputSalonNamePlaceholderValue}}">
-      </label>
-      <label for="{{inputSalonCountryId}}" [ngClass]="{'input-label':true}">{{inputSalonCountryLabelValue}}
-        <input id="{{inputSalonCountryId}}" [ngClass]="{'input':true}" type="text"
-               placeholder="{{inputSalonCountryPlaceholderValue}}">
-      </label>
-      <label for="{{inputSalonAddressId}}" [ngClass]="{'input-label':true}">{{inputSalonAddressLabelValue}}
-        <input id="{{inputSalonAddressId}}" [ngClass]="{'input':true}" type="text"
-               placeholder="{{inputSalonAddressPlaceholderValue}}">
-      </label>
-      <label for="{{inputSalonZipId}}" [ngClass]="{'input-label':true}">{{inputSalonZipLabelValue}}
-        <input id="{{inputSalonZipId}}" [ngClass]="{'input':true}" type="text"
-               placeholder="{{inputSalonZipPlaceholderValue}}">
-      </label>
-      <label for="{{inputSalonCityId}}" [ngClass]="{'input-label':true}">{{inputSalonCityLabelValue}}
-        <input id="{{inputSalonCityId}}" [ngClass]="{'input':true}" type="text"
-               placeholder="{{inputSalonCityPlaceholderValue}}">
-      </label>
-      <label for="{{inputSalonPhoneId}}" [ngClass]="{'input-label':true}">{{inputSalonPhoneLabelValue}}
-        <input id="{{inputSalonPhoneId}}" [ngClass]="{'input':true}" type="text"
-               placeholder="{{inputSalonPhonePlaceholderValue}}">
-      </label>
-      <label for="{{inputSalonPhone2Id}}" [ngClass]="{'input-label':true}">{{inputSalonPhoneLabelValue}}
-        <input id="{{inputSalonPhone2Id}}" [ngClass]="{'input':true}" type="text"
-               placeholder="{{inputSalonPhonePlaceholderValue}}">
-      </label>
-    </div>
-    <div class="col-12">
-      <div [ngClass]="{'button-orange-100':true}">{{registrationButtonTitleValue}}</div>
-    </div>
-  </div>
+  </form>
 </div>

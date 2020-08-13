@@ -91,6 +91,7 @@ export class RegistrationIndividualComponent implements OnInit {
       user.secretWord = this.value.secretWord.trim();
       user.roles = [RolesModel.UserRole, RolesModel.IndividualRole];
       user.isGoogleAuthenticate = false;
+      user.isFBAuthenticate = false;
 
       this.authenticateS
         .verifyEmail(user.email)
