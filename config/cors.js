@@ -1,8 +1,7 @@
 const cors = require('cors');
-
 module.exports = {
     cors: cors,
-    configUse: (app)=>{
+    configUse: (app) => {
         app.use(cors());
     }
 }

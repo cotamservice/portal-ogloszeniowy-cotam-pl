@@ -19,6 +19,7 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "*",
     "cors": "*",
+    "easy-soap-request": "^3.3.3",
     "express": "*",
     "googleapis": "^58.0.0",
     "jsonwebtoken": "*",
@@ -26,7 +27,9 @@
     "npm": "^6.14.5",
     "passport": "*",
     "passport-google-oauth": "^2.0.0",
-    "passport-jwt": "*"
+    "passport-jwt": "*",
+    "xhr2": "^0.2.0",
+    "xml2js": "^0.4.23"
   },
   "devDependencies": {
     "@types/express": "^4.17.7",

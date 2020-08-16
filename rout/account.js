@@ -20,7 +20,6 @@ router.get('/registration/verify/email/:email', (req, res) => {
     })
 })
 router.post('/registration/individual', (req, res) => {
-    console.log('TRY REGISTRATION INDIVIDUAL USER IN SERVER SIDE');
     let newUser = new User({
         email: req.body.email,
         password: req.body.password,
@@ -29,7 +28,6 @@ router.post('/registration/individual', (req, res) => {
         isGoogleAuthenticate: req.body.isGoogleAuthenticate,
         isFBAuthenticate: req.body.isFBAuthenticate,
     })
-    console.log('USER TO REG: ' + newUser);
     User.addUser(newUser, (err) => {
         if (err) {
             res.json({success: false});
@@ -40,7 +38,6 @@ router.post('/registration/individual', (req, res) => {
 })
 
 router.post('/authenticate', (req, res) => {
-    console.log('try authenticate on server side');
     const email = req.body.email;
     const password = req.body.password;
 
@@ -49,8 +46,6 @@ router.post('/authenticate', (req, res) => {
         if (!user) {
             return res.json({success: false});
         }
-        console.log('is fb:' + user.isFBAuthenticate);
-        console.log('is go:' + user.isGoogleAuthenticate);
         if (user.isGoogleAuthenticate || user.isFBAuthenticate) {
             const token = jwt.sign(user.toJSON(), require('../config').passport.secretKey, {
                 expiresIn: 3600 * 24 * 356
