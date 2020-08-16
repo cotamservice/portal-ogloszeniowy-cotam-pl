@@ -82,7 +82,7 @@ router.post('/get', (req, res) => {
         krs: req.body.krs,
     };
     getByData(data, (result) => {
-        console.log("GET RES: " + JSON.stringify(result, null, 4));
+        // console.log("GET RES: " + JSON.stringify(result, null, 4));
         if (result) {
             res.json({success: true, data: result});
         } else {
