@@ -119,13 +119,12 @@ export class AuthenticateService {
 
       this.isEmailExist(user.email)
         .subscribe(data => {
-          if (data['success'] === true) {
+          if (data['success']) {
             this.authenticateGoFbUser(user);
-          } else if (data['success'] === false) {
+          } else if (data['success']) {
             this.registrationIndividual(user).subscribe(data => {
-              if (data['success'] === true) {
+              if (data['success']) {
                 this.authenticateGoFbUser(user);
-
               }
             })
           }
