@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {count} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -48,9 +47,12 @@ export class RegistrationFormValidationService {
   }
 
   isCompanyNipValid(nip: string): boolean {
-    return /^[0-9]{10}$/.test(nip);
+    return /^[0-9]{3,}$/.test(nip);
   }
 
+  isCompanyNipEuValid(nipeu: string) {
+    return /^[a-zA-Z]{2,}[0-9]{3,}$/.test(nipeu);
+  }
   isCompanyNameValid(name: string): boolean {
     return name.length > 2;
   }
@@ -64,7 +66,7 @@ export class RegistrationFormValidationService {
   }
 
   isCountryValid(country: string): boolean {
-    return country.length > 2;
+    return country.length > 0;
   }
 
   isAddressValid(address: string): boolean {
@@ -87,7 +89,4 @@ export class RegistrationFormValidationService {
     return name.length > 2;
   }
 
-  isCompanyTypeValid(type: string): boolean {
-    return type && type.length > 1;
-  }
 }

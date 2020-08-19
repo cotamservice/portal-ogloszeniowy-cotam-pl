@@ -5,6 +5,12 @@ import {Router} from "@angular/router";
 import {UserModel} from "../model/user.model";
 import {RolesModel} from "../model/roles.model";
 import {CompanyTypeModel} from "../model/company.type.model";
+import {map} from "rxjs/operators";
+import {HttpClient} from "@angular/common/http";
+import {GusService} from "../service/gus/gus.service";
+import {CountryService} from "../service/country/country.service";
+import {CompanyModel} from "../model/company.model";
+import {SalonModel} from "../model/salon.model";
 
 @Component({
   selector: 'app-registration-commission',
@@ -23,8 +29,9 @@ export class RegistrationCommissionComponent implements OnInit {
     isRegulationAccept: false,
     selectCompanyOptionList: Object.values(CompanyTypeModel),
     companyNip: '',
+    companyNipEU: '',
+    hasNipEu: false,
     companyName: '',
-    companyType: '',
     companyPersonName: '',
     companyPersonSurname: '',
     companyCountry: '',
@@ -39,6 +46,8 @@ export class RegistrationCommissionComponent implements OnInit {
     salonCity: '',
     salonPhone1: '',
     salonPhone2: '',
+    isNotPolandCompany: false,
+
   }
 
   isValid = {
@@ -47,8 +56,8 @@ export class RegistrationCommissionComponent implements OnInit {
     confirm: true,
     secretWord: true,
     companyNip: true,
+    companyNipEU: true,
     companyName: true,
-    companyType: true,
     companyPersonName: true,
     companyPersonSurname: true,
     companyCountry: true,
@@ -63,6 +72,7 @@ export class RegistrationCommissionComponent implements OnInit {
     salonCity: true,
     salonPhone1: true,
     salonPhone2: true,
+    hasNipEu: true,
   }
 
   invalidMsg = {
@@ -72,8 +82,8 @@ export class RegistrationCommissionComponent implements OnInit {
     secretWord: '',
     regulationAccept: '',
     companyNip: '',
+    companyNipEU: '',
     companyName: '',
-    companyType: '',
     companyPersonName: '',
     companyPersonSurname: '',
     companyCountry: '',
@@ -93,17 +103,22 @@ export class RegistrationCommissionComponent implements OnInit {
 
   constructor(private validation: RegistrationFormValidationService,
               private authenticateS: AuthenticateService,
+              private http: HttpClient,
+              private gus: GusService,
+              private countryS: CountryService,
               private router: Router) {
   }
 
   ngOnInit(): void {
-    this.verifyForm();
   }
 
-  getCompanyTypeName(companyType: string): string {
-    if (companyType === CompanyTypeModel.Company) return 'spółka';
-    if (companyType === CompanyTypeModel.SoloCompany) return 'jednoosobowa';
-    return '';
+  getAllCountriesCodeAndName() {
+    let result = [];
+    for (let code in this.countryS.getIsoCountries()) {
+      let name = this.countryS.getIsoCountries()[code]['name'];
+      result.push([code, name]);
+    }
+    return result;
   }
 
   isEmailValid(): boolean {
@@ -130,23 +145,22 @@ export class RegistrationCommissionComponent implements OnInit {
     return this.isValid.secretWord;
   }
 
-
   isCompanyNipValid(): boolean {
     this.isValid.companyNip = this.validation.isCompanyNipValid(this.value.companyNip.trim());
     this.invalidMsg.companyNip = 'nie prawidłowy nip';
     return this.isValid.companyNip;
   }
 
+  isCompanyNipEUValid() {
+    this.isValid.companyNipEU = this.validation.isCompanyNipEuValid(this.value.companyNipEU.trim());
+    this.invalidMsg.companyNipEU = 'nie prawidłowy nip';
+    return this.value.hasNipEu && this.isValid.hasNipEu;
+  }
+
   isCompanyNameValid(): boolean {
     this.isValid.companyName = this.validation.isCompanyNameValid(this.value.companyName.trim());
     this.invalidMsg.companyName = 'nie prawidłowa wartość';
     return this.isValid.companyName;
-  }
-
-  isCompanyTypeValid(): boolean {
-    this.isValid.companyType = this.validation.isCompanyTypeValid(this.value.companyType.trim());
-    this.invalidMsg.companyType = 'wybierz formę prawną';
-    return this.isValid.companyType;
   }
 
   isCompanyPersonNameValid(): boolean {
@@ -165,8 +179,7 @@ export class RegistrationCommissionComponent implements OnInit {
   isCompanyCountryValid(): boolean {
     this.isValid.companyCountry = this.validation.isCountryValid(this.value.companyCountry.trim());
     this.invalidMsg.companyCountry = 'nie prawidłowa wartość';
-    // return this.isValid.companyCountry;
-    return false;
+    return this.isValid.companyCountry;
   }
 
   isCompanyAddressValid(): boolean {
@@ -189,7 +202,7 @@ export class RegistrationCommissionComponent implements OnInit {
 
   isCompanyPhoneValid(): boolean {
     this.isValid.companyPhone = this.validation.isPhoneValid(this.value.companyPhone.trim());
-    this.invalidMsg.companyAddress = 'musi zawierać tylko cyfry z lub bez dodanym "+" na początku';
+    this.invalidMsg.companyPhone = 'musi zawierać tylko cyfry z/bez dodanym "+" na początku';
     return this.isValid.companyPhone;
   }
 
@@ -250,10 +263,10 @@ export class RegistrationCommissionComponent implements OnInit {
     this.isCompanyCountryValid();
     this.isCompanyNameValid();
     this.isCompanyNipValid();
+    this.isCompanyNipEUValid();
     this.isCompanyPersonNameValid();
     this.isCompanyPersonSurnameValid();
     this.isCompanyPhoneValid();
-    this.isCompanyTypeValid();
     this.isCompanyZipValid();
     this.isSalonAddressValid();
     this.isSalonCityValid();
@@ -269,10 +282,45 @@ export class RegistrationCommissionComponent implements OnInit {
     return this.isEmailValid() && this.isPasswordValid() && this.isConfirmValid() && this.isSecretWordValid()
       && this.isCompanyAddressValid() && this.isCompanyCityValid() && this.isCompanyCountryValid() && this.isCompanyNameValid()
       && this.isCompanyNipValid() && this.isCompanyPersonNameValid() && this.isCompanyPersonSurnameValid() && this.isCompanyPhoneValid()
-      && this.isCompanyTypeValid() && this.isCompanyZipValid()
-      && this.isSalonAddressValid() && this.isSalonCityValid() && this.isSalonCountryValid() && this.isSalonNameValid()
+      && this.isCompanyZipValid() && this.isSalonAddressValid() && this.isSalonCityValid() && this.isSalonCountryValid() && this.isSalonNameValid()
       && this.isSalonPhone1Valid() && this.isSalonPhone2Valid() && this.isSalonZipValid()
-      && this.isRegulationAccept();
+      && this.isRegulationAccept() && this.isCompanyNipEUValid();
+  }
+
+  getCompanyInfoByNip() {
+    if (this.value.isNotPolandCompany) return;
+    let companyData = {
+      nip: this.value.companyNip,
+    };
+    this.gus.getInfo(companyData, (companyData) => {
+      if (companyData !== null && companyData['success'] && !companyData['data'][0]["ErrorCode"]) {
+        let result = {
+          success: companyData['success'],
+          company: companyData['data'][0],
+        }
+        let company = result.company;
+        this.isValid.companyNip = true;
+        this.value.companyName = company['Nazwa'].toString();
+        this.isValid.companyName = true;
+        this.value.companyCountry = 'PL';
+        this.isValid.companyCountry = true;
+        this.value.companyAddress = [company['Ulica'].toString(), 'nr ' + company['NrNieruchomosci'].toString(), 'lok. ' + company['NrLokalu'].toString()].join(', ');
+        this.isValid.companyAddress = true;
+        this.value.companyZip = company ['KodPocztowy'].toString();
+        this.isValid.companyZip = true;
+        this.value.companyCity = company['Miejscowosc'].toString();
+        this.isValid.companyCity = true;
+      } else {
+        this.value.companyName = '';
+        this.value.companyCountry = '';
+        this.value.companyAddress = '';
+        this.value.companyZip = '';
+        this.value.companyCity = '';
+        this.verifyForm();
+        this.isValid.companyNip = false;
+        this.invalidMsg.companyNip = 'NIP nie istnieje';
+      }
+    });
   }
 
   redirectTimer;
@@ -290,7 +338,9 @@ export class RegistrationCommissionComponent implements OnInit {
   }
 
   registrationIndividualFormSubmit() {
+    this.verifyForm();
     if (this.isFormValid()) {
+      console.log('FORM VALID');
       const user: UserModel = new UserModel();
       user.email = this.value.email.trim();
       user.password = this.value.password.trim();
@@ -298,11 +348,42 @@ export class RegistrationCommissionComponent implements OnInit {
       user.roles = [RolesModel.UserRole, RolesModel.CommissionRole];
       user.isGoogleAuthenticate = false;
       user.isFBAuthenticate = false;
-      console.log(user);
+      console.log("USER: " + user);
 
+      const company: CompanyModel = new CompanyModel();
+      company.nip = this.value.companyNip;
+      company.nipEu = this.value.hasNipEu ? this.value.companyNipEU : '';
+      company.name = this.value.companyName;
+      company.country = this.value.companyCountry;
+      company.address = this.value.companyAddress;
+      company.zip = this.value.companyZip;
+      company.city = this.value.companyCity;
+      company.personName = this.value.companyPersonName;
+      company.personSurname = this.value.companyPersonSurname;
+      company.phone = this.value.companyPhone;
+      company.creatorId = '';
+      console.log("COMPANY: " + company);
+
+      const salon: SalonModel = new SalonModel();
+      salon.name = this.value.salonName;
+      salon.country = this.value.salonCountry;
+      salon.address = this.value.salonAddress;
+      salon.city = this.value.salonCity;
+      salon.phones = [this.value.salonPhone1, this.value.salonPhone2];
+      salon.creatorId = '';
+      console.log("SALON: " + salon);
 
     } else {
       this.value.isRegulationAccept = false;
     }
   }
+
+  clearCompanyData() {
+    this.value.companyName = '';
+    this.value.companyCountry = '';
+    this.value.companyAddress = '';
+    this.value.companyZip = '';
+    this.value.companyCity = '';
+  }
+
 }

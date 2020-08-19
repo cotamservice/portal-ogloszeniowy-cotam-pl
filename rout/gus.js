@@ -44,7 +44,6 @@ function login(cb) {
 router.get('/logout/:sid', (req, res) => {
     let sid = req.params.sid;
     logout(sid, (result) => {
-        console.log("SERVER GUS LOGOUT: " + result);
         if (result) {
             res.json({success: true});
         } else {
@@ -82,7 +81,6 @@ router.post('/get', (req, res) => {
         krs: req.body.krs,
     };
     getByData(data, (result) => {
-        // console.log("GET RES: " + JSON.stringify(result, null, 4));
         if (result) {
             res.json({success: true, data: result});
         } else {
@@ -127,7 +125,11 @@ function getByData(data, cb) {
     makeSOAPRequest(url, genHeaders(sid), xml, (result) => {
         xmlBody = result.DaneSzukajPodmiotyResponse.DaneSzukajPodmiotyResult;
         convertStringXml2Json(xmlBody, result => {
-            cb(result.root.dane);
+            if (result !== null) {
+                cb(result.root.dane);
+            } else {
+                cb(null);
+            }
         });
     });
 }
