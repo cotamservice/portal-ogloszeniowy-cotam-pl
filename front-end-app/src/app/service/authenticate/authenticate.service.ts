@@ -6,6 +6,8 @@ import {UserModel} from '../../model/user.model';
 import {RolesModel} from "../../model/roles.model";
 import {Router} from "@angular/router";
 import {DOCUMENT} from "@angular/common";
+import {CompanyModel} from "../../model/company.model";
+import {SalonModel} from "../../model/salon.model";
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +23,14 @@ export class AuthenticateService {
     private jwt: JwtHelperService) {
   }
 
+  registrationCommission(user: UserModel, company: CompanyModel, salon: SalonModel) {
+    let headers = new HttpHeaders();
+    headers.append('Content-type', 'application/json');
+    return this.http
+      .post('http://localhost:3000/account/registration/commission', [user, company, salon], {headers: headers})
+      .pipe(map(res => res));
+  }
+
   registrationIndividual(user: UserModel) {
     let headers = new HttpHeaders();
     headers.append('Content-type', 'application/json');
@@ -29,7 +39,7 @@ export class AuthenticateService {
       .pipe(map(res => res));
   }
 
-  verifyEmail(value: string) {
+  isEmailExist(value: string) {
     let headers = new HttpHeaders();
     headers.append('Content-type', 'application/json');
     return this.http
@@ -107,7 +117,7 @@ export class AuthenticateService {
       user.isGoogleAuthenticate = isGo;
       user.isFBAuthenticate = isFb;
 
-      this.verifyEmail(user.email)
+      this.isEmailExist(user.email)
         .subscribe(data => {
           if (data['success'] === true) {
             this.authenticateGoFbUser(user);

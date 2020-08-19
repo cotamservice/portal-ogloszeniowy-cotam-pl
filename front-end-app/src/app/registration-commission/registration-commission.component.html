@@ -1,6 +1,24 @@
 <div class="container">
-  <form *ngIf="!isSuccess && !isServerDontResponse" (submit)="registrationIndividualFormSubmit()">
+  <div class="row">
+    <div class="col-12 text-center">
+      <label *ngIf="isSuccess" [ngClass]="{'title-label-100':true}">
+        rejestracja jest prawidłowa, przekierowanie za {{redirectTimeLeft}}
+      </label>
+      <label *ngIf="isServerDontResponse" [ngClass]="{'title-label-100':true}">
+        no response from server try later
+      </label>
+    </div>
+  </div>
+  <form *ngIf="!isSuccess && !isServerDontResponse" (submit)="registrationCommissionFormSubmit()">
     <div class="row">
+      <div class="col-12 text-center">
+        <label *ngIf="isSuccess" [ngClass]="{'title-label-100':true}">
+          rejestracja jest prawidłowa, przekierowanie za {{redirectTimeLeft}}
+        </label>
+        <label *ngIf="isServerDontResponse" [ngClass]="{'title-label-100':true}">
+          no response from server try later
+        </label>
+      </div>
       <div class="col-12 text-center">
         <label *ngIf="isSuccess" [ngClass]="{'title-label-100':true}">
           rejestracja jest prawidłowa, przekierowanie za {{redirectTimeLeft}}
@@ -53,7 +71,7 @@
                  [(ngModel)]="value.companyNip" name="companyNip" (change)="isCompanyNipValid(); getCompanyInfoByNip()"
                  placeholder="wpiś nip">
         </label>
-        <label for="nipEu"  *ngIf="value.hasNipEu" [ngClass]="{'input-label':true}">NIP w UE
+        <label for="nipEu" *ngIf="value.hasNipEu" [ngClass]="{'input-label':true}">NIP w UE
           <span *ngIf="!isValid.companyNipEU" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.companyNipEU}}</span>
           <input id="nipEu" [ngClass]="{'input':true,'input-invalid':!isValid.companyNipEU}" type="text"
                  [(ngModel)]="value.companyNipEU" name="companyNipEu" (change)="isCompanyNipEUValid()"

@@ -103,7 +103,7 @@ export class RegistrationIndividualComponent implements OnInit {
       user.isFBAuthenticate = false;
 
       this.authenticateS
-        .verifyEmail(user.email)
+        .isEmailExist(user.email)
         .subscribe(data => {
           if (data['success']) {
             this.isValid.email = false;

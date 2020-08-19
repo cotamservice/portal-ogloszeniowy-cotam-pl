@@ -47,7 +47,7 @@ export class RegistrationLoginComponent implements OnInit {
       let remember = this.value.isRemember;
 
       this.authenticateS
-        .verifyEmail(user.email)
+        .isEmailExist(user.email)
         .subscribe(data => {
           if (data['success'] === true) {
             this.authenticateS

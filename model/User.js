@@ -1,4 +1,3 @@
-const config = require('../config');
 const mongoose = require('mongoose');
 const bCrypt = require('bcryptjs');
 
@@ -42,11 +41,14 @@ module.exports.getUserById = (id, cb) => {
 module.exports.addUser = (userToAdd, cb) => {
     bCrypt.genSalt(10, (err, salt) => {
         bCrypt.hash(userToAdd.password, salt, (err, hash) => {
-            if (err) throw err;
+            if (err) console.log(err);
             userToAdd.password = hash;
             userToAdd.save(cb);
         });
     })
+}
+module.exports.cryptPassword = (passwordToCrypt) => {
+    return bCrypt.hashSync(passwordToCrypt, bCrypt.genSaltSync(10));
 }
 module.exports.comparePass = (passToCompare, passCompareWith, cb) => {
     bCrypt.compare(passToCompare, passCompareWith, (err, isMatch) => {

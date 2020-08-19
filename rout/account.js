@@ -1,9 +1,12 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const router = express.Router();
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const config = require('../config');
 const User = require('../model').User;
+const Company = require('../model').Company;
+const Salon = require('../model').Salon;
 
 router.get('/registration/verify/email/:email', (req, res) => {
     let email = req.params.email;
@@ -35,6 +38,65 @@ router.post('/registration/individual', (req, res) => {
             res.json({success: true});
         }
     });
+})
+router.post('/registration/commission', (req, res) => {
+    let userBody = req.body[0];
+    let newUser = new User({
+        email: userBody.email,
+        password: userBody.password,
+        roles: userBody.roles,
+        secretWord: userBody.secretWord,
+        isGoogleAuthenticate: userBody.isGoogleAuthenticate,
+        isFBAuthenticate: userBody.isFBAuthenticate,
+    });
+
+    let companyBody = req.body[1];
+    let newCompany = new Company({
+        nip: companyBody.nip,
+        nipEu: companyBody.nipEu,
+        name: companyBody.name,
+        personName: companyBody.personName,
+        personSurname: companyBody.personSurname,
+        country: companyBody.country,
+        address: companyBody.address,
+        zip: companyBody.zip,
+        city: companyBody.city,
+        phone: companyBody.phone,
+        creatorId: newUser._id,
+    });
+
+    let salonBody = req.body[2];
+    let newSalon = new Salon({
+        name: salonBody.name,
+        country: salonBody.country,
+        address: salonBody.address,
+        zip: salonBody.zip,
+        city: salonBody.city,
+        phones: salonBody.phones,
+        creatorId: newUser._id,
+    });
+    (async () => {
+        const session = await mongoose.connection.startSession();
+        let err = '';
+        try {
+            session.startTransaction();
+            newUser.password = await User.cryptPassword(newUser.password);
+            await User.create([newUser], {session: session});
+            await Company.create([newCompany], {session: session});
+            await Salon.create([newSalon], {session: session});
+            await session.commitTransaction();
+        } catch (e) {
+            err = e;
+            console.log(e.message);
+        } finally {
+            session.endSession();
+        }
+        if (!err) {
+            res.json({success: true});
+        } else {
+            res.json({success: false});
+        }
+    })();
 })
 
 router.post('/authenticate', (req, res) => {

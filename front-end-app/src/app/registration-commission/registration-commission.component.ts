@@ -154,7 +154,7 @@ export class RegistrationCommissionComponent implements OnInit {
   isCompanyNipEUValid() {
     this.isValid.companyNipEU = this.validation.isCompanyNipEuValid(this.value.companyNipEU.trim());
     this.invalidMsg.companyNipEU = 'nie prawidłowy nip';
-    return this.value.hasNipEu && this.isValid.hasNipEu;
+    return (this.value.hasNipEu && this.isValid.hasNipEu) || !this.value.hasNipEu;
   }
 
   isCompanyNameValid(): boolean {
@@ -323,21 +323,8 @@ export class RegistrationCommissionComponent implements OnInit {
     });
   }
 
-  redirectTimer;
-  redirectTimeLeft = 5;
 
-  startTimer(): void {
-    this.redirectTimer = setInterval(() => {
-      if (this.redirectTimeLeft > 0) {
-        this.redirectTimeLeft--;
-      } else {
-        this.redirectTimeLeft = 5;
-        clearInterval(this.redirectTimer);
-      }
-    }, 1000)
-  }
-
-  registrationIndividualFormSubmit() {
+  registrationCommissionFormSubmit() {
     this.verifyForm();
     if (this.isFormValid()) {
       console.log('FORM VALID');
@@ -351,27 +338,57 @@ export class RegistrationCommissionComponent implements OnInit {
       console.log("USER: " + user);
 
       const company: CompanyModel = new CompanyModel();
-      company.nip = this.value.companyNip;
-      company.nipEu = this.value.hasNipEu ? this.value.companyNipEU : '';
-      company.name = this.value.companyName;
-      company.country = this.value.companyCountry;
-      company.address = this.value.companyAddress;
-      company.zip = this.value.companyZip;
-      company.city = this.value.companyCity;
-      company.personName = this.value.companyPersonName;
-      company.personSurname = this.value.companyPersonSurname;
-      company.phone = this.value.companyPhone;
+      company.nip = this.value.companyNip.trim();
+      company.nipEu = this.value.hasNipEu ? this.value.companyNipEU.trim() : '';
+      company.name = this.value.companyName.trim();
+      company.country = this.value.companyCountry.trim();
+      company.address = this.value.companyAddress.trim();
+      company.zip = this.value.companyZip.trim();
+      company.city = this.toCapitalize(this.value.companyCity.trim());
+      company.personName = this.toCapitalize(this.value.companyPersonName.trim());
+      company.personSurname = this.toCapitalize(this.value.companyPersonSurname.trim());
+      company.phone = this.value.companyPhone.trim();
       company.creatorId = '';
       console.log("COMPANY: " + company);
 
       const salon: SalonModel = new SalonModel();
-      salon.name = this.value.salonName;
-      salon.country = this.value.salonCountry;
-      salon.address = this.value.salonAddress;
-      salon.city = this.value.salonCity;
-      salon.phones = [this.value.salonPhone1, this.value.salonPhone2];
+      salon.name = this.value.salonName.trim();
+      salon.country = this.value.salonCountry.trim();
+      salon.address = this.value.salonAddress.trim();
+      salon.zip = this.value.salonZip.trim();
+      salon.city = this.toCapitalize(this.value.salonCity.trim());
+      salon.phones = [this.value.salonPhone1.trim(), this.value.salonPhone2.trim()];
       salon.creatorId = '';
       console.log("SALON: " + salon);
+
+      this.authenticateS
+        .isEmailExist(user.email)
+        .subscribe((data) => {
+          if (data['success']) {
+            this.isValid.email = false;
+            this.invalidMsg.email = 'wybierz inny';
+            this.value.password = '';
+            this.value.confirm = '';
+            return false;
+          } else {
+            this.authenticateS
+              .registrationCommission(user, company, salon)
+              .subscribe((data) => {
+                this.startTimer();
+                if (data['success']) {
+                  this.isSuccess = true;
+                  setTimeout(() => {
+                    this.router.navigate(['login']);
+                  }, 4000);
+                } else {
+                  this.isServerDontResponse = true;
+                  setTimeout(() => {
+                    this.isServerDontResponse = false;
+                  }, 4000);
+                }
+              });
+          }
+        });
 
     } else {
       this.value.isRegulationAccept = false;
@@ -386,4 +403,21 @@ export class RegistrationCommissionComponent implements OnInit {
     this.value.companyCity = '';
   }
 
+  redirectTimer;
+  redirectTimeLeft = 5;
+
+  startTimer(): void {
+    this.redirectTimer = setInterval(() => {
+      if (this.redirectTimeLeft > 0) {
+        this.redirectTimeLeft--;
+      } else {
+        this.redirectTimeLeft = 5;
+        clearInterval(this.redirectTimer);
+      }
+    }, 1000)
+  }
+
+  toCapitalize(word: string): string {
+    return word.charAt(0).toUpperCase() + word.slice(1);
+  }
 }
