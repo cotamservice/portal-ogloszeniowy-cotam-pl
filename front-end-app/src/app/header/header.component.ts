@@ -193,6 +193,7 @@ export class HeaderComponent implements OnInit {
   pickAddPost(): void {
     this.unPickAll();
     this.isMenuAddPostPick = true;
+    this.router.navigate(['postadd']);
   }
 
   isParkingPick: boolean = false;

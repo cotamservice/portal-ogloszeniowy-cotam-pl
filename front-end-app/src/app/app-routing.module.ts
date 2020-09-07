@@ -5,6 +5,7 @@ import {RegistrationComponent} from "./registration/registration.component";
 import {DashboardComponent} from "./dashboard/dashboard.component";
 
 import {AuthenticateGuard} from "./authenticate.guard.ts";
+import {PostAddComponent} from "./post-add/post-add.component";
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -17,6 +18,7 @@ const routes: Routes = [
       {path: 'google', component: RegistrationComponent},
     ]
   },
+  {path: 'postadd', component: PostAddComponent},
   {path: 'login', component: RegistrationComponent},
   {path: 'dashboard', component: DashboardComponent, canActivate: [AuthenticateGuard]},
   {path: '**', component: HomeComponent},
