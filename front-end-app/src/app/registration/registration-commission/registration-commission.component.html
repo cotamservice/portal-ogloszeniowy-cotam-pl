@@ -11,22 +11,6 @@
   </div>
   <form *ngIf="!isSuccess && !isServerDontResponse" (submit)="registrationCommissionFormSubmit()">
     <div class="row">
-      <div class="col-12 text-center">
-        <label *ngIf="isSuccess" [ngClass]="{'title-label-100':true}">
-          rejestracja jest prawidłowa, przekierowanie za {{redirectTimeLeft}}
-        </label>
-        <label *ngIf="isServerDontResponse" [ngClass]="{'title-label-100':true}">
-          no response from server try later
-        </label>
-      </div>
-      <div class="col-12 text-center">
-        <label *ngIf="isSuccess" [ngClass]="{'title-label-100':true}">
-          rejestracja jest prawidłowa, przekierowanie za {{redirectTimeLeft}}
-        </label>
-        <label *ngIf="isServerDontResponse" [ngClass]="{'title-label-100':true}">
-          no response from server try later
-        </label>
-      </div>
       <div class="col-lg-6 col-md-12">
         <label [ngClass]="{'title-label-125': true}">Podstawowa informacja</label>
         <label for="email" [ngClass]="{'input-label':true}">Email
