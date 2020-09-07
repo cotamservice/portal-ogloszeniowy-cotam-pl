@@ -38,13 +38,13 @@
         <label for="password" [ngClass]="{'input-label':true}">Hasło
           <span *ngIf="!isValid.password" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.password}}</span>
           <input id="password" [ngClass]="{'input':true,'input-invalid':!isValid.password}" type="password"
-                 [(ngModel)]="value.password" name="password" (change)="isPasswordValid()"
+                 [(ngModel)]="value.password" name="password" (change)="isPasswordValid(); isConfirmValid()"
                  placeholder="wpiś hasło">
         </label>
         <label for="confirm" [ngClass]="{'input-label':true}">Powtóż hasło
           <span *ngIf="!isValid.confirm" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.confirm}}</span>
           <input id="confirm" [ngClass]="{'input':true,'input-invalid':!isValid.confirm}"
-                 type="password" [(ngModel)]="value.confirm" name="confirm" (change)="isConfirmValid()"
+                 type="password" [(ngModel)]="value.confirm" name="confirm" (change)="isConfirmValid(); isPasswordValid()"
                  placeholder="powtóż hasło">
         </label>
         <label for="word" [ngClass]="{'input-label':true}">Słowo kluczowe

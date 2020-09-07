@@ -30,6 +30,13 @@ export class AuthenticateService {
       .post('http://localhost:3000/account/registration/commission', [user, company, salon], {headers: headers})
       .pipe(map(res => res));
   }
+  registrationBroker(user: UserModel, company: CompanyModel, salon: SalonModel) {
+    let headers = new HttpHeaders();
+    headers.append('Content-type', 'application/json');
+    return this.http
+      .post('http://localhost:3000/account/registration/broker', [user, company, salon], {headers: headers})
+      .pipe(map(res => res));
+  }
 
   registrationIndividual(user: UserModel) {
     let headers = new HttpHeaders();

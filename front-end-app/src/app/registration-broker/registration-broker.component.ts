@@ -1,4 +1,15 @@
 import {Component, OnInit} from '@angular/core';
+import {CompanyTypeModel} from "../model/company.type.model";
+import {RegistrationFormValidationService} from "../service/form/registration-form-validation.service";
+import {AuthenticateService} from "../service/authenticate/authenticate.service";
+import {HttpClient} from "@angular/common/http";
+import {GusService} from "../service/gus/gus.service";
+import {CountryService} from "../service/country/country.service";
+import {Router} from "@angular/router";
+import {UserModel} from "../model/user.model";
+import {RolesModel} from "../model/roles.model";
+import {CompanyModel} from "../model/company.model";
+import {SalonModel} from "../model/salon.model";
 
 @Component({
   selector: 'app-registration-broker',
@@ -6,102 +17,401 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./registration-broker.component.css']
 })
 export class RegistrationBrokerComponent implements OnInit {
-  registrationButtonTitleValue = 'Zarejestruje się';
+  isSuccess: boolean;
+  isServerDontResponse: boolean;
 
-  inputEmailId = 'id';
-  inputEmailLabelValue = 'Email';
-  inputEmailPlaceholderValue = 'wpiś email';
+  value = {
+    email: '',
+    password: '',
+    confirm: '',
+    secretWord: '',
+    isRegulationAccept: false,
+    selectCompanyOptionList: Object.values(CompanyTypeModel),
+    companyNip: '',
+    companyNipEU: '',
+    hasNipEu: false,
+    companyName: '',
+    companyPersonName: '',
+    companyPersonSurname: '',
+    companyCountry: '',
+    companyAddress: '',
+    companyZip: '',
+    companyCity: '',
+    companyPhone: '',
+    salonName: '',
+    salonCountry: '',
+    salonAddress: '',
+    salonZip: '',
+    salonCity: '',
+    salonPhone1: '',
+    salonPhone2: '',
+    isNotPolandCompany: false,
 
-  inputPasswordId = 'password';
-  inputPasswordLabelValue = 'Hasło';
-  inputPasswordPlaceholderValue = 'wpiś hasło';
+  }
 
-  inputPasswordConfirmId = 'confirm';
-  inputPasswordConfirmLabelValue = 'Powtóż hasło';
-  inputPasswordConfirmPlaceholderValue = 'powtóż hasło';
+  isValid = {
+    email: true,
+    password: true,
+    confirm: true,
+    secretWord: true,
+    companyNip: true,
+    companyNipEU: true,
+    companyName: true,
+    companyPersonName: true,
+    companyPersonSurname: true,
+    companyCountry: true,
+    companyAddress: true,
+    companyZip: true,
+    companyCity: true,
+    companyPhone: true,
+    salonName: true,
+    salonCountry: true,
+    salonAddress: true,
+    salonZip: true,
+    salonCity: true,
+    salonPhone1: true,
+    salonPhone2: true,
+    hasNipEu: true,
+  }
 
-  inputWordId = 'word';
-  inputWordLabelValue = 'Słowo kluczowe';
-  inputWordPlaceholderValue = 'wpiś słowo kluczowe';
+  invalidMsg = {
+    email: '',
+    password: '',
+    confirm: '',
+    secretWord: '',
+    regulationAccept: '',
+    companyNip: '',
+    companyNipEU: '',
+    companyName: '',
+    companyPersonName: '',
+    companyPersonSurname: '',
+    companyCountry: '',
+    companyAddress: '',
+    companyZip: '',
+    companyCity: '',
+    companyPhone: '',
+    salonName: '',
+    salonCountry: '',
+    salonAddress: '',
+    salonZip: '',
+    salonCity: '',
+    salonPhone1: '',
+    salonPhone2: '',
+  };
 
-  inputAcceptCheckboxId = 'accept';
-  inputAcceptCheckboxTitleValue = 'Akceptuję regulamin serwisu';
 
-  inputNipId = 'nip';
-  inputNipLabelValue = 'NIP';
-  inputNipPlaceholderValue = 'wpiś nip';
-
-  inputCompanyNameId = 'company';
-  inputCompanyNameLabelValue = 'Nazwa firmy';
-  inputCompanyNamePlaceholderValue = 'wpiś pewną nazwe firmy';
-
-  selectCompanyTypeId = 'type';
-  selectCompanyTypeLabelValue = 'Forma prawna';
-  selectCompanyTypeDefaultValue = 'wybierz';
-  selectCompanyOptionList = ['spółka', 'jednoosobowa'];
-
-  inputNameId = 'name';
-  inputNameLabelValue = 'Imię';
-  inputNamePlaceholderValue = 'wpiś imię';
-
-  inputSurnameId = 'surname';
-  inputSurnameLabelValue = 'Nazwisko';
-  inputSurnamePlaceholderValue = 'wpiś nazwisko';
-
-  inputCountryId = 'country';
-  inputCountryLabelValue = 'Kraj';
-  inputCountryPlaceholderValue = 'wpiś kraj';
-
-  inputAddressId = 'address';
-  inputAddressLabelValue = 'Adres';
-  inputAddressPlaceholderValue = 'wpiś addres';
-
-  inputZipId = 'zip';
-  inputZipLabelValue = 'Kod pocztowy';
-  inputZipPlaceholderValue = 'wpiś kod pocztowy';
-
-  inputCityId = 'city';
-  inputCityLabelValue = 'Miasto';
-  inputCityPlaceholderValue = 'wpiś miasto';
-
-  inputPhoneId = 'phone';
-  inputPhoneLabelValue = 'Telefon';
-  inputPhonePlaceholderValue = 'wpiś telefon';
-
-  generalInfoTitleValue = 'Podstawowa informacja';
-  companyInfoTitleValue = 'Informacja o firmie';
-
-  salonInfoTitleValue = 'Dodaj salon';
-
-  inputSalonNameId = 'salon-name';
-  inputSalonNameLabelValue = 'Nazwa salonu';
-  inputSalonNamePlaceholderValue = 'wpiś nazwę salonu';
-
-  inputSalonCountryId = 'salon-country';
-  inputSalonCountryLabelValue = 'Kraj';
-  inputSalonCountryPlaceholderValue = 'wpiś kraju';
-
-  inputSalonAddressId = 'salon-address';
-  inputSalonAddressLabelValue = 'Adres';
-  inputSalonAddressPlaceholderValue = 'wpiś adres';
-
-  inputSalonZipId = 'salon-zip';
-  inputSalonZipLabelValue = 'Kod pocztowy';
-  inputSalonZipPlaceholderValue = 'wpiś kod pocztowy';
-
-  inputSalonCityId = 'salon-city';
-  inputSalonCityLabelValue = 'Miasto';
-  inputSalonCityPlaceholderValue = 'wpiś miasto';
-
-  inputSalonPhoneId = 'salon-phone';
-  inputSalonPhone2Id = 'salon-phone2';
-  inputSalonPhoneLabelValue = 'Telefon';
-  inputSalonPhonePlaceholderValue = 'wpiś telefon';
-
-  constructor() {
+  constructor(private validation: RegistrationFormValidationService,
+              private authenticateS: AuthenticateService,
+              private http: HttpClient,
+              private gus: GusService,
+              private countryS: CountryService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
   }
 
+  getAllCountriesCodeAndName() {
+    let result = [];
+    for (let code in this.countryS.getIsoCountries()) {
+      let name = this.countryS.getIsoCountries()[code]['name'];
+      result.push([code, name]);
+    }
+    return result;
+  }
+
+  isEmailValid(): boolean {
+    this.isValid.email = this.validation.isEmailValid(this.value.email.trim());
+    this.invalidMsg.email = 'jest nie prawidłowy';
+    return this.isValid.email;
+  }
+
+  isPasswordValid(): boolean {
+    this.isValid.password = this.validation.isPasswordValid(this.value.password.trim());
+    this.invalidMsg.password = 'musi zawierać co najmniej jedną wielką literę i cyfrę, a długość musi być większa niż 8';
+    return this.isValid.password;
+  }
+
+  isConfirmValid(): boolean {
+    this.isValid.confirm = this.validation.isPasswordConfirm(this.value.password.trim(), this.value.confirm.trim());
+    this.invalidMsg.confirm = 'nieprawidłowe';
+    return this.isValid.confirm;
+  }
+
+  isSecretWordValid(): boolean {
+    this.isValid.secretWord = this.validation.isSecretWordValid(this.value.secretWord.trim());
+    this.invalidMsg.secretWord = 'musi istnieć';
+    return this.isValid.secretWord;
+  }
+
+  isCompanyNipValid(): boolean {
+    this.isValid.companyNip = this.validation.isCompanyNipValid(this.value.companyNip.trim());
+    this.invalidMsg.companyNip = 'nie prawidłowy nip';
+    return this.isValid.companyNip;
+  }
+
+  isCompanyNipEUValid() {
+    this.isValid.companyNipEU = this.validation.isCompanyNipEuValid(this.value.companyNipEU.trim());
+    this.invalidMsg.companyNipEU = 'nie prawidłowy nip';
+    return (this.value.hasNipEu && this.isValid.hasNipEu) || !this.value.hasNipEu;
+  }
+
+  isCompanyNameValid(): boolean {
+    this.isValid.companyName = this.validation.isCompanyNameValid(this.value.companyName.trim());
+    this.invalidMsg.companyName = 'nie prawidłowa wartość';
+    return this.isValid.companyName;
+  }
+
+  isCompanyPersonNameValid(): boolean {
+    this.isValid.companyPersonName = this.validation.isCompanyPersonNameValid(this.value.companyPersonName.trim());
+    this.invalidMsg.companyPersonName = 'nie prawidłowa wartość';
+    return this.isValid.companyPersonName;
+  }
+
+  isCompanyPersonSurnameValid(): boolean {
+    this.isValid.companyPersonSurname = this.validation.isCompanyPersonSurnameValid(this.value.companyPersonSurname.trim());
+    this.invalidMsg.companyPersonSurname = 'nie prawidłowa wartość';
+    return this.isValid.companyPersonSurname;
+
+  }
+
+  isCompanyCountryValid(): boolean {
+    this.isValid.companyCountry = this.validation.isCountryValid(this.value.companyCountry.trim());
+    this.invalidMsg.companyCountry = 'nie prawidłowa wartość';
+    return this.isValid.companyCountry;
+  }
+
+  isCompanyAddressValid(): boolean {
+    this.isValid.companyAddress = this.validation.isAddressValid(this.value.companyAddress.trim());
+    this.invalidMsg.companyAddress = 'nie prawidłowa wartość';
+    return this.isValid.companyAddress;
+  }
+
+  isCompanyZipValid(): boolean {
+    this.isValid.companyZip = this.validation.isZipValid(this.value.companyZip.trim());
+    this.invalidMsg.companyZip = 'nie prawidłowa wartość';
+    return this.isValid.companyZip;
+  }
+
+  isCompanyCityValid(): boolean {
+    this.isValid.companyCity = this.validation.isCityValid(this.value.companyCity.trim());
+    this.invalidMsg.companyCity = 'nie prawidłowa wartość';
+    return this.isValid.companyCity;
+  }
+
+  isCompanyPhoneValid(): boolean {
+    this.isValid.companyPhone = this.validation.isPhoneValid(this.value.companyPhone.trim());
+    this.invalidMsg.companyPhone = 'musi zawierać tylko cyfry z/bez dodanym "+" na początku';
+    return this.isValid.companyPhone;
+  }
+
+  isSalonNameValid(): boolean {
+    this.isValid.salonName = this.validation.isSalonNameValid(this.value.salonName.trim());
+    this.invalidMsg.salonName = 'nie prawidłowa wartość';
+    return this.isValid.salonName;
+  }
+
+  isSalonCountryValid(): boolean {
+    this.isValid.salonCountry = this.validation.isCountryValid(this.value.salonCountry.trim());
+    this.invalidMsg.salonCountry = 'nie prawidłowa wartość';
+    return this.isValid.salonCountry;
+  }
+
+  isSalonAddressValid(): boolean {
+    this.isValid.salonAddress = this.validation.isAddressValid(this.value.salonAddress.trim());
+    this.invalidMsg.salonAddress = 'nie prawidłowa wartość';
+    return this.isValid.salonAddress;
+  }
+
+  isSalonCityValid(): boolean {
+    this.isValid.salonCity = this.validation.isCityValid(this.value.salonCity.trim());
+    this.invalidMsg.salonCity = 'nie prawidłowa wartość';
+    return this.isValid.salonCity;
+  }
+
+  isSalonZipValid(): boolean {
+    this.isValid.salonZip = this.validation.isZipValid(this.value.salonZip.trim());
+    this.invalidMsg.salonZip = 'nie prawidłowa wartość';
+    return this.isValid.salonZip;
+  }
+
+  isSalonPhone1Valid(): boolean {
+    this.isValid.salonPhone1 = this.validation.isPhoneValid(this.value.salonPhone1.trim());
+    this.invalidMsg.salonPhone1 = 'nie prawidłowa wartość';
+    return this.isValid.salonPhone1;
+  }
+
+  isSalonPhone2Valid(): boolean {
+    this.isValid.salonPhone2 = this.validation.isPhoneValid(this.value.salonPhone2.trim());
+    this.invalidMsg.salonPhone2 = 'nie prawidłowa wartość';
+    return this.isValid.salonPhone2;
+  }
+
+  isRegulationAccept(): boolean {
+    this.invalidMsg.regulationAccept = 'Przed rejestracją należy zapoznać się z regulaminem serwisu i zaakceptować go';
+    return this.value.isRegulationAccept;
+  }
+
+  verifyForm(): void {
+    this.isEmailValid();
+    this.isPasswordValid();
+    this.isConfirmValid();
+    this.isSecretWordValid();
+    this.isCompanyAddressValid();
+    this.isCompanyCityValid();
+    this.isCompanyCountryValid();
+    this.isCompanyNameValid();
+    this.isCompanyNipValid();
+    this.isCompanyNipEUValid();
+    this.isCompanyPersonNameValid();
+    this.isCompanyPersonSurnameValid();
+    this.isCompanyPhoneValid();
+    this.isCompanyZipValid();
+    this.isSalonAddressValid();
+    this.isSalonCityValid();
+    this.isSalonCountryValid();
+    this.isSalonNameValid();
+    this.isSalonPhone1Valid();
+    this.isSalonPhone2Valid();
+    this.isSalonZipValid();
+    this.isRegulationAccept();
+  }
+
+  isFormValid(): boolean {
+    return this.isEmailValid() && this.isPasswordValid() && this.isConfirmValid() && this.isSecretWordValid()
+      && this.isCompanyAddressValid() && this.isCompanyCityValid() && this.isCompanyCountryValid() && this.isCompanyNameValid()
+      && this.isCompanyNipValid() && this.isCompanyPersonNameValid() && this.isCompanyPersonSurnameValid() && this.isCompanyPhoneValid()
+      && this.isCompanyZipValid() && this.isSalonAddressValid() && this.isSalonCityValid() && this.isSalonCountryValid() && this.isSalonNameValid()
+      && this.isSalonPhone1Valid() && this.isSalonPhone2Valid() && this.isSalonZipValid()
+      && this.isRegulationAccept() && this.isCompanyNipEUValid();
+  }
+
+  getCompanyInfoByNip() {
+    if (this.value.isNotPolandCompany) return;
+    let companyData = {
+      nip: this.value.companyNip,
+    };
+    this.gus.getInfo(companyData, (companyData) => {
+      if (companyData !== null && companyData['success'] && !companyData['data'][0]["ErrorCode"]) {
+        let result = {
+          success: companyData['success'],
+          company: companyData['data'][0],
+        }
+        let company = result.company;
+        this.isValid.companyNip = true;
+        this.value.companyName = company['Nazwa'].toString();
+        this.isValid.companyName = true;
+        this.value.companyCountry = 'PL';
+        this.isValid.companyCountry = true;
+        this.value.companyAddress = [company['Ulica'].toString(), 'nr ' + company['NrNieruchomosci'].toString(), 'lok. ' + company['NrLokalu'].toString()].join(', ');
+        this.isValid.companyAddress = true;
+        this.value.companyZip = company ['KodPocztowy'].toString();
+        this.isValid.companyZip = true;
+        this.value.companyCity = company['Miejscowosc'].toString();
+        this.isValid.companyCity = true;
+      } else {
+        this.value.companyName = '';
+        this.value.companyCountry = '';
+        this.value.companyAddress = '';
+        this.value.companyZip = '';
+        this.value.companyCity = '';
+        this.verifyForm();
+        this.isValid.companyNip = false;
+        this.invalidMsg.companyNip = 'NIP nie istnieje';
+      }
+    });
+  }
+
+  registrationCommissionFormSubmit() {
+    this.verifyForm();
+    if (this.isFormValid()) {
+      const user: UserModel = new UserModel();
+      user.email = this.value.email.trim();
+      user.password = this.value.password.trim();
+      user.secretWord = this.value.secretWord.trim();
+      user.roles = [RolesModel.UserRole, RolesModel.BrokerRole];
+      user.isGoogleAuthenticate = false;
+      user.isFBAuthenticate = false;
+
+      const company: CompanyModel = new CompanyModel();
+      company.nip = this.value.companyNip.trim();
+      company.nipEu = this.value.hasNipEu ? this.value.companyNipEU.trim() : '';
+      company.name = this.value.companyName.trim();
+      company.country = this.value.companyCountry.trim();
+      company.address = this.value.companyAddress.trim();
+      company.zip = this.value.companyZip.trim();
+      company.city = this.toCapitalize(this.value.companyCity.trim());
+      company.personName = this.toCapitalize(this.value.companyPersonName.trim());
+      company.personSurname = this.toCapitalize(this.value.companyPersonSurname.trim());
+      company.phone = this.value.companyPhone.trim();
+      company.creatorId = '';
+
+      const salon: SalonModel = new SalonModel();
+      salon.name = this.value.salonName.trim();
+      salon.country = this.value.salonCountry.trim();
+      salon.address = this.value.salonAddress.trim();
+      salon.zip = this.value.salonZip.trim();
+      salon.city = this.toCapitalize(this.value.salonCity.trim());
+      salon.phones = [this.value.salonPhone1.trim(), this.value.salonPhone2.trim()];
+      salon.creatorId = '';
+
+      this.authenticateS
+        .isEmailExist(user.email)
+        .subscribe((data) => {
+          if (data['success']) {
+            this.isValid.email = false;
+            this.invalidMsg.email = 'wybierz inny';
+            this.value.password = '';
+            this.value.confirm = '';
+            return false;
+          } else {
+            this.authenticateS
+              .registrationBroker(user, company, salon)
+              .subscribe((data) => {
+                this.startTimer();
+                if (data['success']) {
+                  this.isSuccess = true;
+                  setTimeout(() => {
+                    this.router.navigate(['login']);
+                  }, 4000);
+                } else {
+                  this.isServerDontResponse = true;
+                  setTimeout(() => {
+                    this.isServerDontResponse = false;
+                  }, 4000);
+                }
+              });
+          }
+        });
+
+    } else {
+      this.value.isRegulationAccept = false;
+    }
+  }
+
+  clearCompanyData() {
+    this.value.companyName = '';
+    this.value.companyCountry = '';
+    this.value.companyAddress = '';
+    this.value.companyZip = '';
+    this.value.companyCity = '';
+  }
+
+  redirectTimer;
+  redirectTimeLeft = 5;
+
+  startTimer(): void {
+    this.redirectTimer = setInterval(() => {
+      if (this.redirectTimeLeft > 0) {
+        this.redirectTimeLeft--;
+      } else {
+        this.redirectTimeLeft = 5;
+        clearInterval(this.redirectTimer);
+      }
+    }, 1000)
+  }
+
+  toCapitalize(word: string): string {
+    return word.charAt(0).toUpperCase() + word.slice(1);
+  }
 }
