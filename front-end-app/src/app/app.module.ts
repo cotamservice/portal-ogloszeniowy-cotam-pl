@@ -9,10 +9,10 @@ import {FooterComponent} from './footer/footer.component';
 import {HomeComponent} from './home/home.component';
 
 import {ToStartArrowComponent} from './to-start-arrow/to-start-arrow.component';
-import {RegistrationLoginComponent} from './registration-login/registration-login.component';
-import {RegistrationIndividualComponent} from './registration-individual/registration-individual.component';
-import {RegistrationCommissionComponent} from './registration-commission/registration-commission.component';
-import {RegistrationBrokerComponent} from './registration-broker/registration-broker.component';
+import {RegistrationLoginComponent} from './registration/registration-login/registration-login.component';
+import {RegistrationIndividualComponent} from './registration/registration-individual/registration-individual.component';
+import {RegistrationCommissionComponent} from './registration/registration-commission/registration-commission.component';
+import {RegistrationBrokerComponent} from './registration/registration-broker/registration-broker.component';
 import {FormsModule} from "@angular/forms";
 import {RegistrationFormValidationService} from "./service/form/registration-form-validation.service";
 import {AuthenticateService} from "./service/authenticate/authenticate.service";
@@ -20,8 +20,8 @@ import {HttpClientModule} from "@angular/common/http";
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {AuthenticateGuard} from "./authenticate.guard.ts";
 import {JwtModule} from "@auth0/angular-jwt";
-import {RegistrationLoginGoogleComponent} from './registration-login-google/registration-login-google.component';
-import {RegistrationLoginFbComponent} from './registration-login-fb/registration-login-fb.component';
+import {RegistrationLoginGoogleComponent} from './registration/registration-login-google/registration-login-google.component';
+import {RegistrationLoginFbComponent} from './registration/registration-login-fb/registration-login-fb.component';
 import { PostAddComponent } from './post-add/post-add.component';
 
 export function tokenGetter() {

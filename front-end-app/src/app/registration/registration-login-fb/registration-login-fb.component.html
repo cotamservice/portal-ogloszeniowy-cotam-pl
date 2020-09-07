@@ -1,5 +1,5 @@
 <div [ngClass]="{'login-remote-api':true}" (click)="authenticateIn()">
-  <img [ngClass]="{'login-remote-api-icon': true}" src="assets/img/registration/login-fb-icon.png">
+  <img [ngClass]="{'login-remote-api-icon': true}" src="../../../assets/img/registration/login-fb-icon.png">
   <p [ngClass]="{'login-remote-api-title':true}">Zaloguj się przez facebook</p>
   <span *ngIf="errorMsg.length>0" [ngClass]="{'login-remote-api-title-error':true,'error':true}">{{errorMsg}}</span>
 </div>

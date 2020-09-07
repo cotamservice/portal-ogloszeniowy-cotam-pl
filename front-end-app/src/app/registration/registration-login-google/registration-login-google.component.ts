@@ -1,9 +1,9 @@
 import {Component, OnInit,NgZone} from '@angular/core';
-import {AuthenticateService} from "../service/authenticate/authenticate.service";
-import {UserModel} from "../model/user.model";
+import {AuthenticateService} from "../../service/authenticate/authenticate.service";
+import {UserModel} from "../../model/user.model";
 import {Router} from "@angular/router";
-import {RolesModel} from "../model/roles.model";
-/// <reference path="../../../node_modules/@types/gapi/index.d.ts" />
+import {RolesModel} from "../../model/roles.model";
+/// <reference path="../../../../node_modules/@types/gapi/index.d.ts" />
 declare var gapi: any;
 
 @Component({

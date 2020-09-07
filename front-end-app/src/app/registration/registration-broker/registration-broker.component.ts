@@ -1,22 +1,22 @@
 import {Component, OnInit} from '@angular/core';
-import {RegistrationFormValidationService} from "../service/form/registration-form-validation.service";
-import {AuthenticateService} from "../service/authenticate/authenticate.service";
-import {Router} from "@angular/router";
-import {UserModel} from "../model/user.model";
-import {RolesModel} from "../model/roles.model";
-import {CompanyTypeModel} from "../model/company.type.model";
+import {CompanyTypeModel} from "../../model/company.type.model";
+import {RegistrationFormValidationService} from "../../service/form/registration-form-validation.service";
+import {AuthenticateService} from "../../service/authenticate/authenticate.service";
 import {HttpClient} from "@angular/common/http";
-import {GusService} from "../service/gus/gus.service";
-import {CountryService} from "../service/country/country.service";
-import {CompanyModel} from "../model/company.model";
-import {SalonModel} from "../model/salon.model";
+import {GusService} from "../../service/gus/gus.service";
+import {CountryService} from "../../service/country/country.service";
+import {Router} from "@angular/router";
+import {UserModel} from "../../model/user.model";
+import {RolesModel} from "../../model/roles.model";
+import {CompanyModel} from "../../model/company.model";
+import {SalonModel} from "../../model/salon.model";
 
 @Component({
-  selector: 'app-registration-commission',
-  templateUrl: './registration-commission.component.html',
-  styleUrls: ['./registration-commission.component.css']
+  selector: 'app-registration-broker',
+  templateUrl: './registration-broker.component.html',
+  styleUrls: ['./registration-broker.component.css']
 })
-export class RegistrationCommissionComponent implements OnInit {
+export class RegistrationBrokerComponent implements OnInit {
   isSuccess: boolean;
   isServerDontResponse: boolean;
 
@@ -322,7 +322,6 @@ export class RegistrationCommissionComponent implements OnInit {
     });
   }
 
-
   registrationCommissionFormSubmit() {
     this.verifyForm();
     if (this.isFormValid()) {
@@ -330,7 +329,7 @@ export class RegistrationCommissionComponent implements OnInit {
       user.email = this.value.email.trim();
       user.password = this.value.password.trim();
       user.secretWord = this.value.secretWord.trim();
-      user.roles = [RolesModel.UserRole, RolesModel.CommissionRole];
+      user.roles = [RolesModel.UserRole, RolesModel.BrokerRole];
       user.isGoogleAuthenticate = false;
       user.isFBAuthenticate = false;
 
@@ -367,7 +366,7 @@ export class RegistrationCommissionComponent implements OnInit {
             return false;
           } else {
             this.authenticateS
-              .registrationCommission(user, company, salon)
+              .registrationBroker(user, company, salon)
               .subscribe((data) => {
                 this.startTimer();
                 if (data['success']) {

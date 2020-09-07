@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {RegistrationFormValidationService} from "../service/form/registration-form-validation.service";
-import {AuthenticateService} from "../service/authenticate/authenticate.service";
+import {RegistrationFormValidationService} from "../../service/form/registration-form-validation.service";
+import {AuthenticateService} from "../../service/authenticate/authenticate.service";
 import {Router} from "@angular/router";
-import {RolesModel} from "../model/roles.model";
-import {UserModel} from "../model/user.model";
+import {RolesModel} from "../../model/roles.model";
+import {UserModel} from "../../model/user.model";
 
 @Component({
   selector: 'app-registration-individual',
