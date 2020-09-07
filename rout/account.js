@@ -146,7 +146,6 @@ router.post('/registration/broker', (req, res) => {
             await session.commitTransaction();
         } catch (e) {
             err = e;
-            console.log(e.message);
         } finally {
             session.endSession();
         }

@@ -56,10 +56,3 @@ module.exports.comparePass = (passToCompare, passCompareWith, cb) => {
         cb(null, isMatch);
     });
 }
-
-module.exports.role = {
-    individual: 'individual',
-    commission: 'commission',
-    broker: 'broker',
-    user: 'service_user'
-}
