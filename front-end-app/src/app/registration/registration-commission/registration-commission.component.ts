@@ -4,7 +4,6 @@ import {AuthenticateService} from "../../service/authenticate/authenticate.servi
 import {Router} from "@angular/router";
 import {UserModel} from "../../model/user.model";
 import {RolesModel} from "../../model/roles.model";
-import {CompanyTypeModel} from "../../model/company.type.model";
 import {HttpClient} from "@angular/common/http";
 import {GusService} from "../../service/gus/gus.service";
 import {CountryService} from "../../service/country/country.service";
@@ -26,7 +25,6 @@ export class RegistrationCommissionComponent implements OnInit {
     confirm: '',
     secretWord: '',
     isRegulationAccept: false,
-    selectCompanyOptionList: Object.values(CompanyTypeModel),
     companyNip: '',
     companyNipEU: '',
     hasNipEu: false,

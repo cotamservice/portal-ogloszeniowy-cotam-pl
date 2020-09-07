@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {CompanyTypeModel} from "../../model/company.type.model";
 import {RegistrationFormValidationService} from "../../service/form/registration-form-validation.service";
 import {AuthenticateService} from "../../service/authenticate/authenticate.service";
 import {HttpClient} from "@angular/common/http";
@@ -26,7 +25,6 @@ export class RegistrationBrokerComponent implements OnInit {
     confirm: '',
     secretWord: '',
     isRegulationAccept: false,
-    selectCompanyOptionList: Object.values(CompanyTypeModel),
     companyNip: '',
     companyNipEU: '',
     hasNipEu: false,
