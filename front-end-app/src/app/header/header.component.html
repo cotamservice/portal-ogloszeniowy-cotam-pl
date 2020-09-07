@@ -95,7 +95,7 @@
         <img *ngIf="isAccountBrokerLogin()" [ngClass]="{'menu-account-icon':true}" src="assets/img/header/brokerIcon.png">
         <img *ngIf="isAccountCommissionLogin()" [ngClass]="{'menu-account-icon':true}" src="assets/img/header/commissionIcon.png">
         <img *ngIf="isAccountIndividualLogin()" [ngClass]="{'menu-account-icon':true}" src="assets/img/header/individualIcon.png">
-        <span *ngIf="isAccountIndividualLogin()" [ngClass]="{'menu-account-type': true}">{{accountTypeName}}</span>
+        <span [ngClass]="{'menu-account-type': true}">{{accountTypeName}}</span>
         <span [ngClass]="{'menu-account-name': true}">{{accountName}}</span>
       </div>
       <div *ngIf="!isLogin()" [ngClass]="{'menu-account':true, 'menu-account-pick':isAccountPick}" (click)="pickAccount()">
