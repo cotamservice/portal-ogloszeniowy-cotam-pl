@@ -5,7 +5,6 @@ import {Router} from "@angular/router";
 import {UserModel} from "../model/user.model";
 import {RolesModel} from "../model/roles.model";
 import {CompanyTypeModel} from "../model/company.type.model";
-import {map} from "rxjs/operators";
 import {HttpClient} from "@angular/common/http";
 import {GusService} from "../service/gus/gus.service";
 import {CountryService} from "../service/country/country.service";
@@ -327,7 +326,6 @@ export class RegistrationCommissionComponent implements OnInit {
   registrationCommissionFormSubmit() {
     this.verifyForm();
     if (this.isFormValid()) {
-      console.log('FORM VALID');
       const user: UserModel = new UserModel();
       user.email = this.value.email.trim();
       user.password = this.value.password.trim();
@@ -335,7 +333,6 @@ export class RegistrationCommissionComponent implements OnInit {
       user.roles = [RolesModel.UserRole, RolesModel.CommissionRole];
       user.isGoogleAuthenticate = false;
       user.isFBAuthenticate = false;
-      console.log("USER: " + user);
 
       const company: CompanyModel = new CompanyModel();
       company.nip = this.value.companyNip.trim();
@@ -349,7 +346,6 @@ export class RegistrationCommissionComponent implements OnInit {
       company.personSurname = this.toCapitalize(this.value.companyPersonSurname.trim());
       company.phone = this.value.companyPhone.trim();
       company.creatorId = '';
-      console.log("COMPANY: " + company);
 
       const salon: SalonModel = new SalonModel();
       salon.name = this.value.salonName.trim();
@@ -359,7 +355,6 @@ export class RegistrationCommissionComponent implements OnInit {
       salon.city = this.toCapitalize(this.value.salonCity.trim());
       salon.phones = [this.value.salonPhone1.trim(), this.value.salonPhone2.trim()];
       salon.creatorId = '';
-      console.log("SALON: " + salon);
 
       this.authenticateS
         .isEmailExist(user.email)
