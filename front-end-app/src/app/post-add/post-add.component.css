@@ -1,0 +1,46 @@
+nav ul {
+  padding: 0;
+  margin: 0;
+  border-bottom: 3px solid #e9bc09;
+}
+
+.element {
+  display: inline-block;
+  width: 25%;
+  line-height: 1.25rem;
+  font-size: 1.25rem;
+  padding: 24px 0;
+  margin: 0;
+  text-align: center;
+}
+
+.element:hover {
+  background-color: #f6cb20 !important;
+}
+
+.element-icon {
+  display: inline-block;
+  height: 24px;
+  margin: 0 12px;
+}
+
+.element-text {
+  display: inline-block;
+  text-transform: uppercase;
+  margin: 0;
+  vertical-align: middle;
+}
+
+.select-element {
+  background-color: #e9bc09;
+}
+
+.unselect-element {
+  background-color: transparent;
+}
+
+@media (max-width: 1360px) {
+  .element-text {
+    display: none;
+  }
+}

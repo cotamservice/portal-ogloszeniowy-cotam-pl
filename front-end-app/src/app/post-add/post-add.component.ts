@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-post-add',
@@ -6,10 +6,27 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./post-add.component.css']
 })
 export class PostAddComponent implements OnInit {
+  isPCFormOpen: boolean = true;
+  isPhoneFormOpen: boolean;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
 
+  closeAllForms(): void {
+    this.isPCFormOpen = false;
+    this.isPhoneFormOpen = false;
+  }
+
+  openPCForm(): void {
+    this.closeAllForms();
+    this.isPCFormOpen = true;
+  }
+
+  openPhoneForm() {
+    this.closeAllForms();
+    this.isPhoneFormOpen = true;
+  }
 }

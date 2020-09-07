@@ -23,6 +23,8 @@ import {JwtModule} from "@auth0/angular-jwt";
 import {RegistrationLoginGoogleComponent} from './registration/registration-login-google/registration-login-google.component';
 import {RegistrationLoginFbComponent} from './registration/registration-login-fb/registration-login-fb.component';
 import { PostAddComponent } from './post-add/post-add.component';
+import { PostAddPcComponent } from './post-add/post-add-pc/post-add-pc.component';
+import { PostAddPhoneComponent } from './post-add/post-add-phone/post-add-phone.component';
 
 export function tokenGetter() {
   let localToken = localStorage.getItem("authenticate_token");
@@ -54,6 +56,8 @@ export function tokenGetter() {
     RegistrationLoginGoogleComponent,
     RegistrationLoginFbComponent,
     PostAddComponent,
+    PostAddPcComponent,
+    PostAddPhoneComponent,
   ],
   imports: [
     BrowserModule,

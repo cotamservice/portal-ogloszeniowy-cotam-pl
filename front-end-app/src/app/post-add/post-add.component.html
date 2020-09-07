@@ -1,1 +1,24 @@
-<p>post-add works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <label [ngClass]="{'title-label-175':true}">Dodaj ogoszenie</label>
+      <nav>
+        <ul>
+          <li [ngClass]="{'select-element': isPCFormOpen, 'unselect-element': !isPCFormOpen, 'element': true}"
+              (click)="openPCForm()">
+            <img [ngClass]="{'element-icon': true}" src="assets/img/postadd/PC.png">
+            <p [ngClass]="{'element-text': true}">KOMPUTER</p>
+          </li>
+          <li
+            [ngClass]="{'select-element': isPhoneFormOpen, 'unselect-element': !isPhoneFormOpen, 'element': true}"
+            (click)="openPhoneForm()">
+            <img [ngClass]="{'element-icon': true}" src="assets/img/postadd/telephone.png">
+            <p [ngClass]="{'element-text': true}">TELEFON</p>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
+<app-post-add-pc *ngIf="isPCFormOpen"></app-post-add-pc>
+<app-post-add-phone *ngIf="isPhoneFormOpen"></app-post-add-phone>
