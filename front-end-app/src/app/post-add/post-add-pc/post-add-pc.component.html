@@ -100,7 +100,7 @@
     <div class="col-lg-4 col-md-12">
       <label for="post-mileage" [ngClass]="{'input-label':true}">Przebieg
         <span *ngIf="!isValid.mileage" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.mileage}}</span>
-        <input type="number" id="post-mileage" [ngClass]="{'input':true,'input-invalid':!isValid.mileage}" type="text"
+        <input type="number" id="post-mileage" [ngClass]="{'input':true,'input-invalid':!isValid.mileage}"
                [(ngModel)]="value.mileage" name="post-title" (change)="isMileageValid()"
                placeholder="wpiś przebieg">
       </label>
@@ -108,7 +108,7 @@
     <div class="col-lg-4 col-md-12">
       <label for="post-production" [ngClass]="{'input-label':true}">Rok produkcji
         <span *ngIf="!isValid.productionYear" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.productionYear}}</span>
-        <input type="number" id="post-production" [ngClass]="{'input':true,'input-invalid':!isValid.productionYear}" type="text"
+        <input type="number" id="post-production" [ngClass]="{'input':true,'input-invalid':!isValid.productionYear}"
                [(ngModel)]="value.productionYear" name="post-title" (change)="isProductionYearValid()"
                placeholder="wpiś rok produkcji">
       </label>

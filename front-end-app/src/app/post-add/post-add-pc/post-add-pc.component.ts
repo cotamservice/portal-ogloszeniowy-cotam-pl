@@ -25,7 +25,7 @@ export class PostAddPcComponent implements OnInit {
     pickedCat: '',
     title: '',
     markId: '',
-    model: '',
+    model: [],
     marks: [],
     models: [],
     mileage: 0,
@@ -150,11 +150,11 @@ export class PostAddPcComponent implements OnInit {
   }
 
   isMarkValid(): boolean {
-    return this.value.markId.length > 0;
+    return this.validationS.isMarkValid(this.value.markId);
   }
 
-  isModelValid() {
-    return this.value.model.length > 0;
+  isModelValid(): boolean {
+    return this.validationS.isModelValid(this.value.model);
 
   }
 
