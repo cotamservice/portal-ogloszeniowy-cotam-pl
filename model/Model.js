@@ -22,4 +22,8 @@ module.exports.getAllByModelBodyId = (modelBodyId, cb) => {
     const query = {modelBodyId: modelBodyId};
     Model.find(query, cb);
 }
+module.exports.getAll = (cb) => {
+    const query = {};
+    Model.find(query, cb);
+}
 

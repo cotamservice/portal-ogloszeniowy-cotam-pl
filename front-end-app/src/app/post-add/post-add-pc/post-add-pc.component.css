@@ -1,0 +1,39 @@
+
+.cat-container {
+  display: inline-block;
+  margin: 12px 24px;
+  padding: 0;
+  list-style: none;
+  text-transform: lowercase;
+}
+
+.cat-element {
+  display: inline-block;
+  color: black;
+  cursor: pointer;
+  border: 1px solid white;
+  padding: 12px 0;
+  text-align: center;
+}
+
+.cat-element span {
+  display: block;
+  vertical-align: top;
+  margin: 0 6px;
+}
+
+.cat-element:hover {
+  border: 1px solid #45a1ac;
+}
+
+.cat-element-icon {
+  height: 20px;
+  margin: auto 12px;
+  vertical-align: bottom;
+}
+
+.cat-element-pick {
+  border: 1px solid #3b8790;
+  background-color: #3b8790;
+  color: white;
+}

@@ -1,5 +1,4 @@
 import {DeserializableModel} from "./deserializable.model";
-import {CompanyTypeModel} from "./company.type.model";
 
 export class CompanyModel implements DeserializableModel {
   id: string;

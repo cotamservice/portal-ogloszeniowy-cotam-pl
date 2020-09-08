@@ -21,4 +21,7 @@ module.exports.getAllByMarkId = (markId, cb) => {
     const query = {markId: markId};
     ModelBody.find(query, cb);
 }
-
+module.exports.getAll = (cb) => {
+    const query = {};
+    ModelBody.find(query, cb);
+}
