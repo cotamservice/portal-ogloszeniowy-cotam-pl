@@ -21,6 +21,9 @@ export class PostFormValidationService {
 
   isMarkValid(value: string) {
     return value.length > 0;
+  }
 
+  isPhotosDescriptionValid(description: string) {
+    return description.length > 0;
   }
 }

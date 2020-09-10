@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
-      <label [ngClass]="{'input-label': true}">Kategoria:</label>
+      <label [ngClass]="{'title-label-125': true}">Kategoria:</label>
     </div>
     <div class="col-12">
       <ul [ngClass]="{'cat-container': true}">
@@ -63,7 +63,7 @@
       </ul>
     </div>
     <div class="col-12">
-      <label for="post-title" [ngClass]="{'input-label':true}">Tytuł
+      <label for="post-title" [ngClass]="{'title-label-125':true,'input-label':true}">Tytuł
         <span *ngIf="!isValid.title" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.title}}</span>
         <input id="post-title" [ngClass]="{'input':true,'input-invalid':!isValid.title}" type="text"
                [(ngModel)]="value.title" name="post-title" (change)="isTitleValid()"
@@ -73,7 +73,7 @@
   </div>
   <div class="row">
     <div class="col-lg-4 col-md-12">
-      <label for="post-mark" [ngClass]="{'input-label':true}">Mark
+      <label for="post-mark" [ngClass]="{'title-label-125':true,'input-label':true}">Marka
         <span *ngIf="!isValid.markId" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.markId}}</span>
         <select id="post-mark" [ngClass]="{'input':true,'input-invalid':!isValid.markId}"
                 [(ngModel)]="value.markId" name="post-mark" (change)="isMarkValid()">
@@ -82,7 +82,7 @@
       </label>
     </div>
     <div class="col-lg-4 col-md-12" *ngIf="isMarkValid()">
-      <label for="post-model" [ngClass]="{'input-label':true}">Model
+      <label for="post-model" [ngClass]="{'title-label-125':true,'input-label':true}">Model
         <span *ngIf="!isValid.model" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.model}}</span>
         <select id="post-model" [ngClass]="{'input':true,'input-invalid':!isValid.model}"
                 [(ngModel)]="value.model" name="post-model" (change)="isModelValid()">
@@ -98,7 +98,7 @@
   </div>
   <div class="row">
     <div class="col-lg-4 col-md-12">
-      <label for="post-mileage" [ngClass]="{'input-label':true}">Przebieg
+      <label for="post-mileage" [ngClass]="{'title-label-125':true,'input-label':true}">Przebieg
         <span *ngIf="!isValid.mileage" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.mileage}}</span>
         <input type="number" id="post-mileage" [ngClass]="{'input':true,'input-invalid':!isValid.mileage}"
                [(ngModel)]="value.mileage" name="post-title" (change)="isMileageValid()"
@@ -106,7 +106,7 @@
       </label>
     </div>
     <div class="col-lg-4 col-md-12">
-      <label for="post-production" [ngClass]="{'input-label':true}">Rok produkcji
+      <label for="post-production" [ngClass]="{'title-label-125':true,'input-label':true}">Rok produkcji
         <span *ngIf="!isValid.productionYear" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.productionYear}}</span>
         <input type="number" id="post-production" [ngClass]="{'input':true,'input-invalid':!isValid.productionYear}"
                [(ngModel)]="value.productionYear" name="post-title" (change)="isProductionYearValid()"
@@ -114,4 +114,65 @@
       </label>
     </div>
   </div>
+  <div class="row">
+    <div class="col-12">
+      <label [ngClass]="{'title-label-125':true,'input-label': true}">zdjęcie i opis</label>
+    </div>
+    <div class="col-12">
+      <label for="post-photo" [ngClass]="{'button-blue-100':true}" class="text-left">
+        <img [ngClass]="{'btn-icon-photo':true}" src="/assets/img/postadd/addPhotoIcon.png">
+        dodaj zdjęcie
+        <input id="post-photo" type="file" (change)="uploadFileEvent($event); updatePreview()" multiple accept=".png, .bmp, .jpg, .jpeg">
+      </label>
+    </div>
+    <div class="col-12">
+      <div [ngClass]="{'photos':true}">
+        <ng-container *ngIf="value.photosPreview.length === 0">
+          <img [ngClass]="{'photo':true}" src="/assets/img/postadd/defaultPhotoIcon.png">
+        </ng-container>
+        <ng-container *ngFor="let imgsrc of value.photosPreview; index as i">
+          <div [ngClass]="{'remove':true}" (click)="removePhotoPreview(i)">
+            <div [ngClass]="{'remove-icon':true}"></div>
+            <img [ngClass]="{'photo':true}" src="{{imgsrc}}">
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <div class="col-12">
+      <label for="post-photo-description" [ngClass]="{'title-label-125':true,'input-label':true}">Opisz szczegóły
+        <span *ngIf="!isValid.photosDescription" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.photosDescription}}</span>
+        <textarea id="post-photo-description" [ngClass]="{'input':true,'input-invalid':!isValid.photosDescription, 'description': true}"
+                  [(ngModel)]="value.photosDescription" name="post-title" (change)="isPhotosDescriptionValid()"
+                  placeholder="wpiś opis ogłoszenia lub opis zdjecia">
+        </textarea>
+      </label>
+    </div>
+    <div class="col-12">
+      <label [ngClass]="{'button-blue-100':true}" class="text-left" (click)="addLastPhotosAndDescriptions()">
+        <img [ngClass]="{'btn-icon-add-photo-description-row':true}" src="/assets/img/postadd/addPhotoAndDescriptionRowIcon.png">
+        dodaj kolejny wiersz
+      </label>
+    </div>
+  </div>
+  <ng-container *ngFor="let photosAndDescription of value.photosAndDescription.reverse(); index as i">
+    <div class="row">
+      <div class="col-12">
+        <div [ngClass]="{'photo-description-row': true}">
+          <ng-container *ngIf="photosAndDescription[0].length>0">
+            <ng-container *ngFor="let imgsrc of photosAndDescription[0]">
+              <img [ngClass]="{'photo':true}" src="{{imgsrc}}">
+            </ng-container>
+          </ng-container>
+          <ng-container *ngIf=" photosAndDescription[1].length > 0">
+            <p [ngClass]="{'description': true}">{{photosAndDescription[1]}}</p>
+          </ng-container>
+        </div>
+      </div>
+      <div class="col-12" *ngIf="photosAndDescription[0].length>0 || photosAndDescription[1].length > 0">
+        <label [ngClass]="{'button-blue-100':true}" class="text-left" (click)="editPhotosAndDescription(value.photosAndDescription.length-i-1)">
+          edytować wiersz
+        </label>
+      </div>
+    </div>
+  </ng-container>
 </div>

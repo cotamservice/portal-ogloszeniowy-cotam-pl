@@ -153,7 +153,24 @@ form {
 .button-blue-small:hover {
   background-color: #3b8790;
 }
+.button-blue-100 {
+  color: white;
+  background-color: #45a1ac;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 1rem;
+  line-height: 43px;
+  padding: 0 12px;
+  width: calc(100% - 48px);
+  outline: none;
+  border-radius: 2px;
+  border-width: 0;
+  margin: 12px 24px;
+}
 
+.button-blue-100:hover {
+  background-color: #3b8790;
+}
 .link-a {
   font-size: 1rem;
   color: #45a1ac;

@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {CategoryModel} from "../../model/category.model";
 import {PostFormValidationService} from "../../service/form/post-form-validation.service";
 import {PostService} from "../../service/post/post.service";
+import {PostModel} from "../../model/post.model";
+import {AuthenticateService} from "../../service/authenticate/authenticate.service";
 
 @Component({
   selector: 'app-post-add-pc',
@@ -30,6 +32,10 @@ export class PostAddPcComponent implements OnInit {
     models: [],
     mileage: 0,
     productionYear: 0,
+    photos: [],
+    photosPreview: [],
+    photosDescription: '',
+    photosAndDescription: [],
 
   }
 
@@ -41,6 +47,8 @@ export class PostAddPcComponent implements OnInit {
     models: true,
     mileage: true,
     productionYear: true,
+    photos: true,
+    photosDescription: true,
   }
 
   invalidMsg = {
@@ -51,12 +59,15 @@ export class PostAddPcComponent implements OnInit {
     models: '',
     mileage: '',
     productionYear: '',
+    photos: '',
+    photosDescription: '',
   };
 
 
   constructor(
     private validationS: PostFormValidationService,
     private postS: PostService,
+    private authenticateS: AuthenticateService,
   ) {
   }
 
@@ -145,6 +156,10 @@ export class PostAddPcComponent implements OnInit {
     this.value.pickedCat = CategoryModel.PartCat;
   }
 
+  isCatPicked(): boolean {
+    return this.value.pickedCat.length > 0;
+  }
+
   isTitleValid(): boolean {
     return this.validationS.isPostTitleValid(this.value.title);
   }
@@ -197,5 +212,89 @@ export class PostAddPcComponent implements OnInit {
       }
     }
     return Number(result);
+  }
+
+  uploadFileEvent(event: Event) {
+    // @ts-ignore
+    let fileList: FileList = event.target.files;
+    for (let i = 0; i < fileList.length; ++i) {
+      let file: File = fileList[i];
+      this.value.photos.push(file);
+    }
+  }
+
+  updatePreview() {
+    let preview = [];
+    for (let i = 0; i < this.value.photos.length; ++i) {
+      let reader = new FileReader();
+      reader.onloadend = function () {
+        preview.push(reader.result);
+      };
+      reader.readAsDataURL(this.value.photos[i]);
+    }
+    this.value.photosPreview = preview;
+  }
+
+  isPhotosDescriptionValid() {
+    this.isValid.photosDescription = this.validationS.isPhotosDescriptionValid(this.value.photosDescription);
+    return this.isValid.photosDescription;
+  }
+
+  verifyForm(): void {
+    this.isCatPicked();
+    this.isTitleValid();
+    this.isMarkValid();
+    this.isModelValid();
+    this.isMileageValid();
+    this.isProductionYearValid();
+  }
+
+  isFormValid(): boolean {
+    return this.isCatPicked() && this.isTitleValid() && this.isMarkValid() && this.isModelValid() && this.isMileageValid()
+      && this.isProductionYearValid();
+  }
+
+  addLastPhotosAndDescriptions(): void {
+    let lastPhotosAndDescription = [this.value.photosPreview, this.value.photosDescription];
+    this.value.photosAndDescription.push(lastPhotosAndDescription);
+    this.value.photos =[];
+    this.value.photosPreview = [];
+    this.value.photosDescription = '';
+  }
+
+  preparePost() {
+    this.verifyForm();
+    if (this.isFormValid()) {
+      let post = new PostModel();
+      post.category = this.value.pickedCat;
+      post.title = this.value.title.trim();
+      post.markId = this.value.markId;
+      post.modelBodyId = this.value.model[0];
+      post.modelId = this.value.model[1];
+      post.mileAge = this.value.mileage;
+      post.productionYear = this.value.productionYear;
+      if (this.value.photosPreview.length > 0 || this.value.photosDescription.length > 0) {
+        this.addLastPhotosAndDescriptions();
+      }
+      post.photosAndDescription = this.value.photosAndDescription;
+      // start country
+
+      post.createOn = new Date();
+      if (this.authenticateS.isAuthenticate()) {
+        post.createById = this.authenticateS.getAuthenticateUser().id;
+      } else {
+        post.createById = "";
+      }
+    }
+  }
+
+  editPhotosAndDescription(i: number) {
+    this.value.photosPreview = this.value.photosAndDescription[i][0];
+    this.value.photosDescription = this.value.photosAndDescription[i][1];
+    this.value.photosAndDescription.splice(i, 1);
+  }
+
+  removePhotoPreview(i: number) {
+    this.value.photosPreview.splice(i, 1);
   }
 }

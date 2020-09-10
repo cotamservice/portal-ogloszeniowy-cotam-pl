@@ -37,3 +37,82 @@
   background-color: #3b8790;
   color: white;
 }
+
+.btn-icon-photo {
+  margin: 24px 24px 16px 12px;
+}
+
+#post-photo {
+  display: none;
+}
+
+.photos {
+  margin: 12px 24px;
+  border: 1px solid #9a9a9a;
+}
+
+.photo {
+  margin: 12px;
+  height: 200px;
+}
+
+.remove {
+  display: inline-block;
+  z-index: 2;
+  text-align: center;
+}
+
+.remove:hover img {
+  opacity: 0.5;
+}
+
+.remove:hover {
+  background-color: rgba(0, 0, 0, .5);
+}
+
+.remove .remove-icon {
+  height: 0;
+}
+
+.remove .remove-icon:before {
+  position: relative;
+  content: 'X';
+  font-size: 5rem;
+  font-weight: bold;
+  top: 10px;
+  color: white;
+  visibility: hidden;
+}
+
+.remove:hover .remove-icon:before {
+  visibility: visible;
+}
+
+.description {
+  border: 1px solid #9a9a9a;
+  height: 200px;
+  padding: 12px;
+  width: 100%;
+  resize: none;
+  line-height: 1.3rem;
+}
+
+.photo-description-row {
+  border: 1px solid #9a9a9a;
+  margin: 24px;
+  padding: 12px;
+}
+
+.photo-description-row .description {
+  border: none;
+  height: auto;
+}
+
+.btn-icon-add-photo-description-row {
+  margin: 24px 24px 24px 12px;
+}
+
+.photo-description-row p {
+  hyphens: auto;
+  word-wrap: break-word;
+}

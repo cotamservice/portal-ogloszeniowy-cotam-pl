@@ -38,8 +38,11 @@ nav ul {
 .unselect-element {
   background-color: transparent;
 }
+
 @media (max-width: 1360px) {
   .element-text {
     display: none;
   }
 }
+
+

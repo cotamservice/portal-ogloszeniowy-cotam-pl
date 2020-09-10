@@ -3,7 +3,19 @@ import {CategoryModel} from "./category.model";
 
 export class PostModel implements DeserializableModel {
   id: string;
-  category: CategoryModel;
+  category: string;
+  title: string;
+  markName: string;
+  markId: string;
+  modelBodyName: string;
+  modelBodyId: string;
+  modelName: string;
+  modelId: string;
+  mileAge: number;
+  productionYear: number;
+  photosAndDescription: Array<string>;
+  createOn: Date;
+  createById: string;
 
 
   deserializable(input: any): this {
