@@ -67,7 +67,8 @@ export function getCountryByCode(code) {
 }
 
 export function generate(htmlTagId, countryCode, callOnClick) {
-  new Mapka('mapka0', countryCode.toUpperCase(), callOnClick);
+  document.getElementById(htmlTagId).innerHTML = "";
+  new Mapka(htmlTagId, countryCode.toUpperCase(), callOnClick);
 }
 
 export function Mapka(htmlTagId, countryCode, callOnClick, callOnHoverIn, callOnHoverOut) {
