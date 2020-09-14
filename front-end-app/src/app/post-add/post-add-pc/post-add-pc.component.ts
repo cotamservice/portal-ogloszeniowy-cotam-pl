@@ -45,6 +45,7 @@ export class PostAddPcComponent implements OnInit {
     countries: [],
     regions: [],
     cities: [],
+    range: 0,
 
   }
 
@@ -272,11 +273,13 @@ export class PostAddPcComponent implements OnInit {
   }
 
   addLastPhotosAndDescriptions(): void {
-    let lastPhotosAndDescription = [this.value.photosPreview, this.value.photosDescription];
-    this.value.photosAndDescription.push(lastPhotosAndDescription);
-    this.value.photos = [];
-    this.value.photosPreview = [];
-    this.value.photosDescription = '';
+    if (this.value.photosPreview.length > 0 || this.value.photosDescription.length > 0) {
+      let lastPhotosAndDescription = [this.value.photosPreview, this.value.photosDescription];
+      this.value.photosAndDescription.push(lastPhotosAndDescription);
+      this.value.photos = [];
+      this.value.photosPreview = [];
+      this.value.photosDescription = '';
+    }
   }
 
   preparePost() {
@@ -294,7 +297,11 @@ export class PostAddPcComponent implements OnInit {
         this.addLastPhotosAndDescriptions();
       }
       post.photosAndDescription = this.value.photosAndDescription;
-      // start country
+      post.country = this.value.country;
+      post.region = this.value.region;
+      post.city = this.value.city;
+      post.range = this.value.range;
+
 
       post.createOn = new Date();
       if (this.authenticateS.isAuthenticate()) {

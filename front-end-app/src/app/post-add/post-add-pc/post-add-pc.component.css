@@ -122,3 +122,33 @@
   width: 400px;
   height: 450px;
 }
+
+#post-distance-from-city {
+  margin-top: 20px;
+  outline: none;
+  opacity: .8;
+  width: 100%;
+  height: 4px;
+  background-color: #9a9a9a;
+  border-radius: 0;
+  -webkit-appearance: none;
+}
+
+#post-distance-from-city::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 5px;
+  height: 15px;
+  border-radius: 0;
+  background: #9a9a9a;
+  cursor: pointer;
+}
+
+#post-distance-from-city:hover {
+  opacity: 1;
+}
+
+.post-distance-value{
+  line-height: 43px;
+}
+

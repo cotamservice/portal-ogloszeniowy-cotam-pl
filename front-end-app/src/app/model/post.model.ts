@@ -16,6 +16,10 @@ export class PostModel implements DeserializableModel {
   photosAndDescription: Array<string>;
   createOn: Date;
   createById: string;
+  country: string;
+  region: string;
+  city: string;
+  range: number;
 
 
   deserializable(input: any): this {
