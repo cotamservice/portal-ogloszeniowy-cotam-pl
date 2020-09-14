@@ -116,3 +116,9 @@
   hyphens: auto;
   word-wrap: break-word;
 }
+
+#mapka0 {
+  display: inline-block;
+  width: 400px;
+  height: 450px;
+}

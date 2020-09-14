@@ -176,3 +176,48 @@
     </div>
   </ng-container>
 </div>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-3 col-md-12">
+      <label for="post-country" [ngClass]="{'title-label-125':true,'input-label':true}">Kraj
+        <span *ngIf="!isValid.country" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.country}}</span>
+        <select id="post-country" [ngClass]="{'input':true,'input-invalid':!isValid.country}"
+                [(ngModel)]="value.country" name="post-country" (change)="isCountryValid();updateCountries(); updateRegions()">
+          <option *ngFor="let country of value.countries;" value="{{country[0]}}">{{country[1]}}</option>
+        </select>
+      </label>
+    </div>
+    <div class="col-lg-3 col-md-12" *ngIf="isCountryValid()">
+      <label for="post-region" [ngClass]="{'title-label-125':true,'input-label':true}">Region
+        <span *ngIf="!isValid.region" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.region}}</span>
+        <select id="post-region" [ngClass]="{'input':true,'input-invalid':!isValid.region}"
+                [(ngModel)]="value.region" name="post-region" (change)="isRegionValid(); updateClickedRegionOnMapka()">
+          <option *ngFor="let region of value.regions;" value="{{region[0]}}">{{region[1]}}</option>
+        </select>
+      </label>
+    </div>
+    <div class="col-lg-3 col-md-12" *ngIf="isRegionValid()">
+      <label for="post-city" [ngClass]="{'title-label-125':true,'input-label':true}">Miasto
+        <span *ngIf="!isValid.city" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.city}}</span>
+        <select id="post-city" [ngClass]="{'input':true,'input-invalid':!isValid.city}"
+                [(ngModel)]="value.city" name="post-city" (change)="isCityValid()">
+          <option *ngFor="let city of value.cities;" value="{{city.code}}">{{city.name}}</option>
+        </select>
+      </label>
+    </div>
+    <div class="col-lg-3 col-md-12" *ngIf="isCityValid()">
+      <label for="post-distance-from-city" [ngClass]="{'title-label-125':true,'input-label':true}">Odlegwość
+        <!--        <span *ngIf="!isValid.distanceFromCity" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.distanceFromCity}}</span>-->
+        <!--        <select id="post-city" [ngClass]="{'input':true,'input-invalid':!isValid.distanceFromCity}"-->
+        <!--                [(ngModel)]="value.distanceFromCity" name="post-city" (change)="isDistanceFromCityValid()">-->
+        <!--          <option *ngFor="let city of value.cities;" value="{{city.code}}">{{city.name}}</option>-->
+        <!--        </select>-->
+      </label>
+    </div>
+    <div class="col-lg-8 col-md-12 text-center">
+      <div id="mapka0"></div>
+    </div>
+  </div>
+</div>
+
+

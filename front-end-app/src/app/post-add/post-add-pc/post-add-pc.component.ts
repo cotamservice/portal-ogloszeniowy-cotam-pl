@@ -5,6 +5,9 @@ import {PostService} from "../../service/post/post.service";
 import {PostModel} from "../../model/post.model";
 import {AuthenticateService} from "../../service/authenticate/authenticate.service";
 
+import {MapkaService} from "../../service/mapka/mapka.service";
+import {generate} from "../../../assets/js/mapka/mapka";
+
 @Component({
   selector: 'app-post-add-pc',
   templateUrl: './post-add-pc.component.html',
@@ -36,6 +39,12 @@ export class PostAddPcComponent implements OnInit {
     photosPreview: [],
     photosDescription: '',
     photosAndDescription: [],
+    country: '',
+    region: '',
+    city: '',
+    countries: [],
+    regions: [],
+    cities: [],
 
   }
 
@@ -49,6 +58,9 @@ export class PostAddPcComponent implements OnInit {
     productionYear: true,
     photos: true,
     photosDescription: true,
+    country: true,
+    region: true,
+    city: true,
   }
 
   invalidMsg = {
@@ -61,19 +73,24 @@ export class PostAddPcComponent implements OnInit {
     productionYear: '',
     photos: '',
     photosDescription: '',
+    country: '',
+    region: '',
+    city: '',
   };
-
 
   constructor(
     private validationS: PostFormValidationService,
     private postS: PostService,
     private authenticateS: AuthenticateService,
+    private mapkaS: MapkaService,
   ) {
   }
 
   ngOnInit(): void {
     this.setAllMarks();
     this.setAllModels();
+    this.value.countries = this.mapkaS.getCountriesCodeAndName();
+    this.updateCountries();
   }
 
   unPickAll(): void {
@@ -257,7 +274,7 @@ export class PostAddPcComponent implements OnInit {
   addLastPhotosAndDescriptions(): void {
     let lastPhotosAndDescription = [this.value.photosPreview, this.value.photosDescription];
     this.value.photosAndDescription.push(lastPhotosAndDescription);
-    this.value.photos =[];
+    this.value.photos = [];
     this.value.photosPreview = [];
     this.value.photosDescription = '';
   }
@@ -297,4 +314,47 @@ export class PostAddPcComponent implements OnInit {
   removePhotoPreview(i: number) {
     this.value.photosPreview.splice(i, 1);
   }
+
+  isCountryValid() {
+    return this.validationS.isCountryValid(this.value.country);
+  }
+
+  isRegionValid() {
+    return this.validationS.isRegionValid(this.value.region);
+  }
+
+  isCityValid() {
+    return this.validationS.isCityValid(this.value.city);
+  }
+
+  callWhenClickOnMapka = (country, region, regionName) => {
+    if (!this.isCountryValid()) {
+      this.value.country = region;
+      this.updateCountries();
+      this.updateRegions();
+    } else {
+      this.value.region = region;
+    }
+  }
+
+  updateCountries() {
+    let mapkaHtmlTagId = 'mapka0';
+    if (this.isCountryValid()) {
+      this.mapkaS.generateRegions(this.value.country, mapkaHtmlTagId, this.callWhenClickOnMapka);
+    } else {
+      this.mapkaS.generateCountries(mapkaHtmlTagId, this.callWhenClickOnMapka);
+    }
+  }
+
+  updateRegions() {
+    if (this.isCountryValid()) {
+      this.value.regions = this.mapkaS.getRegionsCodeAndName(this.value.country);
+    }
+  }
+
+  updateClickedRegionOnMapka() {
+    let mapkaHtmlTagId = 'mapka0';
+    this.mapkaS.generateRegionsAndClickByCode(this.value.country, mapkaHtmlTagId, this.callWhenClickOnMapka, this.value.region);
+  }
+
 }

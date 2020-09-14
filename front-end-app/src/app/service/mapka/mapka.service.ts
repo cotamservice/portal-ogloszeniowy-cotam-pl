@@ -5,7 +5,7 @@ import {
   getCountryRegionsByCode,
   getEuropeRegions,
   getCountryRegionsCodeAndNameByCode,
-  getEuropeRegionsCodeAndName, getCountryByCode, generate
+  getEuropeRegionsCodeAndName, getCountryByCode, generate, generateAndClick
 } from "../../../assets/js/mapka/mapka";
 
 
@@ -22,7 +22,7 @@ export class MapkaService {
   }
 
   generateCountries(htmlTagId: string, callOnClick) {
-    generate(htmlTagId, 'eu', callOnClick);
+    generate(htmlTagId, 'eu', callOnClick,);
   }
 
   getCountriesCodeAndName(): Array<Array<string>> {
@@ -31,5 +31,9 @@ export class MapkaService {
 
   getRegionsCodeAndName(countryCode: string): Array<Array<string>> {
     return getCountryRegionsCodeAndNameByCode(countryCode);
+  }
+
+  generateRegionsAndClickByCode(countryCode: string, htmlTagId: string, callOnClick, regionCode: string) {
+    generateAndClick(htmlTagId, countryCode, callOnClick, regionCode);
   }
 }

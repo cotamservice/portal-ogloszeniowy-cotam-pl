@@ -14,3 +14,5 @@ export declare function getCountryByCode(code);
 
 export declare function generate(htmlTagId, countryCode, callOnClick);
 
+export declare  function generateAndClick(htmlTagId,countryCode,callOnClick, regionCode);
+

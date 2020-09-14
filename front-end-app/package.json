@@ -23,7 +23,9 @@
     "@auth0/angular-jwt": "^5.0.1",
     "@types/gapi": "0.0.39",
     "@types/gapi.auth2": "0.0.52",
+    "@types/raphael": "^2.3.0",
     "angular2-flash-messages": "^3.0.1",
+    "raphael": "^2.3.0",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"

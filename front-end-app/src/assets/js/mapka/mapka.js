@@ -71,8 +71,14 @@ export function generate(htmlTagId, countryCode, callOnClick) {
   new Mapka(htmlTagId, countryCode.toUpperCase(), callOnClick);
 }
 
-export function Mapka(htmlTagId, countryCode, callOnClick, callOnHoverIn, callOnHoverOut) {
+export function generateAndClick(htmlTagId, countryCode, callOnClick, regionCode) {
+  document.getElementById(htmlTagId).innerHTML = "";
+  new Mapka(htmlTagId, countryCode.toUpperCase(), callOnClick, regionCode);
+}
+
+export function Mapka(htmlTagId, countryCode, callOnClick, clickedRegionCode) {
   let country = getCountryByCode(countryCode);
+  let regions = [];
   let staticColor = '#f5f5f5';
   let clickColor = '#c7c7c7';
   let hoverColor = '#c7c7c7';
@@ -110,10 +116,22 @@ export function Mapka(htmlTagId, countryCode, callOnClick, callOnHoverIn, callOn
   let clickedRegion = null;
   for (let region of country[country.length - 1]) {
     let obj = r.path(region[2]);
+    regions.push(obj);
     obj.attr(attributes);
     obj.countryCode = country[0];
     obj.regionCode = region[0];
     obj.name = region[1];
+    if (clickedRegionCode && region[0] === clickedRegionCode) {
+      if (clickedRegion !== null) {
+        clickedRegion.attr({
+          fill: staticColor
+        });
+      }
+      clickedRegion = obj;
+      clickedRegion.attr({
+        fill: clickColor
+      });
+    }
     obj
       .scale(scaleX, scaleY, 1, 1)
       .translate(translateX, translateY)
@@ -142,6 +160,6 @@ export function Mapka(htmlTagId, countryCode, callOnClick, callOnHoverIn, callOn
           fill: clickColor
         });
         callOnClick(obj.countryCode, obj.regionCode, obj.name);
-      })
+      });
   }
 }
