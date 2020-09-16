@@ -7,6 +7,7 @@ const state = require('./state');
 const drive = require('./drive');
 const fuel = require('./fuel');
 const gearbox = require('./gearbox');
+const equipment = require('./equipment');
 
 module.exports = {
     configUse: (app) => {
@@ -19,5 +20,6 @@ module.exports = {
         app.use('/drive', drive);
         app.use('/fuel', fuel);
         app.use('/gearbox', gearbox);
+        app.use('/equipment', equipment);
     }
 }
