@@ -26,4 +26,16 @@ export class PostFormValidationService {
   isPhotosDescriptionValid(description: string) {
     return description.length > 0;
   }
+
+  isCountryValid(country: string) {
+    return country.length > 0;
+  }
+
+  isRegionValid(region: string) {
+    return region.length > 0;
+  }
+
+  isCityValid(city: string) {
+    return city.length > 0;
+  }
 }

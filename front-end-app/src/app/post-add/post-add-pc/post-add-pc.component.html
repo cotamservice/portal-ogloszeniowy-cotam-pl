@@ -182,7 +182,7 @@
       <label for="post-country" [ngClass]="{'title-label-125':true,'input-label':true}">Kraj
         <span *ngIf="!isValid.country" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.country}}</span>
         <select id="post-country" [ngClass]="{'input':true,'input-invalid':!isValid.country}"
-                [(ngModel)]="value.country" name="post-country" (change)="isCountryValid();updateCountries(); updateRegions()">
+                [(ngModel)]="value.country" name="post-country" (change)="isCountryValid();updateCountries(); updateRegions(); updateUserSalonByCountry()">
           <option *ngFor="let country of value.countries;" value="{{country[0]}}">{{country[1]}}</option>
         </select>
       </label>
@@ -205,7 +205,6 @@
       </label>
     </div>
     <div class="col-lg-3 col-md-12" *ngIf="isCityValid()">
-
       <label for="post-distance-from-city" [ngClass]="{'title-label-125':true,'input-label':true}">Odlegwość (km)
         <div class="row">
           <div class="col-2 text-center">
@@ -215,14 +214,34 @@
             <input id="post-distance-from-city" type="range" [ngClass]="{'input':true}" [(ngModel)]="value.range" name="post-distance-from-city">
           </div>
         </div>
-
-
       </label>
     </div>
   </div>
   <div class="row">
     <div class="col-lg-8 col-md-12 text-center">
       <div id="mapka0"></div>
+    </div>
+    <div class="col-lg-4 col-md-12 text-left" *ngIf="value.salons.length > 0">
+      <div class="row">
+        <div class="col-12">
+          <label for="post-salon" [ngClass]="{'title-label-125':true,'input-label':true}">Adress
+            <span *ngIf="!isValid.pickedSalon" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.pickedSalon}}</span>
+            <select id="post-salon" [ngClass]="{'input':true,'input-invalid':!isValid.pickedSalon}"
+                    [(ngModel)]="value.pickedSalon" name="post-salon" (change)="isSalonValid()">
+              <option *ngFor="let salon of value.salons;" value="{{salon.id}}">{{salon.name}}</option>
+            </select>
+          </label>
+        </div>
+        <div class="col-12" *ngIf="isSalonPicked()" [ngClass]="{'salon-info':true}">
+          <p>nazwa: </p><p [ngClass]="{'salon-info-p':true}">{{value.salon.name}}</p><br>
+          <p>kod: </p><p [ngClass]="{'salon-info-p':true}">{{value.salon.zip}}</p><br>
+          <p>miasto: </p><p [ngClass]="{'salon-info-p':true}">{{value.salon.city}}</p><br>
+          <p>ulica: </p><p [ngClass]="{'salon-info-p':true}">{{value.salon.address}}</p><br>
+          <ng-container *ngFor="let phone of value.salon.phones">
+            <p>telefon: </p><p [ngClass]="{'salon-info-p':true}">{{phone}}</p><br>
+          </ng-container>
+        </div>
+      </div>
     </div>
   </div>
 </div>

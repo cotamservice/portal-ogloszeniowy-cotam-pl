@@ -35,3 +35,8 @@ const SalonSchema = mongoose.Schema({
 
 const Salon = module.exports = mongoose.model('Salon', SalonSchema);
 
+
+module.exports.getAllByUserId = (creatorId, cb) => {
+    const query = {creatorId: creatorId};
+    Salon.find(query, cb);
+}

@@ -32,4 +32,12 @@ export class PostService {
       .pipe(map(res => res));
   }
 
+  getAllSalonsByUserId(creatorId) {
+    let headers = new HttpHeaders();
+    headers.append('Content-type', 'application/json');
+    return this.http
+      .get(this.localhost + 'salon/all/' + creatorId, {headers: headers})
+      .pipe(map(res => res));
+  }
+
 }

@@ -20,6 +20,7 @@ export class PostModel implements DeserializableModel {
   region: string;
   city: string;
   range: number;
+  salonId: string;
 
 
   deserializable(input: any): this {

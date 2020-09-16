@@ -7,6 +7,7 @@ import {AuthenticateService} from "../../service/authenticate/authenticate.servi
 
 import {MapkaService} from "../../service/mapka/mapka.service";
 import {generate} from "../../../assets/js/mapka/mapka";
+import {SalonModel} from "../../model/salon.model";
 
 @Component({
   selector: 'app-post-add-pc',
@@ -46,7 +47,9 @@ export class PostAddPcComponent implements OnInit {
     regions: [],
     cities: [],
     range: 0,
-
+    salon: new SalonModel(),
+    pickedSalon: '',
+    salons: [],
   }
 
   isValid = {
@@ -62,6 +65,8 @@ export class PostAddPcComponent implements OnInit {
     country: true,
     region: true,
     city: true,
+    salon: true,
+    pickedSalon: true,
   }
 
   invalidMsg = {
@@ -77,6 +82,8 @@ export class PostAddPcComponent implements OnInit {
     country: '',
     region: '',
     city: '',
+    salon: '',
+    pickedSalon: '',
   };
 
   constructor(
@@ -301,7 +308,7 @@ export class PostAddPcComponent implements OnInit {
       post.region = this.value.region;
       post.city = this.value.city;
       post.range = this.value.range;
-
+      post.salonId = this.value.pickedSalon;
 
       post.createOn = new Date();
       if (this.authenticateS.isAuthenticate()) {
@@ -339,6 +346,7 @@ export class PostAddPcComponent implements OnInit {
       this.value.country = region;
       this.updateCountries();
       this.updateRegions();
+      this.updateUserSalonByCountry();
     } else {
       this.value.region = region;
     }
@@ -364,4 +372,45 @@ export class PostAddPcComponent implements OnInit {
     this.mapkaS.generateRegionsAndClickByCode(this.value.country, mapkaHtmlTagId, this.callWhenClickOnMapka, this.value.region);
   }
 
+  isSalonValid() {
+    if (this.authenticateS.isAuthenticate() && (this.authenticateS.isAuthenticateCommission() || this.authenticateS.isAuthenticateBroker())) {
+      return this.value.pickedSalon.length > 0;
+    }
+    return true;
+  }
+
+  updateUserSalonByCountry() {
+    if (this.authenticateS.isAuthenticate() && (this.authenticateS.isAuthenticateCommission() || this.authenticateS.isAuthenticateBroker())) {
+      if (this.isCountryValid()) {
+        this.postS.getAllSalonsByUserId(this.authenticateS.getAuthenticateUser().id)
+          .subscribe(data => {
+              this.value.salons = [];
+              for (let ele of data['result']) {
+                if (ele.country === this.value.country) {
+                  let salon = new SalonModel();
+                  salon.id = ele._id;
+                  salon.name = ele.name;
+                  salon.country = ele.country;
+                  salon.address = ele.address;
+                  salon.zip = ele.zip;
+                  salon.city = ele.city;
+                  salon.phones = ele.phones;
+                  this.value.salons.push(salon);
+                }
+              }
+            }
+          );
+      }
+    }
+  }
+
+  isSalonPicked() {
+    for (let ele of this.value.salons) {
+      if (this.value.pickedSalon === ele.id) {
+        this.value.salon = ele;
+        return true;
+      }
+    }
+    return false;
+  }
 }

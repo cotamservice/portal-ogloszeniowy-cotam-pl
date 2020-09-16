@@ -749,7 +749,7 @@ export class CountryService {
     return this.isoCountries[code].name;
   }
 
-  getIsoCountries(){
+  getIsoCountries() {
     return this.isoCountries;
   }
 }
