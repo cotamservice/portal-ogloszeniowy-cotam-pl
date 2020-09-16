@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const State = require('../model').State;
+const Drive = require('../model').Drive;
 
 
 router.get('/all', (req, res) => {
-    State.getAll((err, result) => {
+    Drive.getAll((err, result) => {
         if (err) {
             res.json({success: null});
         } else {
@@ -19,11 +19,11 @@ router.get('/all', (req, res) => {
 
 router.get('/save', (req, res) => {
     let states = [
-        new State({
-            name: 'Nowy'.toLowerCase(),
+        new Drive({
+            name: 'przedni'.toLowerCase(),
         }),
-        new State({
-            name: 'Urzywany'.toLowerCase(),
+        new Drive({
+            name: 'tylny'.toLowerCase(),
         }),
     ];
 

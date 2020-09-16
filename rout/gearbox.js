@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const State = require('../model').State;
+const GearBox = require('../model').GearBox;
 
 
 router.get('/all', (req, res) => {
-    State.getAll((err, result) => {
+    GearBox.getAll((err, result) => {
         if (err) {
             res.json({success: null});
         } else {
@@ -19,11 +19,11 @@ router.get('/all', (req, res) => {
 
 router.get('/save', (req, res) => {
     let states = [
-        new State({
-            name: 'Nowy'.toLowerCase(),
+        new GearBox({
+            name: 'automatyczna'.toLowerCase(),
         }),
-        new State({
-            name: 'Urzywany'.toLowerCase(),
+        new GearBox({
+            name: 'manualna'.toLowerCase(),
         }),
     ];
 

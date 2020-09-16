@@ -4,6 +4,9 @@ const gus = require('./gus');
 const mark = require('./mark');
 const salon = require('./salon');
 const state = require('./state');
+const drive = require('./drive');
+const fuel = require('./fuel');
+const gearbox = require('./gearbox');
 
 module.exports = {
     configUse: (app) => {
@@ -13,5 +16,8 @@ module.exports = {
         app.use('/mark', mark);
         app.use('/salon', salon);
         app.use('/state', state);
+        app.use('/drive', drive);
+        app.use('/fuel', fuel);
+        app.use('/gearbox', gearbox);
     }
 }

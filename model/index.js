@@ -5,6 +5,9 @@ const Mark = require('./Mark');
 const ModelBody = require('./ModelBody');
 const Model = require('./Model');
 const State = require('./State');
+const Drive = require('./Drive');
+const Fuel = require('./Fuel');
+const GearBox = require('./GearBox');
 
 module.exports = {
     User,
@@ -13,5 +16,8 @@ module.exports = {
     Mark,
     ModelBody,
     Model,
-    State
+    State,
+    Fuel,
+    Drive,
+    GearBox,
 }
