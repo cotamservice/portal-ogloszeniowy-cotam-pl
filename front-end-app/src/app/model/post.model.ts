@@ -21,7 +21,10 @@ export class PostModel implements DeserializableModel {
   city: string;
   range: number;
   salonId: string;
-
+  price: number;
+  currency: string;
+  isPriceNetto: boolean;
+  isGiveInvoce: boolean
 
   deserializable(input: any): this {
     Object.assign(this, input);

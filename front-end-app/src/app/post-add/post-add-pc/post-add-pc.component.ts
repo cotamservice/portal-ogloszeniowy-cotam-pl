@@ -8,6 +8,7 @@ import {AuthenticateService} from "../../service/authenticate/authenticate.servi
 import {MapkaService} from "../../service/mapka/mapka.service";
 import {generate} from "../../../assets/js/mapka/mapka";
 import {SalonModel} from "../../model/salon.model";
+import {CurrencyService} from "../../service/currency/currency.service";
 
 @Component({
   selector: 'app-post-add-pc',
@@ -50,6 +51,11 @@ export class PostAddPcComponent implements OnInit {
     salon: new SalonModel(),
     pickedSalon: '',
     salons: [],
+    price: 0,
+    currency: '',
+    currencies: [],
+    isGiveInvoice: false,
+    isPriceNetto: false,
   }
 
   isValid = {
@@ -67,6 +73,10 @@ export class PostAddPcComponent implements OnInit {
     city: true,
     salon: true,
     pickedSalon: true,
+    price: true,
+    currency: true,
+    isGiveInvoice: true,
+    isPriceNetto: true,
   }
 
   invalidMsg = {
@@ -84,6 +94,10 @@ export class PostAddPcComponent implements OnInit {
     city: '',
     salon: '',
     pickedSalon: '',
+    price: '',
+    currency: '',
+    isGiveInvoice: '',
+    isPriceNetto: '',
   };
 
   constructor(
@@ -91,6 +105,7 @@ export class PostAddPcComponent implements OnInit {
     private postS: PostService,
     private authenticateS: AuthenticateService,
     private mapkaS: MapkaService,
+    private currencyS: CurrencyService,
   ) {
   }
 
@@ -99,6 +114,7 @@ export class PostAddPcComponent implements OnInit {
     this.setAllModels();
     this.value.countries = this.mapkaS.getCountriesCodeAndName();
     this.updateCountries();
+    this.value.currencies = this.currencyS.getAllCurrencies();
   }
 
   unPickAll(): void {
@@ -304,11 +320,18 @@ export class PostAddPcComponent implements OnInit {
         this.addLastPhotosAndDescriptions();
       }
       post.photosAndDescription = this.value.photosAndDescription;
+
       post.country = this.value.country;
       post.region = this.value.region;
       post.city = this.value.city;
       post.range = this.value.range;
       post.salonId = this.value.pickedSalon;
+
+      post.price = this.value.price;
+      post.isPriceNetto = this.value.isPriceNetto;
+      post.isGiveInvoce = this.value.isGiveInvoice;
+      post.currency = this.value.currency;
+
 
       post.createOn = new Date();
       if (this.authenticateS.isAuthenticate()) {
@@ -412,5 +435,9 @@ export class PostAddPcComponent implements OnInit {
       }
     }
     return false;
+  }
+
+  isPriceValid() {
+    return this.value.price > 0;
   }
 }

@@ -233,17 +233,51 @@
           </label>
         </div>
         <div class="col-12" *ngIf="isSalonPicked()" [ngClass]="{'salon-info':true}">
-          <p>nazwa: </p><p [ngClass]="{'salon-info-p':true}">{{value.salon.name}}</p><br>
-          <p>kod: </p><p [ngClass]="{'salon-info-p':true}">{{value.salon.zip}}</p><br>
-          <p>miasto: </p><p [ngClass]="{'salon-info-p':true}">{{value.salon.city}}</p><br>
-          <p>ulica: </p><p [ngClass]="{'salon-info-p':true}">{{value.salon.address}}</p><br>
+          <p>nazwa: </p>
+          <p [ngClass]="{'salon-info-p':true}">{{value.salon.name}}</p><br>
+          <p>kod: </p>
+          <p [ngClass]="{'salon-info-p':true}">{{value.salon.zip}}</p><br>
+          <p>miasto: </p>
+          <p [ngClass]="{'salon-info-p':true}">{{value.salon.city}}</p><br>
+          <p>ulica: </p>
+          <p [ngClass]="{'salon-info-p':true}">{{value.salon.address}}</p><br>
           <ng-container *ngFor="let phone of value.salon.phones">
-            <p>telefon: </p><p [ngClass]="{'salon-info-p':true}">{{phone}}</p><br>
+            <p>telefon: </p>
+            <p [ngClass]="{'salon-info-p':true}">{{phone}}</p><br>
           </ng-container>
         </div>
       </div>
     </div>
   </div>
 </div>
+<div class="container" [ngClass]="{'post-price-container':true}">
+  <div class="row">
+    <div class="col-lg-4 col-md-12">
+      <label for="post-price" [ngClass]="{'title-label-125':true,'input-label':true}">cena
+        <span *ngIf="!isValid.price" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.price}}</span>
+        <input type="number" id="post-price" [ngClass]="{'input':true,'input-invalid':!isValid.price}"
+               [(ngModel)]="value.price" name="post-price" (change)="isPriceValid()"
+               placeholder="wpiś cene">
+      </label>
 
+      <label for="post-give-invoice" [ngClass]="{'input-checkbox-label':true}">
+        <input id="post-give-invoice" [ngClass]="{'input-checkbox':true,'input-invalid':!value.isGiveInvoice}"
+               type="checkbox" [(ngModel)]="value.isGiveInvoice" name="post-give-invoice">Wystawiam facture VAT
+      </label>
+    </div>
+    <div class="col-lg-4 col-md-12">
+      <label for="post-currency" [ngClass]="{'title-label-125':true,'input-label':true}">Waluta
+        <span *ngIf="!isValid.currency" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.currency}}</span>
+        <select id="post-currency" [ngClass]="{'input':true,'input-invalid':!isValid.currency}"
+                [(ngModel)]="value.currency" name="post-currency" (change)="isCountryValid();updateCountries(); updateRegions(); updateUserSalonByCountry()">
+          <option *ngFor="let currency of value.currencies;" value="{{currency[0]}}">{{currency[0]}} {{currency[1]}}</option>
+        </select>
+      </label>
+      <label for="post-is-netto" [ngClass]="{'input-checkbox-label':true}">
+        <input id="post-is-netto" [ngClass]="{'input-checkbox':true,'input-invalid':!value.isPriceNetto}"
+               type="checkbox" [(ngModel)]="value.isPriceNetto" name="post-give-invoice">netto
+      </label>
+    </div>
+  </div>
+</div>
 

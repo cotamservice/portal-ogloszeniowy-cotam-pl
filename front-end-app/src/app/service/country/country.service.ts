@@ -752,4 +752,12 @@ export class CountryService {
   getIsoCountries() {
     return this.isoCountries;
   }
+
+  getCodesAndNames(): Array<Array<string>> {
+    let result = [];
+    for (let code in this.isoCountries) {
+      result.push([code, this.getNameByCode(code)]);
+    }
+    return result;
+  }
 }
