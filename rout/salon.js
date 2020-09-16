@@ -1,11 +1,5 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const router = express.Router();
-const passport = require('passport');
-const jwt = require('jsonwebtoken');
-const config = require('../config');
-const User = require('../model').User;
-const Company = require('../model').Company;
 const Salon = require('../model').Salon;
 
 

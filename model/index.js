@@ -4,6 +4,7 @@ const Salon = require('./Salon');
 const Mark = require('./Mark');
 const ModelBody = require('./ModelBody');
 const Model = require('./Model');
+const State = require('./State');
 
 module.exports = {
     User,
@@ -11,5 +12,6 @@ module.exports = {
     Salon,
     Mark,
     ModelBody,
-    Model
+    Model,
+    State
 }
