@@ -148,21 +148,60 @@
   opacity: 1;
 }
 
-.post-distance-value{
+.post-distance-value {
   line-height: 43px;
 }
 
-.salon-info p{
+.salon-info p {
   line-height: 1.5rem;
   font-size: .8rem;
   margin: 0;
   display: inline;
 }
-.salon-info-p{
+
+.salon-info-p {
   font-weight: 500;
 }
-.post-price-container{
+
+.post-price-container {
   background-color: #45a1ac;
   color: white;
+}
+
+.input-checkbox-post-label {
+  font-size: .8rem;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  margin: 12px 6px;
+}
+
+.title-input-post-container {
+  margin: 12px 24px;
+}
+
+.inline-title-input-post {
+  line-height: 43px;
+}
+
+.equipment-checkbox {
+  margin: 12px 24px;
+  font-size: 1rem;
+  display: inline-block;
+}
+
+.equipment-checkbox-font-size-50 {
+  font-size: .5rem !important;
+  line-height: 1rem;
+
+}
+
+.input-extra {
+  margin: 12px 24px;
+}
+
+.input-vin {
+  display: inline-block;
+  margin-right: 12px;
 }
 

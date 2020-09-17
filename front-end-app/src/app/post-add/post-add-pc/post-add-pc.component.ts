@@ -9,6 +9,11 @@ import {MapkaService} from "../../service/mapka/mapka.service";
 import {generate} from "../../../assets/js/mapka/mapka";
 import {SalonModel} from "../../model/salon.model";
 import {CurrencyService} from "../../service/currency/currency.service";
+import {StateService} from "../../service/state/state.service";
+import {FuelService} from "../../service/fuel/fuel.service";
+import {DriveService} from "../../service/drive/drive.service";
+import {GearboxService} from "../../service/gearbox/gearbox.service";
+import {EquipmentService} from "../../service/equipment/equipment.service";
 
 @Component({
   selector: 'app-post-add-pc',
@@ -56,6 +61,27 @@ export class PostAddPcComponent implements OnInit {
     currencies: [],
     isGiveInvoice: false,
     isPriceNetto: false,
+    state: '',
+    states: [],
+    isDmg: false,
+    isFirstDriver: false,
+    isNoAccidents: false,
+    hasCarBook: false,
+    fuel: '',
+    fuels: [],
+    enginePower: 0,
+    engineDisplacement: 0,
+    engineDrive: '',
+    engineDrives: [],
+    engineGearbox: '',
+    engineGearboxes: [],
+    bodySeats: 0,
+    bodyDoors: 0,
+    bodyColor: '',
+    equipment: [],
+    equipments: [],
+    extraEquipment: [],
+    vin: '',
   }
 
   isValid = {
@@ -77,6 +103,17 @@ export class PostAddPcComponent implements OnInit {
     currency: true,
     isGiveInvoice: true,
     isPriceNetto: true,
+    state: true,
+    fuel: true,
+    enginePower: true,
+    engineDisplacement: true,
+    engineDrive: true,
+    engineGearbox: true,
+    bodySeats: true,
+    bodyDoors: true,
+    bodyColor: true,
+    equipment: true,
+    extraEquipment: true,
   }
 
   invalidMsg = {
@@ -98,6 +135,17 @@ export class PostAddPcComponent implements OnInit {
     currency: '',
     isGiveInvoice: '',
     isPriceNetto: '',
+    state: '',
+    fuel: '',
+    enginePower: '',
+    engineDisplacement: '',
+    engineDrive: '',
+    engineGearbox: '',
+    bodySeats: '',
+    bodyDoors: '',
+    bodyColor: '',
+    equipment: '',
+    extraEquipment: '',
   };
 
   constructor(
@@ -106,6 +154,11 @@ export class PostAddPcComponent implements OnInit {
     private authenticateS: AuthenticateService,
     private mapkaS: MapkaService,
     private currencyS: CurrencyService,
+    private stateS: StateService,
+    private fuelS: FuelService,
+    private driveS: DriveService,
+    private gearboxS: GearboxService,
+    private equipmentS: EquipmentService,
   ) {
   }
 
@@ -115,6 +168,11 @@ export class PostAddPcComponent implements OnInit {
     this.value.countries = this.mapkaS.getCountriesCodeAndName();
     this.updateCountries();
     this.value.currencies = this.currencyS.getAllCurrencies();
+    this.setStates();
+    this.setFuels();
+    this.setEngineDrives();
+    this.setEngineGearboxes();
+    this.setEquipments();
   }
 
   unPickAll(): void {
@@ -332,6 +390,23 @@ export class PostAddPcComponent implements OnInit {
       post.isGiveInvoce = this.value.isGiveInvoice;
       post.currency = this.value.currency;
 
+      post.state = this.value.state;
+      post.isDmg = this.value.isDmg;
+      post.isFirstDriver = this.value.isFirstDriver;
+      post.isNoAccidents = this.value.isNoAccidents;
+      post.hasCarBook = this.value.hasCarBook;
+      post.fuel = this.value.fuel;
+      post.engineDisplacement = this.value.engineDisplacement;
+      post.enginePower = this.value.enginePower;
+      post.engineDrive = this.value.engineDrive;
+      post.engineGearbox = this.value.engineGearbox;
+      post.bodySeats = this.value.bodySeats;
+      post.bodyDoors = this.value.bodyDoors;
+      post.bodyColor = this.value.bodyColor;
+      post.equipment = this.value.equipment;
+      post.extraEquipment = this.value.extraEquipment;
+      post.vin = this.value.vin;
+
 
       post.createOn = new Date();
       if (this.authenticateS.isAuthenticate()) {
@@ -439,5 +514,91 @@ export class PostAddPcComponent implements OnInit {
 
   isPriceValid() {
     return this.value.price > 0;
+  }
+
+  setStates() {
+    this.stateS
+      .getAllStates()
+      .subscribe(data => {
+        for (let ele of data['result']) {
+          this.value.states.push([ele['_id'], ele['name']]);
+        }
+      });
+  }
+
+  private setFuels() {
+    this.fuelS
+      .getAllFuels()
+      .subscribe(data => {
+        for (let ele of data['result']) {
+          this.value.fuels.push([ele['_id'], ele['name']]);
+        }
+      });
+  }
+
+  isEnginePowerValid() {
+    return true;
+  }
+
+  isEngineDisplacementValid() {
+    return true
+  }
+
+  private setEngineDrives() {
+    this.driveS
+      .getAllDrives()
+      .subscribe(data => {
+        for (let ele of data['result']) {
+          this.value.engineDrives.push([ele['_id'], ele['name']]);
+        }
+      });
+  }
+
+  isEngineDriveValid() {
+    return true;
+  }
+
+  private setEngineGearboxes() {
+    this.gearboxS
+      .getAllGearboxes()
+      .subscribe(data => {
+        for (let ele of data['result']) {
+          this.value.engineGearboxes.push([ele['_id'], ele['name']]);
+        }
+      });
+  }
+
+  isBodySeatsValid() {
+    return true;
+  }
+
+  isBodyDoorsValid() {
+    return true;
+  }
+
+  isBodyColorValid() {
+    return true;
+  }
+
+
+  private setEquipments() {
+    this.equipmentS
+      .getAllEquipments()
+      .subscribe(data => {
+        for (let ele of data['result']) {
+          this.value.equipments.push([ele['_id'], ele['name']]);
+        }
+      });
+  }
+
+  updateEquipment(equipmentId: string, equipmentName: string, event) {
+    let isChecked = event.target.checked;
+    if (isChecked) {
+      this.value.equipment.push([equipmentId])
+    } else {
+      this.value.equipment = this.value.equipment.filter((val, index, arr) => {
+        return val[0] !== equipmentId;
+      });
+    }
   }
 }
