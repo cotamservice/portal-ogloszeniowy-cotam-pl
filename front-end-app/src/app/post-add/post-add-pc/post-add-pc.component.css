@@ -193,7 +193,6 @@
 .equipment-checkbox-font-size-50 {
   font-size: .5rem !important;
   line-height: 1rem;
-
 }
 
 .input-extra {
@@ -204,4 +203,80 @@
   display: inline-block;
   margin-right: 12px;
 }
+
+.input-block {
+  margin: 12px 24px;
+}
+
+.input-block-inline {
+  margin: 12px 24px;
+  display: inline-block;
+}
+
+.phone-lang-select {
+  border: 0;
+  outline: 0;
+  color: black;
+  width: 100%;
+}
+
+.m1224 {
+  margin: 12px 24px;
+}
+
+.lh43 {
+  line-height: 43px;
+}
+
+.phone-h-line {
+  border-bottom: 3px #45a1ac solid;
+}
+
+.phone-edit, .phone-delete {
+  display: inline-block;
+  color: white;
+  background-color: #45a1ac;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 1rem;
+  line-height: 43px;
+  padding: 0 12px;
+  width: 130px;
+  outline: none;
+  border-radius: 0;
+  border: 1px solid #e9bc09;
+}
+
+.phone-edit:hover, .phone-delete:hover {
+  background-color: #3b8790;
+}
+
+.phones-container {
+  border-bottom: 3px #45a1ac solid;
+  height: 48px;
+  line-height: 43px;
+  margin: 12px 24px;
+}
+
+.phone-div {
+  display: inline-block;
+  font-weight: bolder;
+  width: 20%;
+}
+
+.lang-div {
+  display: inline-block;
+  width: 30%;
+}
+
+.phone-btn {
+  display: inline-block;
+  text-align: right;
+  width: 50%;
+  line-height: 43px;
+}
+
+
+
+
 

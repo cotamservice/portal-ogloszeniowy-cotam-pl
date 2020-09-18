@@ -14,6 +14,7 @@ import {FuelService} from "../../service/fuel/fuel.service";
 import {DriveService} from "../../service/drive/drive.service";
 import {GearboxService} from "../../service/gearbox/gearbox.service";
 import {EquipmentService} from "../../service/equipment/equipment.service";
+import {RegistrationFormValidationService} from "../../service/form/registration-form-validation.service";
 
 @Component({
   selector: 'app-post-add-pc',
@@ -82,6 +83,12 @@ export class PostAddPcComponent implements OnInit {
     equipments: [],
     extraEquipment: [],
     vin: '',
+    name: '',
+    email: '',
+    phone: '',
+    phoneLanguages: [],
+    languages: [],
+    phones: [],
   }
 
   isValid = {
@@ -114,6 +121,9 @@ export class PostAddPcComponent implements OnInit {
     bodyColor: true,
     equipment: true,
     extraEquipment: true,
+    name: true,
+    email: true,
+    phone: true,
   }
 
   invalidMsg = {
@@ -146,6 +156,9 @@ export class PostAddPcComponent implements OnInit {
     bodyColor: '',
     equipment: '',
     extraEquipment: '',
+    name: '',
+    email: '',
+    phone: '',
   };
 
   constructor(
@@ -159,6 +172,7 @@ export class PostAddPcComponent implements OnInit {
     private driveS: DriveService,
     private gearboxS: GearboxService,
     private equipmentS: EquipmentService,
+    private registrationFormV: RegistrationFormValidationService,
   ) {
   }
 
@@ -173,6 +187,8 @@ export class PostAddPcComponent implements OnInit {
     this.setEngineDrives();
     this.setEngineGearboxes();
     this.setEquipments();
+    this.setLoginEmail();
+    this.setLanguages();
   }
 
   unPickAll(): void {
@@ -600,5 +616,62 @@ export class PostAddPcComponent implements OnInit {
         return val[0] !== equipmentId;
       });
     }
+  }
+
+  private setLoginEmail() {
+    this.value.email = this.authenticateS.getAuthenticateUser().email;
+  }
+
+  isEmailValid() {
+    return this.registrationFormV.isEmailValid(this.value.email);
+  }
+
+  isNameValid() {
+    return this.value.name.length > 0;
+  }
+
+  isPhoneValid() {
+    this.isValid.phone = this.registrationFormV.isPhoneValid(this.value.phone);
+    this.invalidMsg.phone = 'Wprowadz numer';
+    return this.isValid.phone;
+  }
+
+  private setLanguages() {
+    this.value.languages = [['pl1', 'lang1'], ['pl2', 'lang2'], ['pl3', 'lang3']];
+  }
+
+  addPhone() {
+    if (this.value.phone.length <= 0 && !this.isPhoneValid()) return;
+    this.value.phones.push([this.value.phone, this.value.phoneLanguages[0], this.value.phoneLanguages[1], this.value.phoneLanguages[2]])
+    this.value.phone = '';
+    this.value.phoneLanguages = [];
+  }
+
+  isNewPhoneCanBeAdded() {
+    if (this.authenticateS.isAuthenticateBroker()) {
+      return this.value.phones.length <= 3;
+    } else if (this.authenticateS.isAuthenticateCommission()) {
+      return this.value.phones.length <= 2;
+    } else if (this.authenticateS.isAuthenticateIndividual()) {
+      return this.value.phones.length <= 1;
+    } else {
+      return false;
+    }
+  }
+
+  deletePhoneAndLang(phoneLangs) {
+    this.value.phones = this.value.phones.filter((value, index, arr) => {
+      return value[0] !== phoneLangs[0];
+    })
+  }
+
+  editPhoneAndLang(phoneLangs) {
+    this.value.phone = phoneLangs[0];
+    let langs = [];
+    if (phoneLangs[1]) langs.push(phoneLangs[1]);
+    if (phoneLangs[2]) langs.push(phoneLangs[2]);
+    if (phoneLangs[3]) langs.push(phoneLangs[3]);
+    this.value.phoneLanguages = langs;
+    this.deletePhoneAndLang(phoneLangs);
   }
 }

@@ -63,26 +63,26 @@
       </ul>
     </div>
     <div class="col-12">
-      <label for="post-title" [ngClass]="{'title-label-125':true,'input-label':true}">Tytuł
+      <div [ngClass]="{'input-block':true}">Tytuł
         <span *ngIf="!isValid.title" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.title}}</span>
         <input id="post-title" [ngClass]="{'input':true,'input-invalid':!isValid.title}" type="text"
                [(ngModel)]="value.title" name="post-title" (change)="isTitleValid()"
                placeholder="wpiś tytuł">
-      </label>
+      </div>
     </div>
   </div>
   <div class="row">
     <div class="col-lg-4 col-md-12">
-      <label for="post-mark" [ngClass]="{'title-label-125':true,'input-label':true}">Marka
+      <div [ngClass]="{'input-block':true}">Marka
         <span *ngIf="!isValid.markId" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.markId}}</span>
         <select id="post-mark" [ngClass]="{'input':true,'input-invalid':!isValid.markId}"
                 [(ngModel)]="value.markId" name="post-mark" (change)="isMarkValid()">
           <option *ngFor="let mark of value.marks;" value="{{mark._id}}">{{mark.name}}</option>
         </select>
-      </label>
+      </div>
     </div>
     <div class="col-lg-4 col-md-12" *ngIf="isMarkValid()">
-      <label for="post-model" [ngClass]="{'title-label-125':true,'input-label':true}">Model
+      <div [ngClass]="{'input-block':true}">Model
         <span *ngIf="!isValid.model" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.model}}</span>
         <select id="post-model" [ngClass]="{'input':true,'input-invalid':!isValid.model}"
                 [(ngModel)]="value.model" name="post-model" (change)="isModelValid()">
@@ -93,25 +93,25 @@
             </ng-container>
           </ng-container>
         </select>
-      </label>
+      </div>
     </div>
   </div>
   <div class="row">
     <div class="col-lg-4 col-md-12">
-      <label for="post-mileage" [ngClass]="{'title-label-125':true,'input-label':true}">Przebieg
+      <div [ngClass]="{'input-block':true}">Przebieg
         <span *ngIf="!isValid.mileage" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.mileage}}</span>
         <input type="number" id="post-mileage" [ngClass]="{'input':true,'input-invalid':!isValid.mileage}"
                [(ngModel)]="value.mileage" name="post-title" (change)="isMileageValid()"
                placeholder="wpiś przebieg">
-      </label>
+      </div>
     </div>
     <div class="col-lg-4 col-md-12">
-      <label for="post-production" [ngClass]="{'title-label-125':true,'input-label':true}">Rok produkcji
+      <div [ngClass]="{'input-block':true}">Rok produkcji
         <span *ngIf="!isValid.productionYear" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.productionYear}}</span>
         <input type="number" id="post-production" [ngClass]="{'input':true,'input-invalid':!isValid.productionYear}"
                [(ngModel)]="value.productionYear" name="post-title" (change)="isProductionYearValid()"
                placeholder="wpiś rok produkcji">
-      </label>
+      </div>
     </div>
   </div>
   <div class="row">
@@ -139,13 +139,13 @@
       </div>
     </div>
     <div class="col-12">
-      <label for="post-photo-description" [ngClass]="{'title-label-125':true,'input-label':true}">Opisz szczegóły
+      <div [ngClass]="{'input-block':true}">Opisz szczegóły
         <span *ngIf="!isValid.photosDescription" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.photosDescription}}</span>
         <textarea id="post-photo-description" [ngClass]="{'input':true,'input-invalid':!isValid.photosDescription, 'description': true}"
                   [(ngModel)]="value.photosDescription" name="post-title" (change)="isPhotosDescriptionValid()"
                   placeholder="wpiś opis ogłoszenia lub opis zdjecia">
         </textarea>
-      </label>
+      </div>
     </div>
     <div class="col-12">
       <label [ngClass]="{'button-blue-100':true}" class="text-left" (click)="addLastPhotosAndDescriptions()">
@@ -447,7 +447,7 @@
   </div>
   <div class="row">
     <div class="col-12">
-      <label [ngClass]="{'title-label-125':true,'input-label':true}">Extra wyposazenie</label>
+      <div [ngClass]="{'input-block':true}">Extra wyposazenie</div>
     </div>
   </div>
   <div class="row">
@@ -472,6 +472,101 @@
              placeholder="wpiś extra wyposazenie">
     </div>
   </div>
-
-
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <label [ngClass]="{'title-label-125':true,'input-label':true}">dane kontaktowe</label>
+    </div>
+    <div class="col-8">
+      <div [ngClass]="{'input-block':true}">
+        Imię
+        <span *ngIf="!isValid.name" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.name}}</span>
+        <input id="post-name" [ngClass]="{'input':true,'input-invalid':!isValid.name}" type="text"
+               [(ngModel)]="value.name" name="post-name" (change)="isNameValid()"
+               placeholder="wpiś">
+      </div>
+    </div>
+    <div class="col-8">
+      <div [ngClass]="{'input-block':true}">
+        Email
+        <span *ngIf="!isValid.email" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.email}}</span>
+        <input id="post-email" [ngClass]="{'input':true,'input-invalid':!isValid.email}" type="text"
+               [(ngModel)]="value.email" name="post-email" (change)="isEmailValid()"
+               placeholder="wpiś email">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12" *ngIf="value.phones.length > 0">
+      <div [ngClass]="{'input-block':true}">Telefon</div>
+    </div>
+    <div class="col-12" *ngFor="let phoneLangs of value.phones">
+      <div [ngClass]="{'phones-container':true}">
+        <div [ngClass]="{'phone-div':true}">
+          {{phoneLangs[0]}}
+        </div>
+        <div [ngClass]="{'lang-div':true}">
+          <span *ngIf="phoneLangs[1] || phoneLangs[2] || phoneLangs[3]">(</span>
+          <span [ngClass]="{'m1224':true}" *ngIf="phoneLangs[1]">{{phoneLangs[1]}}</span>
+          <span [ngClass]="{'m1224':true}" *ngIf="phoneLangs[2]">{{phoneLangs[2]}}</span>
+          <span [ngClass]="{'m1224':true}" *ngIf="phoneLangs[3]">{{phoneLangs[3]}}</span>
+          <span *ngIf="phoneLangs[1] || phoneLangs[2] || phoneLangs[3]">)</span>
+        </div>
+        <div [ngClass]="{'phone-btn':true}">
+          <div [ngClass]="{'phone-edit': true}" (click)="editPhoneAndLang(phoneLangs)">edytuj</div>
+          <div [ngClass]="{'phone-delete': true}" (click)="deletePhoneAndLang(phoneLangs)">usun</div>
+        </div>
+      </div>
+    </div>
+<!--    <div class="col-12">-->
+<!--      <div class="m1224 phone-h-line text-right"></div>-->
+<!--    </div>-->
+    <div class="col-12" *ngIf="isNewPhoneCanBeAdded()">
+      <div class="row">
+        <div class="col-lg-6 col-md-12">
+          <label for="post-phone-add" [ngClass]="{'title-label-125':true,'input-label':true}">Dodaj telefon
+            <span *ngIf="!isValid.phone" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.phone}}</span>
+            <input id="post-phone-add" [ngClass]="{'input':true,'input-invalid':!isValid.phone}" type="text"
+                   [(ngModel)]="value.phone" name="post-phone-add" (change)="isPhoneValid()"
+                   placeholder="wpiś telefon">
+          </label>
+        </div>
+        <div class="col-lg-6 col-md-12 text-left">
+          <div class="row">
+            <div class="col-12">
+              <label for="post-phone-lang-0" [ngClass]="{'title-label-125':true,'input-label':true}">język przy telefonie
+                <div class="row">
+                  <div class="col-4">
+                    <select id="post-phone-lang-0" [ngClass]="{'input':true,'phone-lang-select':true}"
+                            [(ngModel)]="value.phoneLanguages[0]" name="post-phone-lang-0">
+                      <option *ngFor="let lang of value.languages;" value="{{lang[0]}}">{{lang[1]}}</option>
+                    </select>
+                  </div>
+                  <div class="col-4" *ngIf="value.phoneLanguages[0]">
+                    <select id="post-phone-lang-1" [ngClass]="{'input':true,'phone-lang-select':true}"
+                            [(ngModel)]="value.phoneLanguages[1]" name="post-phone-lang-1">
+                      <option *ngFor="let lang of value.languages;" value="{{lang[0]}}">{{lang[1]}}</option>
+                    </select>
+                  </div>
+                  <div class="col-4"  *ngIf="value.phoneLanguages[1]">
+                    <select id="post-phone-lang-2" [ngClass]="{'input':true,'phone-lang-select':true}"
+                            [(ngModel)]="value.phoneLanguages[2]" name="post-phone-lang-2">
+                      <option *ngFor="let lang of value.languages;" value="{{lang[0]}}">{{lang[1]}}</option>
+                    </select>
+                  </div>
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <label [ngClass]="{'button-blue-100':true}" class="text-left" (click)="addPhone()">
+            <img [ngClass]="{'btn-icon-add-photo-description-row':true}" src="/assets/img/postadd/addPhoneIcon.png">
+            dodaj kolejny telefon
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
