@@ -89,6 +89,10 @@ export class PostAddPcComponent implements OnInit {
     phoneLanguages: [],
     languages: [],
     phones: [],
+    resumption: false,
+    dayLength: 0,
+    startFrom: null,
+    whenStartFrom: 0,
   }
 
   isValid = {
@@ -124,6 +128,8 @@ export class PostAddPcComponent implements OnInit {
     name: true,
     email: true,
     phone: true,
+    resumption: true,
+    dayLength: true,
   }
 
   invalidMsg = {
@@ -159,6 +165,7 @@ export class PostAddPcComponent implements OnInit {
     name: '',
     email: '',
     phone: '',
+    dayLength: '',
   };
 
   constructor(
@@ -673,5 +680,25 @@ export class PostAddPcComponent implements OnInit {
     if (phoneLangs[3]) langs.push(phoneLangs[3]);
     this.value.phoneLanguages = langs;
     this.deletePhoneAndLang(phoneLangs);
+  }
+
+  setPostDaysLength(number) {
+    this.value.dayLength = number;
+  }
+
+  isDayLengthValid() {
+    if (this.value.dayLength <= 0) {
+      this.isValid.dayLength = false;
+      this.invalidMsg.dayLength = 'Trzeba wskazac ilosc dni';
+    } else {
+      this.isValid.dayLength = true;
+      this.invalidMsg.dayLength = '';
+    }
+    return this.isValid.dayLength;
+  }
+
+  setWhenStartFrom(when) {
+    this.value.whenStartFrom = when;
+    if (when === 0) this.value.startFrom = new Date();
   }
 }

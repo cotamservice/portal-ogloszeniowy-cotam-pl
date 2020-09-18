@@ -519,9 +519,6 @@
         </div>
       </div>
     </div>
-<!--    <div class="col-12">-->
-<!--      <div class="m1224 phone-h-line text-right"></div>-->
-<!--    </div>-->
     <div class="col-12" *ngIf="isNewPhoneCanBeAdded()">
       <div class="row">
         <div class="col-lg-6 col-md-12">
@@ -549,7 +546,7 @@
                       <option *ngFor="let lang of value.languages;" value="{{lang[0]}}">{{lang[1]}}</option>
                     </select>
                   </div>
-                  <div class="col-4"  *ngIf="value.phoneLanguages[1]">
+                  <div class="col-4" *ngIf="value.phoneLanguages[1]">
                     <select id="post-phone-lang-2" [ngClass]="{'input':true,'phone-lang-select':true}"
                             [(ngModel)]="value.phoneLanguages[2]" name="post-phone-lang-2">
                       <option *ngFor="let lang of value.languages;" value="{{lang[0]}}">{{lang[1]}}</option>
@@ -567,6 +564,50 @@
           </label>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <label for="post-phone-add" [ngClass]="{'title-label-125':true,'input-label':true}">ILOść dni</label>
+    </div>
+    <div class="col-lg-5 col-md-12" [ngClass]="{'m1224':true}">
+      <label (click)="setPostDaysLength(10)">
+        <input type="radio" name="days-length" [ngClass]="{'post-radio-btn':true}" (change)="isDayLengthValid()">
+        <span [ngClass]="{'post-radio-name':true}">10 dni</span>
+      </label>
+      <label (click)="setPostDaysLength(20)">
+        <input type="radio" name="days-length" [ngClass]="{'post-radio-btn':true}" (change)="isDayLengthValid()">
+        <span [ngClass]="{'post-radio-name':true}">20 dni</span>
+      </label>
+      <label (click)="setPostDaysLength(30)">
+        <input type="radio" name="days-length" [ngClass]="{'post-radio-btn':true}" (change)="isDayLengthValid()">
+        <span [ngClass]="{'post-radio-name':true}">30 dni</span>
+      </label>
+      <span *ngIf="!isValid.dayLength" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.dayLength}}</span>
+    </div>
+    <div class="col-lg-5 col-md-12" [ngClass]="{'m1224':true}">
+      <label for="post-resumption" [ngClass]="{'input-checkbox-post-label':true}">
+        <input id="post-resumption" [ngClass]="{'input-checkbox':true}"
+               type="checkbox" [(ngModel)]="value.resumption" name="post-give-invoice">Wznowienie na 60 dni (w 6 razy większy szansy)
+      </label>
+    </div>
+    <div class="col-12">
+      <label for="post-phone-add" [ngClass]="{'title-label-125':true,'input-label':true}">Data wustawienia</label>
+    </div>
+    <div class="col-12" [ngClass]="{'m1224':true}">
+      <label (click)="setWhenStartFrom(0)">
+        <input type="radio" name="start-from" [ngClass]="{'post-radio-btn':true}" (change)="isDayLengthValid()">
+        <span [ngClass]="{'post-radio-name':true}">od razu</span>
+      </label>
+    </div>
+    <div class="col-12" [ngClass]="{'m1224':true}">
+      <label (click)="setWhenStartFrom(1)">
+        <input type="radio" name="start-from" [ngClass]="{'post-radio-btn':true}" (change)="isDayLengthValid()">
+        <span [ngClass]="{'post-radio-name':true}">inna</span>
+      </label>
+      <input *ngIf="value.whenStartFrom === 1" type="date" [(ngModel)]="value.startFrom">
     </div>
   </div>
 </div>
