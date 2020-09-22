@@ -15,6 +15,8 @@ import {DriveService} from "../../service/drive/drive.service";
 import {GearboxService} from "../../service/gearbox/gearbox.service";
 import {EquipmentService} from "../../service/equipment/equipment.service";
 import {RegistrationFormValidationService} from "../../service/form/registration-form-validation.service";
+import {PromotionModel} from "../../model/promotion.model";
+import {PromotionService} from "../../service/promotion/promotion.service";
 
 @Component({
   selector: 'app-post-add-pc',
@@ -95,6 +97,8 @@ export class PostAddPcComponent implements OnInit {
     minStartFrom: '',
     maxStartFrom: '',
     whenStartFrom: 0,
+    promotions: new Array<PromotionModel>(),
+    promotion: new PromotionModel(),
   }
 
   isValid = {
@@ -182,6 +186,7 @@ export class PostAddPcComponent implements OnInit {
     private gearboxS: GearboxService,
     private equipmentS: EquipmentService,
     private registrationFormV: RegistrationFormValidationService,
+    private promotionS: PromotionService,
   ) {
   }
 
@@ -200,6 +205,7 @@ export class PostAddPcComponent implements OnInit {
     this.setLanguages();
     this.setMinStartFrom();
     this.setMaxStartFrom();
+    this.setPromotions();
   }
 
   unPickAll(): void {
@@ -724,6 +730,28 @@ export class PostAddPcComponent implements OnInit {
     m = m.length < 2 ? '0' + m : m;
     d = d.length < 2 ? '0' + d : d;
     this.value.maxStartFrom = y + '-' + m + '-' + d;
+  }
+
+  private setPromotions() {
+    this.promotionS
+      .getAllPromotions()
+      .subscribe(data => {
+        for (let ele of data['result']) {
+          let pro = new PromotionModel();
+          pro.id = ele._id;
+          pro.name = ele.name;
+          pro.description = ele.description;
+          this.value.promotions.push(pro);
+        }
+      });
+  }
+
+  isPromotionPicked(id: string) {
+    return id && this.value.promotion.id === id;
+  }
+
+  setPromotion(promotion: PromotionModel) {
+    this.value.promotion = promotion;
   }
 
 }

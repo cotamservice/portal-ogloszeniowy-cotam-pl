@@ -616,5 +616,21 @@
         </div>
       </div>
     </div>
+    <div class="col-lg-6 col-md-12">
+      <div class="row">
+        <div class="col-12">
+          <label for="post-phone-add" [ngClass]="{'title-label-125':true,'input-label':true}">promowanie</label>
+        </div>
+        <div class="col-lg-6 dol-md-12" *ngFor="let promotion of value.promotions">
+          <div [ngClass]="{'promotion-div': true, 'promotion-div-picked': isPromotionPicked(promotion.id)}" (click)="setPromotion(promotion)">
+            <div [ngClass]="{'head':true}">{{promotion.name}}</div>
+            <div [ngClass]="{'content':true}">czas trwania<br>{{promotion.duration}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-12">
+    </div>
+
   </div>
 </div>
