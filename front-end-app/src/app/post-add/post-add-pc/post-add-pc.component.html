@@ -621,7 +621,7 @@
         <div class="col-12">
           <label for="post-phone-add" [ngClass]="{'title-label-125':true,'input-label':true}">promowanie</label>
         </div>
-        <div class="col-lg-6 dol-md-12" *ngFor="let promotion of value.promotions">
+        <div class="col-lg-5 dol-md-12" [ngClass]="{'promotions-div':true}" *ngFor="let promotion of value.promotions">
           <div [ngClass]="{'promotion-div': true, 'promotion-div-picked': isPromotionPicked(promotion.id)}" (click)="setPromotion(promotion)">
             <div [ngClass]="{'head':true}">{{promotion.name}}</div>
             <div [ngClass]="{'content':true}">czas trwania<br>{{promotion.duration}}</div>
@@ -630,6 +630,34 @@
       </div>
     </div>
     <div class="col-lg-6 col-md-12">
+      <div class="row">
+        <div class="col-12" [ngClass]="{'subscribe-div':true}">
+          <label for="post-phone-add" [ngClass]="{'title-label-125':true,'input-label':true}">abonament</label>
+        </div>
+        <div class="col-12">
+          <select id="post-subscription" [ngClass]="{'input':true}" (change)="setSubscribtion()"
+                  [(ngModel)]="value.selectedSubscriptionId" name="post-subscription">
+            <ng-container *ngFor="let subscription of value.subscriptions" >
+              <option *ngIf="isFuture(subscription.endIn)"    value="{{subscription.id}}">{{subscription.name}}</option>
+            </ng-container>
+
+          </select>
+        </div>
+        <div class="col-12" [ngClass]="{'subscribe-info':true}">
+          <div class="row">
+            <div class="col-6">ilość ogłoszeń zostawo:</div>
+            <div class="col-6">{{value.subscription.postLeft}}</div>
+          </div>
+          <div class="row">
+            <div class="col-6">ilość ogłoszeń wykozystano:</div>
+            <div class="col-6">{{value.subscription.postAmount - value.subscription.postLeft}}</div>
+          </div>
+          <div class="row">
+            <div class="col-6">aktualny do:</div>
+            <div class="col-6">{{value.subscription.endIn.toLocaleDateString()}}</div>
+          </div>
+        </div>
+      </div>
     </div>
 
   </div>
