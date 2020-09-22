@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const Promotion = require('../model').Promotion;
+const Subscription = require('../model').Subscription;
 
 router.get('/all', (req, res) => {
-    Promotion.getAll((err, result) => {
+    Subscription.getAll((err, result) => {
         if (err) {
             res.json({success: false});
         } else {
@@ -13,17 +13,19 @@ router.get('/all', (req, res) => {
 })
 router.get('/save', (req, res) => {
     let pros = [
-        new Promotion({
-            name: 'Pakiet#1',
-            duration: 10,
+        new Subscription({
+            name: 'Subscription#1',
+            postAmount: 10,
+            description: 'Subscription#1 description',
         }),
-        new Promotion({
-            name: 'Pakiet#2',
-            duration: 20,
+        new Subscription({
+            name: 'Subscription#2',
+            postAmount: 20,
+            description: 'Subscription#2 description',
         }),
     ]
     pros.forEach(ele => {
-        Promotion.getPromotionByName(ele.name, (err, mark) => {
+        Subscription.getSubscriptionByName(ele.name, (err, mark) => {
             if (!mark) {
                 ele.save(err => {
                     if (err) {

@@ -10,6 +10,8 @@ const Fuel = require('./Fuel');
 const GearBox = require('./GearBox');
 const Equipment = require('./Equipment')
 const Promotion = require('./Promotion')
+const Subscription = require('./Subscription')
+const UserSubscription = require('./UserSubscription')
 
 module.exports = {
     User,
@@ -23,5 +25,7 @@ module.exports = {
     Drive,
     GearBox,
     Equipment,
-    Promotion
+    Promotion,
+    Subscription,
+    UserSubscription,
 }

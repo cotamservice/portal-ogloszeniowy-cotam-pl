@@ -9,6 +9,8 @@ const fuel = require('./fuel');
 const gearbox = require('./gearbox');
 const equipment = require('./equipment');
 const promotion = require('./promotion');
+const subscription = require('./subscription');
+const usersubscription = require('./usersubscription');
 
 module.exports = {
     configUse: (app) => {
@@ -23,5 +25,7 @@ module.exports = {
         app.use('/gearbox', gearbox);
         app.use('/equipment', equipment);
         app.use('/promotion', promotion);
+        app.use('/subscription', subscription);
+        app.use('/usersubscription', usersubscription);
     }
 }
