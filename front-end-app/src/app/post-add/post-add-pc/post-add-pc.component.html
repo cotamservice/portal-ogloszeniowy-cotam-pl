@@ -603,11 +603,18 @@
       </label>
     </div>
     <div class="col-12" [ngClass]="{'m1224':true}">
-      <label (click)="setWhenStartFrom(1)">
-        <input type="radio" name="start-from" [ngClass]="{'post-radio-btn':true}" (change)="isDayLengthValid()">
-        <span [ngClass]="{'post-radio-name':true}">inna</span>
-      </label>
-      <input *ngIf="value.whenStartFrom === 1" type="date" [(ngModel)]="value.startFrom">
+      <div class="row">
+        <div class="col-2">
+          <label (click)="setWhenStartFrom(1)">
+            <input type="radio" name="start-from" [ngClass]="{'post-radio-btn':true}" (change)="isDayLengthValid()">
+            <span [ngClass]="{'post-radio-name':true}">inna</span>
+          </label>
+        </div>
+        <div class="col-9">
+          <input *ngIf="value.whenStartFrom === 1" type="date" min="{{value.minStartFrom}}" max="{{value.maxStartFrom}}" [ngClass]="{'input-date':true}"
+                 [(ngModel)]="value.startFrom">
+        </div>
+      </div>
     </div>
   </div>
 </div>

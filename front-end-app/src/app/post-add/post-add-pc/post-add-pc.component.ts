@@ -91,7 +91,9 @@ export class PostAddPcComponent implements OnInit {
     phones: [],
     resumption: false,
     dayLength: 0,
-    startFrom: null,
+    startFrom: new Date().toDateString(),
+    minStartFrom: '',
+    maxStartFrom: '',
     whenStartFrom: 0,
   }
 
@@ -196,6 +198,8 @@ export class PostAddPcComponent implements OnInit {
     this.setEquipments();
     this.setLoginEmail();
     this.setLanguages();
+    this.setMinStartFrom();
+    this.setMaxStartFrom();
   }
 
   unPickAll(): void {
@@ -699,6 +703,27 @@ export class PostAddPcComponent implements OnInit {
 
   setWhenStartFrom(when) {
     this.value.whenStartFrom = when;
-    if (when === 0) this.value.startFrom = new Date();
   }
+
+  setMinStartFrom() {
+    let now = new Date();
+    let y = now.getFullYear().toString();
+    let m = (now.getMonth() + 1).toString();
+    let d = now.getDate().toString();
+    m = m.length < 2 ? '0' + m : m;
+    d = d.length < 2 ? '0' + d : d;
+    this.value.minStartFrom = y + '-' + m + '-' + d;
+  }
+
+  setMaxStartFrom() {
+    let now = new Date();
+    let m = (now.getMonth() + 1).toString();
+    let y = (m === '12' ? now.getFullYear() + 1 : now.getFullYear()).toString();
+    m = (now.getMonth() + 1) === 12 ? '01' : (now.getMonth() + 2).toString();
+    let d = now.getDate().toString();
+    m = m.length < 2 ? '0' + m : m;
+    d = d.length < 2 ? '0' + d : d;
+    this.value.maxStartFrom = y + '-' + m + '-' + d;
+  }
+
 }
