@@ -783,11 +783,11 @@ export class PostAddPcComponent implements OnInit {
     }
     if (!this.value.subscription.id && this.value.subscriptions[0]) {
       this.value.selectedSubscriptionId = this.value.subscriptions[0].id;
-      this.setSubscribtion();
+      this.setSubscription();
     }
   }
 
-  setSubscribtion() {
+  setSubscription() {
     for (let ele of this.value.subscriptions) {
       if (ele.id === this.value.selectedSubscriptionId) {
         this.value.subscription = ele;

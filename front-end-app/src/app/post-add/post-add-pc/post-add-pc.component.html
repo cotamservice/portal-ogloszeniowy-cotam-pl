@@ -635,7 +635,7 @@
           <label for="post-phone-add" [ngClass]="{'title-label-125':true,'input-label':true}">abonament</label>
         </div>
         <div class="col-12">
-          <select id="post-subscription" [ngClass]="{'input':true}" (change)="setSubscribtion()"
+          <select id="post-subscription" [ngClass]="{'input':true}" (change)="setSubscription()"
                   [(ngModel)]="value.selectedSubscriptionId" name="post-subscription">
             <ng-container *ngFor="let subscription of value.subscriptions" >
               <option *ngIf="isFuture(subscription.endIn)"    value="{{subscription.id}}">{{subscription.name}}</option>
