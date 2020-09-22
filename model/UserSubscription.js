@@ -35,7 +35,7 @@ const UserSubscription = module.exports = mongoose.model('UserSubscription', Use
 
 module.exports.getSubscriptionByUserId = (userId, cb) => {
     const query = {userId: userId};
-    UserSubscription.findOne(query, cb);
+    UserSubscription.find(query, cb);
 }
 module.exports.getAll = (cb) => {
     const query = {};

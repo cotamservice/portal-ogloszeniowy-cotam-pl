@@ -635,26 +635,26 @@
           <label for="post-phone-add" [ngClass]="{'title-label-125':true,'input-label':true}">abonament</label>
         </div>
         <div class="col-12">
-          <select id="post-subscription" [ngClass]="{'input':true}" (change)="setSubscription()"
-                  [(ngModel)]="value.selectedSubscriptionId" name="post-subscription">
-            <ng-container *ngFor="let subscription of value.subscriptions" >
-              <option *ngIf="isFuture(subscription.endIn)"    value="{{subscription.id}}">{{subscription.name}}</option>
+          <select id="post-subscription" [ngClass]="{'input':true}" (change)="setUserSubscription()"
+                  [(ngModel)]="value.selectedUsersubscriptionId" name="post-subscription">
+            <ng-container *ngFor="let usersubscription of value.usersubscriptions" >
+              <option *ngIf="isFuture(usersubscription.endIn)"   value="{{usersubscription.id}}">{{usersubscription.subscriptionName}}</option>
             </ng-container>
 
           </select>
         </div>
-        <div class="col-12" [ngClass]="{'subscribe-info':true}">
+        <div class="col-12" [ngClass]="{'subscribe-info':true}" *ngIf="value.usersubscription.id">
           <div class="row">
             <div class="col-6">ilość ogłoszeń zostawo:</div>
-            <div class="col-6">{{value.subscription.postLeft}}</div>
+            <div class="col-6">{{value.usersubscription.postAmount - value.usersubscription.postMade}}</div>
           </div>
           <div class="row">
             <div class="col-6">ilość ogłoszeń wykozystano:</div>
-            <div class="col-6">{{value.subscription.postAmount - value.subscription.postLeft}}</div>
+            <div class="col-6">{{value.usersubscription.postMade}}</div>
           </div>
           <div class="row">
             <div class="col-6">aktualny do:</div>
-            <div class="col-6">{{value.subscription.endIn.toLocaleDateString()}}</div>
+            <div class="col-6">{{value.usersubscription.endIn.toLocaleDateString()}}</div>
           </div>
         </div>
       </div>

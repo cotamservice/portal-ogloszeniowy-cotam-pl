@@ -18,6 +18,8 @@ import {RegistrationFormValidationService} from "../../service/form/registration
 import {PromotionModel} from "../../model/promotion.model";
 import {PromotionService} from "../../service/promotion/promotion.service";
 import {SubscriptionModel} from "../../model/subscription.model";
+import {SubscriptionService} from "../../service/subscription/subscription.service";
+import {UsersubscriptionModel} from "../../model/usersubscription.model";
 
 @Component({
   selector: 'app-post-add-pc',
@@ -100,9 +102,10 @@ export class PostAddPcComponent implements OnInit {
     whenStartFrom: 0,
     promotions: new Array<PromotionModel>(),
     promotion: new PromotionModel(),
-    subscription: new SubscriptionModel(),
-    subscriptions: new Array<SubscriptionModel>(),
-    selectedSubscriptionId: '',
+    usersubscription: new UsersubscriptionModel(),
+    // subscriptions: new Array<SubscriptionModel>(),
+    selectedUsersubscriptionId: '',
+    usersubscriptions: new Array<UsersubscriptionModel>(),
   }
 
   isValid = {
@@ -191,6 +194,7 @@ export class PostAddPcComponent implements OnInit {
     private equipmentS: EquipmentService,
     private registrationFormV: RegistrationFormValidationService,
     private promotionS: PromotionService,
+    private subscriptionS: SubscriptionService,
   ) {
   }
 
@@ -210,7 +214,7 @@ export class PostAddPcComponent implements OnInit {
     this.setMinStartFrom();
     this.setMaxStartFrom();
     this.setPromotions();
-    this.setSubscriptions();
+    this.setUserSubscriptions();
   }
 
   unPickAll(): void {
@@ -760,42 +764,39 @@ export class PostAddPcComponent implements OnInit {
     this.value.promotion = promotion;
   }
 
-  setSubscriptions() {
-    for (let i = 1; i < 4; ++i) {
-      let sab = new SubscriptionModel();
-      sab.id = i.toString();
-      sab.name = 'subscription#' + i.toString();
-      sab.postAmount = i * 10;
-      sab.postLeft = i * 2;
-      if(i !== 3){
-        sab.startIn = new Date();
-        sab.startIn.setDate(sab.startIn.getDate() + i);
-        sab.endIn = new Date();
-        sab.endIn.setDate(sab.startIn.getDate() + i * 10);
-      }else{
-        sab.startIn = new Date();
-        sab.startIn.setDate(sab.startIn.getDate() + i);
-        sab.endIn = new Date();
-        sab.endIn.setDate(sab.startIn.getDate() - i * 10);
-      }
-      sab.description = sab.name + ' description';
-      this.value.subscriptions.push(sab);
-    }
-    if (!this.value.subscription.id && this.value.subscriptions[0]) {
-      this.value.selectedSubscriptionId = this.value.subscriptions[0].id;
-      this.setSubscription();
-    }
+  setUserSubscriptions() {
+    this.subscriptionS
+      .getAllUserSubscriptions(this.authenticateS.getAuthenticateUser().id)
+      .subscribe(data => {
+        for (let ele of data['result']) {
+          let us = new UsersubscriptionModel();
+          us.id = ele._id;
+          us.userId = ele.userId;
+          us.subscriptionId = ele.subscriptionId;
+          us.subscriptionName = ele.subscriptionName;
+          us.postAmount = ele.postAmount;
+          us.postMade = ele.postMade;
+          us.startIn = ele.startIn;
+          us.endIn = new Date(ele.endIn);
+          this.value.usersubscriptions.push(us);
+          if (!this.value.selectedUsersubscriptionId) {
+            this.value.selectedUsersubscriptionId = us.id;
+            this.value.usersubscription = us;
+          }
+        }
+
+      });
   }
 
-  setSubscription() {
-    for (let ele of this.value.subscriptions) {
-      if (ele.id === this.value.selectedSubscriptionId) {
-        this.value.subscription = ele;
+  setUserSubscription() {
+    for (let ele of this.value.usersubscriptions) {
+      if (ele.id === this.value.selectedUsersubscriptionId) {
+        this.value.usersubscription = ele;
       }
     }
   }
 
   isFuture(endIn: Date) {
-    return endIn > new Date;
+    return endIn > new Date();
   }
 }

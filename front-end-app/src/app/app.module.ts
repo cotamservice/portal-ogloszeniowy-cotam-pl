@@ -28,6 +28,7 @@ import {PostAddPhoneComponent} from './post-add/post-add-phone/post-add-phone.co
 import {PostFormValidationService} from "./service/form/post-form-validation.service";
 import {CurrencyService} from "./service/currency/currency.service";
 import {PromotionService} from "./service/promotion/promotion.service";
+import {SubscriptionService} from "./service/subscription/subscription.service";
 
 export function tokenGetter() {
   let localToken = localStorage.getItem("authenticate_token");
@@ -75,7 +76,7 @@ export function tokenGetter() {
     }),
 
   ],
-  providers: [RegistrationFormValidationService, PostFormValidationService, AuthenticateService, AuthenticateGuard, CurrencyService, PromotionService],
+  providers: [RegistrationFormValidationService, PostFormValidationService, AuthenticateService, AuthenticateGuard, CurrencyService, PromotionService, SubscriptionService],
   bootstrap: [AppComponent],
 })
 export class AppModule {
