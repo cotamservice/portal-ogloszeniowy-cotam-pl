@@ -4,8 +4,9 @@ const UserSubscription = require('../model').UserSubscription;
 const Subscription = require('../model').Subscription;
 const User = require('../model').User;
 
-router.get('/all', (req, res) => {
-    UserSubscription.getAll((err, result) => {
+router.get('/all/:userId', (req, res) => {
+    let userId = req.params.userId;
+    UserSubscription.getSubscriptionByUserId(userId, (err, result) => {
         if (err) {
             res.json({success: false});
         } else {
@@ -38,6 +39,8 @@ router.get('/save', (req, res) => {
                 Subscription.getSubscriptionByName(subscriptionName, (err, sub) => {
                     if (sub) {
                         ele.subscriptionId = sub._id;
+                        ele.subscriptionName = sub.name;
+                        ele.postAmount = sub.postAmount;
                         ele.save(err => {
                             if (err) {
                                 res.json({success: false});

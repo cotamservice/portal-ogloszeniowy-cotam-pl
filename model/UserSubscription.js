@@ -9,6 +9,14 @@ const UserSubscriptionSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    subscriptionName: {
+        type: String,
+        required: true
+    },
+    postAmount: {
+        type: Number,
+        required: true
+    },
     postMade: {
         type: Number,
         required: true
