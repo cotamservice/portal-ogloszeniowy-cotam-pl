@@ -740,6 +740,7 @@ export class PostAddPcComponent implements OnInit {
           let pro = new PromotionModel();
           pro.id = ele._id;
           pro.name = ele.name;
+          pro.duration = ele.duration;
           pro.description = ele.description;
           this.value.promotions.push(pro);
         }
