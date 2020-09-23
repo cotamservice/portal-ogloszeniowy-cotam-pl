@@ -29,6 +29,7 @@ import {PostFormValidationService} from "./service/form/post-form-validation.ser
 import {CurrencyService} from "./service/currency/currency.service";
 import {PromotionService} from "./service/promotion/promotion.service";
 import {SubscriptionService} from "./service/subscription/subscription.service";
+import {LanguageService} from "./service/language/language.service";
 
 export function tokenGetter() {
   let localToken = localStorage.getItem("authenticate_token");
@@ -76,7 +77,9 @@ export function tokenGetter() {
     }),
 
   ],
-  providers: [RegistrationFormValidationService, PostFormValidationService, AuthenticateService, AuthenticateGuard, CurrencyService, PromotionService, SubscriptionService],
+  providers: [RegistrationFormValidationService, PostFormValidationService, AuthenticateService,
+    AuthenticateGuard, CurrencyService, PromotionService,
+    SubscriptionService, LanguageService],
   bootstrap: [AppComponent],
 })
 export class AppModule {

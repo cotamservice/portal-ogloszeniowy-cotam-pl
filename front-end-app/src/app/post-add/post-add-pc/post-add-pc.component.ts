@@ -20,6 +20,7 @@ import {PromotionService} from "../../service/promotion/promotion.service";
 import {SubscriptionModel} from "../../model/subscription.model";
 import {SubscriptionService} from "../../service/subscription/subscription.service";
 import {UsersubscriptionModel} from "../../model/usersubscription.model";
+import {LanguageService} from "../../service/language/language.service";
 
 @Component({
   selector: 'app-post-add-pc',
@@ -195,6 +196,7 @@ export class PostAddPcComponent implements OnInit {
     private registrationFormV: RegistrationFormValidationService,
     private promotionS: PromotionService,
     private subscriptionS: SubscriptionService,
+    private languageS: LanguageService,
   ) {
   }
 
@@ -663,7 +665,12 @@ export class PostAddPcComponent implements OnInit {
   }
 
   private setLanguages() {
-    this.value.languages = [['pl1', 'lang1'], ['pl2', 'lang2'], ['pl3', 'lang3']];
+    this.value.languages = this.languageS.getAllNativeLanguages();
+    this.setDefaultPhoneLanguage();
+  }
+
+  private setDefaultPhoneLanguage() {
+    this.value.phoneLanguages[0] = this.languageS.getFirstBrowserLangCode();
   }
 
   addPhone() {
@@ -798,5 +805,9 @@ export class PostAddPcComponent implements OnInit {
 
   isFuture(endIn: Date) {
     return endIn > new Date();
+  }
+
+  convertLangCodeToLangName(phoneLang: string) {
+    return this.languageS.getNativeNameByCode(phoneLang);
   }
 }

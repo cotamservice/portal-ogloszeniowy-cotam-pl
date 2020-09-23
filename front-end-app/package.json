@@ -26,6 +26,7 @@
     "@types/raphael": "^2.3.0",
     "angular2-flash-messages": "^3.0.1",
     "currency-codes": "^2.1.0",
+    "iso-639-1": "^2.1.4",
     "raphael": "^2.3.0",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
