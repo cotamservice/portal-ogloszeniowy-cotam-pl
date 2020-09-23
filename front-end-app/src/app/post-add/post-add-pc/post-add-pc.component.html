@@ -508,9 +508,9 @@
         </div>
         <div [ngClass]="{'lang-div':true}">
           <span *ngIf="phoneLangs[1] || phoneLangs[2] || phoneLangs[3]">(</span>
-          <span [ngClass]="{'m1224':true}" *ngIf="phoneLangs[1]">{{convertLangCodeToLangName(phoneLangs[1])}}</span>
-          <span [ngClass]="{'m1224':true}" *ngIf="phoneLangs[2]">{{convertLangCodeToLangName(phoneLangs[2])}}</span>
-          <span [ngClass]="{'m1224':true}" *ngIf="phoneLangs[3]">{{convertLangCodeToLangName(phoneLangs[3])}}</span>
+          <span *ngIf="phoneLangs[1]">{{convertLangCodeToLangName(phoneLangs[1])}}</span>
+          <span *ngIf="phoneLangs[2]">, {{convertLangCodeToLangName(phoneLangs[2])}}</span>
+          <span *ngIf="phoneLangs[3]">, {{convertLangCodeToLangName(phoneLangs[3])}}</span>
           <span *ngIf="phoneLangs[1] || phoneLangs[2] || phoneLangs[3]">)</span>
         </div>
         <div [ngClass]="{'phone-btn':true}">
@@ -637,8 +637,8 @@
         <div class="col-12">
           <select id="post-subscription" [ngClass]="{'input':true}" (change)="setUserSubscription()"
                   [(ngModel)]="value.selectedUsersubscriptionId" name="post-subscription">
-            <ng-container *ngFor="let usersubscription of value.usersubscriptions" >
-              <option *ngIf="isFuture(usersubscription.endIn)"   value="{{usersubscription.id}}">{{usersubscription.subscriptionName}}</option>
+            <ng-container *ngFor="let usersubscription of value.usersubscriptions">
+              <option *ngIf="isFuture(usersubscription.endIn)" value="{{usersubscription.id}}">{{usersubscription.subscriptionName}}</option>
             </ng-container>
 
           </select>

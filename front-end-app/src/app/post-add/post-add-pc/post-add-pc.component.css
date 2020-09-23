@@ -266,13 +266,14 @@
 
 .lang-div {
   display: inline-block;
-  width: 30%;
+  text-align: left;
+  width: calc(80% - 270px);
 }
 
 .phone-btn {
   display: inline-block;
   text-align: right;
-  width: 50%;
+  width: 270px;
   line-height: 43px;
 }
 
