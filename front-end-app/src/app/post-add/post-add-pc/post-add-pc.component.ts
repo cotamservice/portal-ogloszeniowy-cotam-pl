@@ -21,6 +21,7 @@ import {SubscriptionModel} from "../../model/subscription.model";
 import {SubscriptionService} from "../../service/subscription/subscription.service";
 import {UsersubscriptionModel} from "../../model/usersubscription.model";
 import {LanguageService} from "../../service/language/language.service";
+import {CountryService} from "../../service/country/country.service";
 
 @Component({
   selector: 'app-post-add-pc',
@@ -197,6 +198,7 @@ export class PostAddPcComponent implements OnInit {
     private promotionS: PromotionService,
     private subscriptionS: SubscriptionService,
     private languageS: LanguageService,
+    private countryS: CountryService,
   ) {
   }
 
@@ -205,6 +207,7 @@ export class PostAddPcComponent implements OnInit {
     this.setAllModels();
     this.value.countries = this.mapkaS.getCountriesCodeAndName();
     this.updateCountries();
+    this.setDefaultCountry();
     this.value.currencies = this.currencyS.getAllCurrencies();
     this.setStates();
     this.setFuels();
@@ -809,5 +812,16 @@ export class PostAddPcComponent implements OnInit {
 
   convertLangCodeToLangName(phoneLang: string) {
     return this.languageS.getNativeNameByCode(phoneLang);
+  }
+
+  private setDefaultCountry() {
+    let browserCountry = this.countryS.getBrowserCountry().toUpperCase();
+    for (let ele of this.mapkaS.getCountriesCodeAndName()) {
+      if (ele[0] === browserCountry) {
+        this.value.country = browserCountry;
+        this.updateCountries();
+        break;
+      }
+    }
   }
 }

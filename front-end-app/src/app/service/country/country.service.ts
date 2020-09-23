@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import {getBrowserLocale} from "../../../assets/js/country/country";
 
 @Injectable({
   providedIn: 'root'
@@ -759,5 +760,9 @@ export class CountryService {
       result.push([code, this.getNameByCode(code)]);
     }
     return result;
+  }
+
+  getBrowserCountry() {
+    return getBrowserLocale();
   }
 }
