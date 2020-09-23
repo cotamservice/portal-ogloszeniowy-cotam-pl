@@ -5,11 +5,8 @@ export class PostModel implements DeserializableModel {
   id: string;
   category: string;
   title: string;
-  markName: string;
   markId: string;
-  modelBodyName: string;
   modelBodyId: string;
-  modelName: string;
   modelId: string;
   mileAge: number;
   productionYear: number;
@@ -41,6 +38,16 @@ export class PostModel implements DeserializableModel {
   equipment: Array<string>
   extraEquipment: Array<string>
   vin: string;
+  contactName:string;
+  contactEmail:string;
+  contactPhone: Array<Array<string>>;
+  amountOfDays: number;
+  startDate: Date;
+  resumption: boolean;
+  promotionDuration: number;
+  userSubscriptionId: string;
+  isActive: boolean;
+
 
   deserializable(input: any): this {
     Object.assign(this, input);

@@ -391,20 +391,6 @@ export class PostAddPcComponent implements OnInit {
     return this.isValid.photosDescription;
   }
 
-  verifyForm(): void {
-    this.isCatPicked();
-    this.isTitleValid();
-    this.isMarkValid();
-    this.isModelValid();
-    this.isMileageValid();
-    this.isProductionYearValid();
-  }
-
-  isFormValid(): boolean {
-    return this.isCatPicked() && this.isTitleValid() && this.isMarkValid() && this.isModelValid() && this.isMileageValid()
-      && this.isProductionYearValid();
-  }
-
   addLastPhotosAndDescriptions(): void {
     if (this.value.photosPreview.length > 0 || this.value.photosDescription.length > 0) {
       let lastPhotosAndDescription = [this.value.photosPreview, this.value.photosDescription];
@@ -412,60 +398,6 @@ export class PostAddPcComponent implements OnInit {
       this.value.photos = [];
       this.value.photosPreview = [];
       this.value.photosDescription = '';
-    }
-  }
-
-  preparePost() {
-    this.verifyForm();
-    if (this.isFormValid()) {
-      let post = new PostModel();
-      post.category = this.value.pickedCat;
-      post.title = this.value.title.trim();
-      post.markId = this.value.markId;
-      post.modelBodyId = this.value.model[0];
-      post.modelId = this.value.model[1];
-      post.mileAge = this.value.mileage;
-      post.productionYear = this.value.productionYear;
-      if (this.value.photosPreview.length > 0 || this.value.photosDescription.length > 0) {
-        this.addLastPhotosAndDescriptions();
-      }
-      post.photosAndDescription = this.value.photosAndDescription;
-
-      post.country = this.value.country;
-      post.region = this.value.region;
-      post.city = this.value.city;
-      post.range = this.value.range;
-      post.salonId = this.value.pickedSalon;
-
-      post.price = this.value.price;
-      post.isPriceNetto = this.value.isPriceNetto;
-      post.isGiveInvoce = this.value.isGiveInvoice;
-      post.currency = this.value.currency;
-
-      post.state = this.value.state;
-      post.isDmg = this.value.isDmg;
-      post.isFirstDriver = this.value.isFirstDriver;
-      post.isNoAccidents = this.value.isNoAccidents;
-      post.hasCarBook = this.value.hasCarBook;
-      post.fuel = this.value.fuel;
-      post.engineDisplacement = this.value.engineDisplacement;
-      post.enginePower = this.value.enginePower;
-      post.engineDrive = this.value.engineDrive;
-      post.engineGearbox = this.value.engineGearbox;
-      post.bodySeats = this.value.bodySeats;
-      post.bodyDoors = this.value.bodyDoors;
-      post.bodyColor = this.value.bodyColor;
-      post.equipment = this.value.equipment;
-      post.extraEquipment = this.value.extraEquipment;
-      post.vin = this.value.vin;
-
-
-      post.createOn = new Date();
-      if (this.authenticateS.isAuthenticate()) {
-        post.createById = this.authenticateS.getAuthenticateUser().id;
-      } else {
-        post.createById = "";
-      }
     }
   }
 
@@ -833,18 +765,135 @@ export class PostAddPcComponent implements OnInit {
   isRegulationAccept() {
     this.isValid.isRegulationAccept = this.value.isRegulationAccept;
     this.invalidMsg.isRegulationAccept = !this.isValid.isRegulationAccept ? 'Przed dodawaniem należy zapoznać się z regulaminem serwisu i zaakceptować go' : '';
+    return this.isValid.isRegulationAccept;
   }
 
   isRodoAccept() {
     this.isValid.isRodoAccept = this.value.isRodoAccept;
     this.invalidMsg.isRodoAccept = !this.isValid.isRodoAccept ? 'Przed dodawaniem musimy otrzymac zgodę na przetwarzania danych osobowych' : '';
+    return this.isValid.isRodoAccept;
   }
 
   previewPost() {
-
+    let post = this.preparePost();
   }
 
   addPost() {
-
+    let post = this.preparePost();
   }
+
+  isCurrencyValid() {
+    this.isValid.currency = this.value.currency.length > 0;
+    this.invalidMsg.currency = !this.isValid.currency ? 'Wybierz walutę' : '';
+    return this.isValid.currency;
+  }
+
+  isStateValid() {
+    this.isValid.state = this.value.state.length > 0;
+    this.invalidMsg.state = !this.isValid.state ? 'Wybierz stan' : '';
+    return this.isValid.state;
+  }
+
+  isFuelValid() {
+    this.isValid.fuel = this.value.fuel.length > 0;
+    this.invalidMsg.fuel = !this.isValid.fuel ? 'Wybeirz rodzaj paliwa' : '';
+    return this.isValid.fuel;
+  }
+
+  isEngineGearboxValid() {
+    this.isValid.engineGearbox = this.value.engineGearbox.length > 0;
+    this.invalidMsg.engineGearbox = !this.isValid.engineGearbox ? 'Wybierz skrzynie biegów' : '';
+    return this.isValid.engineGearbox;
+  }
+
+  verifyForm(): void {
+    this.isCatPicked();
+    this.isTitleValid();
+    this.isMarkValid();
+    this.isModelValid();
+    this.isMileageValid();
+    this.isProductionYearValid();
+    this.isCountryValid();
+    this.isRegionValid();
+    this.isCityValid();
+    this.isPriceValid();
+    this.isCurrencyValid();
+    this.isStateValid();
+    this.isFuelValid();
+    this.isEngineDriveValid();
+    this.isEngineGearboxValid();
+    this.isNameValid();
+    this.isEmailValid();
+  }
+
+  isFormValid(): boolean {
+    return this.isCatPicked() && this.isTitleValid() && this.isMarkValid() && this.isModelValid() && this.isMileageValid()
+      && this.isProductionYearValid() && this.isCountryValid() && this.isRegionValid() && this.isCityValid()
+      && this.isPriceValid() && this.isCurrencyValid() && this.isStateValid() && this.isFuelValid() && this.isEngineDriveValid()
+      && this.isEngineGearboxValid() && this.isNameValid() && this.isEmailValid();
+  }
+
+  preparePost() {
+    this.verifyForm();
+    if (!this.isFormValid()) return;
+    let post = new PostModel();
+    post.category = this.value.pickedCat;
+    post.title = this.value.title.trim();
+    post.markId = this.value.markId;
+    post.modelBodyId = this.value.model[0];
+    post.modelId = this.value.model[1];
+    post.mileAge = this.value.mileage;
+    post.productionYear = this.value.productionYear;
+    if (this.value.photosPreview.length > 0 || this.value.photosDescription.length > 0) {
+      this.addLastPhotosAndDescriptions();
+    }
+    post.photosAndDescription = this.value.photosAndDescription;
+
+    post.country = this.value.country;
+    post.region = this.value.region;
+    post.city = this.value.city;
+    post.range = this.value.range;
+    post.salonId = this.value.pickedSalon;
+
+    post.price = this.value.price;
+    post.isPriceNetto = this.value.isPriceNetto;
+    post.isGiveInvoce = this.value.isGiveInvoice;
+    post.currency = this.value.currency;
+
+    post.state = this.value.state;
+    post.isDmg = this.value.isDmg;
+    post.isFirstDriver = this.value.isFirstDriver;
+    post.isNoAccidents = this.value.isNoAccidents;
+    post.hasCarBook = this.value.hasCarBook;
+    post.fuel = this.value.fuel;
+    post.engineDisplacement = this.value.engineDisplacement;
+    post.enginePower = this.value.enginePower;
+    post.engineDrive = this.value.engineDrive;
+    post.engineGearbox = this.value.engineGearbox;
+    post.bodySeats = this.value.bodySeats;
+    post.bodyDoors = this.value.bodyDoors;
+    post.bodyColor = this.value.bodyColor;
+    post.equipment = this.value.equipment;
+    post.extraEquipment = this.value.extraEquipment;
+    post.vin = this.value.vin;
+
+    post.contactName = this.value.name;
+    post.contactEmail = this.value.email;
+    post.contactPhone = this.value.phones;
+    post.amountOfDays = this.value.dayLength;
+    post.startDate = new Date(this.value.startFrom);
+    post.resumption = this.value.resumption;
+    post.promotionDuration = this.value.promotion.duration;
+    post.userSubscriptionId = this.value.usersubscription.id;
+    post.isActive = false;
+
+    post.createOn = new Date();
+    if (this.authenticateS.isAuthenticate()) {
+      post.createById = this.authenticateS.getAuthenticateUser().id;
+    } else {
+      post.createById = "";
+    }
+    return post;
+  }
+
 }

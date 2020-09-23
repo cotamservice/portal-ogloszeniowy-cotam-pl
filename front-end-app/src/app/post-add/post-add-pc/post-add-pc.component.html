@@ -269,7 +269,7 @@
       <label for="post-currency" [ngClass]="{'title-label-125':true,'input-label':true}">Waluta
         <span *ngIf="!isValid.currency" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.currency}}</span>
         <select id="post-currency" [ngClass]="{'input':true,'input-invalid':!isValid.currency}"
-                [(ngModel)]="value.currency" name="post-currency">
+                [(ngModel)]="value.currency" name="post-currency" (change)="isCurrencyValid()">
           <option *ngFor="let currency of value.currencies;" value="{{currency[0]}}">{{currency[0]}} {{currency[1]}}</option>
         </select>
       </label>
@@ -286,7 +286,7 @@
       <label for="post-state" [ngClass]="{'title-label-125':true,'input-label':true}">Stan
         <span *ngIf="!isValid.state" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.state}}</span>
         <select id="post-state" [ngClass]="{'input':true,'input-invalid':!isValid.state}"
-                [(ngModel)]="value.state" name="post-currency">
+                [(ngModel)]="value.state" name="post-state" (change)="isStateValid()">
           <option *ngFor="let state of value.states;" value="{{state[0]}}">{{state[1]}}</option>
         </select>
       </label>
@@ -294,25 +294,25 @@
     <div class="col-lg-2 col-md-12">
       <label for="post-is-dmg" [ngClass]="{'input-checkbox-post-label':true}">
         <input id="post-is-dmg" [ngClass]="{'input-checkbox':true,'input-invalid':!value.isDmg}"
-               type="checkbox" [(ngModel)]="value.isDmg" name="post-give-invoice">Uszkodzony
+               type="checkbox" [(ngModel)]="value.isDmg" name="post-is-dmg">Uszkodzony
       </label>
     </div>
     <div class="col-lg-2 col-md-12">
       <label for="post-is-first-driver" [ngClass]="{'input-checkbox-post-label':true}">
         <input id="post-is-first-driver" [ngClass]="{'input-checkbox':true,'input-invalid':!value.isFirstDriver}"
-               type="checkbox" [(ngModel)]="value.isFirstDriver" name="post-give-invoice">Pierwszy wlaszciciel
+               type="checkbox" [(ngModel)]="value.isFirstDriver" name="post-is-first-driver">Pierwszy wlaszciciel
       </label>
     </div>
     <div class="col-lg-2 col-md-12">
       <label for="post-no-accidents" [ngClass]="{'input-checkbox-post-label':true}">
         <input id="post-no-accidents" [ngClass]="{'input-checkbox':true,'input-invalid':!value.isNoAccidents}"
-               type="checkbox" [(ngModel)]="value.isNoAccidents" name="post-give-invoice">Bezwypadkowy
+               type="checkbox" [(ngModel)]="value.isNoAccidents" name="post-no-accidents">Bezwypadkowy
       </label>
     </div>
     <div class="col-lg-2 col-md-12">
       <label for="post-has-book" [ngClass]="{'input-checkbox-post-label':true}">
         <input id="post-has-book" [ngClass]="{'input-checkbox':true,'input-invalid':!value.hasCarBook}"
-               type="checkbox" [(ngModel)]="value.hasCarBook" name="post-give-invoice">Ksiezeczka pojazdu
+               type="checkbox" [(ngModel)]="value.hasCarBook" name="post-has-book">Ksiezeczka pojazdu
       </label>
     </div>
   </div>
@@ -330,7 +330,7 @@
         <div class="col-lg-6 col-md-12">
           <span *ngIf="!isValid.fuel" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.fuel}}</span>
           <select id="post-fuel" [ngClass]="{'input':true,'input-invalid':!isValid.fuel, 'input-post': true}"
-                  [(ngModel)]="value.fuel" name="post-currency">
+                  [(ngModel)]="value.fuel" name="post-fuel" (change)="isFuelValid()">
             <option *ngFor="let fuel of value.fuels;" value="{{fuel[0]}}">{{fuel[1]}}</option>
           </select>
         </div>
@@ -342,7 +342,7 @@
         <div class="col-lg-6 col-md-12">
           <span *ngIf="!isValid.engineDisplacement" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.engineDisplacement}}</span>
           <input id="post-engine-displacement" [ngClass]="{'input':true,'input-invalid':!isValid.engineDisplacement}" type="number"
-                 [(ngModel)]="value.engineDisplacement" name="post-engine-power" (change)="isEngineDisplacementValid()"
+                 [(ngModel)]="value.engineDisplacement" name="post-engine-displacement" (change)="isEngineDisplacementValid()"
                  placeholder="wpiś pojemność">
         </div>
       </div>
@@ -376,7 +376,7 @@
         <div class="col-lg-6 col-md-12">
           <span *ngIf="!isValid.engineGearbox" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.engineGearbox}}</span>
           <select id="post-engine-gearbox" [ngClass]="{'input':true,'input-invalid':!isValid.engineGearbox, 'input-post': true}"
-                  [(ngModel)]="value.engineGearbox" name="post-engine-gearbox">
+                  [(ngModel)]="value.engineGearbox" name="post-engine-gearbox" (change)="isEngineGearboxValid()">
             <option *ngFor="let gearbox of value.engineGearboxes;" value="{{gearbox[0]}}">{{gearbox[1]}}</option>
           </select>
         </div>
@@ -440,7 +440,7 @@
     <div class="col-lg-3 col-md-12">
       <div [ngClass]="{'equipment-checkbox':true}">
         <input id="post-equipment-vin" [ngClass]="{'input':true, 'input-vin':true}" type="text"
-               [(ngModel)]="value.vin" name="post-body-color"
+               [(ngModel)]="value.vin" name="post-equipment-vin"
                placeholder="wpiś VIN"> <span>VIN</span>
       </div>
     </div>
