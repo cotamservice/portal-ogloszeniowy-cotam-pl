@@ -81,7 +81,7 @@
         </select>
       </div>
     </div>
-    <div class="col-lg-4 col-md-12" *ngIf="isMarkValid()">
+    <div class="col-lg-4 col-md-12" *ngIf="value.markId.length > 0">
       <div [ngClass]="{'input-block':true}">Model
         <span *ngIf="!isValid.model" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.model}}</span>
         <select id="post-model" [ngClass]="{'input':true,'input-invalid':!isValid.model}"
@@ -187,7 +187,7 @@
         </select>
       </label>
     </div>
-    <div class="col-lg-3 col-md-12" *ngIf="isCountryValid()">
+    <div class="col-lg-3 col-md-12" *ngIf="value.country.length > 0">
       <label for="post-region" [ngClass]="{'title-label-125':true,'input-label':true}">Region
         <span *ngIf="!isValid.region" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.region}}</span>
         <select id="post-region" [ngClass]="{'input':true,'input-invalid':!isValid.region}"
@@ -196,7 +196,7 @@
         </select>
       </label>
     </div>
-    <div class="col-lg-3 col-md-12" *ngIf="isRegionValid();">
+    <div class="col-lg-3 col-md-12" *ngIf="value.region.length>0">
       <label for="post-city" [ngClass]="{'title-label-125':true,'input-label':true}">Miasto
         <span *ngIf="!isValid.city" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.city}}</span>
         <input id="post-city" [ngClass]="{'input':true,'input-invalid':!isValid.city}" type="text"
@@ -204,7 +204,7 @@
                placeholder="wpiś miasto">
       </label>
     </div>
-    <div class="col-lg-3 col-md-12" *ngIf="isCityValid()">
+    <div class="col-lg-3 col-md-12" *ngIf="value.city.length > 0">
       <label for="post-distance-from-city" [ngClass]="{'title-label-125':true,'input-label':true}">Odlegwość (km)
         <div class="row">
           <div class="col-2 text-center">
@@ -218,7 +218,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-lg-8 col-md-12 text-center">
+    <div class="col-md-12 text-center" [ngClass]="{'col-lg-8': value.salons.length > 0, 'col-lg-12': value.salons.length === 0}">
       <div id="mapka0"></div>
     </div>
     <div class="col-lg-4 col-md-12 text-left" *ngIf="value.salons.length > 0">
@@ -598,7 +598,7 @@
     </div>
     <div class="col-12" [ngClass]="{'m1224':true}">
       <label (click)="setWhenStartFrom(0)">
-        <input type="radio" name="start-from" [ngClass]="{'post-radio-btn':true}" (change)="isDayLengthValid()" checked>
+        <input type="radio" name="start-from" [ngClass]="{'post-radio-btn':true}"checked>
         <span [ngClass]="{'post-radio-name':true}">od razu</span>
       </label>
     </div>
@@ -606,7 +606,7 @@
       <div class="row">
         <div class="col-2">
           <label (click)="setWhenStartFrom(1)">
-            <input type="radio" name="start-from" [ngClass]="{'post-radio-btn':true}" (change)="isDayLengthValid()">
+            <input type="radio" name="start-from" [ngClass]="{'post-radio-btn':true}">
             <span [ngClass]="{'post-radio-name':true}">inna</span>
           </label>
         </div>

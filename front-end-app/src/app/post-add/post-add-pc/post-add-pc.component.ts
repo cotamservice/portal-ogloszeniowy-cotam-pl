@@ -312,16 +312,21 @@ export class PostAddPcComponent implements OnInit {
   }
 
   isTitleValid(): boolean {
-    return this.validationS.isPostTitleValid(this.value.title);
+    this.isValid.title = this.validationS.isPostTitleValid(this.value.title);
+    this.invalidMsg.title = !this.isValid.title ? 'Wprowadz tytuł' : '';
+    return this.isValid.title;
   }
 
   isMarkValid(): boolean {
-    return this.validationS.isMarkValid(this.value.markId);
+    this.isValid.markId = this.validationS.isMarkValid(this.value.markId);
+    this.invalidMsg.markId = !this.isValid.markId ? 'Wybierz markę' : '';
+    return this.isValid.markId;
   }
 
   isModelValid(): boolean {
-    return this.validationS.isModelValid(this.value.model);
-
+    this.isValid.model = this.validationS.isModelValid(this.value.model) && this.value.model.length > 0;
+    this.invalidMsg.model = !this.isValid.model ? 'Wybierz model' : '';
+    return this.isValid.model;
   }
 
   setAllMarks(): void {
@@ -412,15 +417,21 @@ export class PostAddPcComponent implements OnInit {
   }
 
   isCountryValid() {
-    return this.validationS.isCountryValid(this.value.country);
+    this.isValid.country = this.validationS.isCountryValid(this.value.country);
+    this.invalidMsg.country = !this.isValid.country ? 'Wybierz kraj' : '';
+    return this.isValid.country
   }
 
   isRegionValid() {
-    return this.validationS.isRegionValid(this.value.region);
+    this.isValid.region = this.validationS.isRegionValid(this.value.region);
+    this.invalidMsg.region = !this.isValid.region ? 'wybierz region' : '';
+    return this.isValid.region;
   }
 
   isCityValid() {
-    return this.validationS.isCityValid(this.value.city);
+    this.isValid.city = this.validationS.isCityValid(this.value.city);
+    this.invalidMsg.city = !this.isValid.city ? 'Wpisz miasto' : '';
+    return this.isValid.city;
   }
 
   callWhenClickOnMapka = (country, region, regionName) => {
@@ -436,7 +447,7 @@ export class PostAddPcComponent implements OnInit {
 
   updateCountries() {
     let mapkaHtmlTagId = 'mapka0';
-    if (this.isCountryValid()) {
+    if (this.value.country.length > 0) {
       this.mapkaS.generateRegions(this.value.country, mapkaHtmlTagId, this.callWhenClickOnMapka);
     } else {
       this.mapkaS.generateCountries(mapkaHtmlTagId, this.callWhenClickOnMapka);
@@ -444,7 +455,7 @@ export class PostAddPcComponent implements OnInit {
   }
 
   updateRegions() {
-    if (this.isCountryValid()) {
+    if (this.value.country.length > 0) {
       this.value.regions = this.mapkaS.getRegionsCodeAndName(this.value.country);
     }
   }
@@ -497,7 +508,9 @@ export class PostAddPcComponent implements OnInit {
   }
 
   isPriceValid() {
-    return this.value.price > 0;
+    this.isValid.price = this.value.price > 0;
+    this.invalidMsg.price = !this.isValid.price ? 'cena nie moze byc 0' : '';
+    return this.isValid.price
   }
 
   setStates() {
@@ -539,7 +552,9 @@ export class PostAddPcComponent implements OnInit {
   }
 
   isEngineDriveValid() {
-    return true;
+    this.isValid.engineDrive = this.value.engineDrive.length > 0;
+    this.invalidMsg.engineDrive = !this.isValid.engineDrive ? 'wybierz napęd' : '';
+    return this.isValid.engineDrive;
   }
 
   private setEngineGearboxes() {
@@ -591,11 +606,15 @@ export class PostAddPcComponent implements OnInit {
   }
 
   isEmailValid() {
-    return this.registrationFormV.isEmailValid(this.value.email);
+    this.isValid.email = this.registrationFormV.isEmailValid(this.value.email);
+    this.invalidMsg.email = !this.isValid.email ? 'Wprowadz email' : '';
+    return this.isValid.email;
   }
 
   isNameValid() {
-    return this.value.name.length > 0;
+    this.isValid.name = this.value.name.length > 0;
+    this.invalidMsg.name = !this.isValid.name ? 'Wprowadz imie' : '';
+    return this.isValid.name;
   }
 
   isPhoneValid() {
@@ -653,13 +672,8 @@ export class PostAddPcComponent implements OnInit {
   }
 
   isDayLengthValid() {
-    if (this.value.dayLength <= 0) {
-      this.isValid.dayLength = false;
-      this.invalidMsg.dayLength = 'Trzeba wskazac ilosc dni';
-    } else {
-      this.isValid.dayLength = true;
-      this.invalidMsg.dayLength = '';
-    }
+    this.isValid.dayLength = this.value.dayLength <= 0;
+    this.invalidMsg.dayLength = !this.isValid.dayLength ? 'Trzeba wskazac ilosc dni' : '';
     return this.isValid.dayLength;
   }
 
@@ -824,13 +838,17 @@ export class PostAddPcComponent implements OnInit {
     this.isEngineGearboxValid();
     this.isNameValid();
     this.isEmailValid();
+    this.isDayLengthValid();
+    this.isRegulationAccept();
+    this.isRodoAccept();
   }
 
   isFormValid(): boolean {
     return this.isCatPicked() && this.isTitleValid() && this.isMarkValid() && this.isModelValid() && this.isMileageValid()
       && this.isProductionYearValid() && this.isCountryValid() && this.isRegionValid() && this.isCityValid()
       && this.isPriceValid() && this.isCurrencyValid() && this.isStateValid() && this.isFuelValid() && this.isEngineDriveValid()
-      && this.isEngineGearboxValid() && this.isNameValid() && this.isEmailValid();
+      && this.isEngineGearboxValid() && this.isNameValid() && this.isEmailValid()
+      && this.isDayLengthValid() && this.isRegulationAccept() && this.isRodoAccept();
   }
 
   preparePost() {
@@ -896,4 +914,7 @@ export class PostAddPcComponent implements OnInit {
     return post;
   }
 
+  isStartFromValid() {
+
+  }
 }
