@@ -105,9 +105,10 @@ export class PostAddPcComponent implements OnInit {
     promotions: new Array<PromotionModel>(),
     promotion: new PromotionModel(),
     usersubscription: new UsersubscriptionModel(),
-    // subscriptions: new Array<SubscriptionModel>(),
     selectedUsersubscriptionId: '',
     usersubscriptions: new Array<UsersubscriptionModel>(),
+    isRegulationAccept: false,
+    isRodoAccept: false,
   }
 
   isValid = {
@@ -145,6 +146,8 @@ export class PostAddPcComponent implements OnInit {
     phone: true,
     resumption: true,
     dayLength: true,
+    isRegulationAccept: true,
+    isRodoAccept: true,
   }
 
   invalidMsg = {
@@ -181,6 +184,8 @@ export class PostAddPcComponent implements OnInit {
     email: '',
     phone: '',
     dayLength: '',
+    isRegulationAccept: '',
+    isRodoAccept: '',
   };
 
   constructor(
@@ -823,5 +828,23 @@ export class PostAddPcComponent implements OnInit {
         break;
       }
     }
+  }
+
+  isRegulationAccept() {
+    this.isValid.isRegulationAccept = this.value.isRegulationAccept;
+    this.invalidMsg.isRegulationAccept = !this.isValid.isRegulationAccept ? 'Przed dodawaniem należy zapoznać się z regulaminem serwisu i zaakceptować go' : '';
+  }
+
+  isRodoAccept() {
+    this.isValid.isRodoAccept = this.value.isRodoAccept;
+    this.invalidMsg.isRodoAccept = !this.isValid.isRodoAccept ? 'Przed dodawaniem musimy otrzymac zgodę na przetwarzania danych osobowych' : '';
+  }
+
+  previewPost() {
+
+  }
+
+  addPost() {
+
   }
 }

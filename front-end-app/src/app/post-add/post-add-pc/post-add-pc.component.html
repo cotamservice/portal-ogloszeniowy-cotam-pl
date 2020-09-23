@@ -662,3 +662,37 @@
 
   </div>
 </div>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <label for="regulation-accept" [ngClass]="{'input-checkbox-label':true}">
+        <input id="regulation-accept" [ngClass]="{'input-checkbox':true,'input-invalid':!value.isRegulationAccept}"
+               type="checkbox" [(ngModel)]="value.isRegulationAccept" name="regulation-accept" (change)="isRegulationAccept()">
+        <a [ngClass]="{'link-a':true}" href="">Akceptuję regulamin serwisu</a>
+        <span *ngIf="!value.isRegulationAccept" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.isRegulationAccept}}</span>
+      </label>
+    </div>
+    <div class="col-12">
+      <label for="rodo-accept" [ngClass]="{'input-checkbox-label':true}">
+        <input id="rodo-accept" [ngClass]="{'input-checkbox':true,'input-invalid':!value.isRodoAccept}"
+               type="checkbox" [(ngModel)]="value.isRodoAccept" name="rodo-accept" (change)="isRodoAccept()">
+        Wyrażam zgodę na przetwarzanie danych osobowych.
+        <a [ngClass]="{'link-a':true}" href="">Więcej tutaj</a>
+        <span *ngIf="!value.isRegulationAccept" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.isRodoAccept}}</span>
+      </label>
+    </div>
+
+    <div class="col-lg-6 col-md-6">
+      <label [ngClass]="{'button-blue-100':true}" class="text-left" (click)="previewPost()">
+        <img [ngClass]="{'btn-icon-add-photo-description-row':true, 'btn-icon': true}" src="/assets/img/postadd/previewPostIcon.png">
+        podglad ogłoszenia
+      </label>
+    </div>
+    <div class="col-lg-6 col-md-6">
+      <label [ngClass]="{'button-orange-100':true}" class="text-left" (click)="addPost()">
+        <img [ngClass]="{'btn-icon-add-photo-description-row':true, 'btn-icon': true}" src="/assets/img/postadd/addPostIcon.png">
+        dodaj ogłoszenie
+      </label>
+    </div>
+  </div>
+</div>
