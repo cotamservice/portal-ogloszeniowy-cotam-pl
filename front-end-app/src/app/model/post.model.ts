@@ -47,6 +47,7 @@ export class PostModel implements DeserializableModel {
   promotionDuration: number;
   userSubscriptionId: string;
   isActive: boolean;
+  postNumber: string;
 
 
   deserializable(input: any): this {

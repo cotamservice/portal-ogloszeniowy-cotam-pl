@@ -30,6 +30,7 @@ import {CurrencyService} from "./service/currency/currency.service";
 import {PromotionService} from "./service/promotion/promotion.service";
 import {SubscriptionService} from "./service/subscription/subscription.service";
 import {LanguageService} from "./service/language/language.service";
+import { PostviewComponent } from './postview/postview.component';
 
 export function tokenGetter() {
   let localToken = localStorage.getItem("authenticate_token");
@@ -63,6 +64,7 @@ export function tokenGetter() {
     PostAddComponent,
     PostAddPcComponent,
     PostAddPhoneComponent,
+    PostviewComponent,
   ],
   imports: [
     BrowserModule,

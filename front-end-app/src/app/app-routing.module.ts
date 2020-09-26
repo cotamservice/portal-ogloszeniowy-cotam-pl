@@ -6,6 +6,7 @@ import {DashboardComponent} from "./dashboard/dashboard.component";
 
 import {AuthenticateGuard} from "./authenticate.guard.ts";
 import {PostAddComponent} from "./post-add/post-add.component";
+import {PostviewComponent} from "./postview/postview.component";
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -19,6 +20,7 @@ const routes: Routes = [
     ]
   },
   {path: 'postadd', component: PostAddComponent},
+  {path: 'postview', component: PostviewComponent},
   {path: 'login', component: RegistrationComponent},
   {path: 'dashboard', component: DashboardComponent, canActivate: [AuthenticateGuard]},
   {path: '**', component: HomeComponent},

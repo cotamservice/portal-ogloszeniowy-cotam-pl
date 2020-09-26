@@ -4,6 +4,7 @@
       <label [ngClass]="{'title-label-125': true}">Kategoria:</label>
     </div>
     <div class="col-12">
+      <span *ngIf="!isValid.pickedCat" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.pickedCat}}</span>
       <ul [ngClass]="{'cat-container': true}">
         <li [ngClass]="{'cat-element':true, 'cat-element-pick': isPersonalCatPick}" (click)="pickPersonalCat()">
           <img *ngIf="isPersonalCatPick" [ngClass]="{'cat-element-icon':true}" src="assets/img/header/personalCat.png">
@@ -219,7 +220,7 @@
   </div>
   <div class="row">
     <div class="col-md-12 text-center" [ngClass]="{'col-lg-8': value.salons.length > 0, 'col-lg-12': value.salons.length === 0}">
-      <div id="mapka0"></div>
+      <div id="mapka0" (click)="isRegionValid()"></div>
     </div>
     <div class="col-lg-4 col-md-12 text-left" *ngIf="value.salons.length > 0">
       <div class="row">
@@ -573,8 +574,8 @@
       <label for="post-phone-add" [ngClass]="{'title-label-125':true,'input-label':true}">ILOść dni</label>
     </div>
     <div class="col-lg-5 col-md-12" [ngClass]="{'m1224':true}">
-      <label (click)="setPostDaysLength(10)">
-        <input type="radio" name="days-length" [ngClass]="{'post-radio-btn':true}" (change)="isDayLengthValid()" checked>
+      <label for="days-length-10" (click)="setPostDaysLength(10)">
+        <input id="days-length-10" type="radio" name="days-length" [ngClass]="{'post-radio-btn':true}" (change)="isDayLengthValid()">
         <span [ngClass]="{'post-radio-name':true}">10 dni</span>
       </label>
       <label (click)="setPostDaysLength(20)">
@@ -598,7 +599,7 @@
     </div>
     <div class="col-12" [ngClass]="{'m1224':true}">
       <label (click)="setWhenStartFrom(0)">
-        <input type="radio" name="start-from" [ngClass]="{'post-radio-btn':true}"checked>
+        <input type="radio" name="start-from" [ngClass]="{'post-radio-btn':true}" checked>
         <span [ngClass]="{'post-radio-name':true}">od razu</span>
       </label>
     </div>

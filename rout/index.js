@@ -11,6 +11,7 @@ const equipment = require('./equipment');
 const promotion = require('./promotion');
 const subscription = require('./subscription');
 const usersubscription = require('./usersubscription');
+const post = require('./post');
 
 module.exports = {
     configUse: (app) => {
@@ -27,5 +28,6 @@ module.exports = {
         app.use('/promotion', promotion);
         app.use('/subscription', subscription);
         app.use('/usersubscription', usersubscription);
+        app.use('/post', post);
     }
 }

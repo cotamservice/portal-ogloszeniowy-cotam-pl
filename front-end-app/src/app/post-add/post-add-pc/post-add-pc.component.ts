@@ -5,8 +5,8 @@ import {PostService} from "../../service/post/post.service";
 import {PostModel} from "../../model/post.model";
 import {AuthenticateService} from "../../service/authenticate/authenticate.service";
 
+import {Router} from '@angular/router';
 import {MapkaService} from "../../service/mapka/mapka.service";
-import {generate} from "../../../assets/js/mapka/mapka";
 import {SalonModel} from "../../model/salon.model";
 import {CurrencyService} from "../../service/currency/currency.service";
 import {StateService} from "../../service/state/state.service";
@@ -17,7 +17,6 @@ import {EquipmentService} from "../../service/equipment/equipment.service";
 import {RegistrationFormValidationService} from "../../service/form/registration-form-validation.service";
 import {PromotionModel} from "../../model/promotion.model";
 import {PromotionService} from "../../service/promotion/promotion.service";
-import {SubscriptionModel} from "../../model/subscription.model";
 import {SubscriptionService} from "../../service/subscription/subscription.service";
 import {UsersubscriptionModel} from "../../model/usersubscription.model";
 import {LanguageService} from "../../service/language/language.service";
@@ -112,6 +111,7 @@ export class PostAddPcComponent implements OnInit {
   }
 
   isValid = {
+    pickedCat: true,
     title: true,
     markId: true,
     marks: true,
@@ -151,6 +151,7 @@ export class PostAddPcComponent implements OnInit {
   }
 
   invalidMsg = {
+    pickedCat: '',
     title: '',
     markId: '',
     model: '',
@@ -204,6 +205,7 @@ export class PostAddPcComponent implements OnInit {
     private subscriptionS: SubscriptionService,
     private languageS: LanguageService,
     private countryS: CountryService,
+    private router: Router,
   ) {
   }
 
@@ -225,6 +227,7 @@ export class PostAddPcComponent implements OnInit {
     this.setMaxStartFrom();
     this.setPromotions();
     this.setUserSubscriptions();
+    this.pickPersonalCat();
   }
 
   unPickAll(): void {
@@ -346,13 +349,13 @@ export class PostAddPcComponent implements OnInit {
   }
 
   isMileageValid() {
-    this.isValid.mileage = !isNaN(Number(this.isValid.mileage)) && this.value.mileage >= 0;
+    this.isValid.mileage = !isNaN(Number(this.isValid.mileage));
     this.value.mileage = this.clearFirstZero(this.value.mileage);
     return this.isValid.mileage;
   }
 
   isProductionYearValid() {
-    this.isValid.productionYear = !isNaN(Number(this.isValid.productionYear)) && this.value.productionYear > 1900;
+    this.isValid.productionYear = !isNaN(Number(this.isValid.productionYear));
     this.value.productionYear = this.clearFirstZero(this.value.productionYear);
     return this.isValid.productionYear;
   }
@@ -417,13 +420,13 @@ export class PostAddPcComponent implements OnInit {
   }
 
   isCountryValid() {
-    this.isValid.country = this.validationS.isCountryValid(this.value.country);
+    this.isValid.country = this.value.country.length > 0;
     this.invalidMsg.country = !this.isValid.country ? 'Wybierz kraj' : '';
     return this.isValid.country
   }
 
   isRegionValid() {
-    this.isValid.region = this.validationS.isRegionValid(this.value.region);
+    this.isValid.region = this.value.region.length > 0;
     this.invalidMsg.region = !this.isValid.region ? 'wybierz region' : '';
     return this.isValid.region;
   }
@@ -672,7 +675,7 @@ export class PostAddPcComponent implements OnInit {
   }
 
   isDayLengthValid() {
-    this.isValid.dayLength = this.value.dayLength <= 0;
+    this.isValid.dayLength = this.value.dayLength > 0;
     this.invalidMsg.dayLength = !this.isValid.dayLength ? 'Trzeba wskazac ilosc dni' : '';
     return this.isValid.dayLength;
   }
@@ -790,6 +793,11 @@ export class PostAddPcComponent implements OnInit {
 
   previewPost() {
     let post = this.preparePost();
+    this.verifyForm();
+    if (this.isFormValid()) {
+      this.router.navigate(['/postview', post]);
+    }
+
   }
 
   addPost() {
@@ -852,8 +860,8 @@ export class PostAddPcComponent implements OnInit {
   }
 
   preparePost() {
-    this.verifyForm();
-    if (!this.isFormValid()) return;
+
+
     let post = new PostModel();
     post.category = this.value.pickedCat;
     post.title = this.value.title.trim();

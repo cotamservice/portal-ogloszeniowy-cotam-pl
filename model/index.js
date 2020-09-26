@@ -12,6 +12,7 @@ const Equipment = require('./Equipment')
 const Promotion = require('./Promotion')
 const Subscription = require('./Subscription')
 const UserSubscription = require('./UserSubscription')
+const post = require('./Post')
 
 module.exports = {
     User,
@@ -28,4 +29,5 @@ module.exports = {
     Promotion,
     Subscription,
     UserSubscription,
+    post,
 }
