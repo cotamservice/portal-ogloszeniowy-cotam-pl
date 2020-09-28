@@ -1,0 +1,21 @@
+<div class="images">
+  <div class="image">
+    <img id="arrow-left" src="assets/img/image-carousel/right-arrow.png"
+         (click)="previousImg()"
+         [ngClass]="{'opacity-zero':!isPreviousImgExist()}"
+    >
+    <img id="active" src="{{getActive().value}}">
+    <img id="arrow-right" src="assets/img/image-carousel/right-arrow.png"
+         (click)="nextImg()"
+         [ngClass]="{'opacity-zero':!isNextImgExist()}"
+    >
+  </div>
+  <div class="image-list">
+    <ng-container *ngFor="let img of getActiveList(); index as i">
+      <img [src]="img.value"
+           [ngClass]="{'active-value-opacity': isActive(img)}"
+           (click)="setActive(img)"
+      >
+    </ng-container>
+  </div>
+</div>

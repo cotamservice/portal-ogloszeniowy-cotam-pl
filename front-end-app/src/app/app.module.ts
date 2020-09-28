@@ -31,6 +31,7 @@ import {PromotionService} from "./service/promotion/promotion.service";
 import {SubscriptionService} from "./service/subscription/subscription.service";
 import {LanguageService} from "./service/language/language.service";
 import { PostviewComponent } from './postview/postview.component';
+import { ImageCarouselComponent } from './image-carousel/image-carousel.component';
 
 export function tokenGetter() {
   let localToken = localStorage.getItem("authenticate_token");
@@ -65,6 +66,7 @@ export function tokenGetter() {
     PostAddPcComponent,
     PostAddPhoneComponent,
     PostviewComponent,
+    ImageCarouselComponent,
   ],
   imports: [
     BrowserModule,
