@@ -39,6 +39,7 @@ html {
 .image-list {
   max-height: 100px;
   padding: 0 6px;
+  text-align: center;
 }
 
 .image-list img {
@@ -46,7 +47,7 @@ html {
   max-width: 20%;
   display: inline-block;
   background-color: white;
-  opacity: .5;
+  opacity: .3;
 }
 
 .opacity-zero, .opacity-zero:hover {
