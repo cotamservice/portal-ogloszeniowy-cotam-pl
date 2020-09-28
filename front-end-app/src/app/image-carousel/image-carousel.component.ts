@@ -97,9 +97,8 @@ export class ImageCarouselComponent implements OnInit {
       this.activeImg = img;
     } else {
       this.activeImg = this.getActiveList().length > 0 ? this.getActiveList()[0] : new CarouselImg();
+      this.activeImg.isActive = true;
     }
-    console.log('index: ' + this.getActive().index);
-    console.log('activeListIndex: ' + this.getActive().activeListIndex);
   }
 
   getActiveList() {
