@@ -1,45 +1,35 @@
+
 <div class="full-screen" *ngIf="isFullScreen">
-  <div class="close" (click)="closeFullScreen()">X</div>
+  <div class="full-screen-close" (click)="closeFullScreen()">X</div>
   <img class="arrow-left" src="assets/img/image-carousel/right-arrow-white.png"
-       (click)="previousImg()"
-       [ngClass]="{'opacity-zero':!isPreviousImgExist()}"
-  >
+       (click)="previousImg()" [ngClass]="{'opacity-zero':!isPreviousImgExist()}">
   <div class="image">
     <span class="helper-align"></span>
     <img class="active" src="{{getActiveFS().value}}">
     <span class="helper-align"></span>
   </div>
   <img class="arrow-right" src="assets/img/image-carousel/right-arrow-white.png"
-       (click)="nextImg()"
-       [ngClass]="{'opacity-zero':!isNextImgExist()}"
-  >
+       (click)="nextImg()" [ngClass]="{'opacity-zero':!isNextImgExist()}">
   <div class="image-list">
     <ng-container *ngFor="let img of getActiveListFS(); index as i">
-      <img [src]="img.value"
-           [ngClass]="{'active-value-opacity': isActive(img)}"
-           (click)="setActive(img)"
-      >
+      <img [src]="img.value" [ngClass]="{'active-value-opacity': isActive(img)}" (click)="setActive(img)">
     </ng-container>
   </div>
 </div>
-<div class="images">
+
+<div class="small-screen">
   <img class="arrow-left" src="assets/img/image-carousel/right-arrow.png"
-       (click)="previousImg()"
-       [ngClass]="{'opacity-zero':!isPreviousImgExist()}"
-  >
+       (click)="previousImg()" [ngClass]="{'opacity-zero':!isPreviousImgExist()}">
   <div class="image">
+    <span class="helper-align"></span>
     <img class="active" src="{{getActiveSS().value}}" (click)="openFullScreen()">
+    <span class="helper-align"></span>
   </div>
   <img class="arrow-right" src="assets/img/image-carousel/right-arrow.png"
-       (click)="nextImg()"
-       [ngClass]="{'opacity-zero':!isNextImgExist()}"
-  >
+       (click)="nextImg()" [ngClass]="{'opacity-zero':!isNextImgExist()}">
   <div class="image-list">
     <ng-container *ngFor="let img of getActiveListSS(); index as i">
-      <img [src]="img.value"
-           [ngClass]="{'active-value-opacity': isActive(img)}"
-           (click)="setActive(img)"
-      >
+      <img [src]="img.value" [ngClass]="{'active-value-opacity': isActive(img)}" (click)="setActive(img)">
     </ng-container>
   </div>
 </div>
