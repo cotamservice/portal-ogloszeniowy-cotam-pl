@@ -9,6 +9,7 @@ html {
 .images {
   width: 100%;
   text-align: center;
+  background-color: transparent;
 }
 
 .image {
@@ -51,7 +52,7 @@ html {
   height: 100px;
   max-width: 20%;
   display: inline-block;
-  background-color: white;
+  background-color: transparent;
   opacity: .3;
 }
 
