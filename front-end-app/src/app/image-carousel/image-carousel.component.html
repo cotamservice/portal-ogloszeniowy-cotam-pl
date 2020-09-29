@@ -14,7 +14,7 @@
        [ngClass]="{'opacity-zero':!isNextImgExist()}"
   >
   <div class="image-list">
-    <ng-container *ngFor="let img of getActiveList(); index as i">
+    <ng-container *ngFor="let img of getActiveListFS(); index as i">
       <img [src]="img.value"
            [ngClass]="{'active-value-opacity': isActive(img)}"
            (click)="setActive(img)"
@@ -35,7 +35,7 @@
        [ngClass]="{'opacity-zero':!isNextImgExist()}"
   >
   <div class="image-list">
-    <ng-container *ngFor="let img of getActiveList(); index as i">
+    <ng-container *ngFor="let img of getActiveListSS(); index as i">
       <img [src]="img.value"
            [ngClass]="{'active-value-opacity': isActive(img)}"
            (click)="setActive(img)"

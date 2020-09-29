@@ -105,12 +105,11 @@ export class ImageCarouselComponent implements OnInit {
 
   nextImg(): void {
     if (!this.isNextImgExist()) return;
-    let activeListMiddleIndex = Math.floor(this.getActiveList().length / 2);
-    if (this.getActive().activeListIndex === activeListMiddleIndex) {
+    if (this.getActive().activeListIndex === this.getActiveList().length - 1) {
       this.setActiveFirstIndex(this.getActiveFirstIndex() + 1);
       this.setActiveLastIndex(this.getActiveLastIndex() + 1);
       this.setActiveList();
-      this.setActive(this.getActiveList()[activeListMiddleIndex]);
+      this.setActive(this.getActiveList()[this.getActiveList().length - 1]);
     } else {
       this.setActive(this.getActiveList()[this.getActive().activeListIndex + 1]);
     }
@@ -135,8 +134,13 @@ export class ImageCarouselComponent implements OnInit {
   setActive(img: CarouselImg) {
     let activeImg: CarouselImg = this.getActive();
     if (img) {
-      if (activeImg && activeImg.index !== img.index) {
-        activeImg.isActive = false;
+      for (let ele of this.getActiveList()) {
+        if (activeImg && activeImg.index === ele.index) {
+          ele.isActive = false;
+        }
+        if (img.index === ele.index) {
+          ele.isActive = true;
+        }
       }
       img.isActive = true;
       activeImg = img;
@@ -153,7 +157,15 @@ export class ImageCarouselComponent implements OnInit {
   }
 
   getActiveList() {
-    return this.isFullScreen ? this.activeListFS : this.activeList;
+    return this.isFullScreen ? this.getActiveListFS() : this.getActiveListSS();
+  }
+
+  getActiveListSS() {
+    return this.activeList;
+  }
+
+  getActiveListFS() {
+    return this.activeListFS;
   }
 
   closeFullScreen() {
@@ -161,14 +173,15 @@ export class ImageCarouselComponent implements OnInit {
   }
 
   openFullScreen() {
+    let firstIndex = this.getActiveFirstIndex();
+    let lastIndex = this.getActiveLastIndex();
+    let activeImg = this.getActive();
     this.isFullScreen = true;
-    if (this.activeImg) {
-      let firstIndex = this.activeImg.index > 2 ? this.activeImg.index - 2 : this.activeImg.index;
-      let lastIndex = this.activeImg.index < (this.values.length - 3) ? this.activeImg.index + 2 : this.activeImg.index;
+    if (activeImg) {
       this.setActiveFirstIndex(firstIndex);
       this.setActiveLastIndex(lastIndex);
       this.setActiveList();
-      this.setActive(this.activeImg);
+      this.setActive(activeImg);
     } else {
       this.setActiveList();
       this.setActive(undefined);
