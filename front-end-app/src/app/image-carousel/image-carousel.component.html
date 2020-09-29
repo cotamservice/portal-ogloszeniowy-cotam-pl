@@ -5,7 +5,9 @@
        [ngClass]="{'opacity-zero':!isPreviousImgExist()}"
   >
   <div class="image">
+    <span class="helper-align"></span>
     <img class="active" src="{{getActiveFS().value}}">
+    <span class="helper-align"></span>
   </div>
   <img class="arrow-right" src="assets/img/image-carousel/right-arrow-white.png"
        (click)="nextImg()"
