@@ -70,11 +70,12 @@ export class ImageCarouselComponent implements OnInit {
 
   nextImg(): void {
     if (!this.isNextImgExist()) return;
-    if (this.getActive().activeListIndex === this.getActiveList().length - 1) {
+    let activeListMiddleIndex = Math.floor(this.getActiveList().length / 2);
+    if (this.getActive().activeListIndex === activeListMiddleIndex) {
       this.activeListFirstIndex += 1;
       this.activeListLastIndex += 1;
       this.setActiveList();
-      this.setActive(this.getActiveList()[this.activeList.length - 1]);
+      this.setActive(this.getActiveList()[activeListMiddleIndex]);
     } else {
       this.setActive(this.getActiveList()[this.getActive().activeListIndex + 1]);
     }
