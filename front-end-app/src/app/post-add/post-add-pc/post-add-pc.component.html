@@ -1,699 +1,704 @@
-<div class="container">
-  <div class="row">
-    <div class="col-12">
-      <label [ngClass]="{'title-label-125': true}">Kategoria:</label>
-    </div>
-    <div class="col-12">
-      <span *ngIf="!isValid.pickedCat" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.pickedCat}}</span>
-      <ul [ngClass]="{'cat-container': true}">
-        <li [ngClass]="{'cat-element':true, 'cat-element-pick': isPersonalCatPick}" (click)="pickPersonalCat()">
-          <img *ngIf="isPersonalCatPick" [ngClass]="{'cat-element-icon':true}" src="assets/img/header/personalCat.png">
-          <img *ngIf="!isPersonalCatPick" [ngClass]="{'cat-element-icon':true}" src="assets/img/postadd/personalCat.png">
-          <span>osobowe</span>
-        </li>
-        <li [ngClass]="{'cat-element':true, 'cat-element-pick': isMotorcycleCatPick}" (click)="pickMotorcycleCat()">
-          <img *ngIf="isMotorcycleCatPick" [ngClass]="{'cat-element-icon':true}" src="assets/img/header/motorcycleCat.png">
-          <img *ngIf="!isMotorcycleCatPick" [ngClass]="{'cat-element-icon':true}" src="assets/img/postadd/motorcycleCat.png">
-          <span>motocycle</span>
-        </li>
-        <li [ngClass]="{'cat-element':true, 'cat-element-pick': isProviderCatPick}" (click)="pickProviderCat()">
-          <img *ngIf="isProviderCatPick" [ngClass]="{'cat-element-icon':true}" src="assets/img/header/providerCat.png">
-          <img *ngIf="!isProviderCatPick" [ngClass]="{'cat-element-icon':true}" src="assets/img/postadd/providerCat.png">
-          <span>dostawcze</span>
-        </li>
-        <li [ngClass]="{'cat-element':true, 'cat-element-pick': isTruckCatPick}" (click)="pickTruckCat()">
-          <img *ngIf="isTruckCatPick" [ngClass]="{'cat-element-icon':true}" src="assets/img/header/truckCat.png">
-          <img *ngIf="!isTruckCatPick" [ngClass]="{'cat-element-icon':true}" src="assets/img/postadd/truckCat.png">
-          <span>ciężarowe</span>
-        </li>
-        <li [ngClass]="{'cat-element':true, 'cat-element-pick': isBuildCatPick}" (click)="pickBuildCat()">
-          <img *ngIf="isBuildCatPick" [ngClass]="{'cat-element-icon':true}" src="assets/img/header/buildCat.png">
-          <img *ngIf="!isBuildCatPick" [ngClass]="{'cat-element-icon':true}" src="assets/img/postadd/buildCat.png">
-          <span>budowlane</span>
-        </li>
-        <li [ngClass]="{'cat-element':true, 'cat-element-pick': isAgriculturalCatPick}" (click)="pickAgriculturalCat()">
-          <img *ngIf="isAgriculturalCatPick" [ngClass]="{'cat-element-icon':true}" src="assets/img/header/agriculturalCat.png">
-          <img *ngIf="!isAgriculturalCatPick" [ngClass]="{'cat-element-icon':true}" src="assets/img/postadd/agriculturalCat.png">
-          <span>rolnicze</span>
-        </li>
-        <li [ngClass]="{'cat-element':true, 'cat-element-pick': isTrailerCatPick}" (click)="pickTrailerCat()">
-          <img *ngIf="isTrailerCatPick" [ngClass]="{'cat-element-icon':true}" src="assets/img/header/trailerCat.png">
-          <img *ngIf="!isTrailerCatPick" [ngClass]="{'cat-element-icon':true}" src="assets/img/postadd/trailerCat.png">
-          <span>przyczepy</span>
-        </li>
-        <li [ngClass]="{'cat-element':true, 'cat-element-pick': isBusCatPick}" (click)="pickBusCat()">
-          <img *ngIf="isBusCatPick" [ngClass]="{'cat-element-icon':true}" src="assets/img/header/busCat.png">
-          <img *ngIf="!isBusCatPick" [ngClass]="{'cat-element-icon':true}" src="assets/img/postadd/busCat.png">
-          <span>autobusy</span>
-        </li>
-        <li [ngClass]="{'cat-element':true, 'cat-element-pick': isShipCatPick}" (click)="pickShipCat()">
-          <img *ngIf="isShipCatPick" [ngClass]="{'cat-element-icon':true}" src="assets/img/header/shipCat.png">
-          <img *ngIf="!isShipCatPick" [ngClass]="{'cat-element-icon':true}" src="assets/img/postadd/shipCat.png">
-          <span>wodne</span>
-        </li>
-        <li [ngClass]="{'cat-element':true, 'cat-element-pick': isPlaneCatPick}" (click)="pickPlaneCat()">
-          <img *ngIf="isPlaneCatPick" [ngClass]="{'cat-element-icon':true}" src="assets/img/header/planeCat.png">
-          <img *ngIf="!isPlaneCatPick" [ngClass]="{'cat-element-icon':true}" src="assets/img/postadd/planeCat.png">
-          <span>powietrzne</span>
-        </li>
-        <li [ngClass]="{'cat-element':true, 'cat-element-pick': isPartCatPick}" (click)="pickPartCat()">
-          <img *ngIf="isPartCatPick" [ngClass]="{'cat-element-icon':true}" src="assets/img/header/partCat.png">
-          <img *ngIf="!isPartCatPick" [ngClass]="{'cat-element-icon':true}" src="assets/img/postadd/partCat.png">
-          <span>części</span>
-        </li>
-      </ul>
-    </div>
-    <div class="col-12">
-      <div [ngClass]="{'input-block':true}">Tytuł
-        <span *ngIf="!isValid.title" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.title}}</span>
-        <input id="post-title" [ngClass]="{'input':true,'input-invalid':!isValid.title}" type="text"
-               [(ngModel)]="value.title" name="post-title" (change)="isTitleValid()"
-               placeholder="wpiś tytuł">
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-lg-4 col-md-12">
-      <div [ngClass]="{'input-block':true}">Marka
-        <span *ngIf="!isValid.markId" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.markId}}</span>
-        <select id="post-mark" [ngClass]="{'input':true,'input-invalid':!isValid.markId}"
-                [(ngModel)]="value.markId" name="post-mark" (change)="isMarkValid()">
-          <option *ngFor="let mark of value.marks;" value="{{mark._id}}">{{mark.name}}</option>
-        </select>
-      </div>
-    </div>
-    <div class="col-lg-4 col-md-12" *ngIf="value.markId.length > 0">
-      <div [ngClass]="{'input-block':true}">Model
-        <span *ngIf="!isValid.model" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.model}}</span>
-        <select id="post-model" [ngClass]="{'input':true,'input-invalid':!isValid.model}"
-                [(ngModel)]="value.model" name="post-model" (change)="isModelValid()">
-          <ng-container *ngFor="let body of value.models">
-            <ng-container *ngIf="value.markId === body[0].markId">
-              <option disabled selected>{{body[0].name.toUpperCase()}}</option>
-              <option dir="rtl" *ngFor="let model of body[1]" value="{{[body[0]._id, model._id]}}">{{model.name.toLowerCase()}}</option>
-            </ng-container>
-          </ng-container>
-        </select>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-lg-4 col-md-12">
-      <div [ngClass]="{'input-block':true}">Przebieg
-        <span *ngIf="!isValid.mileage" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.mileage}}</span>
-        <input type="number" id="post-mileage" [ngClass]="{'input':true,'input-invalid':!isValid.mileage}"
-               [(ngModel)]="value.mileage" name="post-title" (change)="isMileageValid()"
-               placeholder="wpiś przebieg">
-      </div>
-    </div>
-    <div class="col-lg-4 col-md-12">
-      <div [ngClass]="{'input-block':true}">Rok produkcji
-        <span *ngIf="!isValid.productionYear" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.productionYear}}</span>
-        <input type="number" id="post-production" [ngClass]="{'input':true,'input-invalid':!isValid.productionYear}"
-               [(ngModel)]="value.productionYear" name="post-title" (change)="isProductionYearValid()"
-               placeholder="wpiś rok produkcji">
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-12">
-      <label [ngClass]="{'title-label-125':true,'input-label': true}">zdjęcie i opis</label>
-    </div>
-    <div class="col-12">
-      <label for="post-photo" [ngClass]="{'button-blue-100':true}" class="text-left">
-        <img [ngClass]="{'btn-icon-photo':true}" src="/assets/img/postadd/addPhotoIcon.png">
-        dodaj zdjęcie
-        <input id="post-photo" type="file" (change)="uploadFileEvent($event); updatePreview()" multiple accept=".png, .bmp, .jpg, .jpeg">
-      </label>
-    </div>
-    <div class="col-12">
-      <div [ngClass]="{'photos':true}">
-        <ng-container *ngIf="value.photosPreview.length === 0">
-          <img [ngClass]="{'photo':true}" src="/assets/img/postadd/defaultPhotoIcon.png">
-        </ng-container>
-        <ng-container *ngFor="let imgsrc of value.photosPreview; index as i">
-          <div [ngClass]="{'remove':true}" (click)="removePhotoPreview(i)">
-            <div [ngClass]="{'remove-icon':true}"></div>
-            <img [ngClass]="{'photo':true}" src="{{imgsrc}}">
-          </div>
-        </ng-container>
-      </div>
-    </div>
-    <div class="col-12">
-      <div [ngClass]="{'input-block':true}">Opisz szczegóły
-        <span *ngIf="!isValid.photosDescription" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.photosDescription}}</span>
-        <textarea id="post-photo-description" [ngClass]="{'input':true,'input-invalid':!isValid.photosDescription, 'description': true}"
-                  [(ngModel)]="value.photosDescription" name="post-title" (change)="isPhotosDescriptionValid()"
-                  placeholder="wpiś opis ogłoszenia lub opis zdjecia">
-        </textarea>
-      </div>
-    </div>
-    <div class="col-12">
-      <label [ngClass]="{'button-blue-100':true}" class="text-left" (click)="addLastPhotosAndDescriptions()">
-        <img [ngClass]="{'btn-icon-add-photo-description-row':true}" src="/assets/img/postadd/addPhotoAndDescriptionRowIcon.png">
-        dodaj kolejny wiersz
-      </label>
-    </div>
-  </div>
-  <ng-container *ngFor="let photosAndDescription of value.photosAndDescription.reverse(); index as i">
+<ng-container *ngIf="!value.isPostReady">
+  <div class="container">
     <div class="row">
       <div class="col-12">
-        <div [ngClass]="{'photo-description-row': true}">
-          <ng-container *ngIf="photosAndDescription[0].length>0">
-            <ng-container *ngFor="let imgsrc of photosAndDescription[0]">
-              <img [ngClass]="{'photo':true}" src="{{imgsrc}}">
+        <label [ngClass]="{'title-label-125': true}">Kategoria:</label>
+      </div>
+      <div class="col-12">
+        <span *ngIf="!isValid.pickedCat" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.pickedCat}}</span>
+        <ul [ngClass]="{'cat-container': true}">
+          <li [ngClass]="{'cat-element':true, 'cat-element-pick': isPersonalCatPick}" (click)="pickPersonalCat()">
+            <img *ngIf="isPersonalCatPick" [ngClass]="{'cat-element-icon':true}" src="assets/img/header/personalCat.png">
+            <img *ngIf="!isPersonalCatPick" [ngClass]="{'cat-element-icon':true}" src="assets/img/postadd/personalCat.png">
+            <span>osobowe</span>
+          </li>
+          <li [ngClass]="{'cat-element':true, 'cat-element-pick': isMotorcycleCatPick}" (click)="pickMotorcycleCat()">
+            <img *ngIf="isMotorcycleCatPick" [ngClass]="{'cat-element-icon':true}" src="assets/img/header/motorcycleCat.png">
+            <img *ngIf="!isMotorcycleCatPick" [ngClass]="{'cat-element-icon':true}" src="assets/img/postadd/motorcycleCat.png">
+            <span>motocycle</span>
+          </li>
+          <li [ngClass]="{'cat-element':true, 'cat-element-pick': isProviderCatPick}" (click)="pickProviderCat()">
+            <img *ngIf="isProviderCatPick" [ngClass]="{'cat-element-icon':true}" src="assets/img/header/providerCat.png">
+            <img *ngIf="!isProviderCatPick" [ngClass]="{'cat-element-icon':true}" src="assets/img/postadd/providerCat.png">
+            <span>dostawcze</span>
+          </li>
+          <li [ngClass]="{'cat-element':true, 'cat-element-pick': isTruckCatPick}" (click)="pickTruckCat()">
+            <img *ngIf="isTruckCatPick" [ngClass]="{'cat-element-icon':true}" src="assets/img/header/truckCat.png">
+            <img *ngIf="!isTruckCatPick" [ngClass]="{'cat-element-icon':true}" src="assets/img/postadd/truckCat.png">
+            <span>ciężarowe</span>
+          </li>
+          <li [ngClass]="{'cat-element':true, 'cat-element-pick': isBuildCatPick}" (click)="pickBuildCat()">
+            <img *ngIf="isBuildCatPick" [ngClass]="{'cat-element-icon':true}" src="assets/img/header/buildCat.png">
+            <img *ngIf="!isBuildCatPick" [ngClass]="{'cat-element-icon':true}" src="assets/img/postadd/buildCat.png">
+            <span>budowlane</span>
+          </li>
+          <li [ngClass]="{'cat-element':true, 'cat-element-pick': isAgriculturalCatPick}" (click)="pickAgriculturalCat()">
+            <img *ngIf="isAgriculturalCatPick" [ngClass]="{'cat-element-icon':true}" src="assets/img/header/agriculturalCat.png">
+            <img *ngIf="!isAgriculturalCatPick" [ngClass]="{'cat-element-icon':true}" src="assets/img/postadd/agriculturalCat.png">
+            <span>rolnicze</span>
+          </li>
+          <li [ngClass]="{'cat-element':true, 'cat-element-pick': isTrailerCatPick}" (click)="pickTrailerCat()">
+            <img *ngIf="isTrailerCatPick" [ngClass]="{'cat-element-icon':true}" src="assets/img/header/trailerCat.png">
+            <img *ngIf="!isTrailerCatPick" [ngClass]="{'cat-element-icon':true}" src="assets/img/postadd/trailerCat.png">
+            <span>przyczepy</span>
+          </li>
+          <li [ngClass]="{'cat-element':true, 'cat-element-pick': isBusCatPick}" (click)="pickBusCat()">
+            <img *ngIf="isBusCatPick" [ngClass]="{'cat-element-icon':true}" src="assets/img/header/busCat.png">
+            <img *ngIf="!isBusCatPick" [ngClass]="{'cat-element-icon':true}" src="assets/img/postadd/busCat.png">
+            <span>autobusy</span>
+          </li>
+          <li [ngClass]="{'cat-element':true, 'cat-element-pick': isShipCatPick}" (click)="pickShipCat()">
+            <img *ngIf="isShipCatPick" [ngClass]="{'cat-element-icon':true}" src="assets/img/header/shipCat.png">
+            <img *ngIf="!isShipCatPick" [ngClass]="{'cat-element-icon':true}" src="assets/img/postadd/shipCat.png">
+            <span>wodne</span>
+          </li>
+          <li [ngClass]="{'cat-element':true, 'cat-element-pick': isPlaneCatPick}" (click)="pickPlaneCat()">
+            <img *ngIf="isPlaneCatPick" [ngClass]="{'cat-element-icon':true}" src="assets/img/header/planeCat.png">
+            <img *ngIf="!isPlaneCatPick" [ngClass]="{'cat-element-icon':true}" src="assets/img/postadd/planeCat.png">
+            <span>powietrzne</span>
+          </li>
+          <li [ngClass]="{'cat-element':true, 'cat-element-pick': isPartCatPick}" (click)="pickPartCat()">
+            <img *ngIf="isPartCatPick" [ngClass]="{'cat-element-icon':true}" src="assets/img/header/partCat.png">
+            <img *ngIf="!isPartCatPick" [ngClass]="{'cat-element-icon':true}" src="assets/img/postadd/partCat.png">
+            <span>części</span>
+          </li>
+        </ul>
+      </div>
+      <div class="col-12">
+        <div [ngClass]="{'input-block':true}">Tytuł
+          <span *ngIf="!isValid.title" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.title}}</span>
+          <input id="post-title" [ngClass]="{'input':true,'input-invalid':!isValid.title}" type="text"
+                 [(ngModel)]="value.title" name="post-title" (change)="isTitleValid()"
+                 placeholder="wpiś tytuł">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-4 col-md-12">
+        <div [ngClass]="{'input-block':true}">Marka
+          <span *ngIf="!isValid.markId" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.markId}}</span>
+          <select id="post-mark" [ngClass]="{'input':true,'input-invalid':!isValid.markId}"
+                  [(ngModel)]="value.markId" name="post-mark" (change)="isMarkValid()">
+            <option *ngFor="let mark of value.marks;" value="{{mark._id}}">{{mark.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-12" *ngIf="value.markId.length > 0">
+        <div [ngClass]="{'input-block':true}">Model
+          <span *ngIf="!isValid.model" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.model}}</span>
+          <select id="post-model" [ngClass]="{'input':true,'input-invalid':!isValid.model}"
+                  [(ngModel)]="value.model" name="post-model" (change)="isModelValid()">
+            <ng-container *ngFor="let body of value.models">
+              <ng-container *ngIf="value.markId === body[0].markId">
+                <option disabled selected>{{body[0].name.toUpperCase()}}</option>
+                <option dir="rtl" *ngFor="let model of body[1]" value="{{[body[0]._id, model._id]}}">{{model.name.toLowerCase()}}</option>
+              </ng-container>
             </ng-container>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-4 col-md-12">
+        <div [ngClass]="{'input-block':true}">Przebieg
+          <span *ngIf="!isValid.mileage" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.mileage}}</span>
+          <input type="number" id="post-mileage" [ngClass]="{'input':true,'input-invalid':!isValid.mileage}"
+                 [(ngModel)]="value.mileage" name="post-title" (change)="isMileageValid()"
+                 placeholder="wpiś przebieg">
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-12">
+        <div [ngClass]="{'input-block':true}">Rok produkcji
+          <span *ngIf="!isValid.productionYear" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.productionYear}}</span>
+          <input type="number" id="post-production" [ngClass]="{'input':true,'input-invalid':!isValid.productionYear}"
+                 [(ngModel)]="value.productionYear" name="post-title" (change)="isProductionYearValid()"
+                 placeholder="wpiś rok produkcji">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <label [ngClass]="{'title-label-125':true,'input-label': true}">zdjęcie i opis</label>
+      </div>
+      <div class="col-12">
+        <label for="post-photo" [ngClass]="{'button-blue-100':true}" class="text-left">
+          <img [ngClass]="{'btn-icon-photo':true}" src="/assets/img/postadd/addPhotoIcon.png">
+          dodaj zdjęcie
+          <input id="post-photo" type="file" (change)="uploadFileEvent($event); updatePreview()" multiple accept=".png, .bmp, .jpg, .jpeg">
+        </label>
+      </div>
+      <div class="col-12">
+        <div [ngClass]="{'photos':true}">
+          <ng-container *ngIf="value.photosPreview.length === 0">
+            <img [ngClass]="{'photo':true}" src="/assets/img/postadd/defaultPhotoIcon.png">
           </ng-container>
-          <ng-container *ngIf=" photosAndDescription[1].length > 0">
-            <p [ngClass]="{'description': true}">{{photosAndDescription[1]}}</p>
+          <ng-container *ngFor="let imgsrc of value.photosPreview; index as i">
+            <div [ngClass]="{'remove':true}" (click)="removePhotoPreview(i)">
+              <div [ngClass]="{'remove-icon':true}"></div>
+              <img [ngClass]="{'photo':true}" src="{{imgsrc}}">
+            </div>
           </ng-container>
         </div>
       </div>
-      <div class="col-12" *ngIf="photosAndDescription[0].length>0 || photosAndDescription[1].length > 0">
-        <label [ngClass]="{'button-blue-100':true}" class="text-left" (click)="editPhotosAndDescription(value.photosAndDescription.length-i-1)">
-          edytować wiersz
+      <div class="col-12">
+        <div [ngClass]="{'input-block':true}">Opisz szczegóły
+          <span *ngIf="!isValid.photosDescription" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.photosDescription}}</span>
+          <textarea id="post-photo-description" [ngClass]="{'input':true,'input-invalid':!isValid.photosDescription, 'description': true}"
+                    [(ngModel)]="value.photosDescription" name="post-title" (change)="isPhotosDescriptionValid()"
+                    placeholder="wpiś opis ogłoszenia lub opis zdjecia">
+        </textarea>
+        </div>
+      </div>
+      <div class="col-12">
+        <label [ngClass]="{'button-blue-100':true}" class="text-left" (click)="addLastPhotosAndDescriptions()">
+          <img [ngClass]="{'btn-icon-add-photo-description-row':true}" src="/assets/img/postadd/addPhotoAndDescriptionRowIcon.png">
+          dodaj kolejny wiersz
         </label>
       </div>
     </div>
-  </ng-container>
-</div>
-<div class="container">
-  <div class="row">
-    <div class="col-lg-3 col-md-12">
-      <label for="post-country" [ngClass]="{'title-label-125':true,'input-label':true}">Kraj
-        <span *ngIf="!isValid.country" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.country}}</span>
-        <select id="post-country" [ngClass]="{'input':true,'input-invalid':!isValid.country}"
-                [(ngModel)]="value.country" name="post-country" (change)="isCountryValid();updateCountries(); updateRegions(); updateUserSalonByCountry()">
-          <option *ngFor="let country of value.countries;" value="{{country[0]}}">{{country[1]}}</option>
-        </select>
-      </label>
-    </div>
-    <div class="col-lg-3 col-md-12" *ngIf="value.country.length > 0">
-      <label for="post-region" [ngClass]="{'title-label-125':true,'input-label':true}">Region
-        <span *ngIf="!isValid.region" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.region}}</span>
-        <select id="post-region" [ngClass]="{'input':true,'input-invalid':!isValid.region}"
-                [(ngModel)]="value.region" name="post-region" (change)="isRegionValid(); updateClickedRegionOnMapka()">
-          <option *ngFor="let region of value.regions;" value="{{region[0]}}">{{region[1]}}</option>
-        </select>
-      </label>
-    </div>
-    <div class="col-lg-3 col-md-12" *ngIf="value.region.length>0">
-      <label for="post-city" [ngClass]="{'title-label-125':true,'input-label':true}">Miasto
-        <span *ngIf="!isValid.city" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.city}}</span>
-        <input id="post-city" [ngClass]="{'input':true,'input-invalid':!isValid.city}" type="text"
-               [(ngModel)]="value.city" name="post-city" (change)="isCityValid()"
-               placeholder="wpiś miasto">
-      </label>
-    </div>
-    <div class="col-lg-3 col-md-12" *ngIf="value.city.length > 0">
-      <label for="post-distance-from-city" [ngClass]="{'title-label-125':true,'input-label':true}">Odlegwość (km)
-        <div class="row">
-          <div class="col-2 text-center">
-            <span [ngClass]="{'post-distance-value':true}">{{value.range}}</span>
-          </div>
-          <div class="col-10">
-            <input id="post-distance-from-city" type="range" [ngClass]="{'input':true}" [(ngModel)]="value.range" name="post-distance-from-city">
+    <ng-container *ngFor="let photosAndDescription of value.photosAndDescription.reverse(); index as i">
+      <div class="row">
+        <div class="col-12">
+          <div [ngClass]="{'photo-description-row': true}">
+            <ng-container *ngIf="photosAndDescription[0].length>0">
+              <ng-container *ngFor="let imgsrc of photosAndDescription[0]">
+                <img [ngClass]="{'photo':true}" src="{{imgsrc}}">
+              </ng-container>
+            </ng-container>
+            <ng-container *ngIf=" photosAndDescription[1].length > 0">
+              <p [ngClass]="{'description': true}">{{photosAndDescription[1]}}</p>
+            </ng-container>
           </div>
         </div>
-      </label>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12 text-center" [ngClass]="{'col-lg-8': value.salons.length > 0, 'col-lg-12': value.salons.length === 0}">
-      <div id="mapka0" (click)="isRegionValid()"></div>
-    </div>
-    <div class="col-lg-4 col-md-12 text-left" *ngIf="value.salons.length > 0">
-      <div class="row">
-        <div class="col-12">
-          <label for="post-salon" [ngClass]="{'title-label-125':true,'input-label':true}">Adress
-            <span *ngIf="!isValid.pickedSalon" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.pickedSalon}}</span>
-            <select id="post-salon" [ngClass]="{'input':true,'input-invalid':!isValid.pickedSalon}"
-                    [(ngModel)]="value.pickedSalon" name="post-salon" (change)="isSalonValid()">
-              <option *ngFor="let salon of value.salons;" value="{{salon.id}}">{{salon.name}}</option>
-            </select>
+        <div class="col-12" *ngIf="photosAndDescription[0].length>0 || photosAndDescription[1].length > 0">
+          <label [ngClass]="{'button-blue-100':true}" class="text-left" (click)="editPhotosAndDescription(value.photosAndDescription.length-i-1)">
+            edytować wiersz
           </label>
         </div>
-        <div class="col-12" *ngIf="isSalonPicked()" [ngClass]="{'salon-info':true}">
-          <p>nazwa: </p>
-          <p [ngClass]="{'salon-info-p':true}">{{value.salon.name}}</p><br>
-          <p>kod: </p>
-          <p [ngClass]="{'salon-info-p':true}">{{value.salon.zip}}</p><br>
-          <p>miasto: </p>
-          <p [ngClass]="{'salon-info-p':true}">{{value.salon.city}}</p><br>
-          <p>ulica: </p>
-          <p [ngClass]="{'salon-info-p':true}">{{value.salon.address}}</p><br>
-          <ng-container *ngFor="let phone of value.salon.phones">
-            <p>telefon: </p>
-            <p [ngClass]="{'salon-info-p':true}">{{phone}}</p><br>
-          </ng-container>
-        </div>
       </div>
-    </div>
+    </ng-container>
   </div>
-</div>
-<div class="container" [ngClass]="{'post-price-container':true}">
-  <div class="row">
-    <div class="col-lg-4 col-md-12">
-      <label for="post-price" [ngClass]="{'title-label-125':true,'input-label':true}">cena
-        <span *ngIf="!isValid.price" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.price}}</span>
-        <input type="number" id="post-price" [ngClass]="{'input':true,'input-invalid':!isValid.price}"
-               [(ngModel)]="value.price" name="post-price" (change)="isPriceValid()"
-               placeholder="wpiś cene">
-      </label>
-
-      <label for="post-give-invoice" [ngClass]="{'input-checkbox-label':true}">
-        <input id="post-give-invoice" [ngClass]="{'input-checkbox':true,'input-invalid':!value.isGiveInvoice}"
-               type="checkbox" [(ngModel)]="value.isGiveInvoice" name="post-give-invoice">Wystawiam facture VAT
-      </label>
-    </div>
-    <div class="col-lg-4 col-md-12">
-      <label for="post-currency" [ngClass]="{'title-label-125':true,'input-label':true}">Waluta
-        <span *ngIf="!isValid.currency" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.currency}}</span>
-        <select id="post-currency" [ngClass]="{'input':true,'input-invalid':!isValid.currency}"
-                [(ngModel)]="value.currency" name="post-currency" (change)="isCurrencyValid()">
-          <option *ngFor="let currency of value.currencies;" value="{{currency[0]}}">{{currency[0]}} {{currency[1]}}</option>
-        </select>
-      </label>
-      <label for="post-is-netto" [ngClass]="{'input-checkbox-label':true}">
-        <input id="post-is-netto" [ngClass]="{'input-checkbox':true,'input-invalid':!value.isPriceNetto}"
-               type="checkbox" [(ngModel)]="value.isPriceNetto" name="post-give-invoice">netto
-      </label>
-    </div>
-  </div>
-</div>
-<div class="container">
-  <div class="row">
-    <div class="col-lg-4 col-md-12">
-      <label for="post-state" [ngClass]="{'title-label-125':true,'input-label':true}">Stan
-        <span *ngIf="!isValid.state" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.state}}</span>
-        <select id="post-state" [ngClass]="{'input':true,'input-invalid':!isValid.state}"
-                [(ngModel)]="value.state" name="post-state" (change)="isStateValid()">
-          <option *ngFor="let state of value.states;" value="{{state[0]}}">{{state[1]}}</option>
-        </select>
-      </label>
-    </div>
-    <div class="col-lg-2 col-md-12">
-      <label for="post-is-dmg" [ngClass]="{'input-checkbox-post-label':true}">
-        <input id="post-is-dmg" [ngClass]="{'input-checkbox':true,'input-invalid':!value.isDmg}"
-               type="checkbox" [(ngModel)]="value.isDmg" name="post-is-dmg">Uszkodzony
-      </label>
-    </div>
-    <div class="col-lg-2 col-md-12">
-      <label for="post-is-first-driver" [ngClass]="{'input-checkbox-post-label':true}">
-        <input id="post-is-first-driver" [ngClass]="{'input-checkbox':true,'input-invalid':!value.isFirstDriver}"
-               type="checkbox" [(ngModel)]="value.isFirstDriver" name="post-is-first-driver">Pierwszy wlaszciciel
-      </label>
-    </div>
-    <div class="col-lg-2 col-md-12">
-      <label for="post-no-accidents" [ngClass]="{'input-checkbox-post-label':true}">
-        <input id="post-no-accidents" [ngClass]="{'input-checkbox':true,'input-invalid':!value.isNoAccidents}"
-               type="checkbox" [(ngModel)]="value.isNoAccidents" name="post-no-accidents">Bezwypadkowy
-      </label>
-    </div>
-    <div class="col-lg-2 col-md-12">
-      <label for="post-has-book" [ngClass]="{'input-checkbox-post-label':true}">
-        <input id="post-has-book" [ngClass]="{'input-checkbox':true,'input-invalid':!value.hasCarBook}"
-               type="checkbox" [(ngModel)]="value.hasCarBook" name="post-has-book">Ksiezeczka pojazdu
-      </label>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-lg-6 col-md-12">
-      <div class="row">
-        <div class="col-12">
-          <label [ngClass]="{'title-label-125':true,'input-label':true}">silnik, napęd, paliwo</label>
-        </div>
-      </div>
-      <div class="row" [ngClass]="{'title-input-post-container':true}">
-        <div class="col-lg-6 col-md-12" [ngClass]="{'inline-title-input-post':true}">
-          Rodzaj Paliwa
-        </div>
-        <div class="col-lg-6 col-md-12">
-          <span *ngIf="!isValid.fuel" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.fuel}}</span>
-          <select id="post-fuel" [ngClass]="{'input':true,'input-invalid':!isValid.fuel, 'input-post': true}"
-                  [(ngModel)]="value.fuel" name="post-fuel" (change)="isFuelValid()">
-            <option *ngFor="let fuel of value.fuels;" value="{{fuel[0]}}">{{fuel[1]}}</option>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 col-md-12">
+        <label for="post-country" [ngClass]="{'title-label-125':true,'input-label':true}">Kraj
+          <span *ngIf="!isValid.country" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.country}}</span>
+          <select id="post-country" [ngClass]="{'input':true,'input-invalid':!isValid.country}"
+                  [(ngModel)]="value.country" name="post-country" (change)="isCountryValid();updateCountries(); updateRegions(); updateUserSalonByCountry()">
+            <option *ngFor="let country of value.countries;" value="{{country[0]}}">{{country[1]}}</option>
           </select>
-        </div>
+        </label>
       </div>
-      <div class="row" [ngClass]="{'title-input-post-container':true}">
-        <div class="col-lg-6 col-md-12" [ngClass]="{'inline-title-input-post':true}">
-          Pojemność skokowa
-        </div>
-        <div class="col-lg-6 col-md-12">
-          <span *ngIf="!isValid.engineDisplacement" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.engineDisplacement}}</span>
-          <input id="post-engine-displacement" [ngClass]="{'input':true,'input-invalid':!isValid.engineDisplacement}" type="number"
-                 [(ngModel)]="value.engineDisplacement" name="post-engine-displacement" (change)="isEngineDisplacementValid()"
-                 placeholder="wpiś pojemność">
-        </div>
-      </div>
-      <div class="row" [ngClass]="{'title-input-post-container':true}">
-        <div class="col-lg-6 col-md-12" [ngClass]="{'inline-title-input-post':true}">
-          Moc
-        </div>
-        <div class="col-lg-6 col-md-12">
-          <span *ngIf="!isValid.enginePower" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.enginePower}}</span>
-          <input id="post-engine-power" [ngClass]="{'input':true,'input-invalid':!isValid.enginePower}" type="number"
-                 [(ngModel)]="value.enginePower" name="post-engine-power" (change)="isEnginePowerValid()"
-                 placeholder="wpiś moc">
-        </div>
-      </div>
-      <div class="row" [ngClass]="{'title-input-post-container':true}">
-        <div class="col-lg-6 col-md-12" [ngClass]="{'inline-title-input-post':true}">
-          Napęd
-        </div>
-        <div class="col-lg-6 col-md-12">
-          <span *ngIf="!isValid.engineDrive" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.engineDrive}}</span>
-          <select id="post-engine-drive" [ngClass]="{'input':true,'input-invalid':!isValid.engineDrive, 'input-post': true}"
-                  [(ngModel)]="value.engineDrive" name="post-engine-drive" (change)="isEngineDriveValid()">
-            <option *ngFor="let drive of value.engineDrives;" value="{{drive[0]}}">{{drive[1]}}</option>
+      <div class="col-lg-3 col-md-12" *ngIf="value.country.length > 0">
+        <label for="post-region" [ngClass]="{'title-label-125':true,'input-label':true}">Region
+          <span *ngIf="!isValid.region" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.region}}</span>
+          <select id="post-region" [ngClass]="{'input':true,'input-invalid':!isValid.region}"
+                  [(ngModel)]="value.region" name="post-region" (change)="isRegionValid(); updateClickedRegionOnMapka()">
+            <option *ngFor="let region of value.regions;" value="{{region[0]}}">{{region[1]}}</option>
           </select>
-        </div>
+        </label>
       </div>
-      <div class="row" [ngClass]="{'title-input-post-container':true}">
-        <div class="col-lg-6 col-md-12" [ngClass]="{'inline-title-input-post':true}">
-          Skrzynia biegów
-        </div>
-        <div class="col-lg-6 col-md-12">
-          <span *ngIf="!isValid.engineGearbox" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.engineGearbox}}</span>
-          <select id="post-engine-gearbox" [ngClass]="{'input':true,'input-invalid':!isValid.engineGearbox, 'input-post': true}"
-                  [(ngModel)]="value.engineGearbox" name="post-engine-gearbox" (change)="isEngineGearboxValid()">
-            <option *ngFor="let gearbox of value.engineGearboxes;" value="{{gearbox[0]}}">{{gearbox[1]}}</option>
-          </select>
-        </div>
+      <div class="col-lg-3 col-md-12" *ngIf="value.region.length>0">
+        <label for="post-city" [ngClass]="{'title-label-125':true,'input-label':true}">Miasto
+          <span *ngIf="!isValid.city" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.city}}</span>
+          <input id="post-city" [ngClass]="{'input':true,'input-invalid':!isValid.city}" type="text"
+                 [(ngModel)]="value.city" name="post-city" (change)="isCityValid()"
+                 placeholder="wpiś miasto">
+        </label>
       </div>
-    </div>
-    <div class="col-lg-6 col-md-12">
-      <div class="row">
-        <div class="col-12">
-          <label [ngClass]="{'title-label-125':true,'input-label':true}">nadwozie</label>
-        </div>
-      </div>
-      <div class="row" [ngClass]="{'title-input-post-container':true}">
-        <div class="col-lg-6 col-md-12" [ngClass]="{'inline-title-input-post':true}">
-          Liczba miejsc
-        </div>
-        <div class="col-lg-6 col-md-12">
-          <span *ngIf="!isValid.bodySeats" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.bodySeats}}</span>
-          <input id="post-body-seats" [ngClass]="{'input':true,'input-invalid':!isValid.bodySeats}" type="number"
-                 [(ngModel)]="value.bodySeats" name="post-body-seats" (change)="isBodySeatsValid()"
-                 placeholder="wpiś ilość">
-        </div>
-      </div>
-      <div class="row" [ngClass]="{'title-input-post-container':true}">
-        <div class="col-lg-6 col-md-12" [ngClass]="{'inline-title-input-post':true}">
-          Liczba drzwi
-        </div>
-        <div class="col-lg-6 col-md-12">
-          <span *ngIf="!isValid.bodyDoors" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.bodyDoors}}</span>
-          <input id="post-body-doors" [ngClass]="{'input':true,'input-invalid':!isValid.bodyDoors}" type="number"
-                 [(ngModel)]="value.bodyDoors" name="post-body-doors" (change)="isBodyDoorsValid()"
-                 placeholder="wpiś ilość">
-        </div>
-      </div>
-      <div class="row" [ngClass]="{'title-input-post-container':true}">
-        <div class="col-lg-6 col-md-12" [ngClass]="{'inline-title-input-post':true}">
-          Kolor
-        </div>
-        <div class="col-lg-6 col-md-12">
-          <span *ngIf="!isValid.bodyColor" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.bodyColor}}</span>
-          <input id="post-body-color" [ngClass]="{'input':true,'input-invalid':!isValid.bodyColor}" type="text"
-                 [(ngModel)]="value.bodyColor" name="post-body-color" (change)="isBodyColorValid()"
-                 placeholder="wpiś kolor">
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-12">
-      <label [ngClass]="{'title-label-125':true,'input-label':true}">wyposazenie</label>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-lg-3 col-md-12" *ngFor="let equipment of value.equipments">
-      <div [ngClass]="{'equipment-checkbox':true, 'equipment-checkbox-font-size-50': equipment[1].length > 24}">
-        <input id="post-equipment-{{equipment[1]}}" [ngClass]="{'input-checkbox':true}"
-               (change)="updateEquipment(equipment[0],equipment[1], $event)"
-               type="checkbox" name="post-equipment-{{equipment[1]}}">
-        {{equipment[1]}}
-      </div>
-    </div>
-    <div class="col-lg-3 col-md-12">
-      <div [ngClass]="{'equipment-checkbox':true}">
-        <input id="post-equipment-vin" [ngClass]="{'input':true, 'input-vin':true}" type="text"
-               [(ngModel)]="value.vin" name="post-equipment-vin"
-               placeholder="wpiś VIN"> <span>VIN</span>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-12">
-      <div [ngClass]="{'input-block':true}">Extra wyposazenie</div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-lg-3 col-md-12">
-      <input id="post-equipment-extra-0" [ngClass]="{'input':true,'input-extra':true}" type="text"
-             [(ngModel)]="value.extraEquipment[0]" name="post-extra-0"
-             placeholder="wpiś extra wyposazenie">
-    </div>
-    <div class="col-lg-3 col-md-12">
-      <input id="post-equipment-extra-1" [ngClass]="{'input':true,'input-extra':true}" type="text"
-             [(ngModel)]="value.extraEquipment[1]" name="post-extra-1"
-             placeholder="wpiś extra wyposazenie">
-    </div>
-    <div class="col-lg-3 col-md-12">
-      <input id="post-equipment-extra-2" [ngClass]="{'input':true,'input-extra':true}" type="text"
-             [(ngModel)]="value.extraEquipment[2]" name="post-extra-2"
-             placeholder="wpiś extra wyposazenie">
-    </div>
-    <div class="col-lg-3 col-md-12">
-      <input id="post-equipment-extra-3" [ngClass]="{'input':true,'input-extra':true}" type="text"
-             [(ngModel)]="value.extraEquipment[3]" name="post-extra-3"
-             placeholder="wpiś extra wyposazenie">
-    </div>
-  </div>
-</div>
-<div class="container">
-  <div class="row">
-    <div class="col-12">
-      <label [ngClass]="{'title-label-125':true,'input-label':true}">dane kontaktowe</label>
-    </div>
-    <div class="col-8">
-      <div [ngClass]="{'input-block':true}">
-        Imię
-        <span *ngIf="!isValid.name" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.name}}</span>
-        <input id="post-name" [ngClass]="{'input':true,'input-invalid':!isValid.name}" type="text"
-               [(ngModel)]="value.name" name="post-name" (change)="isNameValid()"
-               placeholder="wpiś">
-      </div>
-    </div>
-    <div class="col-8">
-      <div [ngClass]="{'input-block':true}">
-        Email
-        <span *ngIf="!isValid.email" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.email}}</span>
-        <input id="post-email" [ngClass]="{'input':true,'input-invalid':!isValid.email}" type="text"
-               [(ngModel)]="value.email" name="post-email" (change)="isEmailValid()"
-               placeholder="wpiś email">
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-12" *ngIf="value.phones.length > 0">
-      <div [ngClass]="{'input-block':true}">Telefon</div>
-    </div>
-    <div class="col-12" *ngFor="let phoneLangs of value.phones">
-      <div [ngClass]="{'phones-container':true}">
-        <div [ngClass]="{'phone-div':true}">
-          {{phoneLangs[0]}}
-        </div>
-        <div [ngClass]="{'lang-div':true}">
-          <span *ngIf="phoneLangs[1] || phoneLangs[2] || phoneLangs[3]">(</span>
-          <span *ngIf="phoneLangs[1]">{{convertLangCodeToLangName(phoneLangs[1])}}</span>
-          <span *ngIf="phoneLangs[2]">, {{convertLangCodeToLangName(phoneLangs[2])}}</span>
-          <span *ngIf="phoneLangs[3]">, {{convertLangCodeToLangName(phoneLangs[3])}}</span>
-          <span *ngIf="phoneLangs[1] || phoneLangs[2] || phoneLangs[3]">)</span>
-        </div>
-        <div [ngClass]="{'phone-btn':true}">
-          <div [ngClass]="{'phone-edit': true}" (click)="editPhoneAndLang(phoneLangs)">edytuj</div>
-          <div [ngClass]="{'phone-delete': true}" (click)="deletePhoneAndLang(phoneLangs)">usun</div>
-        </div>
-      </div>
-    </div>
-    <div class="col-12" *ngIf="isNewPhoneCanBeAdded()">
-      <div class="row">
-        <div class="col-lg-6 col-md-12">
-          <label for="post-phone-add" [ngClass]="{'title-label-125':true,'input-label':true}">Dodaj telefon
-            <span *ngIf="!isValid.phone" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.phone}}</span>
-            <input id="post-phone-add" [ngClass]="{'input':true,'input-invalid':!isValid.phone}" type="text"
-                   [(ngModel)]="value.phone" name="post-phone-add" (change)="isPhoneValid()"
-                   placeholder="wpiś telefon">
-          </label>
-        </div>
-        <div class="col-lg-6 col-md-12 text-left">
+      <div class="col-lg-3 col-md-12" *ngIf="value.city.length > 0">
+        <label for="post-distance-from-city" [ngClass]="{'title-label-125':true,'input-label':true}">Odlegwość (km)
           <div class="row">
-            <div class="col-12">
-              <label for="post-phone-lang-0" [ngClass]="{'title-label-125':true,'input-label':true}">język przy telefonie
-                <div class="row">
-                  <div class="col-4">
-                    <select id="post-phone-lang-0" [ngClass]="{'input':true,'phone-lang-select':true}"
-                            [(ngModel)]="value.phoneLanguages[0]" name="post-phone-lang-0">
-                      <option *ngFor="let lang of value.languages;" value="{{lang[0]}}">{{lang[1]}}</option>
-                    </select>
+            <div class="col-2 text-center">
+              <span [ngClass]="{'post-distance-value':true}">{{value.range}}</span>
+            </div>
+            <div class="col-10">
+              <input id="post-distance-from-city" type="range" [ngClass]="{'input':true}" [(ngModel)]="value.range" name="post-distance-from-city">
+            </div>
+          </div>
+        </label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 text-center" [ngClass]="{'col-lg-8': value.salons.length > 0, 'col-lg-12': value.salons.length === 0}">
+        <div id="mapka0" (click)="isRegionValid()"></div>
+      </div>
+      <div class="col-lg-4 col-md-12 text-left" *ngIf="value.salons.length > 0">
+        <div class="row">
+          <div class="col-12">
+            <label for="post-salon" [ngClass]="{'title-label-125':true,'input-label':true}">Adress
+              <span *ngIf="!isValid.pickedSalon" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.pickedSalon}}</span>
+              <select id="post-salon" [ngClass]="{'input':true,'input-invalid':!isValid.pickedSalon}"
+                      [(ngModel)]="value.pickedSalon" name="post-salon" (change)="isSalonValid()">
+                <option *ngFor="let salon of value.salons;" value="{{salon.id}}">{{salon.name}}</option>
+              </select>
+            </label>
+          </div>
+          <div class="col-12" *ngIf="isSalonPicked()" [ngClass]="{'salon-info':true}">
+            <p>nazwa: </p>
+            <p [ngClass]="{'salon-info-p':true}">{{value.salon.name}}</p><br>
+            <p>kod: </p>
+            <p [ngClass]="{'salon-info-p':true}">{{value.salon.zip}}</p><br>
+            <p>miasto: </p>
+            <p [ngClass]="{'salon-info-p':true}">{{value.salon.city}}</p><br>
+            <p>ulica: </p>
+            <p [ngClass]="{'salon-info-p':true}">{{value.salon.address}}</p><br>
+            <ng-container *ngFor="let phone of value.salon.phones">
+              <p>telefon: </p>
+              <p [ngClass]="{'salon-info-p':true}">{{phone}}</p><br>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container" [ngClass]="{'post-price-container':true}">
+    <div class="row">
+      <div class="col-lg-4 col-md-12">
+        <label for="post-price" [ngClass]="{'title-label-125':true,'input-label':true}">cena
+          <span *ngIf="!isValid.price" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.price}}</span>
+          <input type="number" id="post-price" [ngClass]="{'input':true,'input-invalid':!isValid.price}"
+                 [(ngModel)]="value.price" name="post-price" (change)="isPriceValid()"
+                 placeholder="wpiś cene">
+        </label>
+
+        <label for="post-give-invoice" [ngClass]="{'input-checkbox-label':true}">
+          <input id="post-give-invoice" [ngClass]="{'input-checkbox':true,'input-invalid':!value.isGiveInvoice}"
+                 type="checkbox" [(ngModel)]="value.isGiveInvoice" name="post-give-invoice">Wystawiam facture VAT
+        </label>
+      </div>
+      <div class="col-lg-4 col-md-12">
+        <label for="post-currency" [ngClass]="{'title-label-125':true,'input-label':true}">Waluta
+          <span *ngIf="!isValid.currency" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.currency}}</span>
+          <select id="post-currency" [ngClass]="{'input':true,'input-invalid':!isValid.currency}"
+                  [(ngModel)]="value.currency" name="post-currency" (change)="isCurrencyValid()">
+            <option *ngFor="let currency of value.currencies;" value="{{currency[0]}}">{{currency[0]}} {{currency[1]}}</option>
+          </select>
+        </label>
+        <label for="post-is-netto" [ngClass]="{'input-checkbox-label':true}">
+          <input id="post-is-netto" [ngClass]="{'input-checkbox':true,'input-invalid':!value.isPriceNetto}"
+                 type="checkbox" [(ngModel)]="value.isPriceNetto" name="post-give-invoice">netto
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 col-md-12">
+        <label for="post-state" [ngClass]="{'title-label-125':true,'input-label':true}">Stan
+          <span *ngIf="!isValid.state" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.state}}</span>
+          <select id="post-state" [ngClass]="{'input':true,'input-invalid':!isValid.state}"
+                  [(ngModel)]="value.state" name="post-state" (change)="isStateValid()">
+            <option *ngFor="let state of value.states;" value="{{state[0]}}">{{state[1]}}</option>
+          </select>
+        </label>
+      </div>
+      <div class="col-lg-2 col-md-12">
+        <label for="post-is-dmg" [ngClass]="{'input-checkbox-post-label':true}">
+          <input id="post-is-dmg" [ngClass]="{'input-checkbox':true,'input-invalid':!value.isDmg}"
+                 type="checkbox" [(ngModel)]="value.isDmg" name="post-is-dmg">Uszkodzony
+        </label>
+      </div>
+      <div class="col-lg-2 col-md-12">
+        <label for="post-is-first-driver" [ngClass]="{'input-checkbox-post-label':true}">
+          <input id="post-is-first-driver" [ngClass]="{'input-checkbox':true,'input-invalid':!value.isFirstDriver}"
+                 type="checkbox" [(ngModel)]="value.isFirstDriver" name="post-is-first-driver">Pierwszy wlaszciciel
+        </label>
+      </div>
+      <div class="col-lg-2 col-md-12">
+        <label for="post-no-accidents" [ngClass]="{'input-checkbox-post-label':true}">
+          <input id="post-no-accidents" [ngClass]="{'input-checkbox':true,'input-invalid':!value.isNoAccidents}"
+                 type="checkbox" [(ngModel)]="value.isNoAccidents" name="post-no-accidents">Bezwypadkowy
+        </label>
+      </div>
+      <div class="col-lg-2 col-md-12">
+        <label for="post-has-book" [ngClass]="{'input-checkbox-post-label':true}">
+          <input id="post-has-book" [ngClass]="{'input-checkbox':true,'input-invalid':!value.hasCarBook}"
+                 type="checkbox" [(ngModel)]="value.hasCarBook" name="post-has-book">Ksiezeczka pojazdu
+        </label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6 col-md-12">
+        <div class="row">
+          <div class="col-12">
+            <label [ngClass]="{'title-label-125':true,'input-label':true}">silnik, napęd, paliwo</label>
+          </div>
+        </div>
+        <div class="row" [ngClass]="{'title-input-post-container':true}">
+          <div class="col-lg-6 col-md-12" [ngClass]="{'inline-title-input-post':true}">
+            Rodzaj Paliwa
+          </div>
+          <div class="col-lg-6 col-md-12">
+            <span *ngIf="!isValid.fuel" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.fuel}}</span>
+            <select id="post-fuel" [ngClass]="{'input':true,'input-invalid':!isValid.fuel, 'input-post': true}"
+                    [(ngModel)]="value.fuel" name="post-fuel" (change)="isFuelValid()">
+              <option *ngFor="let fuel of value.fuels;" value="{{fuel[0]}}">{{fuel[1]}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="row" [ngClass]="{'title-input-post-container':true}">
+          <div class="col-lg-6 col-md-12" [ngClass]="{'inline-title-input-post':true}">
+            Pojemność skokowa
+          </div>
+          <div class="col-lg-6 col-md-12">
+            <span *ngIf="!isValid.engineDisplacement" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.engineDisplacement}}</span>
+            <input id="post-engine-displacement" [ngClass]="{'input':true,'input-invalid':!isValid.engineDisplacement}" type="number"
+                   [(ngModel)]="value.engineDisplacement" name="post-engine-displacement" (change)="isEngineDisplacementValid()"
+                   placeholder="wpiś pojemność">
+          </div>
+        </div>
+        <div class="row" [ngClass]="{'title-input-post-container':true}">
+          <div class="col-lg-6 col-md-12" [ngClass]="{'inline-title-input-post':true}">
+            Moc
+          </div>
+          <div class="col-lg-6 col-md-12">
+            <span *ngIf="!isValid.enginePower" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.enginePower}}</span>
+            <input id="post-engine-power" [ngClass]="{'input':true,'input-invalid':!isValid.enginePower}" type="number"
+                   [(ngModel)]="value.enginePower" name="post-engine-power" (change)="isEnginePowerValid()"
+                   placeholder="wpiś moc">
+          </div>
+        </div>
+        <div class="row" [ngClass]="{'title-input-post-container':true}">
+          <div class="col-lg-6 col-md-12" [ngClass]="{'inline-title-input-post':true}">
+            Napęd
+          </div>
+          <div class="col-lg-6 col-md-12">
+            <span *ngIf="!isValid.engineDrive" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.engineDrive}}</span>
+            <select id="post-engine-drive" [ngClass]="{'input':true,'input-invalid':!isValid.engineDrive, 'input-post': true}"
+                    [(ngModel)]="value.engineDrive" name="post-engine-drive" (change)="isEngineDriveValid()">
+              <option *ngFor="let drive of value.engineDrives;" value="{{drive[0]}}">{{drive[1]}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="row" [ngClass]="{'title-input-post-container':true}">
+          <div class="col-lg-6 col-md-12" [ngClass]="{'inline-title-input-post':true}">
+            Skrzynia biegów
+          </div>
+          <div class="col-lg-6 col-md-12">
+            <span *ngIf="!isValid.engineGearbox" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.engineGearbox}}</span>
+            <select id="post-engine-gearbox" [ngClass]="{'input':true,'input-invalid':!isValid.engineGearbox, 'input-post': true}"
+                    [(ngModel)]="value.engineGearbox" name="post-engine-gearbox" (change)="isEngineGearboxValid()">
+              <option *ngFor="let gearbox of value.engineGearboxes;" value="{{gearbox[0]}}">{{gearbox[1]}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-12">
+        <div class="row">
+          <div class="col-12">
+            <label [ngClass]="{'title-label-125':true,'input-label':true}">nadwozie</label>
+          </div>
+        </div>
+        <div class="row" [ngClass]="{'title-input-post-container':true}">
+          <div class="col-lg-6 col-md-12" [ngClass]="{'inline-title-input-post':true}">
+            Liczba miejsc
+          </div>
+          <div class="col-lg-6 col-md-12">
+            <span *ngIf="!isValid.bodySeats" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.bodySeats}}</span>
+            <input id="post-body-seats" [ngClass]="{'input':true,'input-invalid':!isValid.bodySeats}" type="number"
+                   [(ngModel)]="value.bodySeats" name="post-body-seats" (change)="isBodySeatsValid()"
+                   placeholder="wpiś ilość">
+          </div>
+        </div>
+        <div class="row" [ngClass]="{'title-input-post-container':true}">
+          <div class="col-lg-6 col-md-12" [ngClass]="{'inline-title-input-post':true}">
+            Liczba drzwi
+          </div>
+          <div class="col-lg-6 col-md-12">
+            <span *ngIf="!isValid.bodyDoors" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.bodyDoors}}</span>
+            <input id="post-body-doors" [ngClass]="{'input':true,'input-invalid':!isValid.bodyDoors}" type="number"
+                   [(ngModel)]="value.bodyDoors" name="post-body-doors" (change)="isBodyDoorsValid()"
+                   placeholder="wpiś ilość">
+          </div>
+        </div>
+        <div class="row" [ngClass]="{'title-input-post-container':true}">
+          <div class="col-lg-6 col-md-12" [ngClass]="{'inline-title-input-post':true}">
+            Kolor
+          </div>
+          <div class="col-lg-6 col-md-12">
+            <span *ngIf="!isValid.bodyColor" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.bodyColor}}</span>
+            <input id="post-body-color" [ngClass]="{'input':true,'input-invalid':!isValid.bodyColor}" type="text"
+                   [(ngModel)]="value.bodyColor" name="post-body-color" (change)="isBodyColorValid()"
+                   placeholder="wpiś kolor">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <label [ngClass]="{'title-label-125':true,'input-label':true}">wyposazenie</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3 col-md-12" *ngFor="let equipment of value.equipments">
+        <div [ngClass]="{'equipment-checkbox':true, 'equipment-checkbox-font-size-50': equipment[1].length > 24}">
+          <input id="post-equipment-{{equipment[1]}}" [ngClass]="{'input-checkbox':true}"
+                 (change)="updateEquipment(equipment[0],equipment[1], $event)"
+                 type="checkbox" name="post-equipment-{{equipment[1]}}">
+          {{equipment[1]}}
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-12">
+        <div [ngClass]="{'equipment-checkbox':true}">
+          <input id="post-equipment-vin" [ngClass]="{'input':true, 'input-vin':true}" type="text"
+                 [(ngModel)]="value.vin" name="post-equipment-vin"
+                 placeholder="wpiś VIN"> <span>VIN</span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div [ngClass]="{'input-block':true}">Extra wyposazenie</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3 col-md-12">
+        <input id="post-equipment-extra-0" [ngClass]="{'input':true,'input-extra':true}" type="text"
+               [(ngModel)]="value.extraEquipment[0]" name="post-extra-0"
+               placeholder="wpiś extra wyposazenie">
+      </div>
+      <div class="col-lg-3 col-md-12">
+        <input id="post-equipment-extra-1" [ngClass]="{'input':true,'input-extra':true}" type="text"
+               [(ngModel)]="value.extraEquipment[1]" name="post-extra-1"
+               placeholder="wpiś extra wyposazenie">
+      </div>
+      <div class="col-lg-3 col-md-12">
+        <input id="post-equipment-extra-2" [ngClass]="{'input':true,'input-extra':true}" type="text"
+               [(ngModel)]="value.extraEquipment[2]" name="post-extra-2"
+               placeholder="wpiś extra wyposazenie">
+      </div>
+      <div class="col-lg-3 col-md-12">
+        <input id="post-equipment-extra-3" [ngClass]="{'input':true,'input-extra':true}" type="text"
+               [(ngModel)]="value.extraEquipment[3]" name="post-extra-3"
+               placeholder="wpiś extra wyposazenie">
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <label [ngClass]="{'title-label-125':true,'input-label':true}">dane kontaktowe</label>
+      </div>
+      <div class="col-8">
+        <div [ngClass]="{'input-block':true}">
+          Imię
+          <span *ngIf="!isValid.name" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.name}}</span>
+          <input id="post-name" [ngClass]="{'input':true,'input-invalid':!isValid.name}" type="text"
+                 [(ngModel)]="value.name" name="post-name" (change)="isNameValid()"
+                 placeholder="wpiś">
+        </div>
+      </div>
+      <div class="col-8">
+        <div [ngClass]="{'input-block':true}">
+          Email
+          <span *ngIf="!isValid.email" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.email}}</span>
+          <input id="post-email" [ngClass]="{'input':true,'input-invalid':!isValid.email}" type="text"
+                 [(ngModel)]="value.email" name="post-email" (change)="isEmailValid()"
+                 placeholder="wpiś email">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12" *ngIf="value.phones.length > 0">
+        <div [ngClass]="{'input-block':true}">Telefon</div>
+      </div>
+      <div class="col-12" *ngFor="let phoneLangs of value.phones">
+        <div [ngClass]="{'phones-container':true}">
+          <div [ngClass]="{'phone-div':true}">
+            {{phoneLangs[0]}}
+          </div>
+          <div [ngClass]="{'lang-div':true}">
+            <span *ngIf="phoneLangs[1] || phoneLangs[2] || phoneLangs[3]">(</span>
+            <span *ngIf="phoneLangs[1]">{{convertLangCodeToLangName(phoneLangs[1])}}</span>
+            <span *ngIf="phoneLangs[2]">, {{convertLangCodeToLangName(phoneLangs[2])}}</span>
+            <span *ngIf="phoneLangs[3]">, {{convertLangCodeToLangName(phoneLangs[3])}}</span>
+            <span *ngIf="phoneLangs[1] || phoneLangs[2] || phoneLangs[3]">)</span>
+          </div>
+          <div [ngClass]="{'phone-btn':true}">
+            <div [ngClass]="{'phone-edit': true}" (click)="editPhoneAndLang(phoneLangs)">edytuj</div>
+            <div [ngClass]="{'phone-delete': true}" (click)="deletePhoneAndLang(phoneLangs)">usun</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12" *ngIf="isNewPhoneCanBeAdded()">
+        <div class="row">
+          <div class="col-lg-6 col-md-12">
+            <label for="post-phone-add" [ngClass]="{'title-label-125':true,'input-label':true}">Dodaj telefon
+              <span *ngIf="!isValid.phone" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.phone}}</span>
+              <input id="post-phone-add" [ngClass]="{'input':true,'input-invalid':!isValid.phone}" type="text"
+                     [(ngModel)]="value.phone" name="post-phone-add" (change)="isPhoneValid()"
+                     placeholder="wpiś telefon">
+            </label>
+          </div>
+          <div class="col-lg-6 col-md-12 text-left">
+            <div class="row">
+              <div class="col-12">
+                <label for="post-phone-lang-0" [ngClass]="{'title-label-125':true,'input-label':true}">język przy telefonie
+                  <div class="row">
+                    <div class="col-4">
+                      <select id="post-phone-lang-0" [ngClass]="{'input':true,'phone-lang-select':true}"
+                              [(ngModel)]="value.phoneLanguages[0]" name="post-phone-lang-0">
+                        <option *ngFor="let lang of value.languages;" value="{{lang[0]}}">{{lang[1]}}</option>
+                      </select>
+                    </div>
+                    <div class="col-4" *ngIf="value.phoneLanguages[0]">
+                      <select id="post-phone-lang-1" [ngClass]="{'input':true,'phone-lang-select':true}"
+                              [(ngModel)]="value.phoneLanguages[1]" name="post-phone-lang-1">
+                        <option *ngFor="let lang of value.languages;" value="{{lang[0]}}">{{lang[1]}}</option>
+                      </select>
+                    </div>
+                    <div class="col-4" *ngIf="value.phoneLanguages[1]">
+                      <select id="post-phone-lang-2" [ngClass]="{'input':true,'phone-lang-select':true}"
+                              [(ngModel)]="value.phoneLanguages[2]" name="post-phone-lang-2">
+                        <option *ngFor="let lang of value.languages;" value="{{lang[0]}}">{{lang[1]}}</option>
+                      </select>
+                    </div>
                   </div>
-                  <div class="col-4" *ngIf="value.phoneLanguages[0]">
-                    <select id="post-phone-lang-1" [ngClass]="{'input':true,'phone-lang-select':true}"
-                            [(ngModel)]="value.phoneLanguages[1]" name="post-phone-lang-1">
-                      <option *ngFor="let lang of value.languages;" value="{{lang[0]}}">{{lang[1]}}</option>
-                    </select>
-                  </div>
-                  <div class="col-4" *ngIf="value.phoneLanguages[1]">
-                    <select id="post-phone-lang-2" [ngClass]="{'input':true,'phone-lang-select':true}"
-                            [(ngModel)]="value.phoneLanguages[2]" name="post-phone-lang-2">
-                      <option *ngFor="let lang of value.languages;" value="{{lang[0]}}">{{lang[1]}}</option>
-                    </select>
-                  </div>
-                </div>
-              </label>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <label [ngClass]="{'button-blue-100':true}" class="text-left" (click)="addPhone()">
+              <img [ngClass]="{'btn-icon-add-photo-description-row':true}" src="/assets/img/postadd/addPhoneIcon.png">
+              dodaj kolejny telefon
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <label for="post-phone-add" [ngClass]="{'title-label-125':true,'input-label':true}">ILOść dni</label>
+      </div>
+      <div class="col-lg-5 col-md-12" [ngClass]="{'m1224':true}">
+        <label for="days-length-10" (click)="setPostDaysLength(10)">
+          <input id="days-length-10" type="radio" name="days-length" [ngClass]="{'post-radio-btn':true}" (change)="isDayLengthValid()">
+          <span [ngClass]="{'post-radio-name':true}">10 dni</span>
+        </label>
+        <label (click)="setPostDaysLength(20)">
+          <input type="radio" name="days-length" [ngClass]="{'post-radio-btn':true}" (change)="isDayLengthValid()">
+          <span [ngClass]="{'post-radio-name':true}">20 dni</span>
+        </label>
+        <label (click)="setPostDaysLength(30)">
+          <input type="radio" name="days-length" [ngClass]="{'post-radio-btn':true}" (change)="isDayLengthValid()">
+          <span [ngClass]="{'post-radio-name':true}">30 dni</span>
+        </label>
+        <span *ngIf="!isValid.dayLength" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.dayLength}}</span>
+      </div>
+      <div class="col-lg-5 col-md-12" [ngClass]="{'m1224':true}">
+        <label for="post-resumption" [ngClass]="{'input-checkbox-post-label':true}">
+          <input id="post-resumption" [ngClass]="{'input-checkbox':true}"
+                 type="checkbox" [(ngModel)]="value.resumption" name="post-give-invoice">Wznowienie na 60 dni (w 6 razy większy szansy)
+        </label>
+      </div>
+      <div class="col-12">
+        <label for="post-phone-add" [ngClass]="{'title-label-125':true,'input-label':true}">Data wustawienia</label>
+      </div>
+      <div class="col-12" [ngClass]="{'m1224':true}">
+        <label (click)="setWhenStartFrom(0)">
+          <input type="radio" name="start-from" [ngClass]="{'post-radio-btn':true}" checked>
+          <span [ngClass]="{'post-radio-name':true}">od razu</span>
+        </label>
+      </div>
+      <div class="col-12" [ngClass]="{'m1224':true}">
+        <div class="row">
+          <div class="col-2">
+            <label (click)="setWhenStartFrom(1)">
+              <input type="radio" name="start-from" [ngClass]="{'post-radio-btn':true}">
+              <span [ngClass]="{'post-radio-name':true}">inna</span>
+            </label>
+          </div>
+          <div class="col-9">
+            <input *ngIf="value.whenStartFrom === 1" type="date" min="{{value.minStartFrom}}" max="{{value.maxStartFrom}}" [ngClass]="{'input-date':true}"
+                   [(ngModel)]="value.startFrom">
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-12">
+        <div class="row">
+          <div class="col-12">
+            <label for="post-phone-add" [ngClass]="{'title-label-125':true,'input-label':true}">promowanie</label>
+          </div>
+          <div class="col-lg-5 dol-md-12" [ngClass]="{'promotions-div':true}" *ngFor="let promotion of value.promotions">
+            <div [ngClass]="{'promotion-div': true, 'promotion-div-picked': isPromotionPicked(promotion.id)}" (click)="setPromotion(promotion)">
+              <div [ngClass]="{'head':true}">{{promotion.name}}</div>
+              <div [ngClass]="{'content':true}">czas trwania<br>{{promotion.duration}}</div>
             </div>
           </div>
         </div>
-        <div class="col-12">
-          <label [ngClass]="{'button-blue-100':true}" class="text-left" (click)="addPhone()">
-            <img [ngClass]="{'btn-icon-add-photo-description-row':true}" src="/assets/img/postadd/addPhoneIcon.png">
-            dodaj kolejny telefon
-          </label>
+      </div>
+      <div class="col-lg-6 col-md-12">
+        <div class="row">
+          <div class="col-12" [ngClass]="{'subscribe-div':true}">
+            <label for="post-phone-add" [ngClass]="{'title-label-125':true,'input-label':true}">abonament</label>
+          </div>
+          <div class="col-12">
+            <select id="post-subscription" [ngClass]="{'input':true}" (change)="setUserSubscription()"
+                    [(ngModel)]="value.selectedUsersubscriptionId" name="post-subscription">
+              <ng-container *ngFor="let usersubscription of value.usersubscriptions">
+                <option *ngIf="isFuture(usersubscription.endIn)" value="{{usersubscription.id}}">{{usersubscription.subscriptionName}}</option>
+              </ng-container>
+
+            </select>
+          </div>
+          <div class="col-12" [ngClass]="{'subscribe-info':true}" *ngIf="value.usersubscription.id">
+            <div class="row">
+              <div class="col-6">ilość ogłoszeń zostawo:</div>
+              <div class="col-6">{{value.usersubscription.postAmount - value.usersubscription.postMade}}</div>
+            </div>
+            <div class="row">
+              <div class="col-6">ilość ogłoszeń wykozystano:</div>
+              <div class="col-6">{{value.usersubscription.postMade}}</div>
+            </div>
+            <div class="row">
+              <div class="col-6">aktualny do:</div>
+              <div class="col-6">{{value.usersubscription.endIn.toLocaleDateString()}}</div>
+            </div>
+          </div>
         </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <label for="regulation-accept" [ngClass]="{'input-checkbox-label':true}">
+          <input id="regulation-accept" [ngClass]="{'input-checkbox':true,'input-invalid':!value.isRegulationAccept}"
+                 type="checkbox" [(ngModel)]="value.isRegulationAccept" name="regulation-accept" (change)="isRegulationAccept()">
+          <a [ngClass]="{'link-a':true}" href="">Akceptuję regulamin serwisu</a>
+          <span *ngIf="!value.isRegulationAccept" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.isRegulationAccept}}</span>
+        </label>
+      </div>
+      <div class="col-12">
+        <label for="rodo-accept" [ngClass]="{'input-checkbox-label':true}">
+          <input id="rodo-accept" [ngClass]="{'input-checkbox':true,'input-invalid':!value.isRodoAccept}"
+                 type="checkbox" [(ngModel)]="value.isRodoAccept" name="rodo-accept" (change)="isRodoAccept()">
+          Wyrażam zgodę na przetwarzanie danych osobowych.
+          <a [ngClass]="{'link-a':true}" href="">Więcej tutaj</a>
+          <span *ngIf="!value.isRegulationAccept" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.isRodoAccept}}</span>
+        </label>
+      </div>
+
+      <div class="col-lg-6 col-md-6">
+        <label [ngClass]="{'button-blue-100':true}" class="text-left" (click)="previewPost()">
+          <img [ngClass]="{'btn-icon-add-photo-description-row':true, 'btn-icon': true}" src="/assets/img/postadd/previewPostIcon.png">
+          podglad ogłoszenia
+        </label>
+      </div>
+      <div class="col-lg-6 col-md-6">
+        <label [ngClass]="{'button-orange-100':true}" class="text-left" (click)="addPost()">
+          <img [ngClass]="{'btn-icon-add-photo-description-row':true, 'btn-icon': true}" src="/assets/img/postadd/addPostIcon.png">
+          dodaj ogłoszenie
+        </label>
       </div>
     </div>
   </div>
-</div>
-<div class="container">
-  <div class="row">
-    <div class="col-12">
-      <label for="post-phone-add" [ngClass]="{'title-label-125':true,'input-label':true}">ILOść dni</label>
-    </div>
-    <div class="col-lg-5 col-md-12" [ngClass]="{'m1224':true}">
-      <label for="days-length-10" (click)="setPostDaysLength(10)">
-        <input id="days-length-10" type="radio" name="days-length" [ngClass]="{'post-radio-btn':true}" (change)="isDayLengthValid()">
-        <span [ngClass]="{'post-radio-name':true}">10 dni</span>
-      </label>
-      <label (click)="setPostDaysLength(20)">
-        <input type="radio" name="days-length" [ngClass]="{'post-radio-btn':true}" (change)="isDayLengthValid()">
-        <span [ngClass]="{'post-radio-name':true}">20 dni</span>
-      </label>
-      <label (click)="setPostDaysLength(30)">
-        <input type="radio" name="days-length" [ngClass]="{'post-radio-btn':true}" (change)="isDayLengthValid()">
-        <span [ngClass]="{'post-radio-name':true}">30 dni</span>
-      </label>
-      <span *ngIf="!isValid.dayLength" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.dayLength}}</span>
-    </div>
-    <div class="col-lg-5 col-md-12" [ngClass]="{'m1224':true}">
-      <label for="post-resumption" [ngClass]="{'input-checkbox-post-label':true}">
-        <input id="post-resumption" [ngClass]="{'input-checkbox':true}"
-               type="checkbox" [(ngModel)]="value.resumption" name="post-give-invoice">Wznowienie na 60 dni (w 6 razy większy szansy)
-      </label>
-    </div>
-    <div class="col-12">
-      <label for="post-phone-add" [ngClass]="{'title-label-125':true,'input-label':true}">Data wustawienia</label>
-    </div>
-    <div class="col-12" [ngClass]="{'m1224':true}">
-      <label (click)="setWhenStartFrom(0)">
-        <input type="radio" name="start-from" [ngClass]="{'post-radio-btn':true}" checked>
-        <span [ngClass]="{'post-radio-name':true}">od razu</span>
-      </label>
-    </div>
-    <div class="col-12" [ngClass]="{'m1224':true}">
-      <div class="row">
-        <div class="col-2">
-          <label (click)="setWhenStartFrom(1)">
-            <input type="radio" name="start-from" [ngClass]="{'post-radio-btn':true}">
-            <span [ngClass]="{'post-radio-name':true}">inna</span>
-          </label>
-        </div>
-        <div class="col-9">
-          <input *ngIf="value.whenStartFrom === 1" type="date" min="{{value.minStartFrom}}" max="{{value.maxStartFrom}}" [ngClass]="{'input-date':true}"
-                 [(ngModel)]="value.startFrom">
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-6 col-md-12">
-      <div class="row">
-        <div class="col-12">
-          <label for="post-phone-add" [ngClass]="{'title-label-125':true,'input-label':true}">promowanie</label>
-        </div>
-        <div class="col-lg-5 dol-md-12" [ngClass]="{'promotions-div':true}" *ngFor="let promotion of value.promotions">
-          <div [ngClass]="{'promotion-div': true, 'promotion-div-picked': isPromotionPicked(promotion.id)}" (click)="setPromotion(promotion)">
-            <div [ngClass]="{'head':true}">{{promotion.name}}</div>
-            <div [ngClass]="{'content':true}">czas trwania<br>{{promotion.duration}}</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-6 col-md-12">
-      <div class="row">
-        <div class="col-12" [ngClass]="{'subscribe-div':true}">
-          <label for="post-phone-add" [ngClass]="{'title-label-125':true,'input-label':true}">abonament</label>
-        </div>
-        <div class="col-12">
-          <select id="post-subscription" [ngClass]="{'input':true}" (change)="setUserSubscription()"
-                  [(ngModel)]="value.selectedUsersubscriptionId" name="post-subscription">
-            <ng-container *ngFor="let usersubscription of value.usersubscriptions">
-              <option *ngIf="isFuture(usersubscription.endIn)" value="{{usersubscription.id}}">{{usersubscription.subscriptionName}}</option>
-            </ng-container>
-
-          </select>
-        </div>
-        <div class="col-12" [ngClass]="{'subscribe-info':true}" *ngIf="value.usersubscription.id">
-          <div class="row">
-            <div class="col-6">ilość ogłoszeń zostawo:</div>
-            <div class="col-6">{{value.usersubscription.postAmount - value.usersubscription.postMade}}</div>
-          </div>
-          <div class="row">
-            <div class="col-6">ilość ogłoszeń wykozystano:</div>
-            <div class="col-6">{{value.usersubscription.postMade}}</div>
-          </div>
-          <div class="row">
-            <div class="col-6">aktualny do:</div>
-            <div class="col-6">{{value.usersubscription.endIn.toLocaleDateString()}}</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</div>
-<div class="container">
-  <div class="row">
-    <div class="col-12">
-      <label for="regulation-accept" [ngClass]="{'input-checkbox-label':true}">
-        <input id="regulation-accept" [ngClass]="{'input-checkbox':true,'input-invalid':!value.isRegulationAccept}"
-               type="checkbox" [(ngModel)]="value.isRegulationAccept" name="regulation-accept" (change)="isRegulationAccept()">
-        <a [ngClass]="{'link-a':true}" href="">Akceptuję regulamin serwisu</a>
-        <span *ngIf="!value.isRegulationAccept" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.isRegulationAccept}}</span>
-      </label>
-    </div>
-    <div class="col-12">
-      <label for="rodo-accept" [ngClass]="{'input-checkbox-label':true}">
-        <input id="rodo-accept" [ngClass]="{'input-checkbox':true,'input-invalid':!value.isRodoAccept}"
-               type="checkbox" [(ngModel)]="value.isRodoAccept" name="rodo-accept" (change)="isRodoAccept()">
-        Wyrażam zgodę na przetwarzanie danych osobowych.
-        <a [ngClass]="{'link-a':true}" href="">Więcej tutaj</a>
-        <span *ngIf="!value.isRegulationAccept" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.isRodoAccept}}</span>
-      </label>
-    </div>
-
-    <div class="col-lg-6 col-md-6">
-      <label [ngClass]="{'button-blue-100':true}" class="text-left" (click)="previewPost()">
-        <img [ngClass]="{'btn-icon-add-photo-description-row':true, 'btn-icon': true}" src="/assets/img/postadd/previewPostIcon.png">
-        podglad ogłoszenia
-      </label>
-    </div>
-    <div class="col-lg-6 col-md-6">
-      <label [ngClass]="{'button-orange-100':true}" class="text-left" (click)="addPost()">
-        <img [ngClass]="{'btn-icon-add-photo-description-row':true, 'btn-icon': true}" src="/assets/img/postadd/addPostIcon.png">
-        dodaj ogłoszenie
-      </label>
-    </div>
-  </div>
-</div>
+</ng-container>
+<ng-container *ngIf="value.isPostReady">
+  <app-postview [post]="value.post"></app-postview>
+</ng-container>

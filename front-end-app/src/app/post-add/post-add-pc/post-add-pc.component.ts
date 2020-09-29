@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {CategoryModel} from "../../model/category.model";
 import {PostFormValidationService} from "../../service/form/post-form-validation.service";
 import {PostService} from "../../service/post/post.service";
@@ -27,7 +27,7 @@ import {CountryService} from "../../service/country/country.service";
   templateUrl: './post-add-pc.component.html',
   styleUrls: ['./post-add-pc.component.css']
 })
-export class PostAddPcComponent implements OnInit {
+export class PostAddPcComponent implements OnInit, AfterViewInit {
   isPersonalCatPick: boolean = true;
   isMotorcycleCatPick: boolean;
   isProviderCatPick: boolean;
@@ -108,6 +108,8 @@ export class PostAddPcComponent implements OnInit {
     usersubscriptions: new Array<UsersubscriptionModel>(),
     isRegulationAccept: false,
     isRodoAccept: false,
+    isPostReady: false,
+    post: new PostModel(),
   }
 
   isValid = {
@@ -213,9 +215,8 @@ export class PostAddPcComponent implements OnInit {
     this.setAllMarks();
     this.setAllModels();
     this.value.countries = this.mapkaS.getCountriesCodeAndName();
-    this.updateCountries();
-    this.setDefaultCountry();
     this.value.currencies = this.currencyS.getAllCurrencies();
+    this.setDefaultCountry();
     this.setStates();
     this.setFuels();
     this.setEngineDrives();
@@ -228,6 +229,9 @@ export class PostAddPcComponent implements OnInit {
     this.setPromotions();
     this.setUserSubscriptions();
     this.pickPersonalCat();
+  }
+  ngAfterViewInit(){
+    this.updateCountries();
   }
 
   unPickAll(): void {
@@ -773,7 +777,7 @@ export class PostAddPcComponent implements OnInit {
     for (let ele of this.mapkaS.getCountriesCodeAndName()) {
       if (ele[0] === browserCountry) {
         this.value.country = browserCountry;
-        this.updateCountries();
+        // this.updateCountries();
         break;
       }
     }
@@ -791,18 +795,6 @@ export class PostAddPcComponent implements OnInit {
     return this.isValid.isRodoAccept;
   }
 
-  previewPost() {
-    let post = this.preparePost();
-    this.verifyForm();
-    if (this.isFormValid()) {
-      this.router.navigate(['/postview', post]);
-    }
-
-  }
-
-  addPost() {
-    let post = this.preparePost();
-  }
 
   isCurrencyValid() {
     this.isValid.currency = this.value.currency.length > 0;
@@ -860,69 +852,75 @@ export class PostAddPcComponent implements OnInit {
   }
 
   preparePost() {
-
-
-    let post = new PostModel();
-    post.category = this.value.pickedCat;
-    post.title = this.value.title.trim();
-    post.markId = this.value.markId;
-    post.modelBodyId = this.value.model[0];
-    post.modelId = this.value.model[1];
-    post.mileAge = this.value.mileage;
-    post.productionYear = this.value.productionYear;
+    this.value.post = new PostModel();
+    this.value.post.category = this.value.pickedCat;
+    this.value.post.title = this.value.title.trim();
+    this.value.post.markId = this.value.markId;
+    this.value.post.modelBodyId = this.value.model[0];
+    this.value.post.modelId = this.value.model[1];
+    this.value.post.mileAge = this.value.mileage;
+    this.value.post.productionYear = this.value.productionYear;
     if (this.value.photosPreview.length > 0 || this.value.photosDescription.length > 0) {
       this.addLastPhotosAndDescriptions();
     }
-    post.photosAndDescription = this.value.photosAndDescription;
+    this.value.post.photosAndDescription = this.value.photosAndDescription;
 
-    post.country = this.value.country;
-    post.region = this.value.region;
-    post.city = this.value.city;
-    post.range = this.value.range;
-    post.salonId = this.value.pickedSalon;
+    this.value.post.country = this.value.country;
+    this.value.post.region = this.value.region;
+    this.value.post.city = this.value.city;
+    this.value.post.range = this.value.range;
+    this.value.post.salonId = this.value.pickedSalon;
 
-    post.price = this.value.price;
-    post.isPriceNetto = this.value.isPriceNetto;
-    post.isGiveInvoce = this.value.isGiveInvoice;
-    post.currency = this.value.currency;
+    this.value.post.price = this.value.price;
+    this.value.post.isPriceNetto = this.value.isPriceNetto;
+    this.value.post.isGiveInvoce = this.value.isGiveInvoice;
+    this.value.post.currency = this.value.currency;
 
-    post.state = this.value.state;
-    post.isDmg = this.value.isDmg;
-    post.isFirstDriver = this.value.isFirstDriver;
-    post.isNoAccidents = this.value.isNoAccidents;
-    post.hasCarBook = this.value.hasCarBook;
-    post.fuel = this.value.fuel;
-    post.engineDisplacement = this.value.engineDisplacement;
-    post.enginePower = this.value.enginePower;
-    post.engineDrive = this.value.engineDrive;
-    post.engineGearbox = this.value.engineGearbox;
-    post.bodySeats = this.value.bodySeats;
-    post.bodyDoors = this.value.bodyDoors;
-    post.bodyColor = this.value.bodyColor;
-    post.equipment = this.value.equipment;
-    post.extraEquipment = this.value.extraEquipment;
-    post.vin = this.value.vin;
+    this.value.post.state = this.value.state;
+    this.value.post.isDmg = this.value.isDmg;
+    this.value.post.isFirstDriver = this.value.isFirstDriver;
+    this.value.post.isNoAccidents = this.value.isNoAccidents;
+    this.value.post.hasCarBook = this.value.hasCarBook;
+    this.value.post.fuel = this.value.fuel;
+    this.value.post.engineDisplacement = this.value.engineDisplacement;
+    this.value.post.enginePower = this.value.enginePower;
+    this.value.post.engineDrive = this.value.engineDrive;
+    this.value.post.engineGearbox = this.value.engineGearbox;
+    this.value.post.bodySeats = this.value.bodySeats;
+    this.value.post.bodyDoors = this.value.bodyDoors;
+    this.value.post.bodyColor = this.value.bodyColor;
+    this.value.post.equipment = this.value.equipment;
+    this.value.post.extraEquipment = this.value.extraEquipment;
+    this.value.post.vin = this.value.vin;
 
-    post.contactName = this.value.name;
-    post.contactEmail = this.value.email;
-    post.contactPhone = this.value.phones;
-    post.amountOfDays = this.value.dayLength;
-    post.startDate = new Date(this.value.startFrom);
-    post.resumption = this.value.resumption;
-    post.promotionDuration = this.value.promotion.duration;
-    post.userSubscriptionId = this.value.usersubscription.id;
-    post.isActive = false;
+    this.value.post.contactName = this.value.name;
+    this.value.post.contactEmail = this.value.email;
+    this.value.post.contactPhone = this.value.phones;
+    this.value.post.amountOfDays = this.value.dayLength;
+    this.value.post.startDate = new Date(this.value.startFrom);
+    this.value.post.resumption = this.value.resumption;
+    this.value.post.promotionDuration = this.value.promotion.duration;
+    this.value.post.userSubscriptionId = this.value.usersubscription.id;
+    this.value.post.isActive = false;
 
-    post.createOn = new Date();
+    this.value.post.createOn = new Date();
     if (this.authenticateS.isAuthenticate()) {
-      post.createById = this.authenticateS.getAuthenticateUser().id;
+      this.value.post.createById = this.authenticateS.getAuthenticateUser().id;
     } else {
-      post.createById = "";
+      this.value.post.createById = "";
     }
-    return post;
+    return this.value.post;
   }
 
-  isStartFromValid() {
+  previewPost() {
+    let post = this.preparePost();
+    this.verifyForm();
+    this.value.isPostReady = true;
+    // this.value.postReady = this.isFormValid();
 
+  }
+
+  addPost() {
+    let post = this.preparePost();
   }
 }
