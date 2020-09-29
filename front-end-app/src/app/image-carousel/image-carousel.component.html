@@ -1,12 +1,34 @@
-<div class="images">
-  <img id="arrow-left" src="assets/img/image-carousel/right-arrow.png"
+<div class="full-screen" *ngIf="isFullScreen">
+  <div class="close" (click)="closeFullScreen()">X</div>
+  <img class="arrow-left" src="assets/img/image-carousel/right-arrow-white.png"
        (click)="previousImg()"
        [ngClass]="{'opacity-zero':!isPreviousImgExist()}"
   >
   <div class="image">
-    <img id="active" src="{{getActive().value}}">
+    <img class="active" src="{{getActiveFS().value}}">
   </div>
-  <img id="arrow-right" src="assets/img/image-carousel/right-arrow.png"
+  <img class="arrow-right" src="assets/img/image-carousel/right-arrow-white.png"
+       (click)="nextImg()"
+       [ngClass]="{'opacity-zero':!isNextImgExist()}"
+  >
+  <div class="image-list">
+    <ng-container *ngFor="let img of getActiveList(); index as i">
+      <img [src]="img.value"
+           [ngClass]="{'active-value-opacity': isActive(img)}"
+           (click)="setActive(img)"
+      >
+    </ng-container>
+  </div>
+</div>
+<div class="images">
+  <img class="arrow-left" src="assets/img/image-carousel/right-arrow.png"
+       (click)="previousImg()"
+       [ngClass]="{'opacity-zero':!isPreviousImgExist()}"
+  >
+  <div class="image">
+    <img class="active" src="{{getActiveSS().value}}" (click)="openFullScreen()">
+  </div>
+  <img class="arrow-right" src="assets/img/image-carousel/right-arrow.png"
        (click)="nextImg()"
        [ngClass]="{'opacity-zero':!isNextImgExist()}"
   >
