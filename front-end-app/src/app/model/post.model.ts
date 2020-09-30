@@ -5,9 +5,9 @@ export class PostModel implements DeserializableModel {
   id: string;
   category: string;
   title: string;
-  markId: string;
-  modelBodyId: string;
-  modelId: string;
+  markName: string;
+  modelBodyName: string;
+  modelName: string;
   mileAge: number;
   productionYear: number;
   photosAndDescription: Array<string>;

@@ -765,4 +765,9 @@ export class CountryService {
   getBrowserCountry() {
     return getBrowserLocale();
   }
+
+  getFlagUrlByCode(code: string) {
+    code = code.toUpperCase();
+    return "/assets/img/flag/" + code + ".png";
+  }
 }

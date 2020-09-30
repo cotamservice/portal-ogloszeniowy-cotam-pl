@@ -1,4 +1,4 @@
-<ng-container *ngIf="!value.isPostReady">
+<ng-container>
   <div class="container">
     <div class="row">
       <div class="col-12">
@@ -76,22 +76,22 @@
     <div class="row">
       <div class="col-lg-4 col-md-12">
         <div [ngClass]="{'input-block':true}">Marka
-          <span *ngIf="!isValid.markId" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.markId}}</span>
-          <select id="post-mark" [ngClass]="{'input':true,'input-invalid':!isValid.markId}"
-                  [(ngModel)]="value.markId" name="post-mark" (change)="isMarkValid()">
-            <option *ngFor="let mark of value.marks;" value="{{mark._id}}">{{mark.name}}</option>
+          <span *ngIf="!isValid.markName" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.markName}}</span>
+          <select id="post-mark" [ngClass]="{'input':true,'input-invalid':!isValid.markName}"
+                  [(ngModel)]="value.markName" name="post-mark" (change)="isMarkValid()">
+            <option *ngFor="let mark of value.marks;" value="{{mark.name}}">{{mark.name}}</option>
           </select>
         </div>
       </div>
-      <div class="col-lg-4 col-md-12" *ngIf="value.markId.length > 0">
+      <div class="col-lg-4 col-md-12" *ngIf="value.markName.length > 0">
         <div [ngClass]="{'input-block':true}">Model
-          <span *ngIf="!isValid.model" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.model}}</span>
-          <select id="post-model" [ngClass]="{'input':true,'input-invalid':!isValid.model}"
+          <span *ngIf="!isValid.modelName" [ngClass]="{'input-invalid-tip':true}">{{invalidMsg.modelName}}</span>
+          <select id="post-model" [ngClass]="{'input':true,'input-invalid':!isValid.modelName}"
                   [(ngModel)]="value.model" name="post-model" (change)="isModelValid()">
             <ng-container *ngFor="let body of value.models">
-              <ng-container *ngIf="value.markId === body[0].markId">
+              <ng-container *ngIf="value.markName === body[0].markId">
                 <option disabled selected>{{body[0].name.toUpperCase()}}</option>
-                <option dir="rtl" *ngFor="let model of body[1]" value="{{[body[0]._id, model._id]}}">{{model.name.toLowerCase()}}</option>
+                <option dir="rtl" *ngFor="let model of body[1]" value="{{[body[0].name, model.name]}}">{{model.name.toLowerCase()}}</option>
               </ng-container>
             </ng-container>
           </select>
@@ -698,7 +698,4 @@
       </div>
     </div>
   </div>
-</ng-container>
-<ng-container *ngIf="value.isPostReady">
-  <app-postview [post]="value.post"></app-postview>
 </ng-container>

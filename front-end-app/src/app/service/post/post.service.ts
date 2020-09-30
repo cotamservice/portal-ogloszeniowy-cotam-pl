@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {map} from "rxjs/operators";
+import {PostModel} from "../../model/post.model";
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +37,24 @@ export class PostService {
     return this.http
       .get(this.localhost + 'salon/all/' + creatorId, {headers: headers})
       .pipe(map(res => res));
+  }
+
+  private postForPreview: PostModel;
+
+  savePostForPreview(post: PostModel) {
+    this.postForPreview = post;
+  }
+
+  getPostForPreview(): PostModel {
+    return this.postForPreview;
+  }
+
+  deletePostForPreview() {
+    this.postForPreview = undefined;
+  }
+
+  isPostForPreviewExist() {
+    return this.postForPreview !== undefined;
   }
 
 }
