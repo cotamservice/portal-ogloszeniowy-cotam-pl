@@ -12,11 +12,8 @@ export class PostFormValidationService {
     return value.length > 2;
   }
 
-  isModelValid(value: Array<string>): boolean {
-    for (let i = 0; i < value.length; ++i) {
-      if (value[i].length <= 0) return false
-    }
-    return true;
+  isModelValid(value: string): boolean {
+    return value.length > 0;
   }
 
   isMarkValid(value: string) {

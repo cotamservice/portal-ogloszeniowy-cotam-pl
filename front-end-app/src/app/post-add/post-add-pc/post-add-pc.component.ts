@@ -43,8 +43,8 @@ export class PostAddPcComponent implements OnInit, AfterViewInit {
   value = {
     pickedCat: '',
     title: '',
-    markName: '',
-    model: [],
+    mark: '',
+    model: '',
     marks: [],
     models: [],
     mileage: 0,
@@ -115,9 +115,9 @@ export class PostAddPcComponent implements OnInit, AfterViewInit {
   isValid = {
     pickedCat: true,
     title: true,
-    markName: true,
+    mark: true,
     marks: true,
-    modelName: true,
+    model: true,
     models: true,
     mileage: true,
     productionYear: true,
@@ -155,8 +155,8 @@ export class PostAddPcComponent implements OnInit, AfterViewInit {
   invalidMsg = {
     pickedCat: '',
     title: '',
-    markName: '',
-    modelName: '',
+    mark: '',
+    model: '',
     marks: '',
     models: '',
     mileage: '',
@@ -325,15 +325,15 @@ export class PostAddPcComponent implements OnInit, AfterViewInit {
   }
 
   isMarkValid(): boolean {
-    this.isValid.markName = this.validationS.isMarkValid(this.value.markName);
-    this.invalidMsg.markName = !this.isValid.markName ? 'Wybierz markę' : '';
-    return this.isValid.markName;
+    this.isValid.mark = this.validationS.isMarkValid(this.value.mark[1]);
+    this.invalidMsg.mark = !this.isValid.mark ? 'Wybierz markę' : '';
+    return this.isValid.mark;
   }
 
   isModelValid(): boolean {
-    this.isValid.modelName = this.validationS.isModelValid(this.value.model) && this.value.model.length > 0;
-    this.invalidMsg.modelName = !this.isValid.modelName ? 'Wybierz model' : '';
-    return this.isValid.modelName;
+    this.isValid.model = this.validationS.isModelValid(this.value.model);
+    this.invalidMsg.model = !this.isValid.model ? 'Wybierz model' : '';
+    return this.isValid.model;
   }
 
   setAllMarks(): void {
@@ -855,9 +855,9 @@ export class PostAddPcComponent implements OnInit, AfterViewInit {
     this.value.post = new PostModel();
     this.value.post.category = this.value.pickedCat;
     this.value.post.title = this.value.title.trim();
-    this.value.post.markName = this.value.markName;
-    this.value.post.modelBodyName = this.value.model[0];
-    this.value.post.modelName = this.value.model[1];
+    this.value.post.markName = this.value.mark.split(',')[1];
+    this.value.post.modelBodyName = this.value.model.split(',')[0];
+    this.value.post.modelName = this.value.model.split(',')[1];
     this.value.post.mileAge = this.value.mileage;
     this.value.post.productionYear = this.value.productionYear;
     if (this.value.photosPreview.length > 0 || this.value.photosDescription.length > 0) {
