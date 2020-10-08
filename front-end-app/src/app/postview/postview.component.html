@@ -1,1 +1,37 @@
-<p>postview works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-1">
+      <div class="parking-border">
+        <img id="parking-symbol" src="/assets/img/postview/parking-black.png">
+        <img id="parking-plus" src="/assets/img/postview/plus-black.png">
+      </div>
+    </div>
+    <div class="col-3 title">
+      <img class="title-flag" src="{{flagUrl}}">
+      <span> {{post.title}}</span>
+    </div>
+    <div class="col-5 under-title">
+      <div class="row">
+        <div class="col-12">
+          <span>{{post.markName}} {{post.modelName}}</span>
+        </div>
+        <div class="col-12">
+          <span>{{post.productionYear}}r. {{post.mileAge}}km. </span>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-3">
+      cena
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <app-image-carousel [values]="getAllPhotos()"></app-image-carousel>
+    </div>
+    <div class="col-6">
+      numer oferty
+    </div>
+  </div>
+</div>
+

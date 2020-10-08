@@ -230,7 +230,8 @@ export class PostAddPcComponent implements OnInit, AfterViewInit {
     this.setUserSubscriptions();
     this.pickPersonalCat();
   }
-  ngAfterViewInit(){
+
+  ngAfterViewInit() {
     this.updateCountries();
   }
 
@@ -844,11 +845,12 @@ export class PostAddPcComponent implements OnInit, AfterViewInit {
   }
 
   isFormValid(): boolean {
-    return this.isCatPicked() && this.isTitleValid() && this.isMarkValid() && this.isModelValid() && this.isMileageValid()
-      && this.isProductionYearValid() && this.isCountryValid() && this.isRegionValid() && this.isCityValid()
-      && this.isPriceValid() && this.isCurrencyValid() && this.isStateValid() && this.isFuelValid() && this.isEngineDriveValid()
-      && this.isEngineGearboxValid() && this.isNameValid() && this.isEmailValid()
-      && this.isDayLengthValid() && this.isRegulationAccept() && this.isRodoAccept();
+    return
+    this.isCatPicked() && this.isTitleValid() && this.isMarkValid() && this.isModelValid() && this.isMileageValid()
+    && this.isProductionYearValid() && this.isCountryValid() && this.isRegionValid() && this.isCityValid()
+    && this.isPriceValid() && this.isCurrencyValid() && this.isStateValid() && this.isFuelValid() && this.isEngineDriveValid()
+    && this.isEngineGearboxValid() && this.isNameValid() && this.isEmailValid()
+    && this.isDayLengthValid() && this.isRegulationAccept() && this.isRodoAccept();
   }
 
   preparePost() {
@@ -915,9 +917,10 @@ export class PostAddPcComponent implements OnInit, AfterViewInit {
   previewPost() {
     let post = this.preparePost();
     // this.verifyForm();
-    // if(this.isFormValid()){}
-    this.postS.savePostForPreview(post);
-    this.router.navigate(['/postview']);
+    // if (this.isFormValid()) {
+      this.postS.savePostForPreview(post);
+      this.router.navigate(['/postview']);
+    // }
   }
 
   addPost() {

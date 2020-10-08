@@ -1,0 +1,38 @@
+*, *:after, *:before {
+  box-sizing: border-box;
+}
+
+.parking-border {
+  padding: 3px;
+  border: 3px solid #e9bc09;
+  text-align: center;
+  width: 64px;
+  height: 75px;
+}
+
+.parking-border:hover {
+  background-color: #3b8790;
+}
+
+.parking-border #parking-symbol {
+  width: 26px;
+  height: 37px;
+  display: block;
+  margin: 0 auto;
+}
+
+.title-flag {
+  border: 1px solid rgba(0, 0, 0, .1);
+}
+
+.parking-border #parking-plus {
+  width: 20px;
+  height: 20px;
+  display: block;
+  margin: 5px auto 0 auto;
+}
+
+.under-title .title{
+  word-spacing: normal;
+  height: 75px;
+}

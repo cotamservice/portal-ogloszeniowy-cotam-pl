@@ -27,7 +27,7 @@ router.get('/save', (req, res) => {
         uss.push(us);
     }
     uss.forEach(ele => {
-        User.getUserByEmail('Password2Password2@gmail.com', (err, user) => {
+        User.getUserByEmail('password2@gmail.com', (err, user) => {
             if (user) {
                 ele.userId = user._id;
                 let subscriptionName = '';

@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 
-const username = "bronda";
-const password = 'I%40%25%23loveyou5303';//encrypt
-const dbName = 'bronda';
-const uri = "mongodb+srv://" + username + ":" + password + "@bronda-ks5hs.mongodb.net/" + dbName + "?retryWrites=true&w=majority";
+const username = "cotam";
+const password = 'cotam';
+const dbName = 'cotam';
+const uri = "mongodb+srv://" + username + ":" + password + "@cotam.v4bnb.mongodb.net/" + dbName + "?retryWrites=true&w=majority";
 const options = {
     useNewUrlParser: true,
     useUnifiedTopology: true
